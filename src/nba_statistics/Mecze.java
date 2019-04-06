@@ -5,11 +5,14 @@
  */
 package nba_statistics;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -25,14 +28,18 @@ public class Mecze {
     @Column(name="id_meczu")
     private int id;
     
-    @Column(name="id_druzyny_gospodarza")
-    private int idDrGosp;
+    @ManyToOne(cascade={CascadeType.PERSIST, CascadeType.MERGE, 
+                CascadeType.DETACH, CascadeType.REFRESH})
+    @JoinColumn(name="id_druzyny_gospodarza")
+    private Druzyny druzGosp;
     
-    @Column(name="id_druzyny_goscia")
-    private int idDrGosc;
+    @ManyToOne(cascade={CascadeType.PERSIST, CascadeType.MERGE, 
+                CascadeType.DETACH, CascadeType.REFRESH})
+    @JoinColumn(name="id_druzyny_goscia")
+    private Druzyny druzGosc;
     
     @Column(name="data")
-    String data;
+    private String data;
     
     @Column(name="punkty_gospodarza")
     private int pktGosp;
@@ -43,6 +50,7 @@ public class Mecze {
     @Column(name="ilosc_dogrywek")
     private int iloscDogrywek;
     
+    //DO ZMIANY PO UTWORZENIU KLASY
     @Column(name="id_sezonu")
     private int idSezonu;
     
@@ -50,15 +58,13 @@ public class Mecze {
     
     }
 
-    public Mecze(int idDrGosp, int idDrGosc, String data, int pktGosp, int pktGosc, int iloscDogrywek, int idSezonu) {
-        this.idDrGosp = idDrGosp;
-        this.idDrGosc = idDrGosc;
+    public Mecze(String data, int pktGosp, int pktGosc, int iloscDogrywek) {
         this.data = data;
         this.pktGosp = pktGosp;
         this.pktGosc = pktGosc;
         this.iloscDogrywek = iloscDogrywek;
-        this.idSezonu = idSezonu;
     }
+
     
      public int getId() {
         return id;
@@ -68,20 +74,20 @@ public class Mecze {
         this.id = id;
     }
 
-    public int getIdDrGosp() {
-        return idDrGosp;
+    public Druzyny getDruzGosp() {
+        return druzGosp;
     }
 
-    public void setIdDrGosp(int idDrGosp) {
-        this.idDrGosp = idDrGosp;
+    public void setDruzGosp(Druzyny druzGosp) {
+        this.druzGosp = druzGosp;
     }
 
-    public int getIdDrGosc() {
-        return idDrGosc;
+    public Druzyny getDruzGosc() {
+        return druzGosc;
     }
 
-    public void setIdDrGosc(int idDrGosc) {
-        this.idDrGosc = idDrGosc;
+    public void setDruzGosc(Druzyny druzGosc) {
+        this.druzGosc = druzGosc;
     }
 
     public String getData() {
@@ -126,7 +132,9 @@ public class Mecze {
 
     @Override
     public String toString() {
-        return "Mecze{" + "id=" + id + ", idDrGosp=" + idDrGosp + ", idDrGosc=" + idDrGosc + ", data=" + data + ", pktGosp=" + pktGosp + ", pktGosc=" + pktGosc + ", iloscDogrywek=" + iloscDogrywek + ", idSezonu=" + idSezonu + '}';
+        return "Mecze{" + "id=" + id + ", druzGosc=" + druzGosc + ", data=" + data + ", pktGosp=" + pktGosp + ", pktGosc=" + pktGosc + ", iloscDogrywek=" + iloscDogrywek + '}';
     }
+
+
     
 }
