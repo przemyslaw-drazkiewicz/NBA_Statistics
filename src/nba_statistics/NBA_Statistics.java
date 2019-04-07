@@ -36,26 +36,26 @@ public class NBA_Statistics {
         Session session = sf.getCurrentSession();
 
         try {
-            Druzyny d1 = new Druzyny("a", "b", "c", "d");
-            Druzyny d2 = new Druzyny("a2", "b2", "c2", "d2");
-
-            session.beginTransaction();
-
-            session.save(d1);
-            session.save(d2);
-
-            session.getTransaction().commit();
-
-            Mecze mecz = new Mecze("10.02.2019", 10, 15, 2);
-
-            mecz.setDruzGosp(d1);
-            mecz.setDruzGosc(d2);
-
-            session = sf.getCurrentSession();
-
-            session.beginTransaction();
-
-            session.save(mecz);
+//            Druzyny d1 = new Druzyny("a", "b", "c", "d");
+//            Druzyny d2 = new Druzyny("a2", "b2", "c2", "d2");
+//
+              session.beginTransaction();
+//
+//            session.save(d1);
+//            session.save(d2);
+//
+//            session.getTransaction().commit();
+//
+//            Mecze mecz = new Mecze("10.02.2019", 10, 15, 2);
+//
+//            mecz.setDruzGosp(d1);
+//            mecz.setDruzGosc(d2);
+//
+//            session = sf.getCurrentSession();
+//
+//            session.beginTransaction();
+//
+//            session.save(mecz);
 //            Mecze mecz = session.get(Mecze.class, 2);
 //
 //            session.delete(mecz);
@@ -72,7 +72,8 @@ public class NBA_Statistics {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        
+        //close session
         session.close();
         //close session factory
         sf.close();

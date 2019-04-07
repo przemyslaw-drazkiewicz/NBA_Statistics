@@ -20,42 +20,43 @@ import javax.persistence.Table;
  * @author Przemek
  */
 @Entity
-@Table(name="mecze")
+@Table(name = "mecze")
 public class Mecze {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name="id_meczu")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_meczu")
     private int id;
-    
-    @ManyToOne(cascade={CascadeType.PERSIST, CascadeType.MERGE, 
-                CascadeType.DETACH, CascadeType.REFRESH})
-    @JoinColumn(name="id_druzyny_gospodarza")
+
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE,
+        CascadeType.DETACH, CascadeType.REFRESH})
+    @JoinColumn(name = "id_druzyny_gospodarza")
     private Druzyny druzGosp;
-    
-    @ManyToOne(cascade={CascadeType.PERSIST, CascadeType.MERGE, 
-                CascadeType.DETACH, CascadeType.REFRESH})
-    @JoinColumn(name="id_druzyny_goscia")
+
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE,
+        CascadeType.DETACH, CascadeType.REFRESH})
+    @JoinColumn(name = "id_druzyny_goscia")
     private Druzyny druzGosc;
-    
-    @Column(name="data")
+
+    @Column(name = "data")
     private String data;
-    
-    @Column(name="punkty_gospodarza")
+
+    @Column(name = "punkty_gospodarza")
     private int pktGosp;
-    
-    @Column(name="punkty_goscia")
+
+    @Column(name = "punkty_goscia")
     private int pktGosc;
-    
-    @Column(name="ilosc_dogrywek")
+
+    @Column(name = "ilosc_dogrywek")
     private int iloscDogrywek;
-    
-    //DO ZMIANY PO UTWORZENIU KLASY
-    @Column(name="id_sezonu")
-    private int idSezonu;
-    
-    public Mecze(){
-    
+
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE,
+        CascadeType.DETACH, CascadeType.REFRESH})
+    @JoinColumn(name = "id_sezonu")
+    private Sezony sezon;
+
+    public Mecze() {
+
     }
 
     public Mecze(String data, int pktGosp, int pktGosc, int iloscDogrywek) {
@@ -65,8 +66,7 @@ public class Mecze {
         this.iloscDogrywek = iloscDogrywek;
     }
 
-    
-     public int getId() {
+    public int getId() {
         return id;
     }
 
@@ -122,19 +122,16 @@ public class Mecze {
         this.iloscDogrywek = iloscDogrywek;
     }
 
-    public int getIdSezonu() {
-        return idSezonu;
+    public Sezony getSezon() {
+        return sezon;
     }
 
-    public void setIdSezonu(int idSezonu) {
-        this.idSezonu = idSezonu;
+    public void setSezon(Sezony sezon) {
+        this.sezon = sezon;
     }
 
     @Override
     public String toString() {
-        return "Mecze{" + "id=" + id + ", druzGosc=" + druzGosc + ", data=" + data + ", pktGosp=" + pktGosp + ", pktGosc=" + pktGosc + ", iloscDogrywek=" + iloscDogrywek + '}';
+        return "Mecze{" + "id=" + id + ", data=" + data + ", pktGosp=" + pktGosp + ", pktGosc=" + pktGosc + ", iloscDogrywek=" + iloscDogrywek + '}';
     }
-
-
-    
 }

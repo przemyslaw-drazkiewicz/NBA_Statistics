@@ -28,23 +28,23 @@ public class HistoriaDruzynZawodnika {
     @Column(name = "id_historii_druzyn_zawodnika")
     private int id;
 
-    //DO ZMIANY
-    @Column(name = "id_zawodnika")
-    private int idZawodnika;
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE,
+        CascadeType.DETACH, CascadeType.REFRESH})
+    @JoinColumn(name = "id_zawodnika")
+    private Zawodnicy zawodnik;
 
-    //DO ZMIANY, tak jak nizej
-    @Column(name = "id_sezonu")
-    private int idSezonu;
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE,
+        CascadeType.DETACH, CascadeType.REFRESH})
+    @JoinColumn(name = "id_sezonu")
+    private Sezony sezon;
 
-    @ManyToOne(cascade={CascadeType.PERSIST, CascadeType.MERGE, 
-                CascadeType.DETACH, CascadeType.REFRESH})
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE,
+        CascadeType.DETACH, CascadeType.REFRESH})
     @JoinColumn(name = "id_druzyny")
     private Druzyny druzyna;
 
     public HistoriaDruzynZawodnika() {
     }
-
-    ;
 
     public int getId() {
         return id;
@@ -54,22 +54,22 @@ public class HistoriaDruzynZawodnika {
         this.id = id;
     }
 
-    public int getIdZawodnika() {
-        return idZawodnika;
+    public Zawodnicy getZawodnik() {
+        return zawodnik;
     }
 
-    public void setIdZawodnika(int idZawodnika) {
-        this.idZawodnika = idZawodnika;
+    public void setZawodnik(Zawodnicy zawodnik) {
+        this.zawodnik = zawodnik;
     }
 
-    public int getIdSezonu() {
-        return idSezonu;
+    public Sezony getSezon() {
+        return sezon;
     }
 
-    public void setIdSezonu(int idSezonu) {
-        this.idSezonu = idSezonu;
+    public void setSezon(Sezony sezon) {
+        this.sezon = sezon;
     }
-
+    
     public Druzyny getDruzyna() {
         return druzyna;
     }
@@ -77,6 +77,5 @@ public class HistoriaDruzynZawodnika {
     public void setDruzyna(Druzyny druzyna) {
         this.druzyna = druzyna;
     }
-
 
 }
