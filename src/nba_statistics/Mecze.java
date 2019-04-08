@@ -5,6 +5,7 @@
  */
 package nba_statistics;
 
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -54,6 +56,10 @@ public class Mecze {
         CascadeType.DETACH, CascadeType.REFRESH})
     @JoinColumn(name = "id_sezonu")
     private Sezony sezon;
+    
+    @OneToMany(mappedBy = "druzyna", cascade={CascadeType.PERSIST, CascadeType.MERGE, 
+                CascadeType.DETACH, CascadeType.REFRESH})
+    List<OsiagnieciaZawWMeczu> osiagZawWMeczu;
 
     public Mecze() {
 
