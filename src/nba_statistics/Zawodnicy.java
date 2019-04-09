@@ -53,10 +53,18 @@ public class Zawodnicy {
     @OneToMany(mappedBy = "zawodnik", cascade = {CascadeType.PERSIST, CascadeType.MERGE,
         CascadeType.DETACH, CascadeType.REFRESH})
     List<HistoriaDruzynZawodnika> histDruzynZaw;
-    
-    @OneToMany(mappedBy = "druzyna", cascade={CascadeType.PERSIST, CascadeType.MERGE, 
-                CascadeType.DETACH, CascadeType.REFRESH})
+
+    @OneToMany(mappedBy = "druzyna", cascade = {CascadeType.PERSIST, CascadeType.MERGE,
+        CascadeType.DETACH, CascadeType.REFRESH})
     List<OsiagnieciaZawWMeczu> osiagZawWMeczu;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_zawodnika_schodzacego")
+    List<HistZmianWMeczu> histZmianWMeczuZawSchodz;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_zawodnika_wchodzacego")
+    List<HistZmianWMeczu> histZmianWMeczuZawWchodz;
 
     public Zawodnicy(String imie, String nazwisko, String dataUr, float wzrost, float waga) {
         this.imie = imie;
@@ -114,10 +122,49 @@ public class Zawodnicy {
         this.waga = waga;
     }
 
+    public Druzyny getDruzyna() {
+        return druzyna;
+    }
+
+    public void setDruzyna(Druzyny druzyna) {
+        this.druzyna = druzyna;
+    }
+
+    public List<HistoriaDruzynZawodnika> getHistDruzynZaw() {
+        return histDruzynZaw;
+    }
+
+    public void setHistDruzynZaw(List<HistoriaDruzynZawodnika> histDruzynZaw) {
+        this.histDruzynZaw = histDruzynZaw;
+    }
+
+    public List<OsiagnieciaZawWMeczu> getOsiagZawWMeczu() {
+        return osiagZawWMeczu;
+    }
+
+    public void setOsiagZawWMeczu(List<OsiagnieciaZawWMeczu> osiagZawWMeczu) {
+        this.osiagZawWMeczu = osiagZawWMeczu;
+    }
+
+    public List<HistZmianWMeczu> getHistZmianWMeczuZawSchodz() {
+        return histZmianWMeczuZawSchodz;
+    }
+
+    public void setHistZmianWMeczuZawSchodz(List<HistZmianWMeczu> histZmianWMeczuZawSchodz) {
+        this.histZmianWMeczuZawSchodz = histZmianWMeczuZawSchodz;
+    }
+
+    public List<HistZmianWMeczu> getHistZmianWMeczuZawWchodz() {
+        return histZmianWMeczuZawWchodz;
+    }
+
+    public void setHistZmianWMeczuZawWchodz(List<HistZmianWMeczu> histZmianWMeczuZawWchodz) {
+        this.histZmianWMeczuZawWchodz = histZmianWMeczuZawWchodz;
+    }
+
     @Override
     public String toString() {
         return "Zawodnicy{" + "id=" + id + ", imie=" + imie + ", nazwisko=" + nazwisko + ", dataUr=" + dataUr + ", wzrost=" + wzrost + ", waga=" + waga + '}';
     }
-    
-    
+
 }

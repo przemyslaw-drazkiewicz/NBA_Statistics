@@ -56,10 +56,14 @@ public class Mecze {
         CascadeType.DETACH, CascadeType.REFRESH})
     @JoinColumn(name = "id_sezonu")
     private Sezony sezon;
-    
-    @OneToMany(mappedBy = "druzyna", cascade={CascadeType.PERSIST, CascadeType.MERGE, 
-                CascadeType.DETACH, CascadeType.REFRESH})
+
+    @OneToMany(mappedBy = "druzyna", cascade = {CascadeType.PERSIST, CascadeType.MERGE,
+        CascadeType.DETACH, CascadeType.REFRESH})
     List<OsiagnieciaZawWMeczu> osiagZawWMeczu;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_meczu")
+    List<HistZmianWMeczu> histZmianWMeczu;
 
     public Mecze() {
 
@@ -135,6 +139,23 @@ public class Mecze {
     public void setSezon(Sezony sezon) {
         this.sezon = sezon;
     }
+
+    public List<OsiagnieciaZawWMeczu> getOsiagZawWMeczu() {
+        return osiagZawWMeczu;
+    }
+
+    public void setOsiagZawWMeczu(List<OsiagnieciaZawWMeczu> osiagZawWMeczu) {
+        this.osiagZawWMeczu = osiagZawWMeczu;
+    }
+
+    public List<HistZmianWMeczu> getHistZmianWMeczu() {
+        return histZmianWMeczu;
+    }
+
+    public void setHistZmianWMeczu(List<HistZmianWMeczu> histZmianWMeczu) {
+        this.histZmianWMeczu = histZmianWMeczu;
+    }
+   
 
     @Override
     public String toString() {

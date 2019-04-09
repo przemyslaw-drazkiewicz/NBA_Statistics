@@ -30,6 +30,10 @@ public class NBA_Statistics {
                 .addAnnotatedClass(Mecze.class)
                 .addAnnotatedClass(Druzyny.class)
                 .addAnnotatedClass(HistoriaDruzynZawodnika.class)
+                .addAnnotatedClass(OsiagnieciaZawWMeczu.class)
+                .addAnnotatedClass(Sezony.class)
+                .addAnnotatedClass(Zawodnicy.class)
+                .addAnnotatedClass(HistZmianWMeczu.class)
                 .buildSessionFactory();
 
         //create session
