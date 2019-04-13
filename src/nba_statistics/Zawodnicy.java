@@ -5,6 +5,7 @@
  */
 package nba_statistics;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -21,6 +22,8 @@ import javax.persistence.OneToMany;
  *
  * @author Przemek
  */
+
+
 @Entity
 @Table(name = "zawodnicy")
 public class Zawodnicy {
@@ -53,11 +56,17 @@ public class Zawodnicy {
     @OneToMany(mappedBy = "zawodnik", cascade = {CascadeType.PERSIST, CascadeType.MERGE,
         CascadeType.DETACH, CascadeType.REFRESH})
     List<HistoriaDruzynZawodnika> histDruzynZaw;
+    
+    /*
+    @OneToMany(mappedBy="zawodnik", 
+            cascade = {CascadeType.PERSIST, CascadeType.MERGE,
+            CascadeType.DETACH, CascadeType.REFRESH})
+    private List<ZawodnikPozycja> zawodnikPozycja;
 
     @OneToMany(mappedBy = "druzyna", cascade = {CascadeType.PERSIST, CascadeType.MERGE,
         CascadeType.DETACH, CascadeType.REFRESH})
     List<OsiagnieciaZawWMeczu> osiagZawWMeczu;
-
+*/
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_zawodnika_schodzacego")
     List<HistZmianWMeczu> histZmianWMeczuZawSchodz;
@@ -137,6 +146,24 @@ public class Zawodnicy {
     public void setHistDruzynZaw(List<HistoriaDruzynZawodnika> histDruzynZaw) {
         this.histDruzynZaw = histDruzynZaw;
     }
+    /////////////////////////////////////////////////////////
+    /*
+    public List<ZawodnikPozycja> getZawodnikPozycja(){
+        return zawodnikPozycja;
+    }
+    
+    public void setZawodnikPozycja (List<ZawodnikPozycja> zawPoz){
+        this.zawodnikPozycja = zawPoz;
+    }
+    
+    public void dodaj(ZawodnikPozycja zawPoz){
+        if (zawodnikPozycja == null){
+            zawodnikPozycja = new ArrayList<>();
+        }
+        
+        zawodnikPozycja.add(zawPoz);
+        zawPoz.setZawodnicy(this);
+    }
 
     public List<OsiagnieciaZawWMeczu> getOsiagZawWMeczu() {
         return osiagZawWMeczu;
@@ -145,7 +172,7 @@ public class Zawodnicy {
     public void setOsiagZawWMeczu(List<OsiagnieciaZawWMeczu> osiagZawWMeczu) {
         this.osiagZawWMeczu = osiagZawWMeczu;
     }
-
+*/
     public List<HistZmianWMeczu> getHistZmianWMeczuZawSchodz() {
         return histZmianWMeczuZawSchodz;
     }

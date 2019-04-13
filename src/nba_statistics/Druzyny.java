@@ -52,6 +52,11 @@ public class Druzyny {
     @OneToMany(mappedBy = "druzyna", cascade={CascadeType.PERSIST, CascadeType.MERGE, 
                 CascadeType.DETACH, CascadeType.REFRESH})
     List<HistoriaDruzynZawodnika> histDruzynZaw;
+    
+    //druzyny - zawodnicy
+    @OneToMany(mappedBy = "druzyna", cascade={CascadeType.PERSIST, CascadeType.MERGE, 
+                CascadeType.DETACH, CascadeType.REFRESH})
+    List<Zawodnicy> zawodnicy;
 
     public Druzyny() {
     }

@@ -19,6 +19,8 @@ import javax.persistence.Table;
  *
  * @author Przemek
  */
+
+
 @Entity
 @Table(name = "historia_zmian_w_meczu")
 public class HistZmianWMeczu {
@@ -33,8 +35,9 @@ public class HistZmianWMeczu {
     @Column(name = "id_historii_zmian")
     private int id;
 
-    @Column(name = "czas_zmiany")
-    private Mecze mecz;
+    //bez tego -> klucz obcy do tabeli Mecze -> bo Uni-directional
+    //@Column(name = "id_meczu")
+    //private Mecze mecz;
 
     @Column(name = "id_zawodnika_schodzacego")
     private int idZawodSchodz;
@@ -44,17 +47,27 @@ public class HistZmianWMeczu {
 
     @Column(name = "id_zawodnika_wchodzacego")
     private int idZawodWchodz;
+    
 
     //KLASA DO IMPLEMENTACJI
     //private PowodyZejscia powodZejscia;
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE,
+        CascadeType.DETACH, CascadeType.REFRESH})
+    @JoinColumn(name= "id_powodu_zejscia")
+    private PowodyZejscia powodZejscia;
+    
+    
+
+    
     
     public HistZmianWMeczu() {
     }
 
     ;
 
-    public HistZmianWMeczu(Mecze mecz, int idZawodSchodz, String czasZmiany, int idZawodWchodz) {
-        this.mecz = mecz;
+    public HistZmianWMeczu(int idZawodSchodz, String czasZmiany, int idZawodWchodz) {
+        
+        
         this.idZawodSchodz = idZawodSchodz;
         this.czasZmiany = czasZmiany;
         this.idZawodWchodz = idZawodWchodz;
@@ -68,13 +81,13 @@ public class HistZmianWMeczu {
         this.id = id;
     }
 
-    public Mecze getMecz() {
+    /*public Mecze getMecz() {
         return mecz;
     }
 
     public void setMecz(Mecze mecz) {
         this.mecz = mecz;
-    }
+    }*/
 
     public int getIdZawodSchodz() {
         return idZawodSchodz;
@@ -100,9 +113,19 @@ public class HistZmianWMeczu {
         this.idZawodWchodz = idZawodWchodz;
     }
 
+    public PowodyZejscia getPowodyZejscia()
+    {
+        return powodZejscia;
+    }
+    
+    public void setPowodyZejscia(PowodyZejscia powodZejscia)
+    {
+        this.powodZejscia = powodZejscia;
+    }
     @Override
     public String toString() {
-        return "HistZmianWMeczu{" + "id=" + id + ", mecz=" + mecz + ", idZawodSchodz=" + idZawodSchodz + ", czasZmiany=" + czasZmiany + ", idZawodWchodz=" + idZawodWchodz + '}';
+        return "HistZmianWMeczu{" + "id=" + id  + ", idZawodSchodz=" + idZawodSchodz + ", czasZmiany=" + czasZmiany + ", idZawodWchodz=" + idZawodWchodz + 
+                "powod zejscia= "+ powodZejscia +'}';
     }
 
 }

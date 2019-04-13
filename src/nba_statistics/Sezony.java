@@ -19,6 +19,8 @@ import javax.persistence.OneToMany;
  *
  * @author Przemek
  */
+
+
 @Entity
 @Table(name = "sezony")
 public class Sezony {
@@ -34,7 +36,7 @@ public class Sezony {
     @Column(name = "data_rozpoczecia")
     private String dataRozp;
 
-    @Column(name = "dara_zakonczenia")
+    @Column(name = "data_zakonczenia")
     private String dataZakon;
     
     @OneToMany(mappedBy = "sezon", cascade={CascadeType.PERSIST, CascadeType.MERGE, 
