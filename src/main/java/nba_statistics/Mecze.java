@@ -59,9 +59,9 @@ public class Mecze {
     private Sezony sezon;
 
     //to do Mecze - Osiagniecia zawodnika w meczu
-    /*@OneToMany(mappedBy = "mecze", cascade = {CascadeType.PERSIST, CascadeType.MERGE,
+    @OneToMany(mappedBy = "mecze", cascade = {CascadeType.PERSIST, CascadeType.MERGE,
         CascadeType.DETACH, CascadeType.REFRESH})
-    List<OsiagnieciaZawWMeczu> osiagZawWMeczu;*/
+    List<OsiagnieciaZawWMeczu> osiagZawWMeczu;
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_meczu")
@@ -142,13 +142,13 @@ public class Mecze {
         this.sezon = sezon;
     }
 
-    /*public List<OsiagnieciaZawWMeczu> getOsiagZawWMeczu() {
+    public List<OsiagnieciaZawWMeczu> getOsiagZawWMeczu() {
         return osiagZawWMeczu;
     }
 
     public void setOsiagZawWMeczu(List<OsiagnieciaZawWMeczu> osiagZawWMeczu) {
         this.osiagZawWMeczu = osiagZawWMeczu;
-    }*/
+    }
 
     public List<HistZmianWMeczu> getHistZmianWMeczu() {
         return histZmianWMeczu;

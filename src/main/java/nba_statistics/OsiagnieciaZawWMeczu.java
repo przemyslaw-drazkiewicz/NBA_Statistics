@@ -105,6 +105,14 @@ public class OsiagnieciaZawWMeczu {
         this.fauleTech = fauleTech;
     }
 
+    public OsiagnieciaZawWMeczuId getId() {
+        return id;
+    }
+
+    public void setId(OsiagnieciaZawWMeczuId id) {
+        this.id = id;
+    }
+
     public int getZdobytePunkty() {
         return zdobytePunkty;
     }

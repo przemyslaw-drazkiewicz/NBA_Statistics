@@ -72,35 +72,23 @@ class ZawodnikPozycjaID implements Serializable{
 
 
 
-@Entity
+@Entity(name="ZawodnikPozycja")
 @Table(name = "zawodnik_pozycja")
 public class ZawodnikPozycja {
+
     @EmbeddedId
     private ZawodnikPozycjaID id; 
-        
-    //private Pozycje pozycje;
-    
-    //private Zawodnicy zawodnicy;
-    
-    
+
     public ZawodnikPozycja(){};
-    
-    /*public Pozycje getPozycje(){
-        return pozycje;
+
+    public ZawodnikPozycjaID getId() {
+        return id;
     }
-    
-    public void setPozycje(Pozycje pozycje){
-        this.pozycje = pozycje;
+
+    public void setId(ZawodnikPozycjaID id) {
+        this.id = id;
     }
-    
-    public Zawodnicy getZawodnicy(){
-        return zawodnicy;
-    }
-    
-    public void setZawodnicy(Zawodnicy zawodnicy){
-        this.zawodnicy = zawodnicy;
-    }*/
-    
+
     @Override
     public String toString(){
         return "ZawodnikPozycja{id= " + id + '}';

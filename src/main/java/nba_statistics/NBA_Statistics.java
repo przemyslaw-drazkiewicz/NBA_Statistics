@@ -42,24 +42,24 @@ public class NBA_Statistics {
 
         try {
             //Druzyny d1 = new Druzyny("Atlantycka", "Wschodnia", "Toronto Raptors", "Toronto");
-            Druzyny d2 = new Druzyny("Centralna", "Wschodnia", "Indiana Pacers", "Indiana");
+           // Druzyny d2 = new Druzyny("Centralna", "Wschodnia", "Indiana Pacers", "Indiana");
             //Druzyny d3 = new Druzyny("Pacific", "Zachodnia", "Phoenix Suns", "Phoenix");
 //          
-            Zawodnicy z1 = new Zawodnicy("Marcin", "Gortat", "1980-02-10", 202, 101);
-            Sezony s1 = new Sezony("Play Offy", "2017-06-22", "2018-07-30");
-            HistoriaDruzynZawodnika hdz1 = new HistoriaDruzynZawodnika();
-            hdz1.setDruzyna(d2);
-            hdz1.setSezon(s1);
-            hdz1.setZawodnik(z1);
+            Zawodnicy z1 = new Zawodnicy("Andrzej", "Grabowski", "1940-02-10", 160, 140);
+        //    Sezony s1 = new Sezony("Play Offy", "2017-06-22", "2018-07-30");
+        //    HistoriaDruzynZawodnika hdz1 = new HistoriaDruzynZawodnika();
+        //    hdz1.setDruzyna(d2);
+        //    hdz1.setSezon(s1);
+         //   hdz1.setZawodnik(z1);
 
             
             
               session.beginTransaction();
               
-              session.save(d2);
-              session.save(z1);
-              session.save(s1);
-              session.save(hdz1);
+          //    session.save(d2);
+                session.save(z1);
+         //     session.save(s1);
+         //     session.save(hdz1);
               
              // session.save(d3);
              //z1.setDruzyna(d3);
