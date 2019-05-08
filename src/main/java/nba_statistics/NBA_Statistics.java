@@ -6,6 +6,7 @@
 package nba_statistics;
 
 
+import nba_statistics.entities.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -79,12 +80,12 @@ public class NBA_Statistics {
               Zawodnicy zaw = session.get(Zawodnicy.class, 7);
               Pozycje poz = session.get(Pozycje.class, 2);
               Pozycje poz2 = session.get(Pozycje.class,3);
-//            ZawodnikPozycja zawodnikPozycja = new ZawodnikPozycja(zaw,poz);
-//            session.save(zawodnikPozycja);
-              ZawodnikPozycja zawodnikPozycjaRes = session.get(ZawodnikPozycja.class,new ZawodnikPozycjaID(zaw.getId(),poz.getId()));
-              session.delete(zawodnikPozycjaRes);
-//              System.out.println(zaw.toString());
-//              System.out.println(poz.toString());
+            ZawodnikPozycja zawodnikPozycja = new ZawodnikPozycja(zaw,poz);
+            session.save(zawodnikPozycja);
+//              ZawodnikPozycja zawodnikPozycjaRes = session.get(ZawodnikPozycja.class,new ZawodnikPozycjaID(zaw.getId(),poz.getId()));
+//              session.delete(zawodnikPozycjaRes);
+              System.out.println(zaw.toString());
+              System.out.println(poz.toString());
 //              System.out.println(zawodnikPozycjaRes.toString());
 
 

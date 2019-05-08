@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package nba_statistics;
+package nba_statistics.entities;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +22,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="powody_zejscia")
-class PowodyZejscia {
+public class PowodyZejscia {
     
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
