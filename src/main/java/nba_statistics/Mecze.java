@@ -6,6 +6,7 @@
 package nba_statistics;
 
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
@@ -58,9 +59,7 @@ public class Mecze {
     @JoinColumn(name = "id_sezonu")
     private Sezony sezon;
 
-    //to do Mecze - Osiagniecia zawodnika w meczu
-    @OneToMany(mappedBy = "mecze", cascade = {CascadeType.PERSIST, CascadeType.MERGE,
-        CascadeType.DETACH, CascadeType.REFRESH})
+    @OneToMany(mappedBy = "mecz", cascade = CascadeType.ALL)
     List<OsiagnieciaZawWMeczu> osiagZawWMeczu;
 
     @OneToMany(cascade = CascadeType.ALL)
@@ -157,7 +156,19 @@ public class Mecze {
     public void setHistZmianWMeczu(List<HistZmianWMeczu> histZmianWMeczu) {
         this.histZmianWMeczu = histZmianWMeczu;
     }
-   
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Mecze)) return false;
+        Mecze that = (Mecze) o;
+        return Objects.equals(getId(), that.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId());
+    }
 
     @Override
     public String toString() {

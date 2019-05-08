@@ -7,6 +7,7 @@ package nba_statistics;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -62,11 +63,10 @@ public class Zawodnicy {
             cascade = {CascadeType.PERSIST, CascadeType.MERGE,
             CascadeType.DETACH, CascadeType.REFRESH})
     private List<ZawodnikPozycja> zawodnikPozycja;
-
-    @OneToMany(mappedBy = "druzyna", cascade = {CascadeType.PERSIST, CascadeType.MERGE,
-        CascadeType.DETACH, CascadeType.REFRESH})
-    List<OsiagnieciaZawWMeczu> osiagZawWMeczu;
 */
+    @OneToMany(mappedBy = "zawodnik", cascade = CascadeType.ALL)
+    List<OsiagnieciaZawWMeczu> osiagZawWMeczu;
+
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_zawodnika_schodzacego")
     List<HistZmianWMeczu> histZmianWMeczuZawSchodz;
@@ -74,6 +74,8 @@ public class Zawodnicy {
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_zawodnika_wchodzacego")
     List<HistZmianWMeczu> histZmianWMeczuZawWchodz;
+
+    public Zawodnicy(){}
 
     public Zawodnicy(String imie, String nazwisko, String dataUr, float wzrost, float waga) {
         this.imie = imie;
@@ -164,7 +166,7 @@ public class Zawodnicy {
         zawodnikPozycja.add(zawPoz);
         zawPoz.setZawodnicy(this);
     }
-
+*/
     public List<OsiagnieciaZawWMeczu> getOsiagZawWMeczu() {
         return osiagZawWMeczu;
     }
@@ -172,7 +174,7 @@ public class Zawodnicy {
     public void setOsiagZawWMeczu(List<OsiagnieciaZawWMeczu> osiagZawWMeczu) {
         this.osiagZawWMeczu = osiagZawWMeczu;
     }
-*/
+
     public List<HistZmianWMeczu> getHistZmianWMeczuZawSchodz() {
         return histZmianWMeczuZawSchodz;
     }
@@ -187,6 +189,19 @@ public class Zawodnicy {
 
     public void setHistZmianWMeczuZawWchodz(List<HistZmianWMeczu> histZmianWMeczuZawWchodz) {
         this.histZmianWMeczuZawWchodz = histZmianWMeczuZawWchodz;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Zawodnicy)) return false;
+        Zawodnicy that = (Zawodnicy) o;
+        return Objects.equals(getId(), that.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId());
     }
 
     @Override

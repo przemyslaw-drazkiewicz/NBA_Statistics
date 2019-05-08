@@ -5,19 +5,11 @@
  */
 package nba_statistics;
 
+import org.hibernate.annotations.Cascade;
+
 import java.io.Serializable;
 import java.util.Objects;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  *
@@ -28,53 +20,69 @@ import javax.persistence.Table;
 class OsiagnieciaZawWMeczuId implements Serializable{
     
     //field representing part of composite PK and at the same time FK
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE,
-        CascadeType.DETACH, CascadeType.REFRESH})
-    @JoinColumn(name = "id_zawodnika")
-    Zawodnicy zawodnik;
+    @Column(name = "id_zawodnika")
+    int id_zawodnika;
     
     //field representing part of composite PK and at the same time FK
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE,
-        CascadeType.DETACH, CascadeType.REFRESH})
-    @JoinColumn(name = "id_meczu")
-    Mecze mecz;
+    @Column(name = "id_meczu")
+    int id_meczu;
     
     public OsiagnieciaZawWMeczuId(){};
 
-    public OsiagnieciaZawWMeczuId(Zawodnicy zawodnik, Mecze mecz) {
-        this.zawodnik = zawodnik;
-        this.mecz = mecz;
+    public OsiagnieciaZawWMeczuId(int id_zawodnika, int id_meczu) {
+        this.id_zawodnika = id_zawodnika;
+        this.id_meczu = id_meczu;
     }
 
-    public Zawodnicy getZawodnik() {
-        return zawodnik;
+    public int getId_zawodnika() {
+        return id_zawodnika;
     }
 
-    public Mecze getMecz() {
-        return mecz;
+    public void setId_zawodnika(int id_zawodnika) {
+        this.id_zawodnika = id_zawodnika;
     }
-    
+
+    public int getId_meczu() {
+        return id_meczu;
+    }
+
+    public void setId_meczu(int id_meczu) {
+        this.id_meczu = id_meczu;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof OsiagnieciaZawWMeczuId)) return false;
         OsiagnieciaZawWMeczuId that = (OsiagnieciaZawWMeczuId) o;
-        return Objects.equals(getZawodnik(), that.getZawodnik()) &&
-                Objects.equals(getMecz(), that.getMecz());
+        return Objects.equals(getId_zawodnika(), that.getId_zawodnika()) &&
+                Objects.equals(getId_meczu(), that.getId_meczu());
     }
  
     @Override
     public int hashCode() {
-        return Objects.hash(getZawodnik(), getMecz());
+        return Objects.hash(id_zawodnika, id_meczu);
     }
 }
 
-@Entity
+@Entity(name="OsiagnieciaZawWMeczu")
 @Table(name = "osiagniecia_zawodnika_w_meczu")
 public class OsiagnieciaZawWMeczu {
     
     @EmbeddedId
     private OsiagnieciaZawWMeczuId id;
+
+    @ManyToOne
+    @MapsId("id_zawodnika")
+    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
+    @JoinColumn(name = "id_zawodnika")
+    private Zawodnicy zawodnik;
+
+    @ManyToOne
+    @MapsId("id_meczu")
+    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
+    @JoinColumn(name = "id_meczu")
+    private Mecze mecz;
     
     @Column(name = "zdobyte_punkty")
     private int zdobytePunkty;
@@ -96,13 +104,16 @@ public class OsiagnieciaZawWMeczu {
     
     public OsiagnieciaZawWMeczu(){};
 
-    public OsiagnieciaZawWMeczu(int zdobytePunkty, int przechwyty, int zbiorki, int bloki, int faule, int fauleTech) {
+    public OsiagnieciaZawWMeczu(Zawodnicy zawodnik, Mecze mecz, int zdobytePunkty, int przechwyty, int zbiorki, int bloki, int faule, int fauleTech) {
+        this.zawodnik = zawodnik;
+        this.mecz = mecz;
         this.zdobytePunkty = zdobytePunkty;
         this.przechwyty = przechwyty;
         this.zbiorki = zbiorki;
         this.bloki = bloki;
         this.faule = faule;
         this.fauleTech = fauleTech;
+        this.id = new OsiagnieciaZawWMeczuId();
     }
 
     public OsiagnieciaZawWMeczuId getId() {
@@ -159,6 +170,22 @@ public class OsiagnieciaZawWMeczu {
 
     public void setFauleTech(int fauleTech) {
         this.fauleTech = fauleTech;
+    }
+
+    public Zawodnicy getZawodnik() {
+        return zawodnik;
+    }
+
+    public void setZawodnik(Zawodnicy zawodnik) {
+        this.zawodnik = zawodnik;
+    }
+
+    public Mecze getMecz() {
+        return mecz;
+    }
+
+    public void setMecz(Mecze mecz) {
+        this.mecz = mecz;
     }
 
     @Override
