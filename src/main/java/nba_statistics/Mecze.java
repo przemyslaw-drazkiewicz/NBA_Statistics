@@ -60,11 +60,11 @@ public class Mecze {
     private Sezony sezon;
 
     @OneToMany(mappedBy = "mecz", cascade = CascadeType.ALL)
-    List<OsiagnieciaZawWMeczu> osiagZawWMeczu;
+    private List<OsiagnieciaZawWMeczu> osiagZawWMeczu;
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_meczu")
-    List<HistZmianWMeczu> histZmianWMeczu;
+    private List<HistZmianWMeczu> histZmianWMeczu;
 
     public Mecze() {
 

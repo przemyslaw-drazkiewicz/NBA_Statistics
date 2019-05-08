@@ -190,8 +190,14 @@ public class OsiagnieciaZawWMeczu {
 
     @Override
     public String toString() {
-        return "OsiagnieciaZawWMeczu{" + "id=" + id + ", zdobytePunkty=" + zdobytePunkty + ", przechwyty=" + przechwyty + ", zbiorki=" + zbiorki + ", bloki=" + bloki + ", faule=" + faule + ", fauleTech=" + fauleTech + '}';
+        return "OsiagnieciaZawWMeczu{" +
+                "id=" + id +
+                ", zdobytePunkty=" + zdobytePunkty +
+                ", przechwyty=" + przechwyty +
+                ", zbiorki=" + zbiorki +
+                ", bloki=" + bloki +
+                ", faule=" + faule +
+                ", fauleTech=" + fauleTech +
+                '}';
     }
-    
-    
 }

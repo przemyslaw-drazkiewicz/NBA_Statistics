@@ -56,24 +56,21 @@ public class Zawodnicy {
 
     @OneToMany(mappedBy = "zawodnik", cascade = {CascadeType.PERSIST, CascadeType.MERGE,
         CascadeType.DETACH, CascadeType.REFRESH})
-    List<HistoriaDruzynZawodnika> histDruzynZaw;
-    
-    /*
-    @OneToMany(mappedBy="zawodnik", 
-            cascade = {CascadeType.PERSIST, CascadeType.MERGE,
-            CascadeType.DETACH, CascadeType.REFRESH})
+    private List<HistoriaDruzynZawodnika> histDruzynZaw;
+
+    @OneToMany(mappedBy="zawodnik", cascade = CascadeType.ALL)
     private List<ZawodnikPozycja> zawodnikPozycja;
-*/
+
     @OneToMany(mappedBy = "zawodnik", cascade = CascadeType.ALL)
-    List<OsiagnieciaZawWMeczu> osiagZawWMeczu;
+    private List<OsiagnieciaZawWMeczu> osiagZawWMeczu;
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_zawodnika_schodzacego")
-    List<HistZmianWMeczu> histZmianWMeczuZawSchodz;
+    private List<HistZmianWMeczu> histZmianWMeczuZawSchodz;
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_zawodnika_wchodzacego")
-    List<HistZmianWMeczu> histZmianWMeczuZawWchodz;
+    private List<HistZmianWMeczu> histZmianWMeczuZawWchodz;
 
     public Zawodnicy(){}
 
@@ -149,7 +146,7 @@ public class Zawodnicy {
         this.histDruzynZaw = histDruzynZaw;
     }
     /////////////////////////////////////////////////////////
-    /*
+
     public List<ZawodnikPozycja> getZawodnikPozycja(){
         return zawodnikPozycja;
     }
@@ -164,9 +161,9 @@ public class Zawodnicy {
         }
         
         zawodnikPozycja.add(zawPoz);
-        zawPoz.setZawodnicy(this);
+        zawPoz.setZawodnik(this);
     }
-*/
+
     public List<OsiagnieciaZawWMeczu> getOsiagZawWMeczu() {
         return osiagZawWMeczu;
     }

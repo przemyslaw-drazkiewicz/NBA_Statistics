@@ -33,12 +33,16 @@ public class Pozycje {
 
     @Column(name = "nazwa")
     private String nazwa;
-    
-   /* @OneToMany(mappedBy="pozycja", 
-            cascade = {CascadeType.PERSIST, CascadeType.MERGE,
-            CascadeType.DETACH, CascadeType.REFRESH})
-    private List<ZawodnikPozycja> zawodnikPozycja;*/
-    
+
+    @OneToMany(mappedBy="pozycja", cascade = CascadeType.ALL)
+    private List<ZawodnikPozycja> zawodnikPozycja;
+
+    public Pozycje(){}
+
+    public Pozycje(String nazwa) {
+        this.nazwa = nazwa;
+    }
+
     public int getId() {
         return id;
     }
@@ -54,7 +58,7 @@ public class Pozycje {
     public void setNazwa(String nazwa) {
         this.nazwa = nazwa;
     }
-    /*  
+
     public List<ZawodnikPozycja> getZawodnikPozycja(){
         return zawodnikPozycja;
     }
@@ -63,7 +67,7 @@ public class Pozycje {
         this.zawodnikPozycja = zawPoz;
     }
     
-    public void dodaj(ZawodnikPozycja zawPoz){
+    public void dodajZawodnikPozycja(ZawodnikPozycja zawPoz){
         if (zawodnikPozycja == null){
             zawodnikPozycja = new ArrayList<>();
         }
@@ -71,9 +75,13 @@ public class Pozycje {
         zawodnikPozycja.add(zawPoz);
         zawPoz.setPozycje(this);
     }
-    */
+
     @Override
-    public String toString(){
-        return "ZawodnikPozycja{id= " + id + "nazwa= " + nazwa + '}';
+    public String toString() {
+        return "Pozycje{" +
+                "id=" + id +
+                ", nazwa='" + nazwa + '\'' +
+                ", zawodnikPozycja=" + zawodnikPozycja +
+                '}';
     }
 }
