@@ -7,8 +7,6 @@ package nba_statistics.entities;
 
 import org.hibernate.annotations.Cascade;
 
-import java.io.Serializable;
-import java.util.Objects;
 import javax.persistence.*;
 
 @Entity(name="OsiagnieciaZawWMeczu")

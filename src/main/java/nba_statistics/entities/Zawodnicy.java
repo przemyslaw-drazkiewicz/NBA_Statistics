@@ -20,7 +20,6 @@ import javax.persistence.Table;
 import javax.persistence.OneToMany;
 
 /**
- *
  * @author Przemek
  */
 
@@ -50,16 +49,19 @@ public class Zawodnicy {
     private float waga;
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE,
-        CascadeType.DETACH, CascadeType.REFRESH})
+            CascadeType.DETACH, CascadeType.REFRESH})
     @JoinColumn(name = "id_druzyny")
     private Druzyny druzyna;
 
     @OneToMany(mappedBy = "zawodnik", cascade = {CascadeType.PERSIST, CascadeType.MERGE,
-        CascadeType.DETACH, CascadeType.REFRESH})
+            CascadeType.DETACH, CascadeType.REFRESH})
     private List<HistoriaDruzynZawodnika> histDruzynZaw;
 
-    @OneToMany(mappedBy="zawodnik", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "zawodnik", cascade = CascadeType.ALL)
     private List<ZawodnikPozycja> zawodnikPozycja;
+
+    @OneToMany(mappedBy = "zawodnik", cascade = CascadeType.ALL)
+    private List<PozycjeZawWMeczu> pozycjeZawWMeczu;
 
     @OneToMany(mappedBy = "zawodnik", cascade = CascadeType.ALL)
     private List<OsiagnieciaZawWMeczu> osiagZawWMeczu;
@@ -72,7 +74,8 @@ public class Zawodnicy {
     @JoinColumn(name = "id_zawodnika_wchodzacego")
     private List<HistZmianWMeczu> histZmianWMeczuZawWchodz;
 
-    public Zawodnicy(){}
+    public Zawodnicy() {
+    }
 
     public Zawodnicy(String imie, String nazwisko, String dataUr, float wzrost, float waga) {
         this.imie = imie;
@@ -145,23 +148,21 @@ public class Zawodnicy {
     public void setHistDruzynZaw(List<HistoriaDruzynZawodnika> histDruzynZaw) {
         this.histDruzynZaw = histDruzynZaw;
     }
-    /////////////////////////////////////////////////////////
 
-    public List<ZawodnikPozycja> getZawodnikPozycja(){
+    public List<ZawodnikPozycja> getZawodnikPozycja() {
         return zawodnikPozycja;
     }
-    
-    public void setZawodnikPozycja (List<ZawodnikPozycja> zawPoz){
+
+    public void setZawodnikPozycja(List<ZawodnikPozycja> zawPoz) {
         this.zawodnikPozycja = zawPoz;
     }
-    
-    public void dodaj(ZawodnikPozycja zawPoz){
-        if (zawodnikPozycja == null){
-            zawodnikPozycja = new ArrayList<>();
-        }
-        
-        zawodnikPozycja.add(zawPoz);
-        zawPoz.setZawodnik(this);
+
+    public List<PozycjeZawWMeczu> getPozycjeZawWMeczu() {
+        return pozycjeZawWMeczu;
+    }
+
+    public void setPozycjeZawWMeczu(List<PozycjeZawWMeczu> pozycjeZawWMeczu) {
+        this.pozycjeZawWMeczu = pozycjeZawWMeczu;
     }
 
     public List<OsiagnieciaZawWMeczu> getOsiagZawWMeczu() {
@@ -186,6 +187,15 @@ public class Zawodnicy {
 
     public void setHistZmianWMeczuZawWchodz(List<HistZmianWMeczu> histZmianWMeczuZawWchodz) {
         this.histZmianWMeczuZawWchodz = histZmianWMeczuZawWchodz;
+    }
+
+    public void dodajZawodnikPozycja(ZawodnikPozycja zawPoz) {
+        if (zawodnikPozycja == null) {
+            zawodnikPozycja = new ArrayList<>();
+        }
+
+        zawodnikPozycja.add(zawPoz);
+        zawPoz.setZawodnik(this);
     }
 
     @Override

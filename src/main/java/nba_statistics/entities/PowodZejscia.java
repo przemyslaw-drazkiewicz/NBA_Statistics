@@ -22,7 +22,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="powody_zejscia")
-public class PowodyZejscia {
+public class PowodZejscia {
     
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -43,7 +43,7 @@ public class PowodyZejscia {
             historiaZmian = new ArrayList<>();
         }
         historiaZmian.add(historiaZmianWMeczu);
-        historiaZmianWMeczu.setPowodyZejscia(this);
+        historiaZmianWMeczu.setPowodZejscia(this);
         
     }
     

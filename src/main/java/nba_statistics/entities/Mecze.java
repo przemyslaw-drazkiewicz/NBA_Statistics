@@ -59,6 +59,9 @@ public class Mecze {
     private Sezony sezon;
 
     @OneToMany(mappedBy = "mecz", cascade = CascadeType.ALL)
+    private List<PozycjeZawWMeczu> pozycjeZawWMeczu;
+
+    @OneToMany(mappedBy = "mecz", cascade = CascadeType.ALL)
     private List<OsiagnieciaZawWMeczu> osiagZawWMeczu;
 
     @OneToMany(cascade = CascadeType.ALL)

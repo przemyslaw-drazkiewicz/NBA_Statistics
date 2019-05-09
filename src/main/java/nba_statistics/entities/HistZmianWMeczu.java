@@ -49,28 +49,19 @@ public class HistZmianWMeczu {
     private int idZawodWchodz;
     
 
-    //KLASA DO IMPLEMENTACJI
-    //private PowodyZejscia powodZejscia;
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE,
         CascadeType.DETACH, CascadeType.REFRESH})
     @JoinColumn(name= "id_powodu_zejscia")
-    private PowodyZejscia powodZejscia;
-    
-    
+    private PowodZejscia powodZejscia;
 
-    
-    
     public HistZmianWMeczu() {
     }
 
-    ;
-
-    public HistZmianWMeczu(int idZawodSchodz, String czasZmiany, int idZawodWchodz) {
-        
-        
+    public HistZmianWMeczu(int idZawodSchodz, String czasZmiany, int idZawodWchodz, PowodZejscia powodZejscia) {
         this.idZawodSchodz = idZawodSchodz;
         this.czasZmiany = czasZmiany;
         this.idZawodWchodz = idZawodWchodz;
+        this.powodZejscia = powodZejscia;
     }
 
     public int getId() {
@@ -113,12 +104,12 @@ public class HistZmianWMeczu {
         this.idZawodWchodz = idZawodWchodz;
     }
 
-    public PowodyZejscia getPowodyZejscia()
+    public PowodZejscia getPowodyZejscia()
     {
         return powodZejscia;
     }
-    
-    public void setPowodyZejscia(PowodyZejscia powodZejscia)
+
+    public void setPowodZejscia(PowodZejscia powodZejscia)
     {
         this.powodZejscia = powodZejscia;
     }

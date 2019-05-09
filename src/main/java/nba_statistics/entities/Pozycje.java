@@ -35,6 +35,9 @@ public class Pozycje {
     @OneToMany(mappedBy="pozycja", cascade = CascadeType.ALL)
     private List<ZawodnikPozycja> zawodnikPozycja;
 
+    @OneToMany(mappedBy = "pozycja", cascade = CascadeType.ALL)
+    private List<PozycjeZawWMeczu> pozycjeZawWMeczu;
+
     public Pozycje(){}
 
     public Pozycje(String nazwa) {

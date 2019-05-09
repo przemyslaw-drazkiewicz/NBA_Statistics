@@ -1,20 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package nba_statistics.entities;
 
 import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 
-@Entity(name="ZawodnikPozycja")
-@Table(name = "zawodnik_pozycja")
-public class ZawodnikPozycja {
+@Entity(name = "PozycjeZawWMeczu")
+@Table(name = "pozycje_zawodnika_w_meczu")
+public class PozycjeZawWMeczu {
 
     @EmbeddedId
-    private ZawodnikPozycjaID id;
+    private PozycjeZawWMeczuID id;
 
     @ManyToOne
     @MapsId("id_zawodnika")
@@ -23,25 +18,24 @@ public class ZawodnikPozycja {
     private Zawodnicy zawodnik;
 
     @ManyToOne
+    @MapsId("id_meczu")
+    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
+    @JoinColumn(name = "id_meczu")
+    private Mecze mecz;
+
+    @ManyToOne
     @MapsId("id_pozycji")
     @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     @JoinColumn(name = "id_pozycji")
     private Pozycje pozycja;
 
-    public ZawodnikPozycja(){}
+    public PozycjeZawWMeczu(){};
 
-    public ZawodnikPozycja(Zawodnicy zawodnik, Pozycje pozycja) {
-        id = new ZawodnikPozycjaID();
+    public PozycjeZawWMeczu(Zawodnicy zawodnik, Mecze mecz, Pozycje pozycja) {
+        id = new PozycjeZawWMeczuID();
         this.zawodnik = zawodnik;
+        this.mecz = mecz;
         this.pozycja = pozycja;
-    }
-
-    public ZawodnikPozycjaID getId() {
-        return id;
-    }
-
-    public void setId(ZawodnikPozycjaID id) {
-        this.id = id;
     }
 
     public Zawodnicy getZawodnik() {
@@ -52,20 +46,29 @@ public class ZawodnikPozycja {
         this.zawodnik = zawodnik;
     }
 
-    public Pozycje getPozycje() {
+    public Mecze getMecz() {
+        return mecz;
+    }
+
+    public void setMecz(Mecze mecz) {
+        this.mecz = mecz;
+    }
+
+    public Pozycje getPozycja() {
         return pozycja;
     }
 
-    public void setPozycje(Pozycje pozycje) {
-        this.pozycja = pozycje;
+    public void setPozycja(Pozycje pozycja) {
+        this.pozycja = pozycja;
     }
 
     @Override
     public String toString() {
-        return "ZawodnikPozycja{" +
+        return "PozycjeZawWMeczu{" +
                 "id=" + id +
                 ", zawodnik=" + zawodnik +
-                ", pozycje=" + pozycja +
+                ", mecz=" + mecz +
+                ", pozycja=" + pozycja +
                 '}';
     }
 }

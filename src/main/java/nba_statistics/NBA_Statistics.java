@@ -32,9 +32,10 @@ public class NBA_Statistics {
                 .addAnnotatedClass(Sezony.class)
                 .addAnnotatedClass(Zawodnicy.class)
                 .addAnnotatedClass(HistZmianWMeczu.class)
-                .addAnnotatedClass(PowodyZejscia.class)
+                .addAnnotatedClass(PowodZejscia.class)
                 .addAnnotatedClass(ZawodnikPozycja.class)
                 .addAnnotatedClass(Pozycje.class)
+                .addAnnotatedClass(PozycjeZawWMeczu.class)
                 .buildSessionFactory();
 
         //create session
@@ -77,69 +78,32 @@ public class NBA_Statistics {
 //            Pozycje pozycja2 = new Pozycje("Rzucajacy obronca");
 //            session.save(pozycja);
 //            session.save(pozycja2);
-              Zawodnicy zaw = session.get(Zawodnicy.class, 7);
-              Pozycje poz = session.get(Pozycje.class, 2);
-              Pozycje poz2 = session.get(Pozycje.class,3);
-            ZawodnikPozycja zawodnikPozycja = new ZawodnikPozycja(zaw,poz);
-            session.save(zawodnikPozycja);
+//            Zawodnicy zaw = session.get(Zawodnicy.class, 7);
+//            Pozycje poz = session.get(Pozycje.class, 2);
+//            Pozycje poz2 = session.get(Pozycje.class, 3);
+//            ZawodnikPozycja zawodnikPozycja = new ZawodnikPozycja(zaw, poz);
+//            session.save(zawodnikPozycja);
 //              ZawodnikPozycja zawodnikPozycjaRes = session.get(ZawodnikPozycja.class,new ZawodnikPozycjaID(zaw.getId(),poz.getId()));
 //              session.delete(zawodnikPozycjaRes);
-              System.out.println(zaw.toString());
-              System.out.println(poz.toString());
+//            System.out.println(zaw.toString());
+//            System.out.println(poz.toString());
 //              System.out.println(zawodnikPozycjaRes.toString());
 
+            ///////// TEST PozycjeZawWMeczu ////////////
 
-//            session.save(d2);
-//            session.save(z1);
-//            session.save(s1);
-//            session.save(hdz1);
-//
-//            session.save(d3);
-//            z1.setDruzyna(d3);
-//
-//            session.save(z1);
-//            session.createQuery("delete from DruzynyDruzyny d1 = session.get(Druzyny.class, 1);").executeUpdate();
-//            session.createQuery("delete from Druzyny where id < 6 ").executeUpdate();
-//
-//
-//            session.save(d1);
-//            session.save(d2);
-//            session.save(d3);
-//
-//
-//            session.getTransaction().commit();
-//
-//            session.save(d2);
-//            session.save(d3);
-//            Mecze mecz = new Mecze("30.01.2019", 90, 73, 0);
-//
-//            mecz.setDruzGosc(d3);
-//            mecz.setDruzGosp(d2);
-//            session.save(mecz);
-//
-//            mecz.setSezon(s1);
-//
-//            session.save(s1);
-//            mecz.setDruzGosp(d1);
-//            mecz.setDruzGosc(d2);
-//
-//            session = sf.getCurrentSession();
-//
-//            session.beginTransaction();
-//
-//            session.save(mecz);
-//            Mecze mecz = session.get(Mecze.class, 2);
-//
+            Mecze mecz = session.get(Mecze.class, 6);
+            Zawodnicy zawodnik = session.get(Zawodnicy.class, 4);
+            Pozycje pozycja = session.get(Pozycje.class, 3);
+//            PozycjeZawWMeczu pozycjeZawWMeczu = new PozycjeZawWMeczu(zawodnik,mecz,pozycja);
+//            session.save(pozycjeZawWMeczu);
+//            PozycjeZawWMeczu pozycjeZawWMeczuRes = session.get(PozycjeZawWMeczu.class,
+//                    new PozycjeZawWMeczuID(zawodnik.getId(), mecz.getId(),pozycja.getId()));
+//            session.delete(pozycjeZawWMeczuRes);
 //            session.delete(mecz);
-//            session.createQuery("delete from Mecze where id=1 ").executeUpdate();
-//            List<Mecze> mecze = session.createQuery("from Mecze").list();
-//
-//            for (Mecze mecz : mecze) {
-//                System.out.println(mecz + "\n");
-//            }
-
-
             session.getTransaction().commit();
+
+            //TODO
+            //nie działa usuwanie meczów i zawodników
 
 
             System.out.println("Successful connection !!!");
