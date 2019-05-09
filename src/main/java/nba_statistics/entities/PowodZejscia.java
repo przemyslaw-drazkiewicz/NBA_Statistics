@@ -36,7 +36,28 @@ public class PowodZejscia {
             cascade={CascadeType.PERSIST, CascadeType.MERGE,
         CascadeType.DETACH, CascadeType.REFRESH})
     private List<HistZmianWMeczu> historiaZmian;
-    
+
+    public PowodZejscia() {};
+
+    public PowodZejscia(String nazwa) { this.nazwa = nazwa; }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getNazwa() {
+        return nazwa;
+    }
+
+    public void setNazwa(String nazwa) {
+        this.nazwa = nazwa;
+    }
+
+
     public void dodajHistorieZmian(HistZmianWMeczu historiaZmianWMeczu){
         if (historiaZmian == null)
         {
@@ -55,5 +76,12 @@ public class PowodZejscia {
         this.historiaZmian = historiaZmian;
     }
             
-    
+    @Override
+    public String toString(){
+        return "PowodZejscia{" +
+                "id=" + id +
+                ", nazwa='" + nazwa + '\'' +
+                ", historiaZmian=" + historiaZmian +
+                '}';
+    }
 }

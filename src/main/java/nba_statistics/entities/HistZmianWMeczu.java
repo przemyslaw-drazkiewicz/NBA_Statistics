@@ -32,12 +32,12 @@ public class HistZmianWMeczu {
     //na Uni-directional
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_historii_zmian")
+    @Column(name = "id_historia_zmian_w_meczu")
     private int id;
 
     //bez tego -> klucz obcy do tabeli Mecze -> bo Uni-directional
-    //@Column(name = "id_meczu")
-    //private Mecze mecz;
+   // @Column(name = "id_meczu")
+   // private Mecze mecz;
 
     @Column(name = "id_zawodnika_schodzacego")
     private int idZawodSchodz;
@@ -71,15 +71,15 @@ public class HistZmianWMeczu {
     public void setId(int id) {
         this.id = id;
     }
-
-    /*public Mecze getMecz() {
+/*
+    public Mecze getMecz() {
         return mecz;
     }
 
     public void setMecz(Mecze mecz) {
         this.mecz = mecz;
-    }*/
-
+    }
+*/
     public int getIdZawodSchodz() {
         return idZawodSchodz;
     }
@@ -113,6 +113,7 @@ public class HistZmianWMeczu {
     {
         this.powodZejscia = powodZejscia;
     }
+
     @Override
     public String toString() {
         return "HistZmianWMeczu{" + "id=" + id  + ", idZawodSchodz=" + idZawodSchodz + ", czasZmiany=" + czasZmiany + ", idZawodWchodz=" + idZawodWchodz + 

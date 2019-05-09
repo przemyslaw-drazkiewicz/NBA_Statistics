@@ -5,6 +5,7 @@
  */
 package nba_statistics.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.CascadeType;
@@ -159,6 +160,12 @@ public class Mecze {
         this.histZmianWMeczu = histZmianWMeczu;
     }
 
+    public void dodajHistZmianWMeczu (HistZmianWMeczu newHistZmianWMeczu){
+        if (histZmianWMeczu == null){
+            histZmianWMeczu = new ArrayList<>();
+        }
+        histZmianWMeczu.add(newHistZmianWMeczu);
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
