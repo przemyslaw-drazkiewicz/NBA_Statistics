@@ -18,6 +18,7 @@ import java.util.ArrayList;
  */
 public class NBA_Statistics {
 
+
     /**
      * @param args the command line arguments
      */
@@ -145,12 +146,51 @@ public class NBA_Statistics {
             Mecze mecze = session.get(Mecze.class, 8);
             session.delete(mecze);
 */
-            //TODO
-            //nie działa usuwanie zawodników  :(
 
+
+            //Zawodnicy zaw = new Zawodnicy("ziomek", "usun sie", "1000-11-11", 1,1);
+            //session.save(zaw);
             Zawodnicy zaw = session.get(Zawodnicy.class, 4);
+            //session.save(zaw);
             session.delete(zaw);
+/*
+            Druzyny d = session.get(Druzyny.class, 8);
 
+            Sezony s = session.get(Sezony.class, 5);
+
+            Pozycje p = session.get(Pozycje.class, 1);
+
+            Mecze mecz = session.get(Mecze.class, 3);
+
+            PowodZejscia powod = session.get(PowodZejscia.class, 1);
+*/
+            //mecz.dodajHistZmianWMeczu(new HistZmianWMeczu(13, "02:41", 6, powod));
+            //mecz.dodajHistZmianWMeczu(new HistZmianWMeczu(4,"05:21", 13, session.get(PowodZejscia.class, 1)));
+
+
+
+            ////////////////////////////////////////////////////////////////////////
+            /*Druzyny d2 = session.get(Druzyny.class, 10);
+            Druzyny d3 = session.get(Druzyny.class, 11);
+
+
+            Mecze mecz2 = new Mecze("2019-03-22", 90, 79, 2);
+            mecz.setDruzGosp(d3);
+            mecz.setDruzGosc(d2);
+            Sezony sezon = session.get(Sezony.class, 5);
+
+
+            mecz.setSezon(sezon);
+
+
+
+
+
+            mecz.dodajHistZmianWMeczu(new HistZmianWMeczu(11, "02:41", 6, powod));
+            mecz.dodajHistZmianWMeczu(new HistZmianWMeczu(4,"05:21", 11, session.get(PowodZejscia.class, 1)));
+
+            session.save(mecz);
+            */
             session.getTransaction().commit();
 
             System.out.println("Successful connection !!!");

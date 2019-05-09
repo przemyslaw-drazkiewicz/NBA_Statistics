@@ -53,8 +53,8 @@ public class Zawodnicy {
     @JoinColumn(name = "id_druzyny")
     private Druzyny druzyna;
 
-    @OneToMany(mappedBy = "zawodnik", cascade = {CascadeType.PERSIST, CascadeType.MERGE,
-            CascadeType.DETACH, CascadeType.REFRESH})
+    // tutaj usuwanie kaskadowe musi byc
+    @OneToMany(mappedBy = "zawodnik", cascade = CascadeType.ALL)
     private List<HistoriaDruzynZawodnika> histDruzynZaw;
 
     @OneToMany(mappedBy = "zawodnik", cascade = CascadeType.ALL)

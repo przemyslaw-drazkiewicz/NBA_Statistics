@@ -20,12 +20,12 @@ import javax.persistence.Table;
  * @author Przemek
  */
 @Entity
-@Table(name = "Historia_druzyn_zawodnika")
+@Table(name = "historia_druzyn_zawodnika")
 public class HistoriaDruzynZawodnika {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_historii_druzyn_zawodnika")
+    @Column(name = "id_historia_druzyn_zawodnika")
     private int id;
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE,
@@ -40,6 +40,7 @@ public class HistoriaDruzynZawodnika {
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE,
         CascadeType.DETACH, CascadeType.REFRESH})
+    //@ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_druzyny")
     private Druzyny druzyna;
 
