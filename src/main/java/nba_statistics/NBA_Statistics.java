@@ -6,18 +6,33 @@
 package nba_statistics;
 
 
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import nba_statistics.entities.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-import java.util.ArrayList;
-
 /**
  * @author Przemek
  */
-public class NBA_Statistics {
+public class NBA_Statistics extends Application {
 
+    private static final String MainFXML = "/MainView.fxml";
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        FXMLLoader loader = new FXMLLoader(this.getClass().getResource(MainFXML));
+        AnchorPane anchorPane = loader.load();
+        Scene scene = new Scene(anchorPane);
+
+        primaryStage.setScene(scene);
+        primaryStage.setTitle("NBA Statistics");
+        primaryStage.show();
+    }
 
     /**
      * @param args the command line arguments
@@ -107,13 +122,6 @@ public class NBA_Statistics {
             session.delete(pozycjeZawWMeczuRes);
             session.delete(mecz);
 
-*/
-
-
-
-
-/*
-
             PowodZejscia pz = new PowodZejscia("zmiana taktyczna");
             session.save(pz);
 
@@ -129,10 +137,6 @@ public class NBA_Statistics {
             session.save(sezon);
             mecz.setSezon(sezon);
 
-
-
-
-
             mecz.dodajHistZmianWMeczu(new HistZmianWMeczu(4, "02:41", 6, pz));
             mecz.dodajHistZmianWMeczu(new HistZmianWMeczu(6,"05:21", 4, session.get(PowodZejscia.class, 1)));
 
@@ -146,13 +150,15 @@ public class NBA_Statistics {
             Mecze mecze = session.get(Mecze.class, 8);
             session.delete(mecze);
 */
+            Zawodnicy zaw = session.get(Zawodnicy.class, 4);
+            System.out.println(zaw.toString());
 
 
             //Zawodnicy zaw = new Zawodnicy("ziomek", "usun sie", "1000-11-11", 1,1);
             //session.save(zaw);
-            Zawodnicy zaw = session.get(Zawodnicy.class, 4);
+//            Zawodnicy zaw = session.get(Zawodnicy.class, 4);
             //session.save(zaw);
-            session.delete(zaw);
+//            session.delete(zaw);
 /*
             Druzyny d = session.get(Druzyny.class, 8);
 
@@ -167,24 +173,16 @@ public class NBA_Statistics {
             //mecz.dodajHistZmianWMeczu(new HistZmianWMeczu(13, "02:41", 6, powod));
             //mecz.dodajHistZmianWMeczu(new HistZmianWMeczu(4,"05:21", 13, session.get(PowodZejscia.class, 1)));
 
-
-
             ////////////////////////////////////////////////////////////////////////
             /*Druzyny d2 = session.get(Druzyny.class, 10);
             Druzyny d3 = session.get(Druzyny.class, 11);
-
 
             Mecze mecz2 = new Mecze("2019-03-22", 90, 79, 2);
             mecz.setDruzGosp(d3);
             mecz.setDruzGosc(d2);
             Sezony sezon = session.get(Sezony.class, 5);
 
-
             mecz.setSezon(sezon);
-
-
-
-
 
             mecz.dodajHistZmianWMeczu(new HistZmianWMeczu(11, "02:41", 6, powod));
             mecz.dodajHistZmianWMeczu(new HistZmianWMeczu(4,"05:21", 11, session.get(PowodZejscia.class, 1)));
@@ -203,5 +201,8 @@ public class NBA_Statistics {
         //close session factory
         sf.close();
 
+        //launch the main view
+        launch(args);
     }
+
 }
