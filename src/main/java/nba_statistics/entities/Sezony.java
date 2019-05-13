@@ -39,11 +39,11 @@ public class Sezony {
     @Column(name = "data_zakonczenia")
     private String dataZakon;
     
-    @OneToMany(mappedBy = "sezon", cascade={CascadeType.PERSIST, CascadeType.MERGE, 
+    @OneToMany(mappedBy = "sezon", cascade={CascadeType.PERSIST, CascadeType.MERGE,
                 CascadeType.DETACH, CascadeType.REFRESH})
     List<Mecze> mecze;
 
-        @OneToMany(mappedBy = "sezon", cascade={CascadeType.PERSIST, CascadeType.MERGE, 
+        @OneToMany(mappedBy = "sezon", cascade={CascadeType.PERSIST, CascadeType.MERGE,
                 CascadeType.DETACH, CascadeType.REFRESH})
     List<HistoriaDruzynZawodnika> histDruzZaw;
     

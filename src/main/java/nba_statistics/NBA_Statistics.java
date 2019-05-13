@@ -11,6 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import nba_statistics.controllers.MainController;
 import nba_statistics.entities.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -22,16 +23,22 @@ import org.hibernate.cfg.Configuration;
 public class NBA_Statistics extends Application {
 
     private static final String MainFXML = "/MainView.fxml";
+    private static final String Preseason = "/Preseason.fxml";
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        //window = primaryStage;
         FXMLLoader loader = new FXMLLoader(this.getClass().getResource(MainFXML));
         AnchorPane anchorPane = loader.load();
         Scene scene = new Scene(anchorPane);
 
+
         primaryStage.setScene(scene);
         primaryStage.setTitle("NBA Statistics");
         primaryStage.show();
+
+
+
     }
 
     /**
@@ -150,8 +157,8 @@ public class NBA_Statistics extends Application {
             Mecze mecze = session.get(Mecze.class, 8);
             session.delete(mecze);
 */
-            Zawodnicy zaw = session.get(Zawodnicy.class, 4);
-            System.out.println(zaw.toString());
+            //Zawodnicy zaw = session.get(Zawodnicy.class, 6);
+            //System.out.println(zaw.toString());
 
 
             //Zawodnicy zaw = new Zawodnicy("ziomek", "usun sie", "1000-11-11", 1,1);
