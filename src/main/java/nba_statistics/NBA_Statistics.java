@@ -16,6 +16,9 @@ import nba_statistics.entities.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.query.Query;
+
+import java.util.List;
 
 /**
  * @author Przemek
@@ -196,6 +199,17 @@ public class NBA_Statistics extends Application {
 
             session.save(mecz);
             */
+
+/*            Query<Mecze> theQuery = session.createQuery("from Mecze", Mecze.class);
+            List<Mecze> matches = theQuery.getResultList();*/
+
+ /*            for (Mecze m:matches)
+            {
+                System.out.println(m.toString());
+            }*/
+
+
+            //session.createQuery("delete from Druzyny where id>=8").executeUpdate();
             session.getTransaction().commit();
 
             System.out.println("Successful connection !!!");

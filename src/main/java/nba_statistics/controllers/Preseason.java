@@ -1,7 +1,6 @@
 package nba_statistics.controllers;
 
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,6 +11,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import nba_statistics.entities.Druzyny;
+import nba_statistics.entities.Mecze;
+import nba_statistics.services.MatchesService;
+import nba_statistics.services.TeamsService;
 
 import java.io.IOException;
 import java.net.URL;
@@ -41,6 +44,7 @@ public class Preseason implements Initializable {
     @FXML private TextField t30; @FXML private TextField t31; @FXML private TextField t32;
 
     @FXML private Button sendBtn;
+
 
     private void setVisibleD(){
         d10.setVisible(true);d11.setVisible(true);d12.setVisible(true);d13.setVisible(true);
@@ -81,7 +85,7 @@ public class Preseason implements Initializable {
         window.setScene(preseasonScene);
         window.show();
     }
-
+    private String state;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -96,29 +100,58 @@ public class Preseason implements Initializable {
 
     public void onSelected()
     {
+
         selected.setVisible(true);
        switch (spinner.getValue().toString()){
            case "Druzyna":
                setInvisibleM();
                setInvisibleS();
                setVisibleD();
+               state = "Druzyna";
                break;
 
            case "Mecz":
                setInvisibleD();
                setInvisibleS();
                setVisibleM();
-               break;
+               state = "Mecz";
+
+/*
+            MatchesService matchesService = new MatchesService();
+
+            //Mecze mecz2 = new Mecze("2019-03-22", 901, 729, 2);
+            //matchesService.persist(mecz2);
+            List<Mecze> listaOsobista = matchesService.findAll();
+
+            for (Mecze m:listaOsobista){
+               System.out.println(m.toString());
+           }*/
+            break;
 
            case "Sezon":
                setInvisibleM();
                setInvisibleD();
                setVisibleS();
+               state = "Sezon";
                break;
 
 
 
        }
        sendBtn.setVisible(true);
+    }
+    public void sendToDatabase(){
+        switch (state){
+            case "Druzyna":
+
+                break;
+            case "Mecz":
+                MatchesService matchesService = new MatchesService();
+                matchesService.getData(t20.getText(),t21.getText(), t22.getText(), t23.getText());
+                break;
+            case "Sezon":
+
+                break;
+        }
     }
 }

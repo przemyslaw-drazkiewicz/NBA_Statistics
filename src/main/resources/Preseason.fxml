@@ -42,7 +42,7 @@
       <TextField fx:id="t11" layoutX="248.0" layoutY="217.0" visible="false" />
       <TextField fx:id="t12" layoutX="248.0" layoutY="257.0" visible="false" />
       <TextField fx:id="t13" layoutX="248.0" layoutY="294.0" visible="false" />
-      <Button fx:id="sendBtn" layoutX="272.0" layoutY="348.0" mnemonicParsing="false" text="Wyślij" visible="false" />
+      <Button fx:id="sendBtn" layoutX="272.0" layoutY="348.0" mnemonicParsing="false" onAction="#sendToDatabase" text="Wyślij" visible="false" />
       <Text fx:id="m11" layoutX="186.0" layoutY="223.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gość" visible="false">
          <font>
             <Font size="20.0" />
