@@ -1,9 +1,10 @@
 package nba_statistics.dao.classes;
 
 import nba_statistics.HibernateUtil;
-import nba_statistics.dao.interfaces.ISeasonsDao;
+import nba_statistics.dao.interfaces.IPlayersDao;
 import nba_statistics.entities.Druzyny;
-import nba_statistics.entities.Sezony;
+import nba_statistics.entities.Zawodnicy;
+import nba_statistics.services.TeamsService;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -11,12 +12,13 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
 
-public class SeasonsDao implements ISeasonsDao {
+public class PlayersDao implements IPlayersDao {
+
     private Session currentSession;
 
     private Transaction currentTransaction;
 
-    public SeasonsDao(){
+    public PlayersDao(){
 
     }
 
@@ -63,20 +65,32 @@ public class SeasonsDao implements ISeasonsDao {
         this.currentTransaction = currentTransaction;
     }
 
-    public void persist(Sezony entity) {
+    public void persist(Zawodnicy entity) {
         getCurrentSession().save(entity);
     }
 
-    public Sezony getSeasons(String name) {
-        Query<Sezony> theQuery = getCurrentSession().createQuery("from Sezony where nazwa = :name", Sezony.class);
-        theQuery.setParameter("name", name);
-        Sezony s = theQuery.setMaxResults(1).uniqueResult();
-        System.out.println(s.toString());
-        return s;
-    }
-    public void getData(String name, String startDate, String endDate){
-        Sezony s = new Sezony(name, startDate, endDate);
-        persist(s);
+    public void getData(String name, String surname, String date, float height, float weight, String team) {
+        Zawodnicy z = new Zawodnicy(name, surname, date, height, weight);
+        TeamsService teamsService = new TeamsService();
+        Druzyny d = teamsService.getTeam(team);
+        z.setDruzyna(d);
+        persist(z);
 
     }
+
+    public void updatePlayer(String name, String surname, String team){
+        //Query<Zawodnicy> theQuery = getCurrentSession().createQuery("from Zawodnicy where imie = :name and nazwisko = :surname",Zawodnicy.class);
+        TeamsService teamsService = new TeamsService();
+        Druzyny d = teamsService.getTeam(team);
+        int id = d.getId();
+
+        getCurrentSession().createQuery("update Zawodnicy set id_druzyny = :id  where imie = :name and nazwisko = :surname")
+                .setParameter("id", id)
+                .setParameter("name", name)
+                .setParameter("surname", surname)
+                .executeUpdate();
+
+
+    }
+
 }

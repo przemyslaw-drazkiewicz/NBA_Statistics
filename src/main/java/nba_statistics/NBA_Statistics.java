@@ -26,7 +26,6 @@ import java.util.List;
 public class NBA_Statistics extends Application {
 
     private static final String MainFXML = "/MainView.fxml";
-    private static final String Preseason = "/Preseason.fxml";
 
     @Override
     public void start(Stage primaryStage) throws Exception {

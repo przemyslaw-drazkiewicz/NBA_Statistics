@@ -15,4 +15,9 @@ public class SeasonsService {
         seasonsDao.closeCurrentSession();
         return s;
     }
+    public void getData(String name, String startDate, String endDate){
+        seasonsDao.openCurrentSessionwithTransaction();
+        seasonsDao.getData(name, startDate, endDate);
+        seasonsDao.closeCurrentSessionwithTransaction();
+    }
 }

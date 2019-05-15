@@ -12,10 +12,16 @@ public class TeamsService {
     public TeamsService(){
         teamsDao = new TeamsDao();
     }
+
     public Druzyny getTeam(String name){
         teamsDao.openCurrentSession();
         Druzyny d = teamsDao.getTeam(name);
         teamsDao.closeCurrentSession();
         return d;
+    }
+    public void getData(String division, String conference, String name, String location){
+        teamsDao.openCurrentSessionwithTransaction();
+        teamsDao.getData(division, conference, name,location);
+        teamsDao.closeCurrentSessionwithTransaction();
     }
 }

@@ -65,6 +65,10 @@ public class TeamsDao implements ITeamsDao {
     }
 
 
+    public void persist(Druzyny entity) {
+        getCurrentSession().save(entity);
+    }
+
     public Druzyny getTeam(String name) {
         Query<Druzyny> theQuery = getCurrentSession().createQuery("from Druzyny where nazwa = :name", Druzyny.class);
         theQuery.setParameter("name", name);
@@ -72,5 +76,9 @@ public class TeamsDao implements ITeamsDao {
         Druzyny d = theQuery.setMaxResults(1).uniqueResult();
         System.out.println(d.toString());
         return d;
+    }
+    public void getData(String division, String conference, String name, String location){
+        Druzyny d = new Druzyny(division, conference, name, location);
+        persist(d);
     }
 }
