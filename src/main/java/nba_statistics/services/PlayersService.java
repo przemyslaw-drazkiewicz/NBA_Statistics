@@ -1,7 +1,6 @@
 package nba_statistics.services;
 
 import nba_statistics.dao.classes.PlayersDao;
-import nba_statistics.entities.Zawodnicy;
 
 public class PlayersService {
     private static PlayersDao playersDao;

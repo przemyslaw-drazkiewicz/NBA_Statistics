@@ -56,6 +56,7 @@ public class Preseason implements Initializable {
 
     @FXML private Button sendBtn; @FXML private Button addedSeasonBtn; @FXML private Button skipBtn;
 
+    @FXML private Text tSeason;@FXML private Text tSeason0;
 
     private void setVisibleD(){
         d10.setVisible(true);d11.setVisible(true);d12.setVisible(true);d13.setVisible(true);
@@ -68,13 +69,13 @@ public class Preseason implements Initializable {
     }
 
     private void setVisibleM(){
-        m10.setVisible(true);m11.setVisible(true);m12.setVisible(true);
-        t20.setVisible(true);t21.setVisible(true);t22.setVisible(true);
+        m10.setVisible(true);m11.setVisible(true);m12.setVisible(true); tSeason.setVisible(true);
+        t20.setVisible(true);t21.setVisible(true);t22.setVisible(true); tSeason0.setVisible(true);
 
     }
     private void setInvisibleM(){
-        m10.setVisible(false);m11.setVisible(false);m12.setVisible(false);
-        t20.setVisible(false);t21.setVisible(false);t22.setVisible(false);
+        m10.setVisible(false);m11.setVisible(false);m12.setVisible(false); tSeason.setVisible(false);
+        t20.setVisible(false);t21.setVisible(false);t22.setVisible(false); tSeason0.setVisible(false);
     }
 
     private void setInvisibleS(){
@@ -143,6 +144,7 @@ public class Preseason implements Initializable {
         spinner.setVisible(true);
         selected.setVisible(true);
         enterDataTxt.setVisible(true);
+        tSeason.setText(currSeason);
     }
 
     @Override
@@ -201,6 +203,7 @@ public class Preseason implements Initializable {
        }
        sendBtn.setVisible(true);
     }
+
     public void addNewPlayer(){
         setInvisibleP();
         setVisibleNewPlayerT();
@@ -214,6 +217,7 @@ public class Preseason implements Initializable {
         state = "Transfer";
         newPlayerCheckBox.setSelected(false);
     }
+
     public void sendToDatabase(){
         switch (state){
             case "Team":
@@ -235,7 +239,6 @@ public class Preseason implements Initializable {
                 PlayersService playersService1 = new PlayersService();
                 playersService1.updatePlayer(t40.getText(), t41.getText(), t42.getText());
                 clearTextFieldTransfer();
-
                 break;
         }
     }

@@ -13,23 +13,17 @@
       <Button fx:id="logOutBtn" layoutX="534.0" layoutY="14.0" mnemonicParsing="false" onAction="#changeScreen" text="Log out" />
       <Spinner fx:id="spinner" layoutX="227.0" layoutY="45.0" visible="false" />
       <Button fx:id="selected" layoutX="395.0" layoutY="45.0" mnemonicParsing="false" onAction="#onSelected" text="Select" visible="false" />
-      <Text fx:id="d11" layoutX="122.0" layoutY="237.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Conference" visible="false">
+      <Text fx:id="d11" layoutX="126.0" layoutY="277.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Conference" visible="false">
          <font>
             <Font size="20.0" />
          </font>
       </Text>
-      <Text fx:id="m10" layoutX="189.0" layoutY="194.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Host" visible="false">
+      <Text fx:id="d10" layoutX="157.0" layoutY="238.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Division" visible="false">
          <font>
             <Font size="20.0" />
          </font>
       </Text>
-      <Text fx:id="s1" layoutX="445.0" layoutY="242.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Season" visible="false" />
-      <Text fx:id="d10" layoutX="163.0" layoutY="192.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Division" visible="false">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Text>
-      <Text fx:id="d12" layoutX="168.0" layoutY="278.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name" visible="false">
+      <Text fx:id="d12" layoutX="171.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name" visible="false">
          <font>
             <Font size="20.0" />
          </font>
@@ -39,22 +33,37 @@
             <Font size="20.0" />
          </font>
       </Text>
-      <TextField fx:id="t10" layoutX="248.0" layoutY="173.0" visible="false" />
-      <TextField fx:id="t11" layoutX="248.0" layoutY="217.0" visible="false" />
-      <TextField fx:id="t12" layoutX="248.0" layoutY="257.0" visible="false" />
+      <TextField fx:id="t12" layoutX="248.0" layoutY="184.0" visible="false" />
+      <TextField fx:id="t10" layoutX="248.0" layoutY="218.0" visible="false" />
+      <TextField fx:id="t11" layoutX="248.0" layoutY="256.0" visible="false" />
       <TextField fx:id="t13" layoutX="248.0" layoutY="294.0" visible="false" />
       <Button fx:id="sendBtn" layoutX="248.0" layoutY="357.0" mnemonicParsing="false" onAction="#sendToDatabase" prefHeight="30.0" prefWidth="113.0" text="Send" visible="false" />
+      <Text fx:id="m10" layoutX="189.0" layoutY="191.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Host" visible="false">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
       <Text fx:id="m11" layoutX="186.0" layoutY="223.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Away" visible="false">
          <font>
             <Font size="20.0" />
          </font>
       </Text>
-      <Text fx:id="m12" layoutX="187.0" layoutY="264.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Data" visible="false">
+      <Text fx:id="m12" layoutX="189.0" layoutY="263.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Data" visible="false">
          <font>
             <Font size="20.0" />
          </font>
       </Text>
-      <TextField fx:id="t20" layoutX="259.0" layoutY="172.0" visible="false" />
+      <Text fx:id="tSeason0" layoutX="166.0" layoutY="307.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Season" visible="false">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <Text fx:id="tSeason" layoutX="259.0" layoutY="306.0" strokeType="OUTSIDE" strokeWidth="0.0" visible="false" wrappingWidth="169.783203125">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <TextField fx:id="t20" layoutX="259.0" layoutY="170.0" visible="false" />
       <TextField fx:id="t21" layoutX="259.0" layoutY="205.0" visible="false" />
       <TextField fx:id="t22" layoutX="259.0" layoutY="243.0" visible="false" />
       <Text fx:id="s10" layoutX="192.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name">
@@ -74,18 +83,19 @@
       </Text>
       <TextField fx:id="t30" layoutX="273.0" layoutY="91.0" />
       <TextField fx:id="t31" layoutX="273.0" layoutY="135.0" />
-      <TextField fx:id="t32" layoutX="270.0" layoutY="174.0" />
-      <Text fx:id="enterDataTxt" layoutX="248.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter data" visible="false">
-         <font>
-            <Font size="25.0" />
-         </font>
-      </Text>
+      <TextField fx:id="t32" layoutX="273.0" layoutY="172.0" />
       <Text fx:id="s13" layoutX="234.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter season">
          <font>
             <Font size="25.0" />
          </font>
       </Text>
       <Button fx:id="addedSeasonBtn" layoutX="278.0" layoutY="234.0" mnemonicParsing="false" onAction="#addedSeason" text="Add" />
+      <Button fx:id="skipBtn" layoutX="371.0" layoutY="234.0" mnemonicParsing="false" onAction="#skipAction" text="Skip" />
+      <Text fx:id="enterDataTxt" layoutX="248.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter data" visible="false">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Text>
       <CheckBox fx:id="newPlayerCheckBox" layoutX="224.0" layoutY="85.0" mnemonicParsing="false" onAction="#addNewPlayer" text="New player" visible="false" />
       <CheckBox fx:id="transferCheckBox" layoutX="312.0" layoutY="85.0" mnemonicParsing="false" onAction="#changeTeam" text="Transfer" visible="false" />
       <Text fx:id="p40" layoutX="138.0" layoutY="161.0" strokeType="OUTSIDE" strokeWidth="0.0" text="First name" visible="false">
@@ -120,10 +130,9 @@
       </Text>
       <TextField fx:id="t40" layoutX="270.0" layoutY="141.0" visible="false" />
       <TextField fx:id="t41" layoutX="271.0" layoutY="172.0" visible="false" />
-      <TextField fx:id="t44" layoutX="271.0" layoutY="287.0" visible="false" />
-      <TextField fx:id="t43" layoutX="270.0" layoutY="245.0" visible="false" />
-      <TextField fx:id="t45" layoutX="270.0" layoutY="326.0" visible="false" />
       <TextField fx:id="t42" layoutX="270.0" layoutY="209.0" visible="false" />
-      <Button fx:id="skipBtn" layoutX="371.0" layoutY="234.0" mnemonicParsing="false" onAction="#skipAction" text="Skip" />
+      <TextField fx:id="t43" layoutX="270.0" layoutY="245.0" visible="false" />
+      <TextField fx:id="t44" layoutX="271.0" layoutY="287.0" visible="false" />
+      <TextField fx:id="t45" layoutX="270.0" layoutY="326.0" visible="false" />
    </children>
 </AnchorPane>
