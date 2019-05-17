@@ -172,36 +172,36 @@ public class Preseason implements Initializable {
     {
 
         selected.setVisible(true);
-       switch (spinner.getValue().toString()){
-           case "Team":
-               setInvisibleCheckBox();
-               setInvisibleM();
-               setInvisibleP();
-               setInvisibleS();
-               setVisibleD();
-               state = "Team";
-               break;
+        switch (spinner.getValue().toString()){
+            case "Team":
+                setInvisibleCheckBox();
+                setInvisibleM();
+                setInvisibleP();
+                setInvisibleS();
+                setVisibleD();
+                state = "Team";
+                break;
 
-           case "Match":
-               setInvisibleCheckBox();
-               setInvisibleD();
-               setInvisibleP();
-               setInvisibleS();
-               setVisibleM();
-               state = "Match";
-            break;
+            case "Match":
+                setInvisibleCheckBox();
+                setInvisibleD();
+                setInvisibleP();
+                setInvisibleS();
+                setVisibleM();
+                state = "Match";
+                break;
 
-           case "Player":
-               setInvisibleD();
-               setInvisibleS();
-               setInvisibleM();
-               setVisibleCheckBox();
-               break;
+            case "Player":
+                setInvisibleD();
+                setInvisibleS();
+                setInvisibleM();
+                setVisibleCheckBox();
+                break;
 
 
 
-       }
-       sendBtn.setVisible(true);
+        }
+        sendBtn.setVisible(true);
     }
 
     public void addNewPlayer(){

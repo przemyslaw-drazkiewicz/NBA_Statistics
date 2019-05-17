@@ -41,4 +41,13 @@ public class MainController implements Initializable {
         window.setScene(preseasonScene);
         window.show();
     }
+
+    public void changeScreenToReviewer(ActionEvent event) throws IOException {
+        Parent reviewerParent = FXMLLoader.load(getClass().getResource("/DataViewer.fxml"));
+        Scene reviewerScene = new Scene(reviewerParent);
+
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        window.setScene(reviewerScene);
+        window.show();
+    }
 }

@@ -5,6 +5,9 @@ import nba_statistics.dao.interfaces.IPlayersDao;
 import nba_statistics.entities.Druzyny;
 import nba_statistics.entities.Zawodnicy;
 import nba_statistics.services.TeamsService;
+import org.hibernate.query.Query;
+
+import java.util.List;
 
 public class PlayersDao extends Dao implements IPlayersDao {
 
@@ -40,4 +43,12 @@ public class PlayersDao extends Dao implements IPlayersDao {
 
     }
 
+    public List<Zawodnicy> getPlayers(String surname){
+
+        Query<Zawodnicy> theQuery = getCurrentSession().createQuery("from Zawodnicy where nazwisko = :surname")
+                .setParameter("surname", surname);
+        List<Zawodnicy> players = theQuery.getResultList();
+
+        return players;
+    }
 }
