@@ -2,6 +2,7 @@ package nba_statistics.services;
 
 import nba_statistics.dao.classes.MatchesDao;
 import nba_statistics.entities.Mecze;
+import nba_statistics.entities.OsiagnieciaZawWMeczu;
 
 import java.util.List;
 
@@ -11,6 +12,8 @@ public class MatchesService{
     public MatchesService(){
         matchesDao = new MatchesDao();
     }
+
+
 
     public List<Mecze> findAll(){
         matchesDao.openCurrentSession();
@@ -29,4 +32,13 @@ public class MatchesService{
         matchesDao.persist(entity);
         matchesDao.closeCurrentSessionwithTransaction();
     }
+
+
+    public List<OsiagnieciaZawWMeczu> getAchievementPlayerInMatch(int idPlayer, int idSeason, int idTeam) {
+        matchesDao.openCurrentSessionwithTransaction();
+        List<OsiagnieciaZawWMeczu> achievements = matchesDao.getAchievementPlayerInMatch(idPlayer, idSeason,idTeam);
+        matchesDao.closeCurrentSessionwithTransaction();
+        return achievements;
+    }
+
 }

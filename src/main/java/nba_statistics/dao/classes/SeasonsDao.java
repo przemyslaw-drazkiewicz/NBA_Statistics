@@ -4,6 +4,8 @@ import nba_statistics.dao.interfaces.ISeasonsDao;
 import nba_statistics.entities.Sezony;
 import org.hibernate.query.Query;
 
+import java.util.List;
+
 public class SeasonsDao extends Dao implements ISeasonsDao {
 
 
@@ -26,6 +28,7 @@ public class SeasonsDao extends Dao implements ISeasonsDao {
     public void getData(String name, String startDate, String endDate){
         Sezony s = new Sezony(name, startDate, endDate);
         persist(s);
-
     }
+
+
 }

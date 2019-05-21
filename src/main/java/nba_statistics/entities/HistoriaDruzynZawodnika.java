@@ -79,4 +79,5 @@ public class HistoriaDruzynZawodnika {
         this.druzyna = druzyna;
     }
 
+
 }

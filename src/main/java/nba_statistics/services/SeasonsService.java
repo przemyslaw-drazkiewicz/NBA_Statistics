@@ -3,11 +3,14 @@ package nba_statistics.services;
 import nba_statistics.dao.classes.SeasonsDao;
 import nba_statistics.entities.Sezony;
 
+import java.util.List;
+
 public class SeasonsService {
     private static SeasonsDao seasonsDao;
     public SeasonsService(){
         seasonsDao = new SeasonsDao();
     }
+
 
     public Sezony getSeason(String name){
         seasonsDao.openCurrentSession();
