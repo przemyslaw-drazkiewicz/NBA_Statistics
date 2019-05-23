@@ -50,4 +50,12 @@ public class MainController implements Initializable {
         window.setScene(reviewerScene);
         window.show();
     }
+    public void changeScreenToRegister(ActionEvent event)throws IOException{
+        Parent reviewerParent = FXMLLoader.load(getClass().getResource("/RegisterView.fxml"));
+        Scene reviewerScene = new Scene(reviewerParent);
+
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        window.setScene(reviewerScene);
+        window.show();
+    }
 }

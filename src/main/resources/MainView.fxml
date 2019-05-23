@@ -29,7 +29,7 @@
             <Reflection fraction="0.8" topOpacity="0.0" />
          </effect>
       </TextField>
-      <Button id="registerBtn" layoutX="185.0" layoutY="296.0" mnemonicParsing="false" style="-fx-border-color: transparent; -fx-background-color: transparent; -fx-cursor: hand;" text="Sign up" textFill="#fffbfb" underline="true" />
+      <Button id="registerBtn" layoutX="185.0" layoutY="296.0" mnemonicParsing="false" onAction="#changeScreenToRegister" style="-fx-border-color: transparent; -fx-background-color: transparent; -fx-cursor: hand;" text="Sign up" textFill="#fffbfb" underline="true" />
       <Button fx:id="reviewerBtn" layoutX="461.0" layoutY="290.0" mnemonicParsing="false" onAction="#changeScreenToReviewer" prefHeight="39.0" prefWidth="104.0" text="Reviewer" textAlignment="CENTER" />
    </children>
 </AnchorPane>

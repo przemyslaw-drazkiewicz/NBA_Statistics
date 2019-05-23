@@ -4,7 +4,7 @@ import nba_statistics.dao.interfaces.ITeamsDao;
 import nba_statistics.entities.Druzyny;
 import org.hibernate.query.Query;
 
-public class TeamsDao extends Dao implements ITeamsDao {
+public class    TeamsDao extends Dao implements ITeamsDao {
 
     public TeamsDao(){
 
