@@ -21,10 +21,11 @@ public class MatchesService{
         matchesDao.closeCurrentSession();
         return matches;
     }
-    public void getData(String home, String away, String date, String season){
-        matchesDao.openCurrentSessionwithTransaction();
-        matchesDao.getData(home, away, date,season);
-        matchesDao.closeCurrentSessionwithTransaction();
+    public int getData(String home, String away, String date, String season){
+        matchesDao.openCurrentSession();
+        int tmp = matchesDao.getData(home, away, date,season);
+        matchesDao.closeCurrentSession();
+        return tmp;
     }
 
     public void persist(Mecze entity) {

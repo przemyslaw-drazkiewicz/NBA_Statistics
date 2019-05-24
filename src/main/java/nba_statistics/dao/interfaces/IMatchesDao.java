@@ -9,7 +9,7 @@ import java.util.List;
 public interface IMatchesDao {
     List<Mecze> findAll();
 
-    void getData(String home, String away, String date, String season);
+    int getData(String home, String away, String date, String season);
     void persist(Mecze mecze);
     List<OsiagnieciaZawWMeczu> getAchievementPlayerInMatch(int idPlayer, int idSeason, int idTeam);
 }

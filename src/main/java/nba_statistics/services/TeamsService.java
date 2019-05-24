@@ -21,4 +21,10 @@ public class TeamsService {
         teamsDao.getData(division, conference, name,location);
         teamsDao.closeCurrentSessionwithTransaction();
     }
+    public boolean checkTeam(String team){
+        teamsDao.openCurrentSession();
+        boolean i = teamsDao.checkTeam(team);
+        teamsDao.closeCurrentSession();
+        return i;
+    }
 }

@@ -13,15 +13,18 @@ public class PlayersService {
         playersDao = new PlayersDao();
     }
 
-    public void updatePlayer(String name, String surname,String team){
+    public int updatePlayer(String name, String surname,String team){
         playersDao.openCurrentSessionwithTransaction();
-        playersDao.updatePlayer(name, surname,team);
+        int tmp = 0;
+        tmp = playersDao.updatePlayer(name, surname,team);
         playersDao.closeCurrentSessionwithTransaction();
+        return tmp;
     }
-    public void getData(String name, String surname, String date, float height, float weight, String team){
+    public int getData(String name, String surname, String date, float height, float weight, String team){
         playersDao.openCurrentSessionwithTransaction();
-        playersDao.getData(name, surname, date,height, weight, team);
+        int tmp = playersDao.getData(name, surname, date,height, weight, team);
         playersDao.closeCurrentSessionwithTransaction();
+        return tmp;
     }
 
     public List<Zawodnicy> getPlayers(String name, String surname){

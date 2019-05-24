@@ -18,9 +18,16 @@ public class SeasonsService {
         seasonsDao.closeCurrentSession();
         return s;
     }
-    public void getData(String name, String startDate, String endDate){
-        seasonsDao.openCurrentSessionwithTransaction();
-        seasonsDao.getData(name, startDate, endDate);
-        seasonsDao.closeCurrentSessionwithTransaction();
+    public int getData(String name, String startDate, String endDate){
+        seasonsDao.openCurrentSession();
+        int i = seasonsDao.getData(name, startDate, endDate);
+        seasonsDao.closeCurrentSession();
+        return i;
+    }
+    public boolean checkSeason(String name){
+        seasonsDao.openCurrentSession();
+        boolean i = seasonsDao.checkSeason(name);
+        seasonsDao.closeCurrentSession();
+        return i;
     }
 }

@@ -4,7 +4,9 @@ import nba_statistics.dao.interfaces.IMatchesDao;
 import nba_statistics.entities.*;
 import nba_statistics.services.SeasonsService;
 import nba_statistics.services.TeamsService;
+import org.hibernate.exception.DataException;
 import org.hibernate.query.Query;
+import java.sql.Date;
 
 import java.util.*;
 
@@ -24,18 +26,38 @@ public class MatchesDao extends Dao implements IMatchesDao{
         getCurrentSession().save(entity);
     }
 
-    public void getData(String home, String away, String date, String season){
+    public int getData(String home, String away, String date, String season){
         TeamsService teamsService = new TeamsService();
         SeasonsService seasonsService = new SeasonsService();
         Druzyny teamHome = teamsService.getTeam(home);
         Druzyny teamAway = teamsService.getTeam(away);
-        Sezony s = seasonsService.getSeason(season);
-        Mecze mecz = new Mecze();
-        mecz.setData(date);
-        mecz.setDruzGosp(teamHome);
-        mecz.setDruzGosc(teamAway);
-        mecz.setSezon(s);
-        persist(mecz);
+        if (teamHome == null){
+            return 1;
+        } else if (teamAway == null){
+            return 2;
+        } else {
+            Sezony s = seasonsService.getSeason(season);
+            Mecze mecz = new Mecze();
+
+            mecz.setDruzGosp(teamHome);
+            mecz.setDruzGosc(teamAway);
+
+            try{
+                Date checkDate = Date.valueOf(date); //'return' IllegalArgumentException exception if wrong date format
+                mecz.setData(date);
+                mecz.setSezon(s);
+                persist(mecz);
+                return 0;
+            }
+            catch (IllegalArgumentException e)
+            {
+                return 3;
+            }
+
+
+        }
+
+
     }
 
 

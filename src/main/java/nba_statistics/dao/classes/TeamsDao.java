@@ -16,14 +16,31 @@ public class    TeamsDao extends Dao implements ITeamsDao {
 
     public Druzyny getTeam(String name) {
         Query<Druzyny> theQuery = getCurrentSession().createQuery("from Druzyny where nazwa = :name", Druzyny.class);
+
         theQuery.setParameter("name", name);
         //theQuery.executeUpdate();
         Druzyny d = theQuery.setMaxResults(1).uniqueResult();
+        if (d == null) {
+            return null;
+        }
         System.out.println(d.toString());
         return d;
     }
     public void getData(String division, String conference, String name, String location){
         Druzyny d = new Druzyny(division, conference, name, location);
         persist(d);
+    }
+
+    @Override
+    public boolean checkTeam(String team) {
+        Query<Druzyny> theQuery = getCurrentSession().createQuery("from Druzyny where nazwa = :team", Druzyny.class);
+
+        theQuery.setParameter("team", team);
+        Druzyny d = theQuery.setMaxResults(1).uniqueResult();
+        if (d == null){
+            return true;
+        }
+        else
+            return false;
     }
 }
