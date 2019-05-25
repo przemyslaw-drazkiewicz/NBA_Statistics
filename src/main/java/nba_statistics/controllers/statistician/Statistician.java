@@ -1,4 +1,4 @@
-package nba_statistics.controllers;
+package nba_statistics.controllers.statistician;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -9,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
 
@@ -23,7 +24,8 @@ import javafx.scene.text.Text;
 import nba_statistics.entities.Druzyny;
 import nba_statistics.entities.Mecze;
 import nba_statistics.services.MatchesService;
-import nba_statistics.services.TeamsService;
+
+import static nba_statistics.others.Alerts.*;
 
 public class Statistician implements Initializable {
 
@@ -31,13 +33,28 @@ public class Statistician implements Initializable {
     private ComboBox<String> matchesComboBox;
 
     @FXML
-    private Text dateText;
+    private Text choiceText;
+
+    @FXML
+    private Text matchText;
+
+    @FXML
+    private Button buttonOK;
+
+    @FXML
+    private Button buttonBack;
+
+    private List<String> matchesT;
 
     private ObservableList<String> choice;
 
     private Mecze match;
 
+    private Visibility v;
+
     private Date date = new Date();
+
+    private List<Mecze> matchs;
 
 
     public void changeScreen(ActionEvent event) throws IOException {
@@ -49,18 +66,54 @@ public class Statistician implements Initializable {
         window.show();
     }
 
+    public void onClickButtonOK() {
+        int matchSelected = -1;
+        String matchT = matchesComboBox.getValue();
+        for(int i=0;i<matchesT.size();i++)
+        {
+            if(matchesT.get(i).equals(matchT))
+            {
+                matchSelected=i;
+            }
+        }
+        if(matchSelected==-1)
+        {
+            getAlertChoiceMatch();
+        }
+        else {
+            Mecze match = matchs.get(matchSelected);
+
+            Druzyny teamH = match.getDruzGosp();
+            Druzyny teamA = match.getDruzGosc();
+
+            String matchT2 = teamH.getNazwa() + " vs. " + teamA.getNazwa();
+            matchText.setText(matchT2);
+            v.setInvisibleC(choiceText, buttonOK, matchesComboBox);
+            buttonBack.setVisible(true);
+            matchText.setVisible(true);
+        }
+    }
+
+    public void onClickButtonBack() {
+        v.setVisibleC(choiceText,buttonOK,matchesComboBox);
+        buttonBack.setVisible(false);
+        matchText.setVisible(false);
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        v = new Visibility();
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         String dateS = formatter.format(date);
 
         MatchesService matchesDao = new MatchesService();
-        List<Mecze> matchs = matchesDao.findAllAtDate(dateS);
-        List<String> matchesT = new ArrayList<>();
+        matchs = matchesDao.findAllAtDate(dateS);
 
-        for (Mecze matchBuffer : matchs) {
-            match = matchBuffer;
+        matchesT = new ArrayList<>();
+
+        for (Mecze mecze : matchs) {
+            match = mecze;
 
             Druzyny teamH = match.getDruzGosp();
             Druzyny teamA = match.getDruzGosc();

@@ -38,6 +38,16 @@ public class Alerts {
         errorAlert.setContentText("You must enter season name which exist in database");
         errorAlert.showAndWait();
     }
+
+    public static void getAlertChoiceMatch(){
+
+        Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+        errorAlert.setTitle("ERROR");
+        errorAlert.setHeaderText("You don't choice a match");
+        errorAlert.setContentText("You must choice a match before click 'OK'");
+        errorAlert.showAndWait();
+    }
+
     public static void getAlertSeasonRepeat(String s){
 
         Alert errorAlert = new Alert(Alert.AlertType.ERROR);
