@@ -21,6 +21,14 @@ public class MatchesService{
         matchesDao.closeCurrentSession();
         return matches;
     }
+
+    public List<Mecze> findAllAtDate(String date){
+        matchesDao.openCurrentSession();
+        List<Mecze> matches = matchesDao.findAllAtDate(date);
+        matchesDao.closeCurrentSession();
+        return matches;
+    }
+
     public int getData(String home, String away, String date, String season){
         matchesDao.openCurrentSession();
         int tmp = matchesDao.getData(home, away, date,season);

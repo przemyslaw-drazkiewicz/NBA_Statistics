@@ -22,6 +22,15 @@ public class MatchesDao extends Dao implements IMatchesDao{
         return matches;
     }
 
+    public List<Mecze> findAllAtDate(String date) {
+
+        Query<Mecze> theQuery = getCurrentSession().createQuery("from Mecze where data = :date")
+                .setParameter("date",date);
+        List<Mecze> matches = theQuery.getResultList();
+
+        return matches;
+    }
+
     public void persist(Mecze entity) {
         getCurrentSession().save(entity);
     }

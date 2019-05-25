@@ -8,6 +8,7 @@ import java.util.List;
 
 public interface IMatchesDao {
     List<Mecze> findAll();
+    List<Mecze> findAllAtDate(String date);
 
     int getData(String home, String away, String date, String season);
     void persist(Mecze mecze);

@@ -166,6 +166,7 @@ public class Mecze {
         }
         histZmianWMeczu.add(newHistZmianWMeczu);
     }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

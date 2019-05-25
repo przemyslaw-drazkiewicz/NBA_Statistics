@@ -26,6 +26,20 @@ public class    TeamsDao extends Dao implements ITeamsDao {
         System.out.println(d.toString());
         return d;
     }
+
+    public Druzyny getTeam(int id) {
+        Query<Druzyny> theQuery = getCurrentSession().createQuery("from Druzyny where id_druzyny = :id", Druzyny.class);
+
+        theQuery.setParameter("id", id);
+        //theQuery.executeUpdate();
+        Druzyny d = theQuery.setMaxResults(1).uniqueResult();
+        if (d == null) {
+            return null;
+        }
+        System.out.println(d.toString());
+        return d;
+    }
+
     public void getData(String division, String conference, String name, String location){
         Druzyny d = new Druzyny(division, conference, name, location);
         persist(d);
