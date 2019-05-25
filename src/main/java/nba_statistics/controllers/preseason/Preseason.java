@@ -140,6 +140,7 @@ public class Preseason implements Initializable {
                 v.setInvisibleS(s10, s11, s12, s13, t30, t31, t32, addedSeasonBtn);
                 v.setVisibleD(d10, d11, d12, d13, t10, t12, t13);
                 t10.getSelectionModel().clearSelection();
+                v.clearTextFieldD(t12,t13);
                 state = "Team";
 
                 break;
@@ -150,6 +151,8 @@ public class Preseason implements Initializable {
                 v.setInvisibleP(p40, p41, p42, p43, p44, p45, t40, t41, t42, t43, t44, t45);
                 v.setInvisibleS(s10, s11, s12, s13, t30, t31, t32, addedSeasonBtn);
                 v.setVisibleM(m10, m11, m12, tSeason, tSeason0, t20, t21, t22);
+                v.clearTextFieldM(t20,t21,t22);
+
                 state = "Match";
                 break;
 
@@ -158,6 +161,10 @@ public class Preseason implements Initializable {
                 v.setInvisibleS(s10, s11, s12, s13, t30, t31, t32, addedSeasonBtn);
                 v.setInvisibleM(m10, m11, m12, tSeason, tSeason0, t20, t21, t22);
                 v.setVisibleCheckBox(newPlayerCheckBox, transferCheckBox);
+                v.clearTextFieldNewPlayer(t40,t41,t42,t43,t44,t45);
+                newPlayerCheckBox.setSelected(false);
+                transferCheckBox.setSelected(false);
+
                 break;
 
 
@@ -179,6 +186,7 @@ public class Preseason implements Initializable {
     public void addNewPlayer() {
         v.setInvisibleP(p40, p41, p42, p43, p44, p45, t40, t41, t42, t43, t44, t45);
         v.setVisibleNewPlayerT(p40, p41, p42, p43, p44, p45, t40, t41, t42, t43, t44, t45);
+        v.clearTextFieldNewPlayer(t40,t41,t42,t43,t44,t45);
         transferCheckBox.setSelected(false);
         state = "NewPlayer";
     }
@@ -186,6 +194,7 @@ public class Preseason implements Initializable {
     public void changeTeam() {
         v.setInvisibleP(p40, p41, p42, p43, p44, p45, t40, t41, t42, t43, t44, t45);
         v.setVisibleTransferT(p40, p41, p42, t40, t41, t42);
+        v.clearTextFieldTransfer(t40,t41,t42);
         state = "Transfer";
         newPlayerCheckBox.setSelected(false);
     }
