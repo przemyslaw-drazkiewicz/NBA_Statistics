@@ -4,12 +4,19 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nba_statistics.controllers.Statistician">
    <children>
-      <ComboBox layoutX="232.0" layoutY="81.0" prefWidth="150.0" />
+      <ComboBox fx:id="matchesComboBox" layoutX="232.0" layoutY="81.0" prefWidth="150.0" />
       <Button layoutX="291.0" layoutY="188.0" mnemonicParsing="false" text="OK" />
       <Label layoutX="271.0" layoutY="38.0" text="Choice match" />
       <Button layoutX="534.0" layoutY="14.0" mnemonicParsing="false" onAction="#changeScreen" text="Log out" />
+       <Text fx:id="dateText" layoutX="286.0" layoutY="380.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" visible="true">
+           <font>
+               <Font size="20.0" />
+           </font>
+       </Text>
    </children>
 </AnchorPane>
