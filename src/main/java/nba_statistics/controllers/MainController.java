@@ -58,4 +58,12 @@ public class MainController implements Initializable {
         window.setScene(reviewerScene);
         window.show();
     }
+    public void changeScreenToStatistician(ActionEvent event) throws IOException {
+        Parent reviewerParent = FXMLLoader.load(getClass().getResource("/Statistician.fxml"));
+        Scene reviewerScene = new Scene(reviewerParent);
+
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        window.setScene(reviewerScene);
+        window.show();
+    }
 }
