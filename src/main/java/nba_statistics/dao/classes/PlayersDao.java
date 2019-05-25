@@ -66,6 +66,14 @@ public class PlayersDao extends Dao implements IPlayersDao {
         return players;
     }
 
+    public List<Zawodnicy> getPlayers(int id){
+
+        Query<Zawodnicy> theQuery = getCurrentSession().createQuery("from Zawodnicy where id_druzyny =:id")
+                .setParameter("id", id);
+        List<Zawodnicy> players = theQuery.getResultList();
+        return players;
+    }
+
     public List<HistoriaDruzynZawodnika> getPlayerTeamsHistory(int idPlayer){
         Query<HistoriaDruzynZawodnika> theQuery = getCurrentSession().createQuery("from HistoriaDruzynZawodnika where id_zawodnika = :idPlayer")
                 .setParameter("idPlayer", idPlayer);

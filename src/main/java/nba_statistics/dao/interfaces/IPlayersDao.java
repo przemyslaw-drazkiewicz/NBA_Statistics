@@ -9,5 +9,6 @@ public interface IPlayersDao {
     int getData(String name, String surname, String date, float height, float weight, String team);
     int updatePlayer(String name, String surname,String team);
     List<Zawodnicy> getPlayers(String name, String surname);
+    List<Zawodnicy> getPlayers(int id);
     List<HistoriaDruzynZawodnika> getPlayerTeamsHistory(int idPlayer);
 }

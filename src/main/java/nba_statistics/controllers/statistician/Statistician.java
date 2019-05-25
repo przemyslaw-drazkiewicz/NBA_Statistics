@@ -11,6 +11,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -23,26 +24,37 @@ import java.util.ResourceBundle;
 import javafx.scene.text.Text;
 import nba_statistics.entities.Druzyny;
 import nba_statistics.entities.Mecze;
+import nba_statistics.entities.Zawodnicy;
 import nba_statistics.services.MatchesService;
+import nba_statistics.services.PlayersService;
 
 import static nba_statistics.others.Alerts.*;
 
 public class Statistician implements Initializable {
 
-    @FXML
-    private ComboBox<String> matchesComboBox;
-
-    @FXML
-    private Text choiceText;
-
-    @FXML
-    private Text matchText;
-
-    @FXML
-    private Button buttonOK;
-
-    @FXML
-    private Button buttonBack;
+    @FXML private ComboBox<String> matchesComboBox;
+    @FXML private Text choiceText;
+    @FXML private Text matchText;
+    @FXML private Button buttonOK;
+    @FXML private Button buttonBack;
+    @FXML private ListView homeTeam;
+    @FXML private ListView awayTeam;
+    @FXML private Button oneH;
+    @FXML private Button twoH;
+    @FXML private Button threeH;
+    @FXML private Button oneA;
+    @FXML private Button twoA;
+    @FXML private Button threeA;
+    @FXML private Button BH;
+    @FXML private Button BA;
+    @FXML private Button RH;
+    @FXML private Button RA;
+    @FXML private Button FH;
+    @FXML private Button FA;
+    @FXML private Button TFH;
+    @FXML private Button TFA;
+    @FXML private Button SH;
+    @FXML private Button SA;
 
     private List<String> matchesT;
 
@@ -85,19 +97,39 @@ public class Statistician implements Initializable {
 
             Druzyny teamH = match.getDruzGosp();
             Druzyny teamA = match.getDruzGosc();
+            int id_TeamH = teamH.getId();
+            int id_TeamA = teamA.getId();
+
+            PlayersService playersDAO = new PlayersService();
+            List<Zawodnicy> playersTeamH = playersDAO.getPlayers(id_TeamH);
+            List<Zawodnicy> playersTeamA = playersDAO.getPlayers(id_TeamA);
+            ObservableList<String> playersA = FXCollections.observableArrayList();
+            ObservableList<String> playersH = FXCollections.observableArrayList();
+
+            for (Zawodnicy players : playersTeamH) {
+                String player = players.getImie() + " " + players.getNazwisko();
+                playersH.add(player);
+            }
+
+            for (Zawodnicy players : playersTeamA) {
+                String player = players.getImie() + " " + players.getNazwisko();
+                playersA.add(player);
+            }
+
+            homeTeam.setItems(playersH);
+            awayTeam.setItems(playersA);
 
             String matchT2 = teamH.getNazwa() + " vs. " + teamA.getNazwa();
             matchText.setText(matchT2);
             v.setInvisibleC(choiceText, buttonOK, matchesComboBox);
-            buttonBack.setVisible(true);
-            matchText.setVisible(true);
+            v.setVisibleM(oneH,twoH,threeH,oneA,twoA,threeA,BH,BA,RH,RA,FH,FA,TFH,TFA,SH,SA,homeTeam,awayTeam,buttonBack,matchText);
+
         }
     }
 
     public void onClickButtonBack() {
         v.setVisibleC(choiceText,buttonOK,matchesComboBox);
-        buttonBack.setVisible(false);
-        matchText.setVisible(false);
+        v.setInvisibleM(oneH,twoH,threeH,oneA,twoA,threeA,BH,BA,RH,RA,FH,FA,TFH,TFA,SH,SA,homeTeam,awayTeam,buttonBack,matchText);
     }
 
     @Override
