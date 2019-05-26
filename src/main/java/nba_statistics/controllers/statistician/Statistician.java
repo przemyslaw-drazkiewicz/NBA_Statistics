@@ -75,6 +75,8 @@ public class Statistician implements Initializable {
 
     private List<String> homeTeamSquad;
     private List<String> awayTeamSquad;
+    private List<String> playersListTeamH;
+    private List<String> playersListTeamA;
 
     private ObservableList<String> choice;
 
@@ -113,6 +115,8 @@ public class Statistician implements Initializable {
         else {
             homeTeamSquad = new ArrayList<>();
             awayTeamSquad = new ArrayList<>();
+            playersListTeamH = new ArrayList<>();
+            playersListTeamA = new ArrayList<>();
             match = matchs.get(matchSelected);
 
             Druzyny teamH = match.getDruzGosp();
@@ -128,11 +132,13 @@ public class Statistician implements Initializable {
 
             for (Zawodnicy players : playersTeamH) {
                 String player = players.getImie() + " " + players.getNazwisko();
+                playersListTeamH.add(player);
                 playersH.add(player);
             }
 
             for (Zawodnicy players : playersTeamA) {
                 String player = players.getImie() + " " + players.getNazwisko();
+                playersListTeamA.add(player);
                 playersA.add(player);
             }
             homeTeamChoice.setItems(playersH);
@@ -151,7 +157,7 @@ public class Statistician implements Initializable {
 
         if(homeTeamSquad.size()!=5 || awayTeamSquad.size()!=5 )
         {
-            getAlertChoiceMatch();
+            getAlertChoiceSquad();
         }
         else {
 
@@ -185,6 +191,118 @@ public class Statistician implements Initializable {
         v.setVisibleC(choiceText,buttonOK,matchesComboBox);
         v.setInvisibleS(homeTeamChoice,awayTeamChoice,homeTeamFive,awayTeamFive,homeTeamName,awayTeamName,confirmSquad,addHT,remHT,addAT,remAT,listPlayers,firstSquad);
         v.setInvisibleM(oneH,twoH,threeH,oneA,twoA,threeA,BH,BA,RH,RA,FH,FA,TFH,TFA,SH,SA,homeTeam,awayTeam,buttonBack,matchText);
+    }
+
+    public void onClickButtonAddH() {
+        String player =(String) homeTeamChoice.getSelectionModel().getSelectedItem();
+        if(player==null)
+        {
+            getAlertChoicePlayer("Add");
+        }
+        else if(homeTeamSquad.size()==5)
+        {
+            getAlertTooManyPlayersInSquad();
+        }
+        else{
+            homeTeamSquad.add(player);
+            playersListTeamH.remove(player);
+            ObservableList<String> playersSquadH = FXCollections.observableArrayList();
+
+            for (String playersH : homeTeamSquad) {
+                playersSquadH.add(playersH);
+            }
+
+            ObservableList<String> playersListH = FXCollections.observableArrayList();
+
+            for (String playersH : playersListTeamH) {
+                playersListH.add(playersH);
+            }
+
+            homeTeamChoice.setItems(playersListH);
+            homeTeamFive.setItems(playersSquadH);
+        }
+    }
+
+    public void onClickButtonRemH() {
+        String player =(String) homeTeamFive.getSelectionModel().getSelectedItem();
+        if(player==null)
+        {
+            getAlertChoicePlayer("Remove");
+        }
+        else {
+            homeTeamSquad.remove(player);
+            playersListTeamH.add(player);
+            ObservableList<String> playersSquadH = FXCollections.observableArrayList();
+
+            for (String playersH : homeTeamSquad) {
+                playersSquadH.add(playersH);
+            }
+
+            ObservableList<String> playersListH = FXCollections.observableArrayList();
+
+            for (String playersH : playersListTeamH) {
+                playersListH.add(playersH);
+            }
+
+            homeTeamChoice.setItems(playersListH);
+            homeTeamFive.setItems(playersSquadH);
+        }
+    }
+
+    public void onClickButtonAddA() {
+        String player =(String) awayTeamChoice.getSelectionModel().getSelectedItem();
+        if(player==null)
+        {
+            getAlertChoicePlayer("Add");
+        }
+        else if(awayTeamSquad.size()==5)
+        {
+            getAlertTooManyPlayersInSquad();
+        }
+        else {
+            awayTeamSquad.add(player);
+            playersListTeamA.remove(player);
+            ObservableList<String> playersSquadA = FXCollections.observableArrayList();
+
+            for (String playersA : awayTeamSquad) {
+                playersSquadA.add(playersA);
+            }
+
+            ObservableList<String> playersListA = FXCollections.observableArrayList();
+
+            for (String playersA : playersListTeamA) {
+                playersListA.add(playersA);
+            }
+
+            awayTeamChoice.setItems(playersListA);
+            awayTeamFive.setItems(playersSquadA);
+        }
+    }
+
+    public void onClickButtonRemA() {
+        String player =(String) awayTeamFive.getSelectionModel().getSelectedItem();
+        if(player==null)
+        {
+            getAlertChoicePlayer("Remove");
+        }
+        else {
+            awayTeamSquad.remove(player);
+            playersListTeamA.add(player);
+            ObservableList<String> playersSquadA = FXCollections.observableArrayList();
+
+            for (String playersA : awayTeamSquad) {
+                playersSquadA.add(playersA);
+            }
+
+            ObservableList<String> playersListA = FXCollections.observableArrayList();
+
+            for (String playersA : playersListTeamA) {
+                playersListA.add(playersA);
+            }
+
+            awayTeamChoice.setItems(playersListA);
+            awayTeamFive.setItems(playersSquadA);
+        }
     }
 
     @Override

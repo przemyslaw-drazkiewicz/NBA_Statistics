@@ -39,6 +39,30 @@ public class Alerts {
         errorAlert.showAndWait();
     }
 
+    public static void getAlertChoicePlayer(String s){
+        Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+        errorAlert.setTitle("ERROR");
+        errorAlert.setHeaderText("You don't choice a player");
+        errorAlert.setContentText("You must choice a player before click '" + s +"'");
+        errorAlert.showAndWait();
+    }
+
+    public static void getAlertChoiceSquad(){
+        Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+        errorAlert.setTitle("ERROR");
+        errorAlert.setHeaderText("You don't choice a first squad");
+        errorAlert.setContentText("You must choice a first squad of five players before click 'Confirm'");
+        errorAlert.showAndWait();
+    }
+
+    public static void getAlertTooManyPlayersInSquad(){
+        Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+        errorAlert.setTitle("ERROR");
+        errorAlert.setHeaderText("You can't add this player");
+        errorAlert.setContentText("You can add only five players to first squad");
+        errorAlert.showAndWait();
+    }
+
     public static void getAlertChoiceMatch(){
 
         Alert errorAlert = new Alert(Alert.AlertType.ERROR);
