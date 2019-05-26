@@ -44,7 +44,10 @@ public class MatchesDao extends Dao implements IMatchesDao{
             return 1;
         } else if (teamAway == null){
             return 2;
-        } else {
+        }else if (home.equals(away)){
+            return 4;
+        }
+        else {
             Sezony s = seasonsService.getSeason(season);
             Mecze mecz = new Mecze();
 
@@ -53,6 +56,10 @@ public class MatchesDao extends Dao implements IMatchesDao{
 
             try{
                 Date checkDate = Date.valueOf(date); //'return' IllegalArgumentException exception if wrong date format
+                Date startDate = Date.valueOf(s.getDataRozp());
+                Date endDate = Date.valueOf(s.getDataZakon());
+                if (startDate.compareTo(checkDate) > 0 || endDate.compareTo(checkDate) < 0)
+                    return 5;
                 mecz.setData(date);
                 mecz.setSezon(s);
                 persist(mecz);

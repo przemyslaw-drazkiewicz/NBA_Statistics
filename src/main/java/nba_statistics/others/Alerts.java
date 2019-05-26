@@ -104,4 +104,39 @@ public class Alerts {
         errorAlert.setContentText("");
         errorAlert.showAndWait();
     }
+
+    public static void getAlertDateBetween(String d){
+
+        Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+        errorAlert.setTitle("ERROR");
+        errorAlert.setHeaderText("Date '" + d + "' is incorrect");
+        errorAlert.setContentText("Date must be date between start and end season");
+        errorAlert.showAndWait();
+    }
+
+    public static void confirmation(int flag){
+
+        Alert confirmation = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmation.setTitle("CONFIRMATION");
+        switch (flag)
+        {
+            case 0:
+                confirmation.setHeaderText("Added season");
+                break;
+            case 1:
+                confirmation.setHeaderText("Added team");
+                break;
+            case 2:
+                confirmation.setHeaderText("Added match");
+                break;
+            case 3:
+                confirmation.setHeaderText("Added new player");
+                break;
+            case 4:
+                confirmation.setHeaderText("Changed player's team");
+                break;
+
+        }
+        confirmation.showAndWait();
+    }
 }

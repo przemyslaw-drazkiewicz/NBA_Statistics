@@ -47,6 +47,9 @@ public class Preseason implements Initializable {
     @FXML private Button sendBtn; @FXML private Button addedSeasonBtn; @FXML private Button skipBtn;
 
     @FXML private Text tSeason; @FXML private Text tSeason0;
+    @FXML private Text tDuration; @FXML private Text tDuration0;
+
+
 
     private ObservableList<String> choice = FXCollections.observableArrayList
             ("Match", "Player", "Team");
@@ -102,6 +105,8 @@ public class Preseason implements Initializable {
             switch (seasonsDao.getData(t30.getText(), t31.getText(), t32.getText())) {
                 case 0:
                     currSeason = t30.getText();
+                    tDuration.setText(t31.getText() + " / " + t32.getText());
+                    confirmation(0);
                     initScene();
                     break;
                 case 1:
@@ -123,7 +128,9 @@ public class Preseason implements Initializable {
     public void skipAction() {
         SeasonsService seasonsDao = new SeasonsService();
         if (seasonsDao.checkSeason(t30.getText())) {
+            SeasonsService seasonsService = new SeasonsService();
             currSeason = t30.getText(); //get season but not save to database 'this season exist in database'
+            tDuration.setText(seasonsService.getSeason(currSeason).getDataRozp() + " / " + seasonsService.getSeason(currSeason).getDataZakon());
             initScene();
         } else {
             getAlertSeason(t30.getText());
@@ -135,7 +142,7 @@ public class Preseason implements Initializable {
         switch (comboBox.getValue()) {
             case "Team":
                 v.setInvisibleCheckBox(newPlayerCheckBox, transferCheckBox);
-                v.setInvisibleM(m10, m11, m12, tSeason, tSeason0, t20, t21, t22);
+                v.setInvisibleM(m10, m11, m12, tSeason, tSeason0, t20, t21, t22,tDuration0, tDuration);
                 v.setInvisibleP(p40, p41, p42, p43, p44, p45, t40, t41, t42, t43, t44, t45);
                 v.setInvisibleS(s10, s11, s12, s13, t30, t31, t32, addedSeasonBtn);
                 v.setVisibleD(d10, d11, d12, d13, t10, t12, t13);
@@ -150,7 +157,7 @@ public class Preseason implements Initializable {
                 v.setInvisibleD(d10, d11, d12, d13, t10, t12, t13, DivE, DivW);
                 v.setInvisibleP(p40, p41, p42, p43, p44, p45, t40, t41, t42, t43, t44, t45);
                 v.setInvisibleS(s10, s11, s12, s13, t30, t31, t32, addedSeasonBtn);
-                v.setVisibleM(m10, m11, m12, tSeason, tSeason0, t20, t21, t22);
+                v.setVisibleM(m10, m11, m12, tSeason, tSeason0, t20, t21, t22, tDuration0, tDuration);
                 v.clearTextFieldM(t20,t21,t22);
 
                 state = "Match";
@@ -159,7 +166,7 @@ public class Preseason implements Initializable {
             case "Player":
                 v.setInvisibleD(d10, d11, d12, d13, t10, t12, t13, DivE, DivW);
                 v.setInvisibleS(s10, s11, s12, s13, t30, t31, t32, addedSeasonBtn);
-                v.setInvisibleM(m10, m11, m12, tSeason, tSeason0, t20, t21, t22);
+                v.setInvisibleM(m10, m11, m12, tSeason, tSeason0, t20, t21, t22,tDuration0, tDuration);
                 v.setVisibleCheckBox(newPlayerCheckBox, transferCheckBox);
                 v.clearTextFieldNewPlayer(t40,t41,t42,t43,t44,t45);
                 newPlayerCheckBox.setSelected(false);
@@ -212,6 +219,7 @@ public class Preseason implements Initializable {
                             getAlertDivision();
                         else {
                             teamsService.getData(t10.getValue(), DivE.getValue(), t12.getText(), t13.getText());
+                            confirmation(1);
                             v.clearTextFieldD(t12, t13);
                         }
                     } else if (t10.getValue() == "Western") {
@@ -219,6 +227,7 @@ public class Preseason implements Initializable {
                             getAlertDivision();
                         else {
                             teamsService.getData(t10.getValue(), DivW.getValue(), t12.getText(), t13.getText());
+                            confirmation(1);
                             v.clearTextFieldD(t12, t13);
                         }
                     } else {
@@ -233,10 +242,8 @@ public class Preseason implements Initializable {
 
                 switch (matchesService.getData(t20.getText(), t21.getText(), t22.getText(), currSeason)) {
                     case 0:
-                        if (t20.getText().equals(t21.getText())) {
-                            getAlertTeams(t20.getText(), t21.getText());
-                        } else
-                            v.clearTextFieldM(t20, t21, t22);
+                        confirmation(2);
+                        v.clearTextFieldM(t20, t21, t22);
                         break;
                     case 1:
                         getAlertTeams(t20.getText());
@@ -247,6 +254,12 @@ public class Preseason implements Initializable {
                     case 3:
                         getAlertDate(t22.getText());
                         break;
+                    case 4:
+                        getAlertTeams(t20.getText(), t21.getText());
+                        break;
+                    case 5:
+                        getAlertDateBetween(t22.getText());
+                        break;
                 }
 
 
@@ -256,6 +269,7 @@ public class Preseason implements Initializable {
                 try {
                     switch (playersService.getData(t40.getText(), t41.getText(), t43.getText(), Float.parseFloat(t44.getText()), Float.parseFloat(t45.getText()), t42.getText())) {
                         case 0:
+                            confirmation(3);
                             v.clearTextFieldNewPlayer(t40, t41, t42, t43, t44, t45);
                             break;
                         case 1:
@@ -282,6 +296,7 @@ public class Preseason implements Initializable {
                             getAlertPlayer(t40.getText(), t41.getText());
                             break;
                         case 1:
+                            confirmation(4);
                             v.clearTextFieldTransfer(t40, t41, t42);
                             break;
                         default:

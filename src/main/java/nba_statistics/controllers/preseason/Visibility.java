@@ -19,14 +19,14 @@ public class Visibility {
         t10.setVisible(false);DivE.setVisible(false);DivW.setVisible(false);t12.setVisible(false);t13.setVisible(false);
     }
 
-    public void setVisibleM(Text m10, Text m11, Text m12, Text tSeason,Text tSeason0, TextField t20, TextField t21, TextField t22){
-        m10.setVisible(true);m11.setVisible(true);m12.setVisible(true); tSeason.setVisible(true);
-        t20.setVisible(true);t21.setVisible(true);t22.setVisible(true); tSeason0.setVisible(true);
+    public void setVisibleM(Text m10, Text m11, Text m12, Text tSeason,Text tSeason0, TextField t20, TextField t21, TextField t22,Text tDuration0,Text tDuration){
+        m10.setVisible(true);m11.setVisible(true);m12.setVisible(true); tSeason.setVisible(true); tDuration.setVisible(true);
+        t20.setVisible(true);t21.setVisible(true);t22.setVisible(true); tSeason0.setVisible(true);tDuration0.setVisible(true);
 
     }
-    public void setInvisibleM(Text m10, Text m11, Text m12, Text tSeason,Text tSeason0, TextField t20, TextField t21, TextField t22){
-        m10.setVisible(false);m11.setVisible(false);m12.setVisible(false); tSeason.setVisible(false);
-        t20.setVisible(false);t21.setVisible(false);t22.setVisible(false); tSeason0.setVisible(false);
+    public void setInvisibleM(Text m10, Text m11, Text m12, Text tSeason,Text tSeason0, TextField t20, TextField t21, TextField t22,Text tDuration0,Text tDuration){
+        m10.setVisible(false);m11.setVisible(false);m12.setVisible(false); tSeason.setVisible(false); tDuration0.setVisible(false);
+        t20.setVisible(false);t21.setVisible(false);t22.setVisible(false); tSeason0.setVisible(false); tDuration.setVisible(false);
     }
 
     public void setInvisibleS(Text s10, Text s11, Text s12, Text s13, TextField t30, TextField t31, TextField t32, Button addedSeasonBtn ){
