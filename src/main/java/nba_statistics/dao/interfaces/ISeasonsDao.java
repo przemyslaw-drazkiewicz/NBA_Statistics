@@ -8,4 +8,5 @@ public interface ISeasonsDao {
     Sezony getSeasons(String name);
     int getData(String name, String startDate, String endDate);
     boolean checkSeason(String name);
+    List<Sezony> getAllSeasons();
 }

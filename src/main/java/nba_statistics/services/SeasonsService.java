@@ -30,4 +30,11 @@ public class SeasonsService {
         seasonsDao.closeCurrentSession();
         return i;
     }
+
+    public List <Sezony> getAllSeasons(){
+        seasonsDao.openCurrentSession();
+        List <Sezony> s = seasonsDao.getAllSeasons();
+        seasonsDao.closeCurrentSession();
+        return s;
+    }
 }

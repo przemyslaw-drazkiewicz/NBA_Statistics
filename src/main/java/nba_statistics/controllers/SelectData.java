@@ -18,16 +18,19 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import nba_statistics.entities.HistoriaDruzynZawodnika;
 import nba_statistics.entities.OsiagnieciaZawWMeczu;
+import nba_statistics.entities.Sezony;
 import nba_statistics.entities.Zawodnicy;
 //import nba_statistics.services.PlayerTeamsHistoryService;
 import nba_statistics.services.MatchesService;
 import nba_statistics.services.PlayersService;
+import nba_statistics.services.SeasonsService;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 
 public class SelectData implements Initializable {
+
 
     //main text
     @FXML private Button LogOutBtn;
@@ -58,11 +61,14 @@ public class SelectData implements Initializable {
     @FXML private Label label11;
     @FXML private TableView resultTable;
 
+    //Top 10 schooters
+    @FXML private ComboBox<String> comboBoxSeasons;
+
     ObservableList<String> kindOfData = FXCollections.observableArrayList
             ("Player's achievements", "List of top 10 shooters", "List of team players", "Timetable");
 
 
-    //visibility
+    //visibility Achievements
     private void setVisibleDateOfBirth(){
         selectDate.setVisible(true);
         listViewOfDateBirth.setVisible(true);
@@ -71,20 +77,6 @@ public class SelectData implements Initializable {
     private void setInisibleDateOfBirth(){
         selectDate.setVisible(false);
         listViewOfDateBirth.setVisible(false);
-    }
-
-    private void setVisiblePlayersAchievements(){
-        writeName.setVisible(true);
-        writeSurname.setVisible(true);
-        name.setVisible(true);
-        surname.setVisible(true);
-    }
-
-    private void setInvisiblePlayersAchievements(){
-        writeName.setVisible(false);
-        writeSurname.setVisible(false);
-        name.setVisible(false);
-        surname.setVisible(false);
     }
 
     private void setVisibleSeasons(){
@@ -128,6 +120,71 @@ public class SelectData implements Initializable {
         label11.setVisible(false);
 
     }
+
+
+    //visibility top 10 schooters
+    private void setVisibleComboBoxSeasons(){
+       comboBoxSeasons.setVisible(true);
+    }
+    private void setInvisibleComboBoxSeasons(){
+        comboBoxSeasons.setVisible(false);
+    }
+
+
+    //main view
+    private void setVisiblePlayersAchievements(){
+        writeName.setVisible(true);
+        writeSurname.setVisible(true);
+        name.setVisible(true);
+        surname.setVisible(true);
+    }
+
+    private void setInvisiblePlayersAchievements(){
+        writeName.setVisible(false);
+        writeSurname.setVisible(false);
+        name.setVisible(false);
+        surname.setVisible(false);
+        setInvisibleSeasons();
+        setInisibleDateOfBirth();
+        setInvisibleLabelsPlayerAchievements();
+    }
+
+    private void setVisibleListTopTenShooters(){
+
+        String name = "";
+        SeasonsService seasonsService = new SeasonsService();
+
+        List<Sezony> s  = seasonsService.getAllSeasons();
+
+        List<String> nameSeasons = new ArrayList<String>(s.size());
+        for(Sezony sez : s){
+            nameSeasons.add(sez.getNazwa());
+        }
+
+
+
+        if(nameSeasons.size() > 0){
+
+            setVisibleComboBoxSeasons();
+            ObservableList<String> oNameSeasons = FXCollections.observableArrayList(nameSeasons);
+            comboBoxSeasons.setItems(oNameSeasons);
+
+
+
+        }else{
+            setInvisibleListTopTenShooters();
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Warning");
+            alert.setHeaderText("No seasons");
+            alert.setContentText("No seasons!");
+            alert.showAndWait();
+        }
+    }
+
+    private void setInvisibleListTopTenShooters(){
+        setInvisibleComboBoxSeasons();
+    }
+
 
     //clear
     private void clearLabelAndList(){
@@ -288,14 +345,20 @@ public class SelectData implements Initializable {
 
 
 
-
-
-
-
-
     }
 
     public void selectListTopTenSchooters(){
+
+        SeasonsService seasonsService = new SeasonsService();
+
+        String nameSeason = "";
+        System.out.println(comboBoxSeasons.getValue());
+        nameSeason = comboBoxSeasons.getValue();
+
+        Sezony season;
+        season = seasonsService.getSeason(nameSeason);
+
+        System.out.println(season.getId());
 
     }
 
@@ -312,18 +375,22 @@ public class SelectData implements Initializable {
         switch(comboBox.getValue()) {
             case "Player's achievements":
                 setVisiblePlayersAchievements();
+                setInvisibleListTopTenShooters();
                 break;
 
             case "List of top 10 shooters":
                 setInvisiblePlayersAchievements();
+                setVisibleListTopTenShooters();
                 break;
 
             case "List of team players":
                 setInvisiblePlayersAchievements();
+                setInvisibleListTopTenShooters();
                 break;
 
             case "Timetable":
                 setInvisiblePlayersAchievements();
+                setInvisibleListTopTenShooters();
                 break;
         }
     }
@@ -357,6 +424,7 @@ public class SelectData implements Initializable {
         comboBox.setItems(kindOfData);
         setInisibleDateOfBirth();
         setInvisiblePlayersAchievements();
+        setInvisibleListTopTenShooters();
         setInvisibleSeasons();
         setInvisibleLabelsPlayerAchievements();
     }

@@ -60,5 +60,10 @@ public class SeasonsDao extends Dao implements ISeasonsDao {
     }
 
 
+    public List<Sezony> getAllSeasons() {
+        Query<Sezony> theQuery = getCurrentSession().createQuery("from Sezony ");
+        List <Sezony> s = theQuery.getResultList();
 
+        return s;
+    }
 }
