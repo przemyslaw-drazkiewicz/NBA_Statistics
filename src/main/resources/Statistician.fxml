@@ -23,23 +23,56 @@
        </Text>
       <Button layoutX="534.0" layoutY="14.0" mnemonicParsing="false" onAction="#changeScreen" text="Log out" visible="true" />
       <Button fx:id="buttonBack" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#onClickButtonBack" text="Back to choice match" visible="false" />
-      <Button fx:id="oneH" layoutX="29.0" layoutY="95.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="57.0" text="+1  pts" visible="false"/>
-      <Button fx:id="twoH" layoutX="126.0" layoutY="95.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="57.0" text="+2  pts" visible="false"/>
-      <Button fx:id="threeH" layoutX="223.0" layoutY="95.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="57.0" text="+3  pts" visible="false"/>
-      <Button fx:id="oneA" layoutX="320.0" layoutY="95.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="57.0" text="+1  pts" visible="false"/>
-      <Button fx:id="twoA" layoutX="417.0" layoutY="95.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="57.0" text="+2  pts" visible="false"/>
-      <Button fx:id="threeA" layoutX="514.0" layoutY="95.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="57.0" text="+3  pts" visible="false"/>
-      <Button fx:id="BH" layoutX="174.0" layoutY="145.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="98.0" text="Block" visible="false"/>
-      <Button fx:id="BA" layoutX="328.0" layoutY="145.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="98.0" text="Block" visible="false"/>
-      <Button fx:id="RH" layoutX="174.0" layoutY="201.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="98.0" text="Rebound" visible="false"/>
-      <Button fx:id="RA" layoutX="328.0" layoutY="201.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="98.0" text="Rebound" visible="false"/>
-      <Button fx:id="FH" layoutX="174.0" layoutY="260.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="98.0" text="Foul" visible="false"/>
-      <Button fx:id="FA" layoutX="328.0" layoutY="260.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="98.0" text="Foul" visible="false"/>
-      <Button fx:id="TFH" layoutX="174.0" layoutY="315.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="98.0" text="Technical foul" visible="false"/>
-      <Button fx:id="TFA" layoutX="328.0" layoutY="315.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="98.0" text="Technical foul" visible="false"/>
-      <Button fx:id="SH" layoutX="174.0" layoutY="370.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="98.0" text="Substitute" visible="false"/>
-      <Button fx:id="SA" layoutX="328.0" layoutY="370.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="98.0" text="Substitute" visible="false"/>
-      <ListView fx:id="homeTeam" layoutX="14.0" layoutY="130.0" prefHeight="260.0" prefWidth="145.0" visible="false"/>
-      <ListView fx:id="awayTeam" layoutX="446.0" layoutY="130.0" prefHeight="260.0" prefWidth="145.0" visible="false"/>
+      <Button fx:id="oneH" layoutX="29.0" layoutY="95.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="57.0" text="+1  pts" visible="false" />
+      <Button fx:id="twoH" layoutX="126.0" layoutY="95.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="57.0" text="+2  pts" visible="false" />
+      <Button fx:id="threeH" layoutX="223.0" layoutY="95.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="57.0" text="+3  pts" visible="false" />
+      <Button fx:id="oneA" layoutX="320.0" layoutY="95.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="57.0" text="+1  pts" visible="false" />
+      <Button fx:id="twoA" layoutX="417.0" layoutY="95.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="57.0" text="+2  pts" visible="false" />
+      <Button fx:id="threeA" layoutX="514.0" layoutY="95.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="57.0" text="+3  pts" visible="false" />
+      <Button fx:id="BH" layoutX="174.0" layoutY="145.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="98.0" text="Block" visible="false" />
+      <Button fx:id="BA" layoutX="328.0" layoutY="145.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="98.0" text="Block" visible="false" />
+      <Button fx:id="RH" layoutX="174.0" layoutY="201.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="98.0" text="Rebound" visible="false" />
+      <Button fx:id="RA" layoutX="328.0" layoutY="201.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="98.0" text="Rebound" visible="false" />
+      <Button fx:id="FH" layoutX="174.0" layoutY="260.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="98.0" text="Foul" visible="false" />
+      <Button fx:id="FA" layoutX="328.0" layoutY="260.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="98.0" text="Foul" visible="false" />
+      <Button fx:id="TFH" layoutX="174.0" layoutY="315.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="98.0" text="Technical foul" visible="false" />
+      <Button fx:id="TFA" layoutX="328.0" layoutY="315.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="98.0" text="Technical foul" visible="false" />
+      <Button fx:id="SH" layoutX="174.0" layoutY="370.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="98.0" text="Substitute" visible="false" />
+      <Button fx:id="SA" layoutX="328.0" layoutY="370.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="98.0" text="Substitute" visible="false" />
+      <ListView fx:id="homeTeam" layoutX="14.0" layoutY="130.0" prefHeight="260.0" prefWidth="145.0" visible="false" />
+      <ListView fx:id="awayTeam" layoutX="446.0" layoutY="130.0" prefHeight="260.0" prefWidth="145.0" visible="false" />
+      <ListView fx:id="homeTeamChoice" layoutX="43.0" layoutY="75.0" prefHeight="116.0" prefWidth="200.0" visible="false"/>
+      <ListView fx:id="awayTeamChoice" layoutX="43.0" layoutY="245.0" prefHeight="116.0" prefWidth="200.0" visible="false"/>
+      <ListView fx:id="homeTeamFive" layoutX="357.0" layoutY="75.0" prefHeight="116.0" prefWidth="200.0" visible="false"/>
+       <ListView fx:id="awayTeamFive" layoutX="357.0" layoutY="245.0" prefHeight="116.0" prefWidth="200.0" visible="false"/>
+       <Text fx:id="homeTeamName" layoutX="250.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HOME TEAM" textAlignment="CENTER" visible="false">
+           <font>
+               <Font size="20.0" />
+           </font>
+       </Text>
+       <Text fx:id="awayTeamName" layoutX="250.0" layoutY="225.0" strokeType="OUTSIDE" strokeWidth="0.0" text="AWAY TEAM" textAlignment="CENTER" visible="false">
+           <font>
+               <Font size="20.0" />
+           </font>
+       </Text>
+      <Button fx:id="addHT" layoutX="281.0" layoutY="95.0" mnemonicParsing="false" text="Add" visible="false"/>
+      <Button fx:id="remHT" layoutX="271.0" layoutY="145.0" mnemonicParsing="false" text="Remove" visible="false"/>
+      <Button fx:id="addAT" layoutX="281.0" layoutY="260.0" mnemonicParsing="false" text="Add" visible="false"/>
+      <Button fx:id="remAT" layoutX="271.0" layoutY="315.0" mnemonicParsing="false" text="Remove" visible="false"/>
+      <Button fx:id="confirmSquad" layoutX="270.0" layoutY="358.0" mnemonicParsing="false" onAction="#onClickButtonConfirm" text="Confirm" textAlignment="CENTER" visible="false">
+         <font>
+            <Font name="System Bold Italic" size="12.0" />
+         </font>
+      </Button>
+       <Text fx:id="listPlayers" layoutX="108.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Players" textAlignment="CENTER" visible="false">
+           <font>
+               <Font size="20.0" />
+           </font>
+       </Text>
+       <Text fx:id="firstSquad" layoutX="409.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="First squad" textAlignment="CENTER" visible="false">
+           <font>
+               <Font size="20.0" />
+           </font>
+       </Text>
    </children>
 </AnchorPane>

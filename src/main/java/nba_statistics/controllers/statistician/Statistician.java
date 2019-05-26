@@ -55,8 +55,26 @@ public class Statistician implements Initializable {
     @FXML private Button TFA;
     @FXML private Button SH;
     @FXML private Button SA;
+    @FXML private ListView homeTeamChoice;
+    @FXML private ListView awayTeamChoice;
+    @FXML private ListView homeTeamFive;
+    @FXML private ListView awayTeamFive;
+    @FXML private Text homeTeamName;
+    @FXML private Text awayTeamName;
+    @FXML private Button confirmSquad;
+    @FXML private Button addHT;
+    @FXML private Button remHT;
+    @FXML private Button addAT;
+    @FXML private Button remAT;
+    @FXML private Text listPlayers;
+    @FXML private Text firstSquad;
+
+
 
     private List<String> matchesT;
+
+    private List<String> homeTeamSquad;
+    private List<String> awayTeamSquad;
 
     private ObservableList<String> choice;
 
@@ -93,7 +111,9 @@ public class Statistician implements Initializable {
             getAlertChoiceMatch();
         }
         else {
-            Mecze match = matchs.get(matchSelected);
+            homeTeamSquad = new ArrayList<>();
+            awayTeamSquad = new ArrayList<>();
+            match = matchs.get(matchSelected);
 
             Druzyny teamH = match.getDruzGosp();
             Druzyny teamA = match.getDruzGosc();
@@ -115,13 +135,47 @@ public class Statistician implements Initializable {
                 String player = players.getImie() + " " + players.getNazwisko();
                 playersA.add(player);
             }
+            homeTeamChoice.setItems(playersH);
+            awayTeamChoice.setItems(playersA);
+            homeTeamName.setText(teamH.getNazwa());
+            awayTeamName.setText(teamA.getNazwa());
 
-            homeTeam.setItems(playersH);
-            awayTeam.setItems(playersA);
+
+            v.setInvisibleC(choiceText, buttonOK, matchesComboBox);
+            v.setVisibleS(homeTeamChoice,awayTeamChoice,homeTeamFive,awayTeamFive,homeTeamName,awayTeamName,confirmSquad,addHT,remHT,addAT,remAT,listPlayers,firstSquad);
+            buttonBack.setVisible(true);
+        }
+
+    }
+    public void onClickButtonConfirm() {
+
+        if(homeTeamSquad.size()!=5 || awayTeamSquad.size()!=5 )
+        {
+            getAlertChoiceMatch();
+        }
+        else {
+
+            Druzyny teamH = match.getDruzGosp();
+            Druzyny teamA = match.getDruzGosc();
+            ObservableList<String> playersSquadA = FXCollections.observableArrayList();
+            ObservableList<String> playersSquadH = FXCollections.observableArrayList();
+
+            for(String playersH : homeTeamSquad)
+            {
+                playersSquadH.add(playersH);
+            }
+            for(String playersA : awayTeamSquad)
+            {
+                playersSquadA.add(playersA);
+            }
 
             String matchT2 = teamH.getNazwa() + " vs. " + teamA.getNazwa();
             matchText.setText(matchT2);
+            homeTeam.setItems(playersSquadH);
+            awayTeam.setItems(playersSquadA);
+
             v.setInvisibleC(choiceText, buttonOK, matchesComboBox);
+            v.setInvisibleS(homeTeamChoice,awayTeamChoice,homeTeamFive,awayTeamFive,homeTeamName,awayTeamName,confirmSquad,addHT,remHT,addAT,remAT,listPlayers,firstSquad);
             v.setVisibleM(oneH,twoH,threeH,oneA,twoA,threeA,BH,BA,RH,RA,FH,FA,TFH,TFA,SH,SA,homeTeam,awayTeam,buttonBack,matchText);
 
         }
@@ -129,6 +183,7 @@ public class Statistician implements Initializable {
 
     public void onClickButtonBack() {
         v.setVisibleC(choiceText,buttonOK,matchesComboBox);
+        v.setInvisibleS(homeTeamChoice,awayTeamChoice,homeTeamFive,awayTeamFive,homeTeamName,awayTeamName,confirmSquad,addHT,remHT,addAT,remAT,listPlayers,firstSquad);
         v.setInvisibleM(oneH,twoH,threeH,oneA,twoA,threeA,BH,BA,RH,RA,FH,FA,TFH,TFA,SH,SA,homeTeam,awayTeam,buttonBack,matchText);
     }
 
@@ -153,8 +208,18 @@ public class Statistician implements Initializable {
             String matchT = teamH.getNazwa() + " vs. " + teamA.getNazwa();
             matchesT.add(matchT);
         }
+/*
+        PlayersService playersDao = new PlayersService();
 
+        List<Zawodnicy> playersTeam = playersDao.getPlayers(15);
+        ObservableList<String> players = FXCollections.observableArrayList();
 
+        for (Zawodnicy playersBuffer : playersTeam) {
+            String player = playersBuffer.getImie() + " " + playersBuffer.getNazwisko();
+            players.add(player);
+        }
+         homeTeamChoice.setItems(players);
+*/
         choice = FXCollections.observableArrayList
                 (matchesT);
         matchesComboBox.setItems(choice);

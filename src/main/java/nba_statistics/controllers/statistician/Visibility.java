@@ -68,4 +68,38 @@ public class Visibility {
         buttonBack.setVisible(true);
         matchText.setVisible(true);
     }
+
+    public void setVisibleS(ListView homeTeamChoice,ListView awayTeamChoice,ListView homeTeamFive,ListView awayTeamFive,Text homeTeamName,Text awayTeamName,Button confirmSquad,Button addHT,Button remHT,Button addAT,Button remAT,Text listPlayers,Text firstSquad)
+    {
+        homeTeamChoice.setVisible(true);
+        awayTeamChoice.setVisible(true);
+        homeTeamFive.setVisible(true);
+        awayTeamFive.setVisible(true);
+        homeTeamName.setVisible(true);
+        awayTeamName.setVisible(true);
+        confirmSquad.setVisible(true);
+        addHT.setVisible(true);
+        remHT.setVisible(true);
+        addAT.setVisible(true);
+        remAT.setVisible(true);
+        listPlayers.setVisible(true);
+        firstSquad.setVisible(true);
+    }
+
+    public void setInvisibleS(ListView homeTeamChoice,ListView awayTeamChoice,ListView homeTeamFive,ListView awayTeamFive,Text homeTeamName,Text awayTeamName,Button confirmSquad,Button addHT,Button remHT,Button addAT,Button remAT,Text listPlayers,Text firstSquad)
+    {
+        homeTeamChoice.setVisible(false);
+        awayTeamChoice.setVisible(false);
+        homeTeamFive.setVisible(false);
+        awayTeamFive.setVisible(false);
+        homeTeamName.setVisible(false);
+        awayTeamName.setVisible(false);
+        confirmSquad.setVisible(false);
+        addHT.setVisible(false);
+        remHT.setVisible(false);
+        addAT.setVisible(false);
+        remAT.setVisible(false);
+        listPlayers.setVisible(false);
+        firstSquad.setVisible(false);
+    }
 }
