@@ -37,12 +37,12 @@
       <DialogPane fx:id="selectDate" contentText="Select date of birth" layoutX="573.0" layoutY="167.0" prefHeight="58.0" prefWidth="185.0" />
       <ListView fx:id="listSeasons" layoutX="583.0" layoutY="252.0" prefHeight="200.0" prefWidth="200.0" />
       <DialogPane fx:id="selectSeason" contentText="Select season" layoutX="573.0" layoutY="167.0" prefHeight="58.0" prefWidth="226.0" />
-      <Label fx:id="label" layoutX="72.0" layoutY="334.0">
+      <Label fx:id="label" layoutX="72.0" layoutY="334.0" prefHeight="27.0" prefWidth="166.0">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label fx:id="label2" layoutX="72.0" layoutY="361.0" prefHeight="27.0" prefWidth="121.0">
+      <Label fx:id="label2" layoutX="72.0" layoutY="361.0" prefHeight="27.0" prefWidth="166.0">
          <font>
             <Font size="18.0" />
          </font>
@@ -52,27 +52,42 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <Label fx:id="label4" layoutX="72.0" layoutY="414.0" prefHeight="27.0" prefWidth="284.0" text="1">
+      <Label fx:id="label4" layoutX="72.0" layoutY="414.0" prefHeight="27.0" prefWidth="284.0">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label fx:id="label6" layoutX="74.0" layoutY="466.0" prefHeight="27.0" prefWidth="284.0" text="1">
+      <Label fx:id="label6" layoutX="72.0" layoutY="466.0" prefHeight="27.0" prefWidth="284.0">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label fx:id="label5" layoutX="74.0" layoutY="439.0" prefHeight="27.0" prefWidth="449.0" text="1">
+      <Label fx:id="label5" layoutX="72.0" layoutY="439.0" prefHeight="27.0" prefWidth="449.0">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label fx:id="label7" layoutX="67.0" layoutY="495.0" prefHeight="27.0" prefWidth="160.0" text="1">
+      <Label fx:id="label7" layoutX="72.0" layoutY="492.0" prefHeight="27.0" prefWidth="284.0">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label fx:id="label8" layoutX="70.0" layoutY="522.0" prefHeight="27.0" prefWidth="160.0" text="1">
+      <Label fx:id="label8" layoutX="72.0" layoutY="519.0" prefHeight="27.0" prefWidth="346.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="label9" layoutX="72.0" layoutY="546.0" prefHeight="27.0" prefWidth="304.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="label10" layoutX="73.0" layoutY="573.0" prefHeight="27.0" prefWidth="321.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="label11" layoutX="74.0" layoutY="600.0" prefHeight="27.0" prefWidth="160.0">
          <font>
             <Font size="18.0" />
          </font>
