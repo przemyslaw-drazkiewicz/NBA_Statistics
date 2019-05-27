@@ -1,10 +1,10 @@
 package nba_statistics.dao.interfaces;
 
-import nba_statistics.entities.Druzyny;
+import nba_statistics.entities.Teams;
 
 public interface ITeamsDao {
-    Druzyny getTeam(String name);
-    Druzyny getTeam(int id);
+    Teams getTeam(String name);
+    Teams getTeam(int id);
     void getData(String division, String conference, String name, String location);
     boolean checkTeam(String team);
 

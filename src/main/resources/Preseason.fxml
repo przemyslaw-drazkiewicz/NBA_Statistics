@@ -99,7 +99,7 @@
       </Text>
       <Button fx:id="addedSeasonBtn" layoutX="278.0" layoutY="234.0" mnemonicParsing="false" onAction="#addedSeason" text="Add" />
       <Button fx:id="skipBtn" layoutX="371.0" layoutY="234.0" mnemonicParsing="false" onAction="#skipAction" text="Skip" />
-      <Text fx:id="enterDataTxt" layoutX="248.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter data" visible="false">
+      <Text fx:id="enterDataTxt" layoutX="248.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter date" visible="false">
          <font>
             <Font size="25.0" />
          </font>

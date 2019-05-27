@@ -1,8 +1,8 @@
 package nba_statistics.services;
 
 import nba_statistics.dao.classes.MatchesDao;
-import nba_statistics.entities.Mecze;
-import nba_statistics.entities.OsiagnieciaZawWMeczu;
+import nba_statistics.entities.Matches;
+import nba_statistics.entities.PlayerMatchAchievements;
 
 import java.util.List;
 
@@ -15,16 +15,16 @@ public class MatchesService{
 
 
 
-    public List<Mecze> findAll(){
+    public List<Matches> findAll(){
         matchesDao.openCurrentSession();
-        List<Mecze> matches = matchesDao.findAll();
+        List<Matches> matches = matchesDao.findAll();
         matchesDao.closeCurrentSession();
         return matches;
     }
 
-    public List<Mecze> findAllAtDate(String date){
+    public List<Matches> findAllAtDate(String date){
         matchesDao.openCurrentSession();
-        List<Mecze> matches = matchesDao.findAllAtDate(date);
+        List<Matches> matches = matchesDao.findAllAtDate(date);
         matchesDao.closeCurrentSession();
         return matches;
     }
@@ -36,16 +36,16 @@ public class MatchesService{
         return tmp;
     }
 
-    public void persist(Mecze entity) {
+    public void persist(Matches entity) {
         matchesDao.openCurrentSessionwithTransaction();
         matchesDao.persist(entity);
         matchesDao.closeCurrentSessionwithTransaction();
     }
 
 
-    public List<OsiagnieciaZawWMeczu> getAchievementPlayerInMatch(int idPlayer, int idSeason, int idTeam) {
+    public List<PlayerMatchAchievements> getAchievementPlayerInMatch(int idPlayer, int idSeason, int idTeam) {
         matchesDao.openCurrentSessionwithTransaction();
-        List<OsiagnieciaZawWMeczu> achievements = matchesDao.getAchievementPlayerInMatch(idPlayer, idSeason,idTeam);
+        List<PlayerMatchAchievements> achievements = matchesDao.getAchievementPlayerInMatch(idPlayer, idSeason,idTeam);
         matchesDao.closeCurrentSessionwithTransaction();
         return achievements;
     }

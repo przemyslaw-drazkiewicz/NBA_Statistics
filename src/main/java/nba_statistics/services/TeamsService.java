@@ -1,7 +1,7 @@
 package nba_statistics.services;
 
 import nba_statistics.dao.classes.TeamsDao;
-import nba_statistics.entities.Druzyny;
+import nba_statistics.entities.Teams;
 
 public class TeamsService {
     private static TeamsDao teamsDao;
@@ -10,16 +10,16 @@ public class TeamsService {
         teamsDao = new TeamsDao();
     }
 
-    public Druzyny getTeam(String name){
+    public Teams getTeam(String name){
         teamsDao.openCurrentSession();
-        Druzyny d = teamsDao.getTeam(name);
+        Teams d = teamsDao.getTeam(name);
         teamsDao.closeCurrentSession();
         return d;
     }
 
-    public Druzyny getTeam(int id){
+    public Teams getTeam(int id){
         teamsDao.openCurrentSession();
-        Druzyny d = teamsDao.getTeam(id);
+        Teams d = teamsDao.getTeam(id);
         teamsDao.closeCurrentSession();
         return d;
     }

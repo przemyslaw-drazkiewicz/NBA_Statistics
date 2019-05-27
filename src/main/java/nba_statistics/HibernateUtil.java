@@ -2,14 +2,7 @@ package nba_statistics;
 
 import nba_statistics.entities.*;
 import org.hibernate.SessionFactory;
-import org.hibernate.boot.Metadata;
-import org.hibernate.boot.MetadataSources;
-import org.hibernate.boot.SessionFactoryBuilder;
-import org.hibernate.boot.registry.StandardServiceRegistry;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistry;
-import java.util.Properties;
 
 
 public class HibernateUtil {
@@ -22,17 +15,17 @@ public class HibernateUtil {
 
           return new Configuration()
                     .configure("hibernate.cfg.xml")
-                    .addAnnotatedClass(Mecze.class)
-                    .addAnnotatedClass(Druzyny.class)
-                    .addAnnotatedClass(HistoriaDruzynZawodnika.class)
-                    .addAnnotatedClass(OsiagnieciaZawWMeczu.class)
-                    .addAnnotatedClass(Sezony.class)
-                    .addAnnotatedClass(Zawodnicy.class)
-                    .addAnnotatedClass(HistZmianWMeczu.class)
-                    .addAnnotatedClass(PowodZejscia.class)
-                    .addAnnotatedClass(ZawodnikPozycja.class)
-                    .addAnnotatedClass(Pozycje.class)
-                    .addAnnotatedClass(PozycjeZawWMeczu.class)
+                    .addAnnotatedClass(Matches.class)
+                    .addAnnotatedClass(Teams.class)
+                    .addAnnotatedClass(PlayerTeamsHistory.class)
+                    .addAnnotatedClass(PlayerMatchAchievements.class)
+                    .addAnnotatedClass(Seasons.class)
+                    .addAnnotatedClass(Players.class)
+                    .addAnnotatedClass(MatchSubstitutionHistory.class)
+                    .addAnnotatedClass(SubstitutionReasons.class)
+                    .addAnnotatedClass(PlayerPosition.class)
+                    .addAnnotatedClass(Positions.class)
+                    .addAnnotatedClass(PlayerMatchPositions.class)
                     .buildSessionFactory();
 
 

@@ -24,7 +24,7 @@
 		<!-- Set the current session context -->
 		<property name="current_session_context_class">thread</property>
 
-        <!-- <mapping class="nba_statistics.entities.Mecze"/>-->
+        <!-- <mapping class="nba_statistics.entities.Matcheses"/>-->
 
      </session-factory>
 

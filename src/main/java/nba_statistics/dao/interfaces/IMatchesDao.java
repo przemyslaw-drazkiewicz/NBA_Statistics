@@ -1,16 +1,15 @@
 package nba_statistics.dao.interfaces;
 
-import nba_statistics.entities.Druzyny;
-import nba_statistics.entities.Mecze;
-import nba_statistics.entities.OsiagnieciaZawWMeczu;
+import nba_statistics.entities.Matches;
+import nba_statistics.entities.PlayerMatchAchievements;
 
 import java.util.List;
 
 public interface IMatchesDao {
-    List<Mecze> findAll();
-    List<Mecze> findAllAtDate(String date);
+    List<Matches> findAll();
+    List<Matches> findAllAtDate(String date);
 
     int getData(String home, String away, String date, String season);
-    void persist(Mecze mecze);
-    List<OsiagnieciaZawWMeczu> getAchievementPlayerInMatch(int idPlayer, int idSeason, int idTeam);
+    void persist(Matches matches);
+    List<PlayerMatchAchievements> getAchievementPlayerInMatch(int idPlayer, int idSeason, int idTeam);
 }

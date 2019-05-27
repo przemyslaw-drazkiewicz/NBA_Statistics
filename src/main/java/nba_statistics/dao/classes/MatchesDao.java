@@ -4,7 +4,6 @@ import nba_statistics.dao.interfaces.IMatchesDao;
 import nba_statistics.entities.*;
 import nba_statistics.services.SeasonsService;
 import nba_statistics.services.TeamsService;
-import org.hibernate.exception.DataException;
 import org.hibernate.query.Query;
 import java.sql.Date;
 
@@ -14,32 +13,32 @@ public class MatchesDao extends Dao implements IMatchesDao{
 
 
 
-    public List<Mecze> findAll() {
-        // List<Mecze> matches = (List<Mecze>) getCurrentSession().createQuery("from Mecze").list();
-        Query<Mecze> theQuery = getCurrentSession().createQuery("from Mecze", Mecze.class);
-        List<Mecze> matches = theQuery.getResultList();
+    public List<Matches> findAll() {
+        // List<Matches> matches = (List<Matches>) getCurrentSession().createQuery("from Matches").list();
+        Query<Matches> theQuery = getCurrentSession().createQuery("from Matches", Matches.class);
+        List<Matches> matches = theQuery.getResultList();
 
         return matches;
     }
 
-    public List<Mecze> findAllAtDate(String date) {
+    public List<Matches> findAllAtDate(String date) {
 
-        Query<Mecze> theQuery = getCurrentSession().createQuery("from Mecze where data = :date")
+        Query<Matches> theQuery = getCurrentSession().createQuery("from Matches where date = :date")
                 .setParameter("date",date);
-        List<Mecze> matches = theQuery.getResultList();
+        List<Matches> matches = theQuery.getResultList();
 
         return matches;
     }
 
-    public void persist(Mecze entity) {
+    public void persist(Matches entity) {
         getCurrentSession().save(entity);
     }
 
     public int getData(String home, String away, String date, String season){
         TeamsService teamsService = new TeamsService();
         SeasonsService seasonsService = new SeasonsService();
-        Druzyny teamHome = teamsService.getTeam(home);
-        Druzyny teamAway = teamsService.getTeam(away);
+        Teams teamHome = teamsService.getTeam(home);
+        Teams teamAway = teamsService.getTeam(away);
         if (teamHome == null){
             return 1;
         } else if (teamAway == null){
@@ -48,20 +47,20 @@ public class MatchesDao extends Dao implements IMatchesDao{
             return 4;
         }
         else {
-            Sezony s = seasonsService.getSeason(season);
-            Mecze mecz = new Mecze();
+            Seasons s = seasonsService.getSeason(season);
+            Matches mecz = new Matches();
 
-            mecz.setDruzGosp(teamHome);
-            mecz.setDruzGosc(teamAway);
+            mecz.setHostTeam(teamHome);
+            mecz.setGuestTeam(teamAway);
 
             try{
                 Date checkDate = Date.valueOf(date); //'return' IllegalArgumentException exception if wrong date format
-                Date startDate = Date.valueOf(s.getDataRozp());
-                Date endDate = Date.valueOf(s.getDataZakon());
+                Date startDate = Date.valueOf(s.getStartDate());
+                Date endDate = Date.valueOf(s.getEndDate());
                 if (startDate.compareTo(checkDate) > 0 || endDate.compareTo(checkDate) < 0)
                     return 5;
-                mecz.setData(date);
-                mecz.setSezon(s);
+                mecz.setDate(date);
+                mecz.setSeason(s);
                 persist(mecz);
                 return 0;
             }
@@ -77,26 +76,26 @@ public class MatchesDao extends Dao implements IMatchesDao{
     }
 
 
-    public List<OsiagnieciaZawWMeczu> getAchievementPlayerInMatch(int idPlayer, int idSeason, int idTeam) {
-        Query<Mecze> theQuery = getCurrentSession().createQuery
-                ("from Mecze where id_sezonu =: idSeason and (id_druzyny_gospodarza =: idTeam or id_druzyny_goscia =: idTeam)")
+    public List<PlayerMatchAchievements> getAchievementPlayerInMatch(int idPlayer, int idSeason, int idTeam) {
+        Query<Matches> theQuery = getCurrentSession().createQuery
+                ("from Matches where season_id =: idSeason and (host_team_id =: idTeam or guest_team_id =: idTeam)")
                 .setParameter("idSeason", idSeason)
                 .setParameter("idTeam", idTeam)
                 .setParameter("idTeam", idTeam);
-        List<Mecze> matches = theQuery.getResultList();
+        List<Matches> matches = theQuery.getResultList();
         int idMatch = -1;
 
 
 
-        List<OsiagnieciaZawWMeczu> tmp = new ArrayList<>();
-        List<OsiagnieciaZawWMeczu> achievements = new ArrayList<>();
+        List<PlayerMatchAchievements> tmp = new ArrayList<>();
+        List<PlayerMatchAchievements> achievements = new ArrayList<>();
 
         System.out.println(matches.size());
 
         for(int i =0; i<matches.size(); i++){
             idMatch = matches.get(i).getId();
-            Query <OsiagnieciaZawWMeczu> query2 = getCurrentSession().createQuery
-                    ("from OsiagnieciaZawWMeczu where id_meczu =: idMatch and id_zawodnika =: idPlayer")
+            Query <PlayerMatchAchievements> query2 = getCurrentSession().createQuery
+                    ("from PlayerMatchAchievements where match_id =: idMatch and player_id =: idPlayer")
                     .setParameter("idMatch", idMatch)
                     .setParameter("idPlayer", idPlayer);
 

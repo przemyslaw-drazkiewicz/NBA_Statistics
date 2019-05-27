@@ -27,7 +27,7 @@
       <TextField fx:id="surname" layoutX="271.0" layoutY="255.0" />
       <Button fx:id="backBtn" layoutX="922.0" layoutY="747.0" mnemonicParsing="false" onAction="#changeScreenBack" text="Back" />
       <ListView fx:id="listViewOfDateBirth" layoutX="586.0" layoutY="222.0" prefHeight="60.0" prefWidth="194.0" />
-      <ComboBox fx:id="comboBox" layoutX="319.0" layoutY="85.0" onAction="#whatIsVisible" prefHeight="60.0" prefWidth="364.0" promptText="Select kind of data" />
+      <ComboBox fx:id="comboBox" layoutX="319.0" layoutY="85.0" onAction="#whatIsVisible" prefHeight="60.0" prefWidth="364.0" promptText="Select kind of date" />
       <Text fx:id="writeName" layoutX="67.0" layoutY="204.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Write name:" wrappingWidth="166.32421875">
          <font>
             <Font size="24.0" />

@@ -1,12 +1,12 @@
 package nba_statistics.dao.interfaces;
 
-import nba_statistics.entities.Sezony;
+import nba_statistics.entities.Seasons;
 
 import java.util.List;
 
 public interface ISeasonsDao {
-    Sezony getSeasons(String name);
+    Seasons getSeasons(String name);
     int getData(String name, String startDate, String endDate);
     boolean checkSeason(String name);
-    List<Sezony> getAllSeasons();
+    List<Seasons> getAllSeasons();
 }

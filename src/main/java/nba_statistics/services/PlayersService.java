@@ -1,8 +1,8 @@
 package nba_statistics.services;
 
 import nba_statistics.dao.classes.PlayersDao;
-import nba_statistics.entities.HistoriaDruzynZawodnika;
-import nba_statistics.entities.Zawodnicy;
+import nba_statistics.entities.PlayerTeamsHistory;
+import nba_statistics.entities.Players;
 
 import java.util.List;
 
@@ -27,23 +27,23 @@ public class PlayersService {
         return tmp;
     }
 
-    public List<Zawodnicy> getPlayers(String name, String surname){
+    public List<Players> getPlayers(String name, String surname){
         playersDao.openCurrentSessionwithTransaction();
-        List<Zawodnicy> players = playersDao.getPlayers(name, surname);
+        List<Players> players = playersDao.getPlayers(name, surname);
         playersDao.closeCurrentSessionwithTransaction();
         return players;
     }
 
-    public List<Zawodnicy> getPlayers(int id){
+    public List<Players> getPlayers(int id){
         playersDao.openCurrentSessionwithTransaction();
-        List<Zawodnicy> players = playersDao.getPlayers(id);
+        List<Players> players = playersDao.getPlayers(id);
         playersDao.closeCurrentSessionwithTransaction();
         return players;
     }
 
-    public List<HistoriaDruzynZawodnika> getPlayerTeamsHistory(int idPlayer){
+    public List<PlayerTeamsHistory> getPlayerTeamsHistory(int idPlayer){
         playersDao.openCurrentSessionwithTransaction();
-        List<HistoriaDruzynZawodnika> history = playersDao.getPlayerTeamsHistory(idPlayer);
+        List<PlayerTeamsHistory> history = playersDao.getPlayerTeamsHistory(idPlayer);
         playersDao.openCurrentSessionwithTransaction();
         return history;
     }

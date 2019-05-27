@@ -1,7 +1,7 @@
 package nba_statistics.services;
 
 import nba_statistics.dao.classes.SeasonsDao;
-import nba_statistics.entities.Sezony;
+import nba_statistics.entities.Seasons;
 
 import java.util.List;
 
@@ -12,9 +12,9 @@ public class SeasonsService {
     }
 
 
-    public Sezony getSeason(String name){
+    public Seasons getSeason(String name){
         seasonsDao.openCurrentSession();
-        Sezony s = seasonsDao.getSeasons(name);
+        Seasons s = seasonsDao.getSeasons(name);
         seasonsDao.closeCurrentSession();
         return s;
     }
@@ -31,9 +31,9 @@ public class SeasonsService {
         return i;
     }
 
-    public List <Sezony> getAllSeasons(){
+    public List <Seasons> getAllSeasons(){
         seasonsDao.openCurrentSession();
-        List <Sezony> s = seasonsDao.getAllSeasons();
+        List <Seasons> s = seasonsDao.getAllSeasons();
         seasonsDao.closeCurrentSession();
         return s;
     }

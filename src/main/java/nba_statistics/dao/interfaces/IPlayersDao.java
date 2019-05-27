@@ -1,14 +1,14 @@
 package nba_statistics.dao.interfaces;
 
-import nba_statistics.entities.HistoriaDruzynZawodnika;
-import nba_statistics.entities.Zawodnicy;
+import nba_statistics.entities.PlayerTeamsHistory;
+import nba_statistics.entities.Players;
 
 import java.util.List;
 
 public interface IPlayersDao {
     int getData(String name, String surname, String date, float height, float weight, String team);
     int updatePlayer(String name, String surname,String team);
-    List<Zawodnicy> getPlayers(String name, String surname);
-    List<Zawodnicy> getPlayers(int id);
-    List<HistoriaDruzynZawodnika> getPlayerTeamsHistory(int idPlayer);
+    List<Players> getPlayers(String name, String surname);
+    List<Players> getPlayers(int id);
+    List<PlayerTeamsHistory> getPlayerTeamsHistory(int idPlayer);
 }

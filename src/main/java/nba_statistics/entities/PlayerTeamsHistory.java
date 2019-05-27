@@ -20,31 +20,31 @@ import javax.persistence.Table;
  * @author Przemek
  */
 @Entity
-@Table(name = "historia_druzyn_zawodnika")
-public class HistoriaDruzynZawodnika {
+@Table(name = "player_teams_history")
+public class PlayerTeamsHistory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_historia_druzyn_zawodnika")
+    @Column(name = "player_teams_history_id")
     private int id;
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE,
         CascadeType.DETACH, CascadeType.REFRESH})
-    @JoinColumn(name = "id_zawodnika")
-    private Zawodnicy zawodnik;
+    @JoinColumn(name = "player_id")
+    private Players player;
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE,
         CascadeType.DETACH, CascadeType.REFRESH})
-    @JoinColumn(name = "id_sezonu")
-    private Sezony sezon;
+    @JoinColumn(name = "season_id")
+    private Seasons season;
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE,
         CascadeType.DETACH, CascadeType.REFRESH})
     //@ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_druzyny")
-    private Druzyny druzyna;
+    @JoinColumn(name = "team_id")
+    private Teams team;
 
-    public HistoriaDruzynZawodnika() {
+    public PlayerTeamsHistory() {
     }
 
     public int getId() {
@@ -55,28 +55,28 @@ public class HistoriaDruzynZawodnika {
         this.id = id;
     }
 
-    public Zawodnicy getZawodnik() {
-        return zawodnik;
+    public Players getPlayer() {
+        return player;
     }
 
-    public void setZawodnik(Zawodnicy zawodnik) {
-        this.zawodnik = zawodnik;
+    public void setPlayer(Players player) {
+        this.player = player;
     }
 
-    public Sezony getSezon() {
-        return sezon;
+    public Seasons getSeason() {
+        return season;
     }
 
-    public void setSezon(Sezony sezon) {
-        this.sezon = sezon;
+    public void setSeason(Seasons season) {
+        this.season = season;
     }
     
-    public Druzyny getDruzyna() {
-        return druzyna;
+    public Teams getTeam() {
+        return team;
     }
 
-    public void setDruzyna(Druzyny druzyna) {
-        this.druzyna = druzyna;
+    public void setTeam(Teams team) {
+        this.team = team;
     }
 
 

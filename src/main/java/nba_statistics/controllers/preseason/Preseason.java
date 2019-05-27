@@ -12,7 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import nba_statistics.entities.Zawodnicy;
+import nba_statistics.entities.Players;
 import nba_statistics.services.MatchesService;
 import nba_statistics.services.PlayersService;
 import nba_statistics.services.SeasonsService;
@@ -130,7 +130,7 @@ public class Preseason implements Initializable {
         if (seasonsDao.checkSeason(t30.getText())) {
             SeasonsService seasonsService = new SeasonsService();
             currSeason = t30.getText(); //get season but not save to database 'this season exist in database'
-            tDuration.setText(seasonsService.getSeason(currSeason).getDataRozp() + " / " + seasonsService.getSeason(currSeason).getDataZakon());
+            tDuration.setText(seasonsService.getSeason(currSeason).getStartDate() + " / " + seasonsService.getSeason(currSeason).getEndDate());
             initScene();
         } else {
             getAlertSeason(t30.getText());
@@ -290,7 +290,7 @@ public class Preseason implements Initializable {
                 if (playersService1.updatePlayer(t40.getText(), t41.getText(), t42.getText()) == 1) {
                     getAlertTeams(t42.getText());
                 } else {
-                    List<Zawodnicy> players = playersService1.getPlayers(t40.getText(), t41.getText());
+                    List<Players> players = playersService1.getPlayers(t40.getText(), t41.getText());
                     switch (players.size()) {
                         case 0:
                             getAlertPlayer(t40.getText(), t41.getText());

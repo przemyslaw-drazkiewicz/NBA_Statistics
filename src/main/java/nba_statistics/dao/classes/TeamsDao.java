@@ -1,7 +1,7 @@
 package nba_statistics.dao.classes;
 
 import nba_statistics.dao.interfaces.ITeamsDao;
-import nba_statistics.entities.Druzyny;
+import nba_statistics.entities.Teams;
 import org.hibernate.query.Query;
 
 public class    TeamsDao extends Dao implements ITeamsDao {
@@ -10,16 +10,16 @@ public class    TeamsDao extends Dao implements ITeamsDao {
 
     }
 
-    public void persist(Druzyny entity) {
+    public void persist(Teams entity) {
         getCurrentSession().save(entity);
     }
 
-    public Druzyny getTeam(String name) {
-        Query<Druzyny> theQuery = getCurrentSession().createQuery("from Druzyny where nazwa = :name", Druzyny.class);
+    public Teams getTeam(String name) {
+        Query<Teams> theQuery = getCurrentSession().createQuery("from Teams where name = :name", Teams.class);
 
         theQuery.setParameter("name", name);
         //theQuery.executeUpdate();
-        Druzyny d = theQuery.setMaxResults(1).uniqueResult();
+        Teams d = theQuery.setMaxResults(1).uniqueResult();
         if (d == null) {
             return null;
         }
@@ -27,12 +27,12 @@ public class    TeamsDao extends Dao implements ITeamsDao {
         return d;
     }
 
-    public Druzyny getTeam(int id) {
-        Query<Druzyny> theQuery = getCurrentSession().createQuery("from Druzyny where id_druzyny = :id", Druzyny.class);
+    public Teams getTeam(int id) {
+        Query<Teams> theQuery = getCurrentSession().createQuery("from Teams where team_id = :id", Teams.class);
 
         theQuery.setParameter("id", id);
         //theQuery.executeUpdate();
-        Druzyny d = theQuery.setMaxResults(1).uniqueResult();
+        Teams d = theQuery.setMaxResults(1).uniqueResult();
         if (d == null) {
             return null;
         }
@@ -41,16 +41,16 @@ public class    TeamsDao extends Dao implements ITeamsDao {
     }
 
     public void getData(String division, String conference, String name, String location){
-        Druzyny d = new Druzyny(division, conference, name, location);
+        Teams d = new Teams(division, conference, name, location);
         persist(d);
     }
 
     @Override
     public boolean checkTeam(String team) {
-        Query<Druzyny> theQuery = getCurrentSession().createQuery("from Druzyny where nazwa = :team", Druzyny.class);
+        Query<Teams> theQuery = getCurrentSession().createQuery("from Teams where name = :team", Teams.class);
 
         theQuery.setParameter("team", team);
-        Druzyny d = theQuery.setMaxResults(1).uniqueResult();
+        Teams d = theQuery.setMaxResults(1).uniqueResult();
         if (d == null){
             return true;
         }

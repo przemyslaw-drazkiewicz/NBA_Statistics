@@ -22,9 +22,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.scene.text.Text;
-import nba_statistics.entities.Druzyny;
-import nba_statistics.entities.Mecze;
-import nba_statistics.entities.Zawodnicy;
+import nba_statistics.entities.Matches;
+import nba_statistics.entities.Players;
+import nba_statistics.entities.Teams;
 import nba_statistics.services.MatchesService;
 import nba_statistics.services.PlayersService;
 
@@ -80,13 +80,13 @@ public class Statistician implements Initializable {
 
     private ObservableList<String> choice;
 
-    private Mecze match;
+    private Matches match;
 
     private Visibility v;
 
     private Date date = new Date();
 
-    private List<Mecze> matchs;
+    private List<Matches> matchs;
 
 
     public void changeScreen(ActionEvent event) throws IOException {
@@ -119,32 +119,32 @@ public class Statistician implements Initializable {
             playersListTeamA = new ArrayList<>();
             match = matchs.get(matchSelected);
 
-            Druzyny teamH = match.getDruzGosp();
-            Druzyny teamA = match.getDruzGosc();
+            Teams teamH = match.getHostTeam();
+            Teams teamA = match.getGuestTeam();
             int id_TeamH = teamH.getId();
             int id_TeamA = teamA.getId();
 
             PlayersService playersDAO = new PlayersService();
-            List<Zawodnicy> playersTeamH = playersDAO.getPlayers(id_TeamH);
-            List<Zawodnicy> playersTeamA = playersDAO.getPlayers(id_TeamA);
+            List<Players> playersTeamH = playersDAO.getPlayers(id_TeamH);
+            List<Players> playersTeamA = playersDAO.getPlayers(id_TeamA);
             ObservableList<String> playersA = FXCollections.observableArrayList();
             ObservableList<String> playersH = FXCollections.observableArrayList();
 
-            for (Zawodnicy players : playersTeamH) {
-                String player = players.getImie() + " " + players.getNazwisko();
+            for (Players players : playersTeamH) {
+                String player = players.getName() + " " + players.getSurname();
                 playersListTeamH.add(player);
                 playersH.add(player);
             }
 
-            for (Zawodnicy players : playersTeamA) {
-                String player = players.getImie() + " " + players.getNazwisko();
+            for (Players players : playersTeamA) {
+                String player = players.getName() + " " + players.getSurname();
                 playersListTeamA.add(player);
                 playersA.add(player);
             }
             homeTeamChoice.setItems(playersH);
             awayTeamChoice.setItems(playersA);
-            homeTeamName.setText(teamH.getNazwa());
-            awayTeamName.setText(teamA.getNazwa());
+            homeTeamName.setText(teamH.getName());
+            awayTeamName.setText(teamA.getName());
 
 
             v.setInvisibleC(choiceText, buttonOK, matchesComboBox);
@@ -161,8 +161,8 @@ public class Statistician implements Initializable {
         }
         else {
 
-            Druzyny teamH = match.getDruzGosp();
-            Druzyny teamA = match.getDruzGosc();
+            Teams teamH = match.getHostTeam();
+            Teams teamA = match.getGuestTeam();
             ObservableList<String> playersSquadA = FXCollections.observableArrayList();
             ObservableList<String> playersSquadH = FXCollections.observableArrayList();
 
@@ -175,7 +175,7 @@ public class Statistician implements Initializable {
                 playersSquadA.add(playersA);
             }
 
-            String matchT2 = teamH.getNazwa() + " vs. " + teamA.getNazwa();
+            String matchT2 = teamH.getName() + " vs. " + teamA.getName();
             matchText.setText(matchT2);
             homeTeam.setItems(playersSquadH);
             awayTeam.setItems(playersSquadA);
@@ -317,23 +317,23 @@ public class Statistician implements Initializable {
 
         matchesT = new ArrayList<>();
 
-        for (Mecze mecze : matchs) {
-            match = mecze;
+        for (Matches matches : matchs) {
+            match = matches;
 
-            Druzyny teamH = match.getDruzGosp();
-            Druzyny teamA = match.getDruzGosc();
+            Teams teamH = match.getHostTeam();
+            Teams teamA = match.getGuestTeam();
 
-            String matchT = teamH.getNazwa() + " vs. " + teamA.getNazwa();
+            String matchT = teamH.getName() + " vs. " + teamA.getName();
             matchesT.add(matchT);
         }
 /*
         PlayersService playersDao = new PlayersService();
 
-        List<Zawodnicy> playersTeam = playersDao.getPlayers(15);
+        List<Players> playersTeam = playersDao.getPlayers(15);
         ObservableList<String> players = FXCollections.observableArrayList();
 
-        for (Zawodnicy playersBuffer : playersTeam) {
-            String player = playersBuffer.getImie() + " " + playersBuffer.getNazwisko();
+        for (Players playersBuffer : playersTeam) {
+            String player = playersBuffer.getName() + " " + playersBuffer.getSurname();
             players.add(player);
         }
          homeTeamChoice.setItems(players);

@@ -1,10 +1,8 @@
 package nba_statistics.controllers;
 
-import javafx.beans.InvalidationListener;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,10 +14,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import nba_statistics.entities.HistoriaDruzynZawodnika;
-import nba_statistics.entities.OsiagnieciaZawWMeczu;
-import nba_statistics.entities.Sezony;
-import nba_statistics.entities.Zawodnicy;
+import nba_statistics.entities.PlayerTeamsHistory;
+import nba_statistics.entities.PlayerMatchAchievements;
+import nba_statistics.entities.Seasons;
+import nba_statistics.entities.Players;
 //import nba_statistics.services.PlayerTeamsHistoryService;
 import nba_statistics.services.MatchesService;
 import nba_statistics.services.PlayersService;
@@ -154,11 +152,11 @@ public class SelectData implements Initializable {
         String name = "";
         SeasonsService seasonsService = new SeasonsService();
 
-        List<Sezony> s  = seasonsService.getAllSeasons();
+        List<Seasons> s  = seasonsService.getAllSeasons();
 
         List<String> nameSeasons = new ArrayList<String>(s.size());
-        for(Sezony sez : s){
-            nameSeasons.add(sez.getNazwa());
+        for(Seasons sez : s){
+            nameSeasons.add(sez.getName());
         }
 
 
@@ -234,7 +232,7 @@ public class SelectData implements Initializable {
         setInvisibleSeasons();
 
         //list of players
-        List<Zawodnicy> players = playersService.getPlayers(name.getText(), surname.getText());
+        List<Players> players = playersService.getPlayers(name.getText(), surname.getText());
 
         //if no one was found
         if(players.size()==0){
@@ -261,24 +259,24 @@ public class SelectData implements Initializable {
             //TO DO
             setVisibleDateOfBirth();
             for(int i = 0; i<players.size(); i++){
-                listViewOfDateBirth.getItems().addAll(players.get(i).getDataUr());
+                listViewOfDateBirth.getItems().addAll(players.get(i).getDateOfBirth());
             }
             setInisibleDateOfBirth();
         }
 
 
-        int idPlayer = players.get(0).getId(); //   ObservableList<HistoriaDruzynZawodnika> playerSeasons = FXCollections.observableArrayList(PlayerTeamsHistoryService.getPlayerSeasons(id));
+        int idPlayer = players.get(0).getId(); //   ObservableList<PlayerTeamsHistory> playerSeasons = FXCollections.observableArrayList(PlayerTeamsHistoryService.getPlayerSeasons(id));
         final int[] idSeason = {-1};
         final int[] idTeam = {-1};
 
         //choice season
 
         setVisibleSeasons();
-        List<HistoriaDruzynZawodnika> playerSeasons = playersService.getPlayerTeamsHistory(idPlayer);
+        List<PlayerTeamsHistory> playerSeasons = playersService.getPlayerTeamsHistory(idPlayer);
 
         List<String> nameSeason = new ArrayList<String>(playerSeasons.size());
-        for(HistoriaDruzynZawodnika nameS : playerSeasons){
-            nameSeason.add(nameS.getSezon().getNazwa());
+        for(PlayerTeamsHistory nameS : playerSeasons){
+            nameSeason.add(nameS.getSeason().getName());
         }
 
         if(nameSeason.size() >0){
@@ -293,31 +291,31 @@ public class SelectData implements Initializable {
                 @Override
                 public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                     label.setText("Season: " + newValue);
-                    label2.setText("Name: " + players.get(0).getImie()); //
-                    label3.setText("Surname: " + players.get(0).getNazwisko());
+                    label2.setText("Name: " + players.get(0).getName()); //
+                    label3.setText("Surname: " + players.get(0).getSurname());
 
                     for(int i =0; i<playerSeasons.size(); i++){
-                        if( newValue.equalsIgnoreCase(playerSeasons.get(i).getSezon().getNazwa())) {
-                            label4.setText("Team: " + playerSeasons.get(i).getDruzyna().getNazwa());
-                            idSeason[0] = playerSeasons.get(i).getSezon().getId();
-                            idTeam[0] =playerSeasons.get(i).getDruzyna().getId();
+                        if( newValue.equalsIgnoreCase(playerSeasons.get(i).getSeason().getName())) {
+                            label4.setText("Team: " + playerSeasons.get(i).getTeam().getName());
+                            idSeason[0] = playerSeasons.get(i).getSeason().getId();
+                            idTeam[0] =playerSeasons.get(i).getTeam().getId();
                         }
                     }
 
 
-                    List<OsiagnieciaZawWMeczu> achievementPlayer = matchesService.getAchievementPlayerInMatch(idPlayer, idSeason[0], idTeam[0] );
+                    List<PlayerMatchAchievements> achievementPlayer = matchesService.getAchievementPlayerInMatch(idPlayer, idSeason[0], idTeam[0] );
                     label5.setText("Number matches: " + achievementPlayer.size());
 
 
                     int points = 0, steals = 0, blocks = 0, collection = 0, fouls = 0, techFaul = 0;
 
-                    for(OsiagnieciaZawWMeczu os : achievementPlayer){
-                        points += os.getZdobytePunkty();
-                        steals += os.getPrzechwyty();
-                        blocks += os.getBloki();
-                        collection += os.getZbiorki();
-                        fouls += os.getFaule();
-                        techFaul += os.getFauleTech();
+                    for(PlayerMatchAchievements os : achievementPlayer){
+                        points += os.getScoredPoints();
+                        steals += os.getSteals();
+                        blocks += os.getBlocks();
+                        collection += os.getRebounds();
+                        fouls += os.getFouls();
+                        techFaul += os.getTechnicalFouls();
                     }
 
                     label6.setText("Points earned: " + points);
@@ -355,7 +353,7 @@ public class SelectData implements Initializable {
         System.out.println(comboBoxSeasons.getValue());
         nameSeason = comboBoxSeasons.getValue();
 
-        Sezony season;
+        Seasons season;
         season = seasonsService.getSeason(nameSeason);
 
         System.out.println(season.getId());
