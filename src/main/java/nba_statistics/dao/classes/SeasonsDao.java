@@ -5,6 +5,7 @@ import nba_statistics.entities.Seasons;
 import org.hibernate.query.Query;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 public class SeasonsDao extends Dao implements ISeasonsDao {
@@ -64,5 +65,16 @@ public class SeasonsDao extends Dao implements ISeasonsDao {
         List <Seasons> s = theQuery.getResultList();
 
         return s;
+    }
+
+    public ArrayList<String> getAllSeasonsName() {
+        Query<Seasons> theQuery = getCurrentSession().createQuery("from Seasons ");
+        List <Seasons> s = theQuery.getResultList();
+        ArrayList<String> seasonsNameList = new ArrayList<>();
+        for (Seasons seasonName : s){
+            seasonsNameList.add(seasonName.getName());
+        }
+
+        return seasonsNameList;
     }
 }

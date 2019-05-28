@@ -13,6 +13,7 @@ import javafx.scene.control.*;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import nba_statistics.entities.Players;
+import nba_statistics.entities.Seasons;
 import nba_statistics.services.MatchesService;
 import nba_statistics.services.PlayersService;
 import nba_statistics.services.SeasonsService;
@@ -20,6 +21,7 @@ import nba_statistics.services.TeamsService;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -39,15 +41,17 @@ public class Preseason implements Initializable {
     @FXML private TextField t20; @FXML private TextField t21; @FXML private TextField t22; @FXML private CheckBox newPlayerCheckBox;
 
     @FXML private Text s10; @FXML private Text s11; @FXML private Text s12; @FXML private Text s13;
-    @FXML private TextField t30; @FXML private TextField t31; @FXML private TextField t32;
+    @FXML private ComboBox<String> seasonsNameCombox;@FXML private TextField t30; @FXML private TextField t31; @FXML private TextField t32;
 
     @FXML private Text p40; @FXML private Text p41; @FXML private Text p42; @FXML private Text p43; @FXML private Text p44; @FXML private Text p45;
     @FXML private TextField t40; @FXML private TextField t41; @FXML private TextField t42;@FXML private TextField t43; @FXML private TextField t44;@FXML private TextField t45;
 
-    @FXML private Button sendBtn; @FXML private Button addedSeasonBtn; @FXML private Button skipBtn;
+    @FXML private Button sendBtn; @FXML private Button addedSeasonBtn;
 
     @FXML private Text tSeason; @FXML private Text tSeason0;
     @FXML private Text tDuration; @FXML private Text tDuration0;
+
+    @FXML private RadioButton newSeasonRadioBtn; @FXML private RadioButton existingSeasonRadioBtn;
 
 
 
@@ -63,9 +67,10 @@ public class Preseason implements Initializable {
     private ObservableList<String> divisionWestern = FXCollections.observableArrayList
             ("Northwest", "Pacific", "Southwest");
 
+    private ObservableList<String> seasonName;// = FXCollections.observableArrayList();
+
     private String state;
     private String currSeason;
-
     private Visibility v;
 
     public void changeScreen(ActionEvent event) throws IOException {
@@ -81,8 +86,7 @@ public class Preseason implements Initializable {
     private void initScene() { //init scene after added season
 
         comboBox.setItems(choice);
-        v.setInvisibleS(s10, s11, s12, s13, t30, t31, t32, addedSeasonBtn);
-        skipBtn.setVisible(false);
+        v.setInvisibleS(s10, s11, s12, s13, seasonsNameCombox,t30 ,t31, t32, addedSeasonBtn);
         comboBox.setVisible(true);
         enterDataTxt.setVisible(true);
         tSeason.setText(currSeason);
@@ -91,52 +95,89 @@ public class Preseason implements Initializable {
         t10.setItems(conference);
     }
 
+    private void initSeasonName()
+    {
+        SeasonsService seasonsService = new SeasonsService();
+        ArrayList<String> seasonsName = seasonsService.getAllSeasonsName();
+        seasonName = FXCollections.observableArrayList(seasonsName);
+        seasonsNameCombox.setItems(seasonName);
+    }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         v = new Visibility();
+        newSeasonRadioBtn.setSelected(true);
+        initSeasonName();
+
+
+
+
+    }
+    public void selectNewSeason(){
+        existingSeasonRadioBtn.setSelected(false);
+        v.setVisibleNewSeason(s10, s11, s12, t30, t31, t32,addedSeasonBtn); seasonsNameCombox.setVisible(false);
+
     }
 
+    public void selectExistingSeason(){
+        newSeasonRadioBtn.setSelected(false);
+        v.setVisibleExistingSeason(s10,s11,s12, seasonsNameCombox,t31,t32,addedSeasonBtn); t30.setVisible(false);
+    }
     public void addedSeason() {
 
-        SeasonsService seasonsDao = new SeasonsService();
+        if (newSeasonRadioBtn.isSelected()){
+            SeasonsService seasonsDao = new SeasonsService();
 
-        if (!seasonsDao.checkSeason(t30.getText())) {
+            if (!seasonsDao.checkSeason(t30.getText())) {
 
-            switch (seasonsDao.getData(t30.getText(), t31.getText(), t32.getText())) {
-                case 0:
-                    currSeason = t30.getText();
-                    tDuration.setText(t31.getText() + " / " + t32.getText());
-                    confirmation(0);
-                    initScene();
-                    break;
-                case 1:
-                    getAlertDate(t31.getText());
-                    break;
-                case 2:
-                    getAlertDate(t32.getText());
-                    break;
-                case 3:
-                    getAlertDate();
-                    break;
+                switch (seasonsDao.getData(t30.getText(), t31.getText(), t32.getText())) {
+                    case 0:
+                        currSeason = t30.getText();
+                        tDuration.setText(t31.getText() + " / " + t32.getText());
+                        confirmation(0);
+                        v.setInvisibleRadioButtons(newSeasonRadioBtn, existingSeasonRadioBtn);
+                        initScene();
+                        break;
+                    case 1:
+                        getAlertDate(t31.getText());
+                        break;
+                    case 2:
+                        getAlertDate(t32.getText());
+                        break;
+                    case 3:
+                        getAlertDate();
+                        break;
+                }
+            } else
+                getAlertSeasonRepeat(t30.getText());
+        } else if (existingSeasonRadioBtn.isSelected()){
+            SeasonsService seasonsDao = new SeasonsService();
+            if (seasonsDao.checkSeason(seasonsNameCombox.getValue())) {
+                SeasonsService seasonsService = new SeasonsService();
+                currSeason = seasonsNameCombox.getValue(); //get season but not save to database 'this season exist in database'
+                tDuration.setText(seasonsService.getSeason(currSeason).getStartDate() + " / " + seasonsService.getSeason(currSeason).getEndDate());
+                v.setInvisibleRadioButtons(newSeasonRadioBtn, existingSeasonRadioBtn);
+                initScene();
+            } else {
+                getAlertSeason(seasonsNameCombox.getValue());
             }
-        } else
-            getAlertSeasonRepeat(t30.getText());
+        }
+
 
 
     }
 
-    public void skipAction() {
+/*    public void skipAction() {
         SeasonsService seasonsDao = new SeasonsService();
-        if (seasonsDao.checkSeason(t30.getText())) {
+        if (seasonsDao.checkSeason(seasonsNameCombox.getText())) {
             SeasonsService seasonsService = new SeasonsService();
-            currSeason = t30.getText(); //get season but not save to database 'this season exist in database'
+            currSeason = seasonsNameCombox.getText(); //get season but not save to database 'this season exist in database'
             tDuration.setText(seasonsService.getSeason(currSeason).getStartDate() + " / " + seasonsService.getSeason(currSeason).getEndDate());
             initScene();
         } else {
-            getAlertSeason(t30.getText());
+            getAlertSeason(seasonsNameCombox.getText());
         }
 
-    }
+    }*/
 
     public void onSelected() {
         switch (comboBox.getValue()) {
@@ -144,7 +185,6 @@ public class Preseason implements Initializable {
                 v.setInvisibleCheckBox(newPlayerCheckBox, transferCheckBox);
                 v.setInvisibleM(m10, m11, m12, tSeason, tSeason0, t20, t21, t22,tDuration0, tDuration);
                 v.setInvisibleP(p40, p41, p42, p43, p44, p45, t40, t41, t42, t43, t44, t45);
-                v.setInvisibleS(s10, s11, s12, s13, t30, t31, t32, addedSeasonBtn);
                 v.setVisibleD(d10, d11, d12, d13, t10, t12, t13);
                 t10.getSelectionModel().clearSelection();
                 v.clearTextFieldD(t12,t13);
@@ -156,7 +196,6 @@ public class Preseason implements Initializable {
                 v.setInvisibleCheckBox(newPlayerCheckBox, transferCheckBox);
                 v.setInvisibleD(d10, d11, d12, d13, t10, t12, t13, DivE, DivW);
                 v.setInvisibleP(p40, p41, p42, p43, p44, p45, t40, t41, t42, t43, t44, t45);
-                v.setInvisibleS(s10, s11, s12, s13, t30, t31, t32, addedSeasonBtn);
                 v.setVisibleM(m10, m11, m12, tSeason, tSeason0, t20, t21, t22, tDuration0, tDuration);
                 v.clearTextFieldM(t20,t21,t22);
 
@@ -165,7 +204,6 @@ public class Preseason implements Initializable {
 
             case "Player":
                 v.setInvisibleD(d10, d11, d12, d13, t10, t12, t13, DivE, DivW);
-                v.setInvisibleS(s10, s11, s12, s13, t30, t31, t32, addedSeasonBtn);
                 v.setInvisibleM(m10, m11, m12, tSeason, tSeason0, t20, t21, t22,tDuration0, tDuration);
                 v.setVisibleCheckBox(newPlayerCheckBox, transferCheckBox);
                 v.clearTextFieldNewPlayer(t40,t41,t42,t43,t44,t45);

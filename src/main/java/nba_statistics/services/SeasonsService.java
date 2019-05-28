@@ -3,6 +3,8 @@ package nba_statistics.services;
 import nba_statistics.dao.classes.SeasonsDao;
 import nba_statistics.entities.Seasons;
 
+import javax.lang.model.type.ArrayType;
+import java.util.ArrayList;
 import java.util.List;
 
 public class SeasonsService {
@@ -36,5 +38,12 @@ public class SeasonsService {
         List <Seasons> s = seasonsDao.getAllSeasons();
         seasonsDao.closeCurrentSession();
         return s;
+    }
+
+    public ArrayList<String>getAllSeasonsName(){
+        seasonsDao.openCurrentSession();
+        ArrayList<String> arrayList = seasonsDao.getAllSeasonsName();
+        seasonsDao.closeCurrentSession();
+        return arrayList;
     }
 }

@@ -1,9 +1,6 @@
 package nba_statistics.controllers.preseason;
 
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.text.Text;
 
 
@@ -29,9 +26,9 @@ public class Visibility {
         t20.setVisible(false);t21.setVisible(false);t22.setVisible(false); tSeason0.setVisible(false); tDuration.setVisible(false);
     }
 
-    public void setInvisibleS(Text s10, Text s11, Text s12, Text s13, TextField t30, TextField t31, TextField t32, Button addedSeasonBtn ){
+    public void setInvisibleS(Text s10, Text s11, Text s12, Text s13, ComboBox comboBox, TextField t30, TextField t31, TextField t32, Button addedSeasonBtn ){
         s10.setVisible(false);s11.setVisible(false);s12.setVisible(false); s13.setVisible(false);
-        t30.setVisible(false);t31.setVisible(false);t32.setVisible(false);
+        t30.setVisible(false);t31.setVisible(false);t32.setVisible(false);comboBox.setVisible(false);
         addedSeasonBtn.setVisible(false);
     }
 
@@ -72,6 +69,23 @@ public class Visibility {
     public void clearTextFieldTransfer(TextField t40, TextField t41, TextField t42){
         t40.clear(); t41.clear();t42.clear();
     }
+
+    public void setVisibleNewSeason(Text s10, Text s11, Text s12,  TextField t30, TextField t31, TextField t32, Button a){
+        s10.setVisible(true); s11.setVisible(true); s12.setVisible(true);
+        t30.setVisible(true); t31.setVisible(true); t32.setVisible(true);
+        a.setVisible(true);
+    }
+    public void setVisibleExistingSeason(Text s10, Text s11, Text s12,  ComboBox t30, TextField t31, TextField t32, Button a){
+        s10.setVisible(true); s11.setVisible(false); s12.setVisible(false);
+        t30.setVisible(true); t31.setVisible(false); t32.setVisible(false);
+        a.setVisible(true);
+    }
+    public void setInvisibleRadioButtons(RadioButton r, RadioButton r1){
+        r.setVisible(false);
+        r1.setVisible(false);
+    }
+
+
 
 
 }
