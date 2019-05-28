@@ -13,7 +13,6 @@ import javafx.scene.control.*;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import nba_statistics.entities.Players;
-import nba_statistics.entities.Seasons;
 import nba_statistics.services.MatchesService;
 import nba_statistics.services.PlayersService;
 import nba_statistics.services.SeasonsService;
@@ -125,11 +124,11 @@ public class Preseason implements Initializable {
     public void addedSeason() {
 
         if (newSeasonRadioBtn.isSelected()){
-            SeasonsService seasonsDao = new SeasonsService();
+            SeasonsService seasonsService = new SeasonsService();
 
-            if (!seasonsDao.checkSeason(t30.getText())) {
+            if (!seasonsService.checkSeason(t30.getText())) {
 
-                switch (seasonsDao.getData(t30.getText(), t31.getText(), t32.getText())) {
+                switch (seasonsService.getData(t30.getText(), t31.getText(), t32.getText())) {
                     case 0:
                         currSeason = t30.getText();
                         tDuration.setText(t31.getText() + " / " + t32.getText());

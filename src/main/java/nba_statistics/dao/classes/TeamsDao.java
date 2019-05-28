@@ -16,7 +16,6 @@ public class    TeamsDao extends Dao implements ITeamsDao {
 
     public Teams getTeam(String name) {
         Query<Teams> theQuery = getCurrentSession().createQuery("from Teams where name = :name", Teams.class);
-
         theQuery.setParameter("name", name);
         //theQuery.executeUpdate();
         Teams d = theQuery.setMaxResults(1).uniqueResult();

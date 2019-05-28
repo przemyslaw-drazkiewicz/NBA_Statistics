@@ -26,6 +26,8 @@ public class HibernateUtil {
                     .addAnnotatedClass(PlayerPosition.class)
                     .addAnnotatedClass(Positions.class)
                     .addAnnotatedClass(PlayerMatchPositions.class)
+                    .addAnnotatedClass(Users.class)
+                    .addAnnotatedClass(Roles.class)
                     .buildSessionFactory();
 
 

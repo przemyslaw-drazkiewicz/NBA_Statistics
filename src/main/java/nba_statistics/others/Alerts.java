@@ -163,4 +163,15 @@ public class Alerts {
         }
         confirmation.showAndWait();
     }
+
+    public static void information(int flag){
+        Alert information = new Alert(Alert.AlertType.INFORMATION);
+        information.setTitle("Success");
+        switch(flag){
+            case 0:
+                information.setHeaderText("Registration successful");
+                break;
+        }
+        information.showAndWait();
+    }
 }

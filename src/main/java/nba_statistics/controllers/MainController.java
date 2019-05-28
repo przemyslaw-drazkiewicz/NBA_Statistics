@@ -8,7 +8,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.event.ActionEvent;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import nba_statistics.entities.Roles;
+import nba_statistics.entities.Users;
+import nba_statistics.services.UsersService;
 
 import javax.swing.*;
 import java.io.IOException;
@@ -22,6 +28,12 @@ public class MainController implements Initializable {
 
     @FXML
     private Button loginBtn;
+    @FXML
+    private PasswordField passwordField;
+    @FXML
+    private TextField userField;
+    @FXML
+    private Text errorText;
 
 
     public void onActionButton(ActionEvent actionEvent){
@@ -66,4 +78,25 @@ public class MainController implements Initializable {
         window.setScene(reviewerScene);
         window.show();
     }
+
+    public void authorize(ActionEvent event){
+        UsersService usersService = new UsersService();
+        Roles role = usersService.authorize(userField.getText(),passwordField.getText());
+        if (role==null){
+            errorText.setVisible(true);
+        }else{
+            try {
+                switch (role.getName()) {
+                    case "VIEWER":{changeScreenToReviewer(event);break;}
+                    case "PRESEASON":{changeScreen(event);break;}
+                    case "STATISTICIAN":{changeScreenToStatistician(event);break;}
+                    //#TODO
+                    //case "ADMIN":{changeScreenToAdmin(event);}
+                }
+            } catch (IOException e){
+                e.printStackTrace();
+            }
+        }
+    }
+
 }
