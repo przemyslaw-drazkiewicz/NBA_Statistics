@@ -4,6 +4,9 @@ import nba_statistics.dao.classes.UsersDao;
 import nba_statistics.entities.Roles;
 import nba_statistics.entities.Users;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class UsersService {
     private static UsersDao usersDao;
 
@@ -28,5 +31,19 @@ public class UsersService {
         Roles role = usersDao.authorize(login,password);
         usersDao.closeCurrentSession();
         return role;
+    }
+
+    public List<Users> findAll(){
+        usersDao.openCurrentSession();
+        List<Users> usersList = usersDao.findAll();
+        usersDao.closeCurrentSession();
+        return usersList;
+    }
+
+    public ArrayList<String> findAllLogin(){
+        usersDao.openCurrentSession();
+        ArrayList<String> usersList = usersDao.findAllLogin();
+        usersDao.closeCurrentSession();
+        return usersList;
     }
 }

@@ -7,11 +7,16 @@ import nba_statistics.services.RolesService;
 import org.hibernate.query.Query;
 
 import javax.management.relation.Role;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class UsersDao extends Dao implements IUsersDao {
+
     public void persist(Users entity) {
         getCurrentSession().save(entity);
     }
+
     public Users getUser(String login){
         Query<Users> theQuery = getCurrentSession().createQuery("from Users where login = :login", Users.class);
         theQuery.setParameter("login", login);
@@ -35,5 +40,19 @@ public class UsersDao extends Dao implements IUsersDao {
             if(user.getPassword().equals(password))
                 return user.getRole();
          return null;
+    }
+
+    @Override
+    public List<Users> findAll() {
+        Query<Users> theQuery = getCurrentSession().createQuery("from Users ", Users.class);
+        List<Users> usersList = theQuery.getResultList();
+        return usersList;
+    }
+
+    @Override
+    public ArrayList<String> findAllLogin() {
+        Query<String> theQuery = getCurrentSession().createQuery("select login from Users ", String.class);
+        ArrayList<String> usersList = new ArrayList<String>(theQuery.getResultList());
+        return usersList;
     }
 }

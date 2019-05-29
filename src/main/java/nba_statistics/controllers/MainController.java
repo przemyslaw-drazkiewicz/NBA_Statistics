@@ -78,6 +78,14 @@ public class MainController implements Initializable {
         window.setScene(reviewerScene);
         window.show();
     }
+    public void changeScreenToAdmin(ActionEvent event) throws IOException {
+        Parent reviewerParent = FXMLLoader.load(getClass().getResource("/AdminView.fxml"));
+        Scene reviewerScene = new Scene(reviewerParent);
+
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        window.setScene(reviewerScene);
+        window.show();
+    }
 
     public void authorize(ActionEvent event){
         UsersService usersService = new UsersService();
@@ -90,8 +98,7 @@ public class MainController implements Initializable {
                     case "VIEWER":{changeScreenToReviewer(event);break;}
                     case "PRESEASON":{changeScreen(event);break;}
                     case "STATISTICIAN":{changeScreenToStatistician(event);break;}
-                    //#TODO
-                    //case "ADMIN":{changeScreenToAdmin(event);}
+                    case "ADMIN":{changeScreenToAdmin(event);break;}
                 }
             } catch (IOException e){
                 e.printStackTrace();
