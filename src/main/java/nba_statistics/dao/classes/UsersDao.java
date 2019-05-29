@@ -55,4 +55,14 @@ public class UsersDao extends Dao implements IUsersDao {
         ArrayList<String> usersList = new ArrayList<String>(theQuery.getResultList());
         return usersList;
     }
+
+    public void updateUser(String userLogin, String roleName){
+        RolesService rolesService = new RolesService();
+        Roles role = rolesService.getRole(roleName);
+        System.out.println(role.getName());
+        Query<String> theQuery = getCurrentSession().createQuery("update Users set role_id = :id  where login = :login")
+                .setParameter("id", role.getId())
+                .setParameter("login", userLogin);
+        theQuery.executeUpdate();
+    }
 }

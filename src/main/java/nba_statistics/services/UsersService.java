@@ -10,40 +10,48 @@ import java.util.List;
 public class UsersService {
     private static UsersDao usersDao;
 
-    public UsersService() { usersDao=new UsersDao();}
+    public UsersService() {
+        usersDao = new UsersDao();
+    }
 
-    public String addUser(String login, String password, String password2){
+    public String addUser(String login, String password, String password2) {
         usersDao.openCurrentSession();
-        String msg = usersDao.addUser(login,password,password2);
+        String msg = usersDao.addUser(login, password, password2);
         usersDao.closeCurrentSession();
         return msg;
     }
 
-    public Users getUser(String login){
+    public Users getUser(String login) {
         usersDao.openCurrentSession();
         Users user = usersDao.getUser(login);
         usersDao.closeCurrentSession();
         return user;
     }
 
-    public Roles authorize(String login, String password){ //Returns role if authorization is successful, null if failure
+    public Roles authorize(String login, String password) { //Returns role if authorization is successful, null if failure
         usersDao.openCurrentSession();
-        Roles role = usersDao.authorize(login,password);
+        Roles role = usersDao.authorize(login, password);
         usersDao.closeCurrentSession();
         return role;
     }
 
-    public List<Users> findAll(){
+    public List<Users> findAll() {
         usersDao.openCurrentSession();
         List<Users> usersList = usersDao.findAll();
         usersDao.closeCurrentSession();
         return usersList;
     }
 
-    public ArrayList<String> findAllLogin(){
+    public ArrayList<String> findAllLogin() {
         usersDao.openCurrentSession();
         ArrayList<String> usersList = usersDao.findAllLogin();
         usersDao.closeCurrentSession();
         return usersList;
+    }
+
+    public void updateUser(String userLogin, String roleName) {
+        usersDao.openCurrentSessionwithTransaction();
+        usersDao.updateUser(userLogin, roleName);
+        usersDao.closeCurrentSessionwithTransaction();
     }
 }

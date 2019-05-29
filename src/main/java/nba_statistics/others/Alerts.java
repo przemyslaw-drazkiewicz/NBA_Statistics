@@ -159,6 +159,9 @@ public class Alerts {
             case 4:
                 confirmation.setHeaderText("Changed player's team");
                 break;
+            case 5:
+                confirmation.setHeaderText("Changed player role");
+                break;
 
         }
         confirmation.showAndWait();
