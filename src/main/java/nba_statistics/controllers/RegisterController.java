@@ -19,14 +19,15 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import static nba_statistics.others.Alerts.information;
 
-public class RegisterView implements Initializable {
+public class RegisterController implements Initializable {
     @FXML  private TextField userField; @FXML private PasswordField passwordField; @FXML private PasswordField passwordField2;
     @FXML private Text errorText;
     public void changeScreen(ActionEvent event) throws IOException {
-        Parent preseasonParent = FXMLLoader.load(getClass().getResource("/MainView.fxml"));
-        Scene preseasonScene = new Scene(preseasonParent);
+        FXMLLoader loader =new FXMLLoader(getClass().getResource("/MainView.fxml"));
+        Parent registerParent = loader.load();
+        Scene registerScene = new Scene(registerParent);
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-        window.setScene(preseasonScene);
+        window.setScene(registerScene);
         window.show();
     }
 

@@ -21,7 +21,7 @@
                <Font size="20.0" />
            </font>
        </Text>
-      <Button layoutX="534.0" layoutY="14.0" mnemonicParsing="false" onAction="#changeScreen" text="Log out" visible="true" />
+      <Button layoutX="534.0" layoutY="14.0" mnemonicParsing="false" onAction="#changeScreen" text="Back" visible="true" />
       <Button fx:id="buttonBack" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#onClickButtonBack" text="Back to choice match" visible="false" />
       <Button fx:id="oneH" layoutX="29.0" layoutY="95.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="57.0" text="+1  pts" visible="false" />
       <Button fx:id="twoH" layoutX="126.0" layoutY="95.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="57.0" text="+2  pts" visible="false" />

@@ -8,7 +8,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nba_statistics.controllers.RegisterView">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nba_statistics.controllers.RegisterController">
    <children>
       <TextField fx:id="userField" focusTraversable="false" layoutX="200.0" layoutY="154.0" prefHeight="25.0" prefWidth="200.0" promptText="Username">
          <effect>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nba_statistics.controllers.AccountController">
+   <children>
+      <Button fx:id="viewButton" layoutX="205.0" layoutY="126.0" onAction="#changeScreenToReviewer" mnemonicParsing="false" prefHeight="148.0" prefWidth="191.0" text="View data" textAlignment="CENTER">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Button>
+      <Button fx:id="adminButton" layoutX="433.0" layoutY="303.0" mnemonicParsing="false" onAction="#changeScreenToAdmin" prefHeight="95.0" prefWidth="167.0" text="Admin panel" textFill="#3700ff">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </Button>
+      <Button fx:id="logoutButton" layoutX="521.0" layoutY="14.0" mnemonicParsing="false" onAction="#logout" prefHeight="31.0" prefWidth="65.0" text="Logout" />
+      <Text fx:id="loginText" layoutX="14.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Logged in as: " textAlignment="RIGHT" wrappingWidth="487.13671875" />
+      <Button fx:id="statButton" layoutX="409.0" layoutY="126.0" mnemonicParsing="false" onAction="#changeScreenToStatistician" prefHeight="148.0" prefWidth="191.0" text="Begin collecting statistics" textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Button>
+      <Button fx:id="preButton" layoutY="126.0" mnemonicParsing="false" prefHeight="148.0" onAction="#changeScreenToPreseason" prefWidth="191.0" text="Enter preseason data" textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

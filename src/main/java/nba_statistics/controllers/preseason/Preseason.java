@@ -28,7 +28,7 @@ import static nba_statistics.others.Alerts.*;
 
 public class Preseason implements Initializable {
 
-    @FXML private Button LogOutBtn;
+    @FXML private Button logOutBtn;
 
     @FXML private ComboBox<String> comboBox;@FXML private Text enterDataTxt;
 
@@ -73,12 +73,13 @@ public class Preseason implements Initializable {
     private Visibility v;
 
     public void changeScreen(ActionEvent event) throws IOException {
-        Parent preseasonParent = FXMLLoader.load(getClass().getResource("/MainView.fxml"));
+        Parent preseasonParent = FXMLLoader.load(getClass().getResource("/AccountView.fxml"));
         Scene preseasonScene = new Scene(preseasonParent);
 
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(preseasonScene);
         window.show();
+        //logOutBtn.getScene().getWindow().hide();
     }
 
 

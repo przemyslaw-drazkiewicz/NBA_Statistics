@@ -17,7 +17,7 @@
             <Font size="24.0" />
          </font>
       </Text>
-      <Button fx:id="logOutBtn" layoutX="915.0" layoutY="23.0" mnemonicParsing="false" onAction="#changeScreen" text="Log out" />
+      <Button fx:id="logOutBtn" layoutX="915.0" layoutY="23.0" mnemonicParsing="false" onAction="#changeScreen" text="Back" />
       <Button fx:id="viewDatabaseBtn" layoutX="841.0" layoutY="473.0" mnemonicParsing="false" onAction="#whatKindOfDataIsSelected" text="View Database" />
       <Text fx:id="writeSurname" layoutX="67.0" layoutY="278.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Write surname:" wrappingWidth="173.0">
          <font>

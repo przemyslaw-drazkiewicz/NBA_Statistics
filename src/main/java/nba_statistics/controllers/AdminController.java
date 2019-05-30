@@ -39,7 +39,7 @@ public class AdminController implements Initializable {
     private ObservableList<String> roleNames;
 
     public void changeScreen(ActionEvent event) throws IOException {
-        Parent adminParent = FXMLLoader.load(getClass().getResource("/MainView.fxml"));
+        Parent adminParent = FXMLLoader.load(getClass().getResource("/AccountView.fxml"));
         Scene parentScene = new Scene(adminParent);
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         window.setScene(parentScene);

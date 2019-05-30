@@ -45,43 +45,24 @@ public class MainController implements Initializable {
 
     }
 
-    public void changeScreen(ActionEvent event) throws IOException {
-        Parent preseasonParent = FXMLLoader.load(getClass().getResource("/Preseason.fxml"));
-        Scene preseasonScene = new Scene(preseasonParent);
 
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-        window.setScene(preseasonScene);
-        window.show();
-    }
-
-    public void changeScreenToReviewer(ActionEvent event) throws IOException {
-        Parent reviewerParent = FXMLLoader.load(getClass().getResource("/DataViewer.fxml"));
-        Scene reviewerScene = new Scene(reviewerParent);
-
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-        window.setScene(reviewerScene);
-        window.show();
-    }
     public void changeScreenToRegister(ActionEvent event)throws IOException{
         Parent reviewerParent = FXMLLoader.load(getClass().getResource("/RegisterView.fxml"));
         Scene reviewerScene = new Scene(reviewerParent);
-
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         window.setScene(reviewerScene);
         window.show();
     }
-    public void changeScreenToStatistician(ActionEvent event) throws IOException {
-        Parent reviewerParent = FXMLLoader.load(getClass().getResource("/Statistician.fxml"));
-        Scene reviewerScene = new Scene(reviewerParent);
 
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-        window.setScene(reviewerScene);
-        window.show();
-    }
-    public void changeScreenToAdmin(ActionEvent event) throws IOException {
-        Parent reviewerParent = FXMLLoader.load(getClass().getResource("/AdminView.fxml"));
-        Scene reviewerScene = new Scene(reviewerParent);
-
+    public void changeScreenToAccount(ActionEvent event, Users user) throws IOException{
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/AccountView.fxml"));
+        Parent accountParent = (Parent)loader.load();
+        AccountController accountController = loader.getController();
+        accountController.init(user);
+        loader.setController(accountController);
+        //Parent accountParent = FXMLLoader.load(getClass().getResource("/AccountView.fxml"));
+        //AccountController accountController = new AccountController(user);
+        Scene reviewerScene = new Scene(accountParent);
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         window.setScene(reviewerScene);
         window.show();
@@ -89,16 +70,18 @@ public class MainController implements Initializable {
 
     public void authorize(ActionEvent event){
         UsersService usersService = new UsersService();
+        //Users user = usersService.getUser(userField.getText());
         Roles role = usersService.authorize(userField.getText(),passwordField.getText());
         if (role==null){
             errorText.setVisible(true);
         }else{
             try {
                 switch (role.getName()) {
-                    case "VIEWER":{changeScreenToReviewer(event);break;}
-                    case "PRESEASON":{changeScreen(event);break;}
-                    case "STATISTICIAN":{changeScreenToStatistician(event);break;}
-                    case "ADMIN":{changeScreenToAdmin(event);break;}
+//                    case "VIEWER":{changeScreenToReviewer(event);break;}
+//                    case "PRESEASON":{changeScreen(event);break;}
+//                    case "STATISTICIAN":{changeScreenToStatistician(event);break;}
+//                    case "ADMIN":{changeScreenToAdmin(event);break;}
+                    default:{changeScreenToAccount(event,usersService.getUser(userField.getText()));break;}
                 }
             } catch (IOException e){
                 e.printStackTrace();

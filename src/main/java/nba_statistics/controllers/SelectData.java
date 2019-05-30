@@ -203,7 +203,7 @@ public class SelectData implements Initializable {
 
     //changing screen
     public void changeScreen(ActionEvent event) throws IOException {
-        Parent preseasonParent = FXMLLoader.load(getClass().getResource("/MainView.fxml"));
+        Parent preseasonParent = FXMLLoader.load(getClass().getResource("/AccountView.fxml"));
         Scene preseasonScene = new Scene(preseasonParent);
 
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();

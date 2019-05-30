@@ -22,6 +22,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.scene.text.Text;
+import nba_statistics.controllers.AccountController;
 import nba_statistics.entities.Matches;
 import nba_statistics.entities.Players;
 import nba_statistics.entities.Teams;
@@ -90,9 +91,12 @@ public class Statistician implements Initializable {
 
 
     public void changeScreen(ActionEvent event) throws IOException {
-        Parent preseasonParent = FXMLLoader.load(getClass().getResource("/MainView.fxml"));
-        Scene preseasonScene = new Scene(preseasonParent);
-
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/AccountView.fxml"));
+       // Parent preseasonParent = FXMLLoader.load(getClass().getResource("/AccountView.fxml"));
+        Parent accountParent = loader.load();
+        AccountController accountController = AccountController.getInstance();
+        loader.setController(accountController);
+        Scene preseasonScene = new Scene(accountParent);
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         window.setScene(preseasonScene);
         window.show();
