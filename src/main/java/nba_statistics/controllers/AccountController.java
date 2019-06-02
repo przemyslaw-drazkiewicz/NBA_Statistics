@@ -35,6 +35,7 @@ public class AccountController implements Initializable {
 
     private Users user;
 
+
     private void setVisibility(){
         switch(user.getRole().getName()){
             case "PRESEASON":
@@ -60,7 +61,6 @@ public class AccountController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
     }
 
 //    public AccountController(Users loggedInUser){
@@ -79,6 +79,7 @@ public class AccountController implements Initializable {
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         window.setScene(preseasonScene);
         window.showAndWait();
+
        // window.show();
     }
     public void changeScreenToStatistician(ActionEvent event) throws IOException {
@@ -107,7 +108,6 @@ public class AccountController implements Initializable {
     public void changeScreenToReviewer(ActionEvent event) throws IOException {
         Parent reviewerParent = FXMLLoader.load(getClass().getResource("/DataViewer.fxml"));
         Scene reviewerScene = new Scene(reviewerParent);
-
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         window.setScene(reviewerScene);
         window.show();

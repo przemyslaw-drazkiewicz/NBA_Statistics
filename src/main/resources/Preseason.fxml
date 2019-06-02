@@ -98,6 +98,9 @@
          </font>
       </Text>
       <Button fx:id="addedSeasonBtn" layoutX="278.0" layoutY="234.0" mnemonicParsing="false" onAction="#addedSeason" text="Next" />
+      <RadioButton fx:id="newSeasonRadioBtn" layoutX="184.0" layoutY="72.0" mnemonicParsing="false" onAction="#selectNewSeason" text="Add new season" />
+      <RadioButton fx:id="existingSeasonRadioBtn" layoutX="330.0" layoutY="72.0" mnemonicParsing="false" onAction="#selectExistingSeason" text="Go to existing season" />
+      <TextField fx:id="t30" layoutX="273.0" layoutY="103.0" />
       <Text fx:id="enterDataTxt" layoutX="248.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter date" visible="false">
          <font>
             <Font size="25.0" />
@@ -143,9 +146,12 @@
       <ComboBox fx:id="t10" layoutX="248.0" layoutY="225.0" onAction="#getConference" prefWidth="150.0" promptText="Conference" visible="false" />
       <ComboBox fx:id="DivE" layoutX="248.0" layoutY="256.0" prefWidth="150.0" promptText="Division" visible="false" />
       <ComboBox fx:id="DivW" layoutX="248.0" layoutY="256.0" prefWidth="150.0" promptText="Division" visible="false" />
-      <RadioButton fx:id="newSeasonRadioBtn" layoutX="184.0" layoutY="72.0" mnemonicParsing="false" onAction="#selectNewSeason" text="Add new season" />
-      <RadioButton fx:id="existingSeasonRadioBtn" layoutX="330.0" layoutY="72.0" mnemonicParsing="false" onAction="#selectExistingSeason" text="Go to existing season" />
       <ComboBox fx:id="seasonsNameCombox" layoutX="278.0" layoutY="103.0" prefWidth="150.0" visible="false" />
-      <TextField fx:id="t30" layoutX="273.0" layoutY="103.0" />
+      <Text fx:id="DateOfBirthT" layoutX="120.0" layoutY="267.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date of birth" visible="false">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <ComboBox fx:id="DateOfBirthComBoxT" layoutX="269.0" layoutY="247.0" prefWidth="150.0" visible="false" />
    </children>
 </AnchorPane>

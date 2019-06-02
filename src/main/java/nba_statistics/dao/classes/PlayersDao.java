@@ -56,6 +56,22 @@ public class PlayersDao extends Dao implements IPlayersDao {
 
     }
 
+    public int updatePlayer2(String name, String surname, String team, String date){
+        TeamsService teamsService = new TeamsService();
+        Teams d = teamsService.getTeam(team);
+        if (d == null)
+            return 1;
+        int id = d.getId();
+        getCurrentSession().createQuery("update Players set team_id = :id where name = :name and surname = :surname and date_of_birth = :date")
+                .setParameter("id", id)
+                .setParameter("name", name)
+                .setParameter("surname", surname)
+                .setParameter("date", date)
+                .executeUpdate();
+        return 0;
+
+    }
+
     public List<Players> getPlayers(String name, String surname){
 
         Query<Players> theQuery = getCurrentSession().createQuery("from Players where name =:name and surname = :surname")

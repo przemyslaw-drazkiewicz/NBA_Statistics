@@ -15,6 +15,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import nba_statistics.entities.Users;
 import nba_statistics.services.RolesService;
 import nba_statistics.services.UsersService;
 
@@ -33,6 +34,8 @@ public class AdminController implements Initializable {
     @FXML private Text empFieldText;
     @FXML private Text okText;
     @FXML private Text invUserText;
+
+    private Users currUser;
 
     private ObservableList<String> userLogins;
 

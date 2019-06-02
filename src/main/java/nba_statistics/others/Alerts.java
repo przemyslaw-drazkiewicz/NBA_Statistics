@@ -177,4 +177,13 @@ public class Alerts {
         }
         information.showAndWait();
     }
+
+    public static void infoMoreThanOnePlayers(){
+
+        Alert information = new Alert(Alert.AlertType.INFORMATION);
+        information.setTitle("Problem");
+        information.setHeaderText("Found more than one players");
+        information.setContentText("Select player's date");
+        information.showAndWait();
+    }
 }
