@@ -1,5 +1,6 @@
 package nba_statistics.controllers;
 
+import com.sun.org.apache.xerces.internal.impl.xpath.regex.Match;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -14,14 +15,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import nba_statistics.entities.PlayerTeamsHistory;
-import nba_statistics.entities.PlayerMatchAchievements;
-import nba_statistics.entities.Seasons;
-import nba_statistics.entities.Players;
+import nba_statistics.entities.*;
 //import nba_statistics.services.PlayerTeamsHistoryService;
 import nba_statistics.services.MatchesService;
 import nba_statistics.services.PlayersService;
 import nba_statistics.services.SeasonsService;
+import nba_statistics.services.TeamsService;
 
 import java.io.IOException;
 import java.net.URL;
@@ -61,6 +60,9 @@ public class SelectData implements Initializable {
 
     //Top 10 schooters
     @FXML private ComboBox<String> comboBoxSeasons;
+
+    //Timetable
+    @FXML private ComboBox<String> comboBoxTeam;
 
     ObservableList<String> kindOfData = FXCollections.observableArrayList
             ("Player's achievements", "List of top 10 shooters", "List of team players", "Timetable");
@@ -183,6 +185,15 @@ public class SelectData implements Initializable {
         setInvisibleComboBoxSeasons();
     }
 
+    private void setVisibleTimetable(){
+        comboBoxTeam.setVisible(true);
+        comboBoxSeasons.setVisible(true);
+    }
+
+    private void setInvisibleTimetable(){
+        comboBoxTeam.setVisible(false);
+        comboBoxSeasons.setVisible(false);
+    }
 
     //clear
     private void clearLabelAndList(){
@@ -365,30 +376,50 @@ public class SelectData implements Initializable {
     }
 
     public void selectTimetable() {
+        String team = comboBoxTeam.getValue();
+        String season = comboBoxSeasons.getValue();
+        MatchesService matchesService = new MatchesService();
+        System.out.println("MATCHES= " + matchesService.getMatches(team,season));
 
     }
 
+    private void initComboBoxSeasons(){
+        SeasonsService seasonsService = new SeasonsService();
+        ArrayList<String> seasons = seasonsService.getAllSeasonsName();
+        comboBoxSeasons.setItems(FXCollections.observableArrayList(seasons));
+    }
+    private void initComboBoxTeams(){
+        TeamsService teamsService = new TeamsService();
+        ArrayList<String> teams = teamsService.getAllTeams();
+        comboBoxTeam.setItems(FXCollections.observableList(teams));
+    }
 
     public void whatIsVisible(){
         switch(comboBox.getValue()) {
             case "Player's achievements":
                 setVisiblePlayersAchievements();
                 setInvisibleListTopTenShooters();
+                setInvisibleTimetable();
                 break;
 
             case "List of top 10 shooters":
                 setInvisiblePlayersAchievements();
+                setInvisibleTimetable();
                 setVisibleListTopTenShooters();
                 break;
 
             case "List of team players":
                 setInvisiblePlayersAchievements();
                 setInvisibleListTopTenShooters();
+                setInvisibleTimetable();
                 break;
 
             case "Timetable":
                 setInvisiblePlayersAchievements();
                 setInvisibleListTopTenShooters();
+                setVisibleTimetable();
+                initComboBoxTeams();
+                initComboBoxSeasons();
                 break;
         }
     }
@@ -425,6 +456,7 @@ public class SelectData implements Initializable {
         setInvisibleListTopTenShooters();
         setInvisibleSeasons();
         setInvisibleLabelsPlayerAchievements();
+        setInvisibleTimetable();
     }
 
 

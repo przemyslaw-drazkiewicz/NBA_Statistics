@@ -4,6 +4,9 @@ import nba_statistics.dao.interfaces.ITeamsDao;
 import nba_statistics.entities.Teams;
 import org.hibernate.query.Query;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class    TeamsDao extends Dao implements ITeamsDao {
 
     public TeamsDao(){
@@ -55,5 +58,23 @@ public class    TeamsDao extends Dao implements ITeamsDao {
         }
         else
             return false;
+    }
+
+    @Override
+    public ArrayList<String> getAllTeams() {
+        Query<Teams> theQuery = getCurrentSession().createQuery("from Teams", Teams.class);
+        List<Teams> teams = theQuery.getResultList();
+        ArrayList <String> teamsName = new ArrayList<>();
+        for (Teams t:teams){
+            teamsName.add(t.getName());
+        }
+        return teamsName;
+    }
+
+    @Override
+    public int getId(String name) {
+        Query<Integer> theQuery = getCurrentSession().createQuery("select id from Teams where name = :name");
+        theQuery.setParameter("name", name);
+        return theQuery.setMaxResults(1).getSingleResult();
     }
 }

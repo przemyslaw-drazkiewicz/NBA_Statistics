@@ -46,4 +46,10 @@ public class SeasonsService {
         seasonsDao.closeCurrentSession();
         return arrayList;
     }
+    public int getId(String name){
+        seasonsDao.openCurrentSession();
+        int id = seasonsDao.getId(name);
+        seasonsDao.closeCurrentSession();
+        return id;
+    }
 }

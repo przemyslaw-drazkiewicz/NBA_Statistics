@@ -106,4 +106,19 @@ public class MatchesDao extends Dao implements IMatchesDao{
         return achievements;
 
     }
+
+    @Override
+    public List<Matches> getMatches(String team, String date) {
+        TeamsService teamsService = new TeamsService();
+        int id = teamsService.getId(team);
+        SeasonsService seasonsService = new SeasonsService();
+        int id2 = seasonsService.getId(date);
+        Query<Matches> theQuery = getCurrentSession().createQuery("from Matches where (host_team_id = :id OR guest_team_id = :id) AND (season_id = :id2)")
+                .setParameter("id", id)
+                .setParameter("id", id)
+                .setParameter("id2", id2);
+
+        List <Matches> matchesList = theQuery.getResultList();
+        return matchesList;
+    }
 }

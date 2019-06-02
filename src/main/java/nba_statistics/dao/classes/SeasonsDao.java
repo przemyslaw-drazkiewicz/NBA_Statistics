@@ -77,4 +77,11 @@ public class SeasonsDao extends Dao implements ISeasonsDao {
 
         return seasonsNameList;
     }
+
+    @Override
+    public int getId(String name) {
+        Query<Integer> theQuery = getCurrentSession().createQuery("select id from Seasons where name = :name");
+        theQuery.setParameter("name", name);
+        return theQuery.setMaxResults(1).getSingleResult();
+    }
 }

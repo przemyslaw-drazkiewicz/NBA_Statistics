@@ -11,4 +11,5 @@ public interface ISeasonsDao {
     boolean checkSeason(String name);
     List<Seasons> getAllSeasons();
     ArrayList<String> getAllSeasonsName();
+    int getId(String name);
 }

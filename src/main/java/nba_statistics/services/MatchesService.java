@@ -49,5 +49,10 @@ public class MatchesService{
         matchesDao.closeCurrentSessionwithTransaction();
         return achievements;
     }
-
+    public List<Matches> getMatches(String team, String date){
+        matchesDao.openCurrentSession();
+        List<Matches> matchesList = matchesDao.getMatches(team,date);
+        matchesDao.closeCurrentSession();
+        return matchesList;
+    }
 }

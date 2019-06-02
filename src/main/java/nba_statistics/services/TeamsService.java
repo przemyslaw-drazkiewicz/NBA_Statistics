@@ -3,6 +3,9 @@ package nba_statistics.services;
 import nba_statistics.dao.classes.TeamsDao;
 import nba_statistics.entities.Teams;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class TeamsService {
     private static TeamsDao teamsDao;
 
@@ -34,5 +37,18 @@ public class TeamsService {
         boolean i = teamsDao.checkTeam(team);
         teamsDao.closeCurrentSession();
         return i;
+    }
+
+    public ArrayList<String> getAllTeams(){
+        teamsDao.openCurrentSession();
+        ArrayList<String> teamsList = teamsDao.getAllTeams();
+        teamsDao.closeCurrentSession();
+        return teamsList;
+    }
+    public int getId(String name){
+        teamsDao.openCurrentSession();
+        int id = teamsDao.getId(name);
+        teamsDao.closeCurrentSession();
+        return id;
     }
 }
