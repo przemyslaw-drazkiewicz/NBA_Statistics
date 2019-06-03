@@ -10,8 +10,8 @@ public class Alerts {
         errorAlert.setTitle("ERROR");
         if (team.length == 1){
 
-            errorAlert.setHeaderText("Team '" + team[0] + "' doesnt exist");
-            errorAlert.setContentText("You must enter correct team name");
+            errorAlert.setHeaderText("Select team");
+            errorAlert.setContentText("You must select team");
 
         } else if (team.length == 2){
             errorAlert.setHeaderText("Host team '" + team[0] + "' and away team '" + team[1] + "' are the same");
@@ -185,5 +185,41 @@ public class Alerts {
         information.setHeaderText("Found more than one players");
         information.setContentText("Select player's date");
         information.showAndWait();
+    }
+
+    public static void getAlertComboBoxTeam(){
+
+        Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+        errorAlert.setTitle("ERROR");
+        errorAlert.setHeaderText("Select team");
+        errorAlert.setContentText("You must select team");
+        errorAlert.showAndWait();
+    }
+
+    public static void getAlertComboBoxSeason(){
+
+        Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+        errorAlert.setTitle("ERROR");
+        errorAlert.setHeaderText("Select season");
+        errorAlert.setContentText("You must select season");
+        errorAlert.showAndWait();
+    }
+
+    public static void getAlertEmptyListOfMatches(){
+
+        Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+        errorAlert.setTitle("ERROR");
+        errorAlert.setHeaderText("There is not any match in chosen team and season");
+        errorAlert.setContentText("Please select existing match in given team and season");
+        errorAlert.showAndWait();
+    }
+
+    public static void getAlertTransferToTheSameTeam(){
+
+        Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+        errorAlert.setTitle("ERROR");
+        errorAlert.setHeaderText("Current and next player's team is the same");
+        errorAlert.setContentText("Please transfer player to other team");
+        errorAlert.showAndWait();
     }
 }

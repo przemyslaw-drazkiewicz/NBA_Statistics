@@ -5,6 +5,8 @@
 <?import javafx.scene.control.DialogPane?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
@@ -18,7 +20,7 @@
          </font>
       </Text>
       <Button fx:id="logOutBtn" layoutX="915.0" layoutY="23.0" mnemonicParsing="false" onAction="#changeScreen" text="Back" />
-      <Button fx:id="viewDatabaseBtn" layoutX="841.0" layoutY="473.0" mnemonicParsing="false" onAction="#whatKindOfDataIsSelected" text="View Database" />
+      <Button fx:id="viewDatabaseBtn" layoutX="862.0" layoutY="467.0" mnemonicParsing="false" onAction="#whatKindOfDataIsSelected" text="View Database" />
       <Text fx:id="writeSurname" layoutX="67.0" layoutY="278.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Write surname:" wrappingWidth="173.0">
          <font>
             <Font size="24.0" />
@@ -94,5 +96,15 @@
       </Label>
       <ComboBox fx:id="comboBoxSeasons" layoutX="319.0" layoutY="166.0" prefHeight="60.0" prefWidth="364.0" promptText="Select season" />
       <ComboBox fx:id="comboBoxTeam" layoutX="319.0" layoutY="250.0" prefHeight="60.0" prefWidth="364.0" promptText="Select team" />
+      <TableView fx:id="matchesTable" layoutX="194.0" layoutY="338.0" prefHeight="417.0" prefWidth="659.0">
+        <columns>
+          <TableColumn fx:id="homeTeam" prefWidth="136.0" text="Home Team" />
+          <TableColumn fx:id="awayTeam" prefWidth="136.0" text="Away Team" />
+            <TableColumn fx:id="date" prefWidth="136.0" text="Date" />
+            <TableColumn fx:id="homePoints" prefWidth="83.0" text="Home points" />
+            <TableColumn fx:id="awayPoints" minWidth="0.0" prefWidth="83.0" text="Away points" />
+            <TableColumn fx:id="extraTime" prefWidth="83.0" text="Extra Time" />
+        </columns>
+      </TableView>
    </children>
 </AnchorPane>

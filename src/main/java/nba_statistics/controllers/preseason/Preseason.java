@@ -17,11 +17,9 @@ import nba_statistics.services.MatchesService;
 import nba_statistics.services.PlayersService;
 import nba_statistics.services.SeasonsService;
 import nba_statistics.services.TeamsService;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -38,13 +36,13 @@ public class Preseason implements Initializable {
     @FXML private ComboBox<String> t10;@FXML private TextField t12; @FXML private TextField t13;
 
     @FXML private Text m10; @FXML private Text m11; @FXML private Text m12; @FXML private CheckBox transferCheckBox;
-    @FXML private TextField t20; @FXML private TextField t21; @FXML private TextField t22; @FXML private CheckBox newPlayerCheckBox;
+    @FXML private ComboBox<String> t20; @FXML private ComboBox<String> t21; @FXML private TextField t22; @FXML private CheckBox newPlayerCheckBox;
 
     @FXML private Text s10; @FXML private Text s11; @FXML private Text s12; @FXML private Text s13;
     @FXML private ComboBox<String> seasonsNameCombox;@FXML private TextField t30; @FXML private TextField t31; @FXML private TextField t32;
 
     @FXML private Text p40; @FXML private Text p41; @FXML private Text p42; @FXML private Text p43; @FXML private Text p44; @FXML private Text p45;
-    @FXML private TextField t40; @FXML private TextField t41; @FXML private TextField t42;@FXML private TextField t43; @FXML private TextField t44;@FXML private TextField t45;
+    @FXML private TextField t40; @FXML private TextField t41; @FXML private ComboBox<String> t42;@FXML private TextField t43; @FXML private TextField t44;@FXML private TextField t45;
 
     @FXML private Button sendBtn; @FXML private Button addedSeasonBtn;
 
@@ -68,10 +66,6 @@ public class Preseason implements Initializable {
 
     private ObservableList<String> divisionWestern = FXCollections.observableArrayList
             ("Northwest", "Pacific", "Southwest");
-
-    private ObservableList<String> seasonName;// = FXCollections.observableArrayList();
-
-
 
     private String state;
     private String currSeason;
@@ -104,19 +98,29 @@ public class Preseason implements Initializable {
     {
         SeasonsService seasonsService = new SeasonsService();
         ArrayList<String> seasonsName = seasonsService.getAllSeasonsName();
-        seasonName = FXCollections.observableArrayList(seasonsName);
-        seasonsNameCombox.setItems(seasonName);
+        seasonsNameCombox.setItems(FXCollections.observableArrayList(seasonsName));
     }
+
+    private void initComboBoxTeams(){
+        TeamsService teamsService = new TeamsService();
+        ArrayList<String> allTeams = teamsService.getAllTeams();
+        t20.setItems(FXCollections.observableArrayList(allTeams));
+        t21.setItems(FXCollections.observableArrayList(allTeams));
+    }
+
+    private void initComboBoxTeamsTransfer(){
+        TeamsService teamsService = new TeamsService();
+        ArrayList<String> allTeams = teamsService.getAllTeams();
+        t42.setItems(FXCollections.observableArrayList(allTeams));
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         v = new Visibility();
         newSeasonRadioBtn.setSelected(true);
         initSeasonName();
-
-
-
-
     }
+
     public void selectNewSeason(){
         existingSeasonRadioBtn.setSelected(false);
         v.setVisibleNewSeason(s10, s11, s12, t30, t31, t32,addedSeasonBtn); seasonsNameCombox.setVisible(false);
@@ -189,8 +193,8 @@ public class Preseason implements Initializable {
                 v.setInvisibleD(d10, d11, d12, d13, t10, t12, t13, DivE, DivW);
                 v.setInvisibleP(p40, p41, p42, p43, p44, p45, t40, t41, t42, t43, t44, t45,DateOfBirthT,DateOfBirthComBoxT);
                 v.setVisibleM(m10, m11, m12, tSeason, tSeason0, t20, t21, t22, tDuration0, tDuration);
-                v.clearTextFieldM(t20,t21,t22);
-
+                v.clearTextFieldM(t22);
+                initComboBoxTeams();
                 state = "Match";
                 break;
 
@@ -198,10 +202,10 @@ public class Preseason implements Initializable {
                 v.setInvisibleD(d10, d11, d12, d13, t10, t12, t13, DivE, DivW);
                 v.setInvisibleM(m10, m11, m12, tSeason, tSeason0, t20, t21, t22,tDuration0, tDuration);
                 v.setVisibleCheckBox(newPlayerCheckBox, transferCheckBox);
-                v.clearTextFieldNewPlayer(t40,t41,t42,t43,t44,t45);
+                v.clearTextFieldNewPlayer(t40,t41,t43,t44,t45);
                 newPlayerCheckBox.setSelected(false);
                 transferCheckBox.setSelected(false);
-
+                initComboBoxTeamsTransfer();
                 break;
 
 
@@ -233,24 +237,24 @@ public class Preseason implements Initializable {
     public void addNewPlayer() {
         v.setInvisibleP(p40, p41, p42, p43, p44, p45, t40, t41, t42, t43, t44, t45,DateOfBirthT,DateOfBirthComBoxT);
         v.setVisibleNewPlayerT(p40, p41, p42, p43, p44, p45, t40, t41, t42, t43, t44, t45);
-        v.clearTextFieldNewPlayer(t40,t41,t42,t43,t44,t45);
+        v.clearTextFieldNewPlayer(t40,t41,t43,t44,t45);
         transferCheckBox.setSelected(false);
+        t42.getSelectionModel().clearSelection();
         state = "NewPlayer";
     }
 
     public void changeTeam() {
         v.setInvisibleP(p40, p41, p42, p43, p44, p45, t40, t41, t42, t43, t44, t45,DateOfBirthT,DateOfBirthComBoxT);
         v.setVisibleTransferT(p40, p41, p42, t40, t41, t42);
-        v.clearTextFieldTransfer(t40,t41,t42);
+        v.clearTextFieldTransfer(t40,t41);
         state = "Transfer";
         newPlayerCheckBox.setSelected(false);
+        t42.getSelectionModel().clearSelection();
     }
 
     public void sendToDatabase() {
         switch (state) {
             case "Team":
-
-
                 TeamsService teamsService = new TeamsService();
                 if (teamsService.checkTeam(t12.getText())) {
 
@@ -279,23 +283,24 @@ public class Preseason implements Initializable {
                 break;
             case "Match":
                 MatchesService matchesService = new MatchesService();
-
-                switch (matchesService.getData(t20.getText(), t21.getText(), t22.getText(), currSeason)) {
+                switch (matchesService.getData(t20.getValue(), t21.getValue(), t22.getText(), currSeason)) {
                     case 0:
                         confirmation(2);
-                        v.clearTextFieldM(t20, t21, t22);
+                        v.clearTextFieldM(t22);
+                        t20.getSelectionModel().clearSelection();
+                        t21.getSelectionModel().clearSelection();
                         break;
                     case 1:
-                        getAlertTeams(t20.getText());
+                        getAlertTeams(t20.getValue());
                         break;
                     case 2:
-                        getAlertTeams(t21.getText());
+                        getAlertTeams(t21.getValue());
                         break;
                     case 3:
                         getAlertDate(t22.getText());
                         break;
                     case 4:
-                        getAlertTeams(t20.getText(), t21.getText());
+                        getAlertTeams(t20.getValue(), t21.getValue());
                         break;
                     case 5:
                         getAlertDateBetween(t22.getText());
@@ -307,13 +312,14 @@ public class Preseason implements Initializable {
             case "NewPlayer":
                 PlayersService playersService = new PlayersService();
                 try {
-                    switch (playersService.getData(t40.getText(), t41.getText(), t43.getText(), Float.parseFloat(t44.getText()), Float.parseFloat(t45.getText()), t42.getText())) {
+                    switch (playersService.getData(t40.getText(), t41.getText(), t43.getText(), Float.parseFloat(t44.getText()), Float.parseFloat(t45.getText()), t42.getValue())) {
                         case 0:
                             confirmation(3);
-                            v.clearTextFieldNewPlayer(t40, t41, t42, t43, t44, t45);
+                            v.clearTextFieldNewPlayer(t40, t41, t43, t44, t45);
+                            t42.getSelectionModel().clearSelection();
                             break;
                         case 1:
-                            getAlertTeams(t42.getText());
+                            getAlertTeams(t42.getValue());
                             break;
                         case 2:
                             getAlertDate(t43.getText());
@@ -331,13 +337,23 @@ public class Preseason implements Initializable {
                         getAlertPlayer(t40.getText(), t41.getText());
                         break;
                     case 1:
-                        if (playersService1.updatePlayer(t40.getText(), t41.getText(), t42.getText()) == 1)
-                            getAlertTeams(t42.getText());
-                        else{
-                        confirmation(4);
-                        v.clearTextFieldTransfer(t40, t41, t42);
-                        DateOfBirthT.setVisible(false);
-                        DateOfBirthComBoxT.setVisible(false);
+                        switch (playersService1.updatePlayer(t40.getText(), t41.getText(), t42.getValue())){
+                            case 0:
+                                confirmation(4);
+                                v.clearTextFieldTransfer(t40, t41);
+                                DateOfBirthT.setVisible(false);
+                                DateOfBirthComBoxT.setVisible(false);
+                                t42.getSelectionModel().clearSelection();
+                                break;
+                            case 1:
+                                getAlertTeams(t42.getValue());
+                                break;
+                            case 2:
+                                getAlertTransferToTheSameTeam();
+                                break;
+
+
+
                         }
                         break;
                     default:
@@ -348,16 +364,20 @@ public class Preseason implements Initializable {
                             setComboBoxPlayersDate(players);
                         }else {
 
-
-                            if (playersService1.updatePlayer2(t40.getText(), t41.getText(), t42.getText(), DateOfBirthComBoxT.getValue()) == 1) {
-                                getAlertTeams(t42.getText());
-                            }
-                            else
-                            {
-                                confirmation(4);
-                                v.clearTextFieldTransfer(t40,t41, t42);
-                                DateOfBirthT.setVisible(false);
-                                DateOfBirthComBoxT.setVisible(false);
+                            switch (playersService1.updatePlayer2(t40.getText(), t41.getText(), t42.getValue(), DateOfBirthComBoxT.getValue())){
+                                case 0:
+                                    confirmation(4);
+                                    v.clearTextFieldTransfer(t40,t41);
+                                    t42.getSelectionModel().clearSelection();
+                                    DateOfBirthT.setVisible(false);
+                                    DateOfBirthComBoxT.setVisible(false);
+                                    break;
+                                case 1:
+                                    getAlertTeams(t42.getValue());
+                                    break;
+                                case 2:
+                                    getAlertTransferToTheSameTeam();
+                                    break;
                             }
                         }
 

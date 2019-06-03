@@ -4,6 +4,7 @@ import nba_statistics.dao.interfaces.IPlayersDao;
 import nba_statistics.entities.PlayerTeamsHistory;
 import nba_statistics.entities.Players;
 import nba_statistics.entities.Teams;
+import nba_statistics.services.PlayersService;
 import nba_statistics.services.TeamsService;
 import org.hibernate.query.Query;
 
@@ -43,6 +44,10 @@ public class PlayersDao extends Dao implements IPlayersDao {
         Teams d = teamsService.getTeam(team);
         if (d == null)
             return 1;
+        List<Players> playersList = getPlayers(name,surname);
+        if (playersList.get(0).getTeam().getName().equals(team)){ //only one player -> get(0) legal
+            return 2;
+        }
 
         int id = d.getId();
 
@@ -61,6 +66,10 @@ public class PlayersDao extends Dao implements IPlayersDao {
         Teams d = teamsService.getTeam(team);
         if (d == null)
             return 1;
+        Players player = getPlayers(name,surname,date);
+        if (player.getTeam().getName().equals(team))
+            return 2;
+
         int id = d.getId();
         getCurrentSession().createQuery("update Players set team_id = :id where name = :name and surname = :surname and date_of_birth = :date")
                 .setParameter("id", id)
@@ -87,6 +96,16 @@ public class PlayersDao extends Dao implements IPlayersDao {
         Query<Players> theQuery = getCurrentSession().createQuery("from Players where team_id =:id")
                 .setParameter("id", id);
         List<Players> players = theQuery.getResultList();
+        return players;
+    }
+
+    @Override
+    public Players getPlayers(String name, String surname, String date) {
+        Query<Players> theQuery = getCurrentSession().createQuery("from Players where name =:name and surname = :surname and date_of_birth =:date")
+                .setParameter("name", name)
+                .setParameter("surname", surname)
+                .setParameter("date", date);
+        Players players= theQuery.getSingleResult();
         return players;
     }
 

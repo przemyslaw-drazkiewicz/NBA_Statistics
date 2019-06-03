@@ -11,5 +11,6 @@ public interface IPlayersDao {
     int updatePlayer2(String name, String surname,String team,String date);
     List<Players> getPlayers(String name, String surname);
     List<Players> getPlayers(int id);
+    Players getPlayers(String name, String surname, String date);
     List<PlayerTeamsHistory> getPlayerTeamsHistory(int idPlayer);
 }

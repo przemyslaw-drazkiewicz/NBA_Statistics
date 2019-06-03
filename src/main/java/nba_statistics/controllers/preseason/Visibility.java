@@ -16,12 +16,12 @@ public class Visibility {
         t10.setVisible(false);DivE.setVisible(false);DivW.setVisible(false);t12.setVisible(false);t13.setVisible(false);
     }
 
-    public void setVisibleM(Text m10, Text m11, Text m12, Text tSeason,Text tSeason0, TextField t20, TextField t21, TextField t22,Text tDuration0,Text tDuration){
+    public void setVisibleM(Text m10, Text m11, Text m12, Text tSeason,Text tSeason0, ComboBox<String> t20, ComboBox<String> t21, TextField t22,Text tDuration0,Text tDuration){
         m10.setVisible(true);m11.setVisible(true);m12.setVisible(true); tSeason.setVisible(true); tDuration.setVisible(true);
         t20.setVisible(true);t21.setVisible(true);t22.setVisible(true); tSeason0.setVisible(true);tDuration0.setVisible(true);
 
     }
-    public void setInvisibleM(Text m10, Text m11, Text m12, Text tSeason,Text tSeason0, TextField t20, TextField t21, TextField t22,Text tDuration0,Text tDuration){
+    public void setInvisibleM(Text m10, Text m11, Text m12, Text tSeason,Text tSeason0, ComboBox<String> t20, ComboBox<String> t21, TextField t22,Text tDuration0,Text tDuration){
         m10.setVisible(false);m11.setVisible(false);m12.setVisible(false); tSeason.setVisible(false); tDuration0.setVisible(false);
         t20.setVisible(false);t21.setVisible(false);t22.setVisible(false); tSeason0.setVisible(false); tDuration.setVisible(false);
     }
@@ -32,16 +32,16 @@ public class Visibility {
         addedSeasonBtn.setVisible(false);
     }
 
-    public void setInvisibleP(Text p40,Text p41,Text p42,Text p43,Text p44,Text p45, TextField t40, TextField t41, TextField t42,TextField t43, TextField t44, TextField t45, Text text, ComboBox<String> comboBox){
+    public void setInvisibleP(Text p40,Text p41,Text p42,Text p43,Text p44,Text p45, TextField t40, TextField t41, ComboBox<String> t42,TextField t43, TextField t44, TextField t45, Text text, ComboBox<String> comboBox){
         p40.setVisible(false);p41.setVisible(false);p42.setVisible(false);p43.setVisible(false);p44.setVisible(false);p45.setVisible(false); text.setVisible(false);
         t40.setVisible(false);t41.setVisible(false);t42.setVisible(false);t43.setVisible(false);t44.setVisible(false);t45.setVisible(false); comboBox.setVisible(false);
     }
-    public void setVisibleNewPlayerT(Text p40,Text p41,Text p42,Text p43,Text p44,Text p45, TextField t40, TextField t41, TextField t42,TextField t43, TextField t44, TextField t45){
+    public void setVisibleNewPlayerT(Text p40,Text p41,Text p42,Text p43,Text p44,Text p45, TextField t40, TextField t41, ComboBox<String> t42,TextField t43, TextField t44, TextField t45){
         p40.setVisible(true);p41.setVisible(true);p42.setVisible(true);p43.setVisible(true);p44.setVisible(true);p45.setVisible(true);
         t40.setVisible(true);t41.setVisible(true);t42.setVisible(true);t43.setVisible(true);t44.setVisible(true);t45.setVisible(true);
     }
 
-    public void setVisibleTransferT(Text p40,Text p41,Text p42, TextField t40, TextField t41, TextField t42){
+    public void setVisibleTransferT(Text p40,Text p41,Text p42, TextField t40, TextField t41, ComboBox<String> t42){
         p40.setVisible(true);p41.setVisible(true);p42.setVisible(true);
         t40.setVisible(true);t41.setVisible(true);t42.setVisible(true);
     }
@@ -58,16 +58,16 @@ public class Visibility {
         t12.clear();t13.clear();
     }
 
-    public void clearTextFieldM(TextField t20, TextField t21, TextField t22){
-        t20.clear(); t21.clear();t22.clear();
+    public void clearTextFieldM(TextField t22){
+        t22.clear();
     }
 
-    public void clearTextFieldNewPlayer(TextField t40, TextField t41, TextField t42,TextField t43, TextField t44, TextField t45){
-        t40.clear(); t41.clear();t42.clear();t43.clear();t44.clear();t45.clear();
+    public void clearTextFieldNewPlayer(TextField t40, TextField t41,TextField t43, TextField t44, TextField t45){
+        t40.clear(); t41.clear();t43.clear();t44.clear();t45.clear();
     }
 
-    public void clearTextFieldTransfer(TextField t40, TextField t41, TextField t42){
-        t40.clear(); t41.clear();t42.clear();
+    public void clearTextFieldTransfer(TextField t40, TextField t41){
+        t40.clear(); t41.clear();
     }
 
     public void setVisibleNewSeason(Text s10, Text s11, Text s12,  TextField t30, TextField t31, TextField t32, Button a){

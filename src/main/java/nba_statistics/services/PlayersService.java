@@ -48,6 +48,12 @@ public class PlayersService {
         return players;
     }
 
+    public Players getPlayers(String name, String surname, String date){
+        playersDao.openCurrentSession();
+        Players player = playersDao.getPlayers(name, surname, date);
+        playersDao.closeCurrentSession();
+        return player;
+    }
     public List<PlayerTeamsHistory> getPlayerTeamsHistory(int idPlayer){
         playersDao.openCurrentSessionwithTransaction();
         List<PlayerTeamsHistory> history = playersDao.getPlayerTeamsHistory(idPlayer);

@@ -1,6 +1,10 @@
 package nba_statistics.controllers;
 
 import com.sun.org.apache.xerces.internal.impl.xpath.regex.Match;
+import javafx.beans.property.ReadOnlyStringWrapper;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -13,8 +17,10 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 import nba_statistics.entities.*;
 //import nba_statistics.services.PlayerTeamsHistoryService;
 import nba_statistics.services.MatchesService;
@@ -25,6 +31,8 @@ import nba_statistics.services.TeamsService;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
+
+import static nba_statistics.others.Alerts.*;
 
 public class SelectData implements Initializable {
 
@@ -63,6 +71,16 @@ public class SelectData implements Initializable {
 
     //Timetable
     @FXML private ComboBox<String> comboBoxTeam;
+
+
+    @FXML private TableView<Matches> matchesTable;
+    @FXML private TableColumn<Matches, String> homeTeam;
+    @FXML private TableColumn<Matches, String> awayTeam;
+    @FXML private TableColumn<Matches, String> date;
+    @FXML private TableColumn<Matches, Integer> homePoints;
+    @FXML private TableColumn<Matches, Integer> awayPoints;
+    @FXML private TableColumn<Matches, Integer> extraTime;
+
 
     ObservableList<String> kindOfData = FXCollections.observableArrayList
             ("Player's achievements", "List of top 10 shooters", "List of team players", "Timetable");
@@ -193,6 +211,10 @@ public class SelectData implements Initializable {
     private void setInvisibleTimetable(){
         comboBoxTeam.setVisible(false);
         comboBoxSeasons.setVisible(false);
+        matchesTable.setVisible(false);
+        comboBoxTeam.getSelectionModel().clearSelection();
+        comboBoxSeasons.getSelectionModel().clearSelection();
+
     }
 
     //clear
@@ -375,11 +397,34 @@ public class SelectData implements Initializable {
 
     }
 
+    private void setTable(List<Matches> listMatches){
+
+        if (listMatches.isEmpty()){
+            getAlertEmptyListOfMatches();
+        }
+        else {
+            matchesTable.setVisible(true);
+            ObservableList<Matches> matchesObservableList = FXCollections.observableArrayList();
+/*            for (Matches m : listMatches) {
+                matchesObservableList.add(m);
+            }*/
+            matchesObservableList.addAll(listMatches);
+            matchesTable.setItems(matchesObservableList);
+        }
+    }
     public void selectTimetable() {
-        String team = comboBoxTeam.getValue();
-        String season = comboBoxSeasons.getValue();
-        MatchesService matchesService = new MatchesService();
-        System.out.println("MATCHES= " + matchesService.getMatches(team,season));
+        String team, season;
+        matchesTable.setVisible(false);
+        if ((season = comboBoxSeasons.getValue()) == null)
+            getAlertComboBoxSeason();
+        else if ((team = comboBoxTeam.getValue()) == null){
+            getAlertComboBoxTeam();
+        }else{
+            MatchesService matchesService = new MatchesService();
+            setTable(matchesService.getMatches(team, season));
+        }
+
+
 
     }
 
@@ -457,6 +502,14 @@ public class SelectData implements Initializable {
         setInvisibleSeasons();
         setInvisibleLabelsPlayerAchievements();
         setInvisibleTimetable();
+
+        //init column in table view -> to TIMETABLE
+        homeTeam.setCellValueFactory(p ->  new ReadOnlyStringWrapper(p.getValue().getHostTeam().getName()));
+        awayTeam.setCellValueFactory(p ->  new ReadOnlyStringWrapper(p.getValue().getGuestTeam().getName()));
+        date.setCellValueFactory(new PropertyValueFactory<>("date"));
+        homePoints.setCellValueFactory(new PropertyValueFactory<>("hostPoints"));
+        awayPoints.setCellValueFactory(new PropertyValueFactory<>("guestPoints"));
+        extraTime.setCellValueFactory(new PropertyValueFactory<>("extraTimeCount"));
     }
 
 

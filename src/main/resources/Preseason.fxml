@@ -72,8 +72,6 @@
             <Font size="20.0" />
          </font>
       </Text>
-      <TextField fx:id="t20" layoutX="259.0" layoutY="170.0" visible="false" />
-      <TextField fx:id="t21" layoutX="259.0" layoutY="205.0" visible="false" />
       <TextField fx:id="t22" layoutX="259.0" layoutY="243.0" visible="false" />
       <Text fx:id="s10" layoutX="197.0" layoutY="124.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name">
          <font>
@@ -140,7 +138,6 @@
       </Text>
       <TextField fx:id="t40" layoutX="270.0" layoutY="141.0" visible="false" />
       <TextField fx:id="t41" layoutX="271.0" layoutY="172.0" visible="false" />
-      <TextField fx:id="t42" layoutX="270.0" layoutY="209.0" visible="false" />
       <TextField fx:id="t43" layoutX="270.0" layoutY="245.0" visible="false" />
       <TextField fx:id="t44" layoutX="271.0" layoutY="287.0" visible="false" />
       <ComboBox fx:id="t10" layoutX="248.0" layoutY="225.0" onAction="#getConference" prefWidth="150.0" promptText="Conference" visible="false" />
@@ -153,5 +150,8 @@
          </font>
       </Text>
       <ComboBox fx:id="DateOfBirthComBoxT" layoutX="269.0" layoutY="247.0" prefWidth="150.0" visible="false" />
+      <ComboBox fx:id="t20" layoutX="259.0" layoutY="169.0" prefWidth="150.0" promptText="Host Team" visible="false" />
+      <ComboBox fx:id="t21" layoutX="259.0" layoutY="202.0" prefWidth="150.0" promptText="Away Team" visible="false" />
+      <ComboBox fx:id="t42" layoutX="269.0" layoutY="211.0" prefWidth="150.0" promptText="Select Team" visible="false" />
    </children>
 </AnchorPane>
