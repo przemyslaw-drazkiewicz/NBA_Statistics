@@ -19,7 +19,6 @@ import java.util.ResourceBundle;
 
 public class AccountController implements Initializable {
 
-    private static AccountController instance=null;
     @FXML
     private Text loginText;
     @FXML
@@ -33,7 +32,9 @@ public class AccountController implements Initializable {
     @FXML
     private Button logoutButton;
 
-    private Users user;
+
+
+    private static Users user;
 
 
     private void setVisibility(){
@@ -59,6 +60,9 @@ public class AccountController implements Initializable {
         setVisibility();
     }
 
+    public static Users getUser() {
+        return user;
+    }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
     }
@@ -112,9 +116,5 @@ public class AccountController implements Initializable {
         window.setScene(reviewerScene);
         window.show();
     }
-    public static AccountController getInstance(){
-        if (instance==null)
-            instance = new AccountController();
-        return instance;
-    }
+
 }

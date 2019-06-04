@@ -37,9 +37,12 @@ public class DataViewer implements Initializable {
 
 
     public void changeScreen(ActionEvent event) throws IOException {
-        Parent preseasonParent = FXMLLoader.load(getClass().getResource("/AccountView.fxml"));
-        Scene preseasonScene = new Scene(preseasonParent);
-
+        //Parent preseasonParent = FXMLLoader.load(getClass().getResource("/AccountView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/AccountView.fxml"));
+        Parent accountParent = (Parent)loader.load();
+        AccountController accountController = loader.getController();
+        accountController.init(AccountController.getUser());
+        Scene preseasonScene = new Scene(accountParent);
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         window.setScene(preseasonScene);
         window.show();

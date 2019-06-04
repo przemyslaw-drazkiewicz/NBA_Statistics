@@ -42,8 +42,11 @@ public class AdminController implements Initializable {
     private ObservableList<String> roleNames;
 
     public void changeScreen(ActionEvent event) throws IOException {
-        Parent adminParent = FXMLLoader.load(getClass().getResource("/AccountView.fxml"));
-        Scene parentScene = new Scene(adminParent);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/AccountView.fxml"));
+        Parent accountParent = (Parent)loader.load();
+        AccountController accountController = loader.getController();
+        accountController.init(AccountController.getUser());
+        Scene parentScene = new Scene(accountParent);
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         window.setScene(parentScene);
         window.show();

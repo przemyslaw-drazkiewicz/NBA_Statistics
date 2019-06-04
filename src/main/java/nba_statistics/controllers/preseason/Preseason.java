@@ -12,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import nba_statistics.controllers.AccountController;
 import nba_statistics.entities.Players;
 import nba_statistics.services.MatchesService;
 import nba_statistics.services.PlayersService;
@@ -72,8 +73,11 @@ public class Preseason implements Initializable {
     private Visibility v;
 
     public void changeScreen(ActionEvent event) throws IOException {
-        Parent preseasonParent = FXMLLoader.load(getClass().getResource("/AccountView.fxml"));
-        Scene preseasonScene = new Scene(preseasonParent);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/AccountView.fxml"));
+        Parent accountParent = (Parent)loader.load();
+        AccountController accountController = loader.getController();
+        accountController.init(AccountController.getUser());
+        Scene preseasonScene = new Scene(accountParent);
 
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(preseasonScene);

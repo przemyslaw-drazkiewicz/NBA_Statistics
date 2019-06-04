@@ -92,10 +92,11 @@ public class Statistician implements Initializable {
 
     public void changeScreen(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/AccountView.fxml"));
-       // Parent preseasonParent = FXMLLoader.load(getClass().getResource("/AccountView.fxml"));
         Parent accountParent = loader.load();
-        AccountController accountController = AccountController.getInstance();
-        loader.setController(accountController);
+        AccountController accountController = loader.getController();
+        accountController.init(AccountController.getUser());
+       // AccountController accountController = AccountController.getInstance();
+        //loader.setController(accountController);
         Scene preseasonScene = new Scene(accountParent);
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         window.setScene(preseasonScene);
