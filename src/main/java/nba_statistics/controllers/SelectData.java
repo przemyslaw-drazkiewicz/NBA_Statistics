@@ -342,13 +342,13 @@ public class SelectData implements Initializable {
                     label5.setText("Number matches: " + achievementPlayer.size());
 
 
-                    int points = 0, steals = 0, blocks = 0, collection = 0, fouls = 0, techFaul = 0;
+                    int points = 0, steals = 0, blocks = 0, rebounds = 0, fouls = 0, techFaul = 0;
 
                     for(PlayerMatchAchievements os : achievementPlayer){
                         points += os.getScoredPoints();
                         steals += os.getSteals();
                         blocks += os.getBlocks();
-                        collection += os.getRebounds();
+                        rebounds += os.getRebounds();
                         fouls += os.getFouls();
                         techFaul += os.getTechnicalFouls();
                     }
@@ -356,7 +356,7 @@ public class SelectData implements Initializable {
                     label6.setText("Points earned: " + points);
                     label7.setText("Steals: " + steals);
                     label8.setText("Blocks: " + blocks);
-                    label9.setText("Collection: " + collection);
+                    label9.setText("Rebounds: " + rebounds);
                     label10.setText("Fouls: " + fouls);
                     label11.setText("Technical fouls: " + techFaul);
 

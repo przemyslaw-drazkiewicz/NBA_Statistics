@@ -13,7 +13,6 @@ import javafx.scene.control.*;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import nba_statistics.controllers.AccountController;
-import nba_statistics.entities.Players;
 import nba_statistics.services.MatchesService;
 import nba_statistics.services.PlayersService;
 import nba_statistics.services.SeasonsService;
@@ -241,6 +240,7 @@ public class Preseason implements Initializable {
         v.clearTextFieldNewPlayer(t40,t41,t43,t44,t45);
         transferCheckBox.setSelected(false);
         t42.getSelectionModel().clearSelection();
+        initComboBoxTeamsTransfer();
         state = "NewPlayer";
     }
 
@@ -251,8 +251,8 @@ public class Preseason implements Initializable {
         state = "Transfer";
         newPlayerCheckBox.setSelected(false);
         t42.getSelectionModel().clearSelection();
-        initComboBoxTeamsTransfer();
         TextFields.bindAutoCompletion(playerField, getPlayers());
+        initComboBoxTeamsTransfer();
 
     }
 
