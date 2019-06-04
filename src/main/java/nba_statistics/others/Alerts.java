@@ -21,12 +21,12 @@ public class Alerts {
     }
 
 
-    public static void getAlertPlayer(String p1, String p2){
+    public static void getAlertPlayer(){
 
         Alert errorAlert = new Alert(Alert.AlertType.ERROR);
         errorAlert.setTitle("ERROR");
-        errorAlert.setHeaderText("Player '" + p1 + " " + p2 +"' doesnt exist");
-        errorAlert.setContentText("You must enter correct player name");
+        errorAlert.setHeaderText("Player not found");
+        errorAlert.setContentText("You must enter correct data");
         errorAlert.showAndWait();
     }
 
@@ -104,6 +104,15 @@ public class Alerts {
             errorAlert.showAndWait();
         }
     }
+    public static void getAlertWrongDate() {
+
+        Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+        errorAlert.setTitle("ERROR");
+        errorAlert.setHeaderText("Date is incorrect format");
+        errorAlert.setContentText("Correct date format: RRRR-MM-DD");
+        errorAlert.showAndWait();
+    }
+
     public static void getAlertFloat() {
 
         Alert errorAlert = new Alert(Alert.AlertType.ERROR);
@@ -178,15 +187,6 @@ public class Alerts {
         information.showAndWait();
     }
 
-    public static void infoMoreThanOnePlayers(){
-
-        Alert information = new Alert(Alert.AlertType.INFORMATION);
-        information.setTitle("Problem");
-        information.setHeaderText("Found more than one players");
-        information.setContentText("Select player's date");
-        information.showAndWait();
-    }
-
     public static void getAlertComboBoxTeam(){
 
         Alert errorAlert = new Alert(Alert.AlertType.ERROR);
@@ -220,6 +220,23 @@ public class Alerts {
         errorAlert.setTitle("ERROR");
         errorAlert.setHeaderText("Current and next player's team is the same");
         errorAlert.setContentText("Please transfer player to other team");
+        errorAlert.showAndWait();
+    }
+
+    public static void getAlertWrongFormat(){
+
+        Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+        errorAlert.setTitle("ERROR");
+        errorAlert.setHeaderText("Wrong data format");
+        errorAlert.setContentText("Correct format: 'name surname <date>'");
+        errorAlert.showAndWait();
+    }
+    public static void getAlertNoDate(){
+
+        Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+        errorAlert.setTitle("ERROR");
+        errorAlert.setHeaderText("Select player from fields or write correct date");
+        errorAlert.setContentText("If two player has the same name and surname date is necessary");
         errorAlert.showAndWait();
     }
 }

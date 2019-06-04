@@ -21,12 +21,12 @@ public class PlayersService {
         return tmp;
     }
 
-    public int updatePlayer2(String name, String surname, String team, String date){
+/*    public int updatePlayer2(String name, String surname, String team, String date){
         playersDao.openCurrentSessionwithTransaction();
         int tmp = playersDao.updatePlayer2(name, surname,team,date);
         playersDao.closeCurrentSessionwithTransaction();
         return tmp;
-    }
+    }*/
     public int getData(String name, String surname, String date, float height, float weight, String team){
         playersDao.openCurrentSessionwithTransaction();
         int tmp = playersDao.getData(name, surname, date,height, weight, team);
@@ -48,17 +48,31 @@ public class PlayersService {
         return players;
     }
 
-    public Players getPlayers(String name, String surname, String date){
+/*    public Players getPlayers(String name, String surname, String date){
         playersDao.openCurrentSession();
         Players player = playersDao.getPlayers(name, surname, date);
         playersDao.closeCurrentSession();
         return player;
-    }
+    }*/
     public List<PlayerTeamsHistory> getPlayerTeamsHistory(int idPlayer){
         playersDao.openCurrentSessionwithTransaction();
         List<PlayerTeamsHistory> history = playersDao.getPlayerTeamsHistory(idPlayer);
         playersDao.openCurrentSessionwithTransaction();
         return history;
+    }
+
+    public List<String> getAll(){
+        playersDao.openCurrentSession();
+        List<String> list = playersDao.getAll();
+        playersDao.closeCurrentSession();
+        return list;
+    }
+
+    public int updatePlayer(String name,String team){
+        playersDao.openCurrentSessionwithTransaction();
+        int i = playersDao.updatePlayer(name, team);
+        playersDao.closeCurrentSessionwithTransaction();
+        return i;
     }
 
 

@@ -18,6 +18,8 @@ import nba_statistics.services.MatchesService;
 import nba_statistics.services.PlayersService;
 import nba_statistics.services.SeasonsService;
 import nba_statistics.services.TeamsService;
+import org.controlsfx.control.textfield.TextFields;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -52,7 +54,7 @@ public class Preseason implements Initializable {
 
     @FXML private RadioButton newSeasonRadioBtn; @FXML private RadioButton existingSeasonRadioBtn;
 
-    @FXML private Text DateOfBirthT; @FXML private ComboBox<String> DateOfBirthComBoxT;
+    @FXML private Text playerText; @FXML private TextField playerField;
 
 
 
@@ -74,7 +76,7 @@ public class Preseason implements Initializable {
 
     public void changeScreen(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/AccountView.fxml"));
-        Parent accountParent = (Parent)loader.load();
+        Parent accountParent = loader.load();
         AccountController accountController = loader.getController();
         accountController.init(AccountController.getUser());
         Scene preseasonScene = new Scene(accountParent);
@@ -117,12 +119,18 @@ public class Preseason implements Initializable {
         ArrayList<String> allTeams = teamsService.getAllTeams();
         t42.setItems(FXCollections.observableArrayList(allTeams));
     }
+    private List<String> getPlayers(){
+        PlayersService playersService = new PlayersService();
+        return playersService.getAll();
+    }
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         v = new Visibility();
         newSeasonRadioBtn.setSelected(true);
         initSeasonName();
+        System.out.println(getPlayers());
     }
 
     public void selectNewSeason(){
@@ -184,7 +192,7 @@ public class Preseason implements Initializable {
             case "Team":
                 v.setInvisibleCheckBox(newPlayerCheckBox, transferCheckBox);
                 v.setInvisibleM(m10, m11, m12, tSeason, tSeason0, t20, t21, t22,tDuration0, tDuration);
-                v.setInvisibleP(p40, p41, p42, p43, p44, p45, t40, t41, t42, t43, t44, t45, DateOfBirthT,DateOfBirthComBoxT);
+                v.setInvisibleP(p40, p41, p42, p43, p44, p45, t40, t41, t42, t43, t44, t45, playerText, playerField);
                 v.setVisibleD(d10, d11, d12, d13, t10, t12, t13);
                 t10.getSelectionModel().clearSelection();
                 v.clearTextFieldD(t12,t13);
@@ -195,7 +203,7 @@ public class Preseason implements Initializable {
             case "Match":
                 v.setInvisibleCheckBox(newPlayerCheckBox, transferCheckBox);
                 v.setInvisibleD(d10, d11, d12, d13, t10, t12, t13, DivE, DivW);
-                v.setInvisibleP(p40, p41, p42, p43, p44, p45, t40, t41, t42, t43, t44, t45,DateOfBirthT,DateOfBirthComBoxT);
+                v.setInvisibleP(p40, p41, p42, p43, p44, p45, t40, t41, t42, t43, t44, t45,playerText, playerField);
                 v.setVisibleM(m10, m11, m12, tSeason, tSeason0, t20, t21, t22, tDuration0, tDuration);
                 v.clearTextFieldM(t22);
                 initComboBoxTeams();
@@ -209,7 +217,6 @@ public class Preseason implements Initializable {
                 v.clearTextFieldNewPlayer(t40,t41,t43,t44,t45);
                 newPlayerCheckBox.setSelected(false);
                 transferCheckBox.setSelected(false);
-                initComboBoxTeamsTransfer();
                 break;
 
 
@@ -217,16 +224,6 @@ public class Preseason implements Initializable {
         sendBtn.setVisible(true);
     }
 
-    private void setComboBoxPlayersDate(List<Players> players){
-        ObservableList<String> dateOfBirthPlayer;
-        ArrayList<String> date = new ArrayList<>();
-        for (Players p : players){
-            date.add(p.getDateOfBirth());
-        }
-        dateOfBirthPlayer = FXCollections.observableArrayList(date);
-        DateOfBirthComBoxT.setItems(dateOfBirthPlayer);
-        DateOfBirthComBoxT.setValue(date.get(0));
-    }
     public void getConference() {
         if (t10.getValue() == "Eastern") {
             DivE.setVisible(true);
@@ -239,7 +236,7 @@ public class Preseason implements Initializable {
     }
 
     public void addNewPlayer() {
-        v.setInvisibleP(p40, p41, p42, p43, p44, p45, t40, t41, t42, t43, t44, t45,DateOfBirthT,DateOfBirthComBoxT);
+        v.setInvisibleP(p40, p41, p42, p43, p44, p45, t40, t41, t42, t43, t44, t45,playerText, playerField);
         v.setVisibleNewPlayerT(p40, p41, p42, p43, p44, p45, t40, t41, t42, t43, t44, t45);
         v.clearTextFieldNewPlayer(t40,t41,t43,t44,t45);
         transferCheckBox.setSelected(false);
@@ -248,12 +245,15 @@ public class Preseason implements Initializable {
     }
 
     public void changeTeam() {
-        v.setInvisibleP(p40, p41, p42, p43, p44, p45, t40, t41, t42, t43, t44, t45,DateOfBirthT,DateOfBirthComBoxT);
-        v.setVisibleTransferT(p40, p41, p42, t40, t41, t42);
-        v.clearTextFieldTransfer(t40,t41);
+        v.setInvisibleP(p40, p41, p42, p43, p44, p45, t40, t41, t42, t43, t44, t45,playerText, playerField);
+        v.setVisibleTransferT(playerText, p42,playerField , t42);
+        v.clearTextFieldTransfer(playerField);
         state = "Transfer";
         newPlayerCheckBox.setSelected(false);
         t42.getSelectionModel().clearSelection();
+        initComboBoxTeamsTransfer();
+        TextFields.bindAutoCompletion(playerField, getPlayers());
+
     }
 
     public void sendToDatabase() {
@@ -269,6 +269,7 @@ public class Preseason implements Initializable {
                             teamsService.getData(t10.getValue(), DivE.getValue(), t12.getText(), t13.getText());
                             confirmation(1);
                             v.clearTextFieldD(t12, t13);
+                            t10.getSelectionModel().clearSelection();DivE.setVisible(false);DivW.setVisible(false);
                         }
                     } else if (t10.getValue() == "Western") {
                         if (DivW.getValue() == null)
@@ -277,6 +278,7 @@ public class Preseason implements Initializable {
                             teamsService.getData(t10.getValue(), DivW.getValue(), t12.getText(), t13.getText());
                             confirmation(1);
                             v.clearTextFieldD(t12, t13);
+                            t10.getSelectionModel().clearSelection();DivE.setVisible(false);DivW.setVisible(false);
                         }
                     } else {
                         getAlertConference();
@@ -335,64 +337,32 @@ public class Preseason implements Initializable {
                 break;
             case "Transfer":
                 PlayersService playersService1 = new PlayersService();
-                List<Players> players = playersService1.getPlayers(t40.getText(), t41.getText());
-                switch (players.size()) {
+                switch (playersService1.updatePlayer(playerField.getText(),t42.getValue())){
                     case 0:
-                        getAlertPlayer(t40.getText(), t41.getText());
+                        confirmation(4);
+                        playerField.clear();
+                        t42.getSelectionModel().clearSelection();
                         break;
                     case 1:
-                        switch (playersService1.updatePlayer(t40.getText(), t41.getText(), t42.getValue())){
-                            case 0:
-                                confirmation(4);
-                                v.clearTextFieldTransfer(t40, t41);
-                                DateOfBirthT.setVisible(false);
-                                DateOfBirthComBoxT.setVisible(false);
-                                t42.getSelectionModel().clearSelection();
-                                break;
-                            case 1:
-                                getAlertTeams(t42.getValue());
-                                break;
-                            case 2:
-                                getAlertTransferToTheSameTeam();
-                                break;
-
-
-
-                        }
+                        getAlertTransferToTheSameTeam();
                         break;
-                    default:
-                        if (!DateOfBirthT.isVisible()){
-                            DateOfBirthT.setVisible(true);
-                            DateOfBirthComBoxT.setVisible(true);
-                            infoMoreThanOnePlayers();
-                            setComboBoxPlayersDate(players);
-                        }else {
-
-                            switch (playersService1.updatePlayer2(t40.getText(), t41.getText(), t42.getValue(), DateOfBirthComBoxT.getValue())){
-                                case 0:
-                                    confirmation(4);
-                                    v.clearTextFieldTransfer(t40,t41);
-                                    t42.getSelectionModel().clearSelection();
-                                    DateOfBirthT.setVisible(false);
-                                    DateOfBirthComBoxT.setVisible(false);
-                                    break;
-                                case 1:
-                                    getAlertTeams(t42.getValue());
-                                    break;
-                                case 2:
-                                    getAlertTransferToTheSameTeam();
-                                    break;
-                            }
-                        }
-
-
-
-
+                    case 2:
+                        getAlertPlayer();
+                        break;
+                    case 3:
+                        getAlertWrongFormat();
+                        break;
+                    case 4:
+                        getAlertComboBoxTeam();
+                        break;
+                    case 5:
+                        getAlertNoDate();
+                        break;
+                    case 6:
+                        getAlertWrongDate();
+                        break;
                 }
 
-
-
-                break;
         }
     }
 

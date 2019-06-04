@@ -9,6 +9,8 @@ import nba_statistics.services.TeamsService;
 import org.hibernate.query.Query;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class PlayersDao extends Dao implements IPlayersDao {
@@ -61,7 +63,7 @@ public class PlayersDao extends Dao implements IPlayersDao {
 
     }
 
-    public int updatePlayer2(String name, String surname, String team, String date){
+/*    public int updatePlayer2(String name, String surname, String team, String date){
         TeamsService teamsService = new TeamsService();
         Teams d = teamsService.getTeam(team);
         if (d == null)
@@ -78,6 +80,60 @@ public class PlayersDao extends Dao implements IPlayersDao {
                 .setParameter("date", date)
                 .executeUpdate();
         return 0;
+
+    }*/
+
+    @Override
+    public int updatePlayer(String name, String team) {
+        String[] splited = name.split("\\s+");
+        String n,s,date = null;
+        TeamsService teamsService = new TeamsService();
+        Teams d = teamsService.getTeam(team);
+
+        if (d == null)
+            return 4;
+        int id = d.getId();
+        switch (splited.length){
+            case 2:
+                n = splited[0];
+                s = splited[1];
+                List<Players> player = getPlayers(n, s);
+                if (player.size() == 0)
+                    return 2;
+                else if (player.size() > 1)
+                    return 5;
+                if (player.get(0).getTeam().getName().equals(team))
+                    return 1;
+
+                getCurrentSession().createQuery("update Players set team_id = :id where name = :n and surname = :s")
+                        .setParameter("id", id)
+                        .setParameter("n", n)
+                        .setParameter("s", s)
+                        .executeUpdate();
+                return 0;
+            case 3:
+                n = splited[0];
+                s = splited[1];
+                date = splited[2];
+                try{Date checkDate = Date.valueOf(date);}
+                catch(IllegalArgumentException e){return 6;}
+                List<Players> player2 = getPlayers(n, s, date);
+                if (player2.size() == 0)
+                    return 2;
+                if (player2.get(0).getTeam().getName().equals(team))
+                    return 1;
+                getCurrentSession().createQuery("update Players set team_id = :id where name = :n and surname = :s and date_of_birth = :date")
+                        .setParameter("id", id)
+                        .setParameter("n", n)
+                        .setParameter("s", s)
+                        .setParameter("date", date)
+                        .executeUpdate();
+                return 0;
+                default:
+                    return 3;
+
+        }
+
 
     }
 
@@ -100,12 +156,12 @@ public class PlayersDao extends Dao implements IPlayersDao {
     }
 
     @Override
-    public Players getPlayers(String name, String surname, String date) {
+    public List<Players> getPlayers(String name, String surname, String date) {
         Query<Players> theQuery = getCurrentSession().createQuery("from Players where name =:name and surname = :surname and date_of_birth =:date")
                 .setParameter("name", name)
                 .setParameter("surname", surname)
                 .setParameter("date", date);
-        Players players= theQuery.getSingleResult();
+        List<Players> players= theQuery.getResultList();
         return players;
     }
 
@@ -115,5 +171,30 @@ public class PlayersDao extends Dao implements IPlayersDao {
         List<PlayerTeamsHistory> history = theQuery.getResultList();
 
         return history;
+    }
+
+    @Override
+    public List<String> getAll() {
+        Query<Players> theQuery = getCurrentSession().createQuery("from Players p");
+        List<Players> playerList = theQuery.getResultList();
+        List<String> getAll = new ArrayList<>();
+        int i =0;
+        int ii = playerList.size();
+        while(i!=ii){
+            Players p = playerList.get(i);
+            List<Players> l = getPlayers(p.getName(), p.getSurname());
+            if (l.size() == 1){
+                String player = p.getName() + " " + p.getSurname();
+                getAll.add(player);
+                i++;
+            }else{
+                for (Players pp : l){
+                    getAll.add(pp.getName() + " " + pp.getSurname() + " " + pp.getDateOfBirth());
+                    playerList.remove(pp); ii--;
+                }
+            }
+        }
+        return getAll;
+
     }
 }

@@ -32,18 +32,18 @@ public class Visibility {
         addedSeasonBtn.setVisible(false);
     }
 
-    public void setInvisibleP(Text p40,Text p41,Text p42,Text p43,Text p44,Text p45, TextField t40, TextField t41, ComboBox<String> t42,TextField t43, TextField t44, TextField t45, Text text, ComboBox<String> comboBox){
-        p40.setVisible(false);p41.setVisible(false);p42.setVisible(false);p43.setVisible(false);p44.setVisible(false);p45.setVisible(false); text.setVisible(false);
-        t40.setVisible(false);t41.setVisible(false);t42.setVisible(false);t43.setVisible(false);t44.setVisible(false);t45.setVisible(false); comboBox.setVisible(false);
+    public void setInvisibleP(Text p40,Text p41,Text p42,Text p43,Text p44,Text p45, TextField t40, TextField t41, ComboBox<String> t42,TextField t43, TextField t44, TextField t45, Text p, TextField pp){
+        p40.setVisible(false);p41.setVisible(false);p42.setVisible(false);p43.setVisible(false);p44.setVisible(false);p45.setVisible(false); p.setVisible(false);
+        t40.setVisible(false);t41.setVisible(false);t42.setVisible(false);t43.setVisible(false);t44.setVisible(false);t45.setVisible(false); pp.setVisible(false);
     }
     public void setVisibleNewPlayerT(Text p40,Text p41,Text p42,Text p43,Text p44,Text p45, TextField t40, TextField t41, ComboBox<String> t42,TextField t43, TextField t44, TextField t45){
         p40.setVisible(true);p41.setVisible(true);p42.setVisible(true);p43.setVisible(true);p44.setVisible(true);p45.setVisible(true);
         t40.setVisible(true);t41.setVisible(true);t42.setVisible(true);t43.setVisible(true);t44.setVisible(true);t45.setVisible(true);
     }
 
-    public void setVisibleTransferT(Text p40,Text p41,Text p42, TextField t40, TextField t41, ComboBox<String> t42){
-        p40.setVisible(true);p41.setVisible(true);p42.setVisible(true);
-        t40.setVisible(true);t41.setVisible(true);t42.setVisible(true);
+    public void setVisibleTransferT(Text playerText,Text p41,TextField playerField, ComboBox<String> t42){
+        playerText.setVisible(true);p41.setVisible(true);
+        playerField.setVisible(true);t42.setVisible(true);
     }
 
     public void setVisibleCheckBox(CheckBox newPlayerCheckBox, CheckBox transferCheckBox){
@@ -66,8 +66,8 @@ public class Visibility {
         t40.clear(); t41.clear();t43.clear();t44.clear();t45.clear();
     }
 
-    public void clearTextFieldTransfer(TextField t40, TextField t41){
-        t40.clear(); t41.clear();
+    public void clearTextFieldTransfer(TextField playerField){
+        playerField.clear();
     }
 
     public void setVisibleNewSeason(Text s10, Text s11, Text s12,  TextField t30, TextField t31, TextField t32, Button a){
