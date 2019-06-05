@@ -3,8 +3,11 @@ package nba_statistics.dao.classes;
 import nba_statistics.dao.interfaces.IPlayersDao;
 import nba_statistics.entities.PlayerTeamsHistory;
 import nba_statistics.entities.Players;
+import nba_statistics.entities.Seasons;
 import nba_statistics.entities.Teams;
+import nba_statistics.services.PlayerTeamsHistoryService;
 import nba_statistics.services.PlayersService;
+import nba_statistics.services.SeasonsService;
 import nba_statistics.services.TeamsService;
 import org.hibernate.query.Query;
 
@@ -40,53 +43,10 @@ public class PlayersDao extends Dao implements IPlayersDao {
         return 0;
     }
 
-    public int updatePlayer(String name, String surname, String team){
-        //Query<Players> theQuery = getCurrentSession().createQuery("from Players where imie = :name and nazwisko = :surname",Players.class);
-        TeamsService teamsService = new TeamsService();
-        Teams d = teamsService.getTeam(team);
-        if (d == null)
-            return 1;
-        List<Players> playersList = getPlayers(name,surname);
-        if (playersList.get(0).getTeam().getName().equals(team)){ //only one player -> get(0) legal
-            return 2;
-        }
-
-        int id = d.getId();
-
-        getCurrentSession().createQuery("update Players set team_id = :id  where name = :name and surname = :surname")
-                .setParameter("id", id)
-                .setParameter("name", name)
-                .setParameter("surname", surname)
-                .executeUpdate();
-        return 0;
-
-
-    }
-
-/*    public int updatePlayer2(String name, String surname, String team, String date){
-        TeamsService teamsService = new TeamsService();
-        Teams d = teamsService.getTeam(team);
-        if (d == null)
-            return 1;
-        Players player = getPlayers(name,surname,date);
-        if (player.getTeam().getName().equals(team))
-            return 2;
-
-        int id = d.getId();
-        getCurrentSession().createQuery("update Players set team_id = :id where name = :name and surname = :surname and date_of_birth = :date")
-                .setParameter("id", id)
-                .setParameter("name", name)
-                .setParameter("surname", surname)
-                .setParameter("date", date)
-                .executeUpdate();
-        return 0;
-
-    }*/
-
     @Override
     public int updatePlayer(String name, String team) {
         String[] splited = name.split("\\s+");
-        String n,s,date = null;
+        String n,s,date;
         TeamsService teamsService = new TeamsService();
         Teams d = teamsService.getTeam(team);
 
@@ -110,6 +70,8 @@ public class PlayersDao extends Dao implements IPlayersDao {
                         .setParameter("n", n)
                         .setParameter("s", s)
                         .executeUpdate();
+
+
                 return 0;
             case 3:
                 n = splited[0];
@@ -163,6 +125,23 @@ public class PlayersDao extends Dao implements IPlayersDao {
                 .setParameter("date", date);
         List<Players> players= theQuery.getResultList();
         return players;
+    }
+
+    @Override
+    public Players getPlayer(String name, String surname) {
+            Query<Players> theQuery = getCurrentSession().createQuery("from Players where name=:name and surname =:surname")
+                    .setParameter("name", name)
+                    .setParameter("surname", surname);
+            return theQuery.getSingleResult();
+    }
+
+    @Override
+    public Players getPlayer(String name, String surname, String date) {
+        Query<Players> theQuery = getCurrentSession().createQuery("from Players where name=:name and surname =:surname and date_of_birth = :date")
+                .setParameter("name", name)
+                .setParameter("surname", surname)
+                .setParameter("date", date);
+        return theQuery.getSingleResult();
     }
 
     public List<PlayerTeamsHistory> getPlayerTeamsHistory(int idPlayer){

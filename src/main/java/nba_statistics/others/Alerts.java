@@ -232,4 +232,13 @@ public class Alerts {
         errorAlert.setContentText("If two player has the same name and surname date is necessary");
         errorAlert.showAndWait();
     }
+
+    public static void getAlertSecondTransfer(){
+
+        Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+        errorAlert.setTitle("ERROR");
+        errorAlert.setHeaderText("The player was transferred to other team in preseason season");
+        errorAlert.setContentText("Player can transfer only one in preseason");
+        errorAlert.showAndWait();
+    }
 }

@@ -13,10 +13,7 @@ import javafx.scene.control.*;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import nba_statistics.controllers.AccountController;
-import nba_statistics.services.MatchesService;
-import nba_statistics.services.PlayersService;
-import nba_statistics.services.SeasonsService;
-import nba_statistics.services.TeamsService;
+import nba_statistics.services.*;
 import org.controlsfx.control.textfield.TextFields;
 
 import java.io.IOException;
@@ -129,7 +126,6 @@ public class Preseason implements Initializable {
         v = new Visibility();
         newSeasonRadioBtn.setSelected(true);
         initSeasonName();
-        System.out.println(getPlayers());
     }
 
     public void selectNewSeason(){
@@ -216,6 +212,7 @@ public class Preseason implements Initializable {
                 v.clearTextFieldNewPlayer(t40,t41,t43,t44,t45);
                 newPlayerCheckBox.setSelected(false);
                 transferCheckBox.setSelected(false);
+                initComboBoxTeamsTransfer();
                 break;
 
 
@@ -240,7 +237,7 @@ public class Preseason implements Initializable {
         v.clearTextFieldNewPlayer(t40,t41,t43,t44,t45);
         transferCheckBox.setSelected(false);
         t42.getSelectionModel().clearSelection();
-        initComboBoxTeamsTransfer();
+        //initComboBoxTeamsTransfer();
         state = "NewPlayer";
     }
 
@@ -252,7 +249,7 @@ public class Preseason implements Initializable {
         newPlayerCheckBox.setSelected(false);
         t42.getSelectionModel().clearSelection();
         TextFields.bindAutoCompletion(playerField, getPlayers());
-        initComboBoxTeamsTransfer();
+        //initComboBoxTeamsTransfer();
 
     }
 
@@ -339,9 +336,14 @@ public class Preseason implements Initializable {
                 PlayersService playersService1 = new PlayersService();
                 switch (playersService1.updatePlayer(playerField.getText(),t42.getValue())){
                     case 0:
-                        information(4);
-                        playerField.clear();
-                        t42.getSelectionModel().clearSelection();
+                        PlayerTeamsHistoryService playerTeamsHistoryService = new PlayerTeamsHistoryService();
+                        if (playerTeamsHistoryService.savePlayerTeamsHistory(playerField.getText(),t42.getValue(),currSeason)){
+                            information(4);
+                            playerField.clear();
+                            t42.getSelectionModel().clearSelection();
+                        }
+                        else
+                            getAlertSecondTransfer();
                         break;
                     case 1:
                         getAlertTransferToTheSameTeam();
