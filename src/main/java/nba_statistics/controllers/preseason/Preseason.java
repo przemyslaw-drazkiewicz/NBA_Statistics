@@ -153,7 +153,7 @@ public class Preseason implements Initializable {
                     case 0:
                         currSeason = t30.getText();
                         tDuration.setText(t31.getText() + " / " + t32.getText());
-                        confirmation(0);
+                        information(0);
                         v.setInvisibleRadioButtons(newSeasonRadioBtn, existingSeasonRadioBtn);
                         initScene();
                         break;
@@ -267,7 +267,7 @@ public class Preseason implements Initializable {
                             getAlertDivision();
                         else {
                             teamsService.getData(t10.getValue(), DivE.getValue(), t12.getText(), t13.getText());
-                            confirmation(1);
+                            information(1);
                             v.clearTextFieldD(t12, t13);
                             t10.getSelectionModel().clearSelection();DivE.setVisible(false);DivW.setVisible(false);
                         }
@@ -276,7 +276,7 @@ public class Preseason implements Initializable {
                             getAlertDivision();
                         else {
                             teamsService.getData(t10.getValue(), DivW.getValue(), t12.getText(), t13.getText());
-                            confirmation(1);
+                            information(1);
                             v.clearTextFieldD(t12, t13);
                             t10.getSelectionModel().clearSelection();DivE.setVisible(false);DivW.setVisible(false);
                         }
@@ -291,7 +291,7 @@ public class Preseason implements Initializable {
                 MatchesService matchesService = new MatchesService();
                 switch (matchesService.getData(t20.getValue(), t21.getValue(), t22.getText(), currSeason)) {
                     case 0:
-                        confirmation(2);
+                        information(2);
                         v.clearTextFieldM(t22);
                         t20.getSelectionModel().clearSelection();
                         t21.getSelectionModel().clearSelection();
@@ -320,7 +320,7 @@ public class Preseason implements Initializable {
                 try {
                     switch (playersService.getData(t40.getText(), t41.getText(), t43.getText(), Float.parseFloat(t44.getText()), Float.parseFloat(t45.getText()), t42.getValue())) {
                         case 0:
-                            confirmation(3);
+                            information(3);
                             v.clearTextFieldNewPlayer(t40, t41, t43, t44, t45);
                             t42.getSelectionModel().clearSelection();
                             break;
@@ -339,7 +339,7 @@ public class Preseason implements Initializable {
                 PlayersService playersService1 = new PlayersService();
                 switch (playersService1.updatePlayer(playerField.getText(),t42.getValue())){
                     case 0:
-                        confirmation(4);
+                        information(4);
                         playerField.clear();
                         t42.getSelectionModel().clearSelection();
                         break;

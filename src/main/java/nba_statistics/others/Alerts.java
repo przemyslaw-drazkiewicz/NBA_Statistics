@@ -147,45 +147,38 @@ public class Alerts {
         errorAlert.showAndWait();
     }
 
-    public static void confirmation(int flag){
+    public static void information(int flag){
 
-        Alert confirmation = new Alert(Alert.AlertType.CONFIRMATION);
-        confirmation.setTitle("CONFIRMATION");
+        Alert information = new Alert(Alert.AlertType.INFORMATION);
+        information.setTitle("CONFIRMATION");
         switch (flag)
         {
             case 0:
-                confirmation.setHeaderText("Added season");
+                information.setHeaderText("Added season");
                 break;
             case 1:
-                confirmation.setHeaderText("Added team");
+                information.setHeaderText("Added team");
                 break;
             case 2:
-                confirmation.setHeaderText("Added match");
+                information.setHeaderText("Added match");
                 break;
             case 3:
-                confirmation.setHeaderText("Added new player");
+                information.setHeaderText("Added new player");
                 break;
             case 4:
-                confirmation.setHeaderText("Changed player's team");
+                information.setHeaderText("Changed player's team");
                 break;
             case 5:
-                confirmation.setHeaderText("Changed player role");
+                information.setHeaderText("Changed player role");
                 break;
-
-        }
-        confirmation.showAndWait();
-    }
-
-    public static void information(int flag){
-        Alert information = new Alert(Alert.AlertType.INFORMATION);
-        information.setTitle("Success");
-        switch(flag){
-            case 0:
+            case 6:
                 information.setHeaderText("Registration successful");
                 break;
+
         }
         information.showAndWait();
     }
+
 
     public static void getAlertComboBoxTeam(){
 

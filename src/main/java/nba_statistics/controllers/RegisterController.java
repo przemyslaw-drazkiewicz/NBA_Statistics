@@ -11,7 +11,6 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import nba_statistics.others.Alerts;
 import nba_statistics.services.UsersService;
 
 import java.io.IOException;
@@ -49,7 +48,7 @@ public class RegisterController implements Initializable {
                 String addUserResult=usersService.addUser(userField.getText(),passwordField.getText(),passwordField2.getText());
                 if (addUserResult.equals("Correct")){
                     try {
-                        information(0);
+                        information(6);
                         changeScreen(event);
                     }catch(IOException e){
                         e.printStackTrace();
