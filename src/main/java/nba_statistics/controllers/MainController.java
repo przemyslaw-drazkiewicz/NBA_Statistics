@@ -1,5 +1,6 @@
 package nba_statistics.controllers;
 
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -10,6 +11,8 @@ import javafx.scene.control.Button;
 import javafx.event.ActionEvent;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import nba_statistics.entities.Roles;
@@ -54,21 +57,20 @@ public class MainController implements Initializable {
         window.show();
     }
 
-    public void changeScreenToAccount(ActionEvent event, Users user) throws IOException{
+    public void changeScreenToAccount(Event event, Users user) throws IOException{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/AccountView.fxml"));
         Parent accountParent = (Parent)loader.load();
         AccountController accountController = loader.getController();
         accountController.init(user);
         loader.setController(accountController);
-        //Parent accountParent = FXMLLoader.load(getClass().getResource("/AccountView.fxml"));
-        //AccountController accountController = new AccountController(user);
         Scene reviewerScene = new Scene(accountParent);
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         window.setScene(reviewerScene);
         window.show();
     }
 
-    public void authorize(ActionEvent event){
+
+    public void authorize(Event event){
         UsersService usersService = new UsersService();
         //Users user = usersService.getUser(userField.getText());
         Roles role = usersService.authorize(userField.getText(),passwordField.getText());
@@ -86,6 +88,13 @@ public class MainController implements Initializable {
             } catch (IOException e){
                 e.printStackTrace();
             }
+        }
+    }
+
+    @FXML
+    void onKeyPressed(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+          authorize(event);
         }
     }
 
