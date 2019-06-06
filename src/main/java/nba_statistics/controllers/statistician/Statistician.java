@@ -20,16 +20,13 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
+
 import javafx.scene.text.Text;
 import nba_statistics.controllers.AccountController;
-import nba_statistics.entities.Matches;
-import nba_statistics.entities.Players;
-import nba_statistics.entities.Teams;
+import nba_statistics.entities.*;
 import nba_statistics.services.MatchesService;
+import nba_statistics.services.PlayerMatchAchievementsService;
 import nba_statistics.services.PlayersService;
 
 import static nba_statistics.others.Alerts.*;
@@ -49,6 +46,8 @@ public class Statistician implements Initializable {
     @FXML private Button oneA;
     @FXML private Button twoA;
     @FXML private Button threeA;
+    @FXML private Button StH;
+    @FXML private Button StA;
     @FXML private Button BH;
     @FXML private Button BA;
     @FXML private Button RH;
@@ -72,6 +71,10 @@ public class Statistician implements Initializable {
     @FXML private Button remAT;
     @FXML private Text listPlayers;
     @FXML private Text firstSquad;
+    //TIMER
+    @FXML private Text sec;
+    @FXML private Text min;
+    @FXML private Text colon;
 
 
 
@@ -82,6 +85,9 @@ public class Statistician implements Initializable {
     private List<String> playersListTeamH;
     private List<String> playersListTeamA;
 
+    private List<Players> playersTeamH;
+    private List<Players> playersTeamA;
+
     private ObservableList<String> choice;
 
     private Matches match;
@@ -91,7 +97,6 @@ public class Statistician implements Initializable {
     private Date date = new Date();
 
     private List<Matches> matchs;
-
 
     public void changeScreen(Event event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/AccountView.fxml"));
@@ -105,7 +110,125 @@ public class Statistician implements Initializable {
         window.setScene(preseasonScene);
         window.show();
     }
+    private boolean isStart = false;
 
+    @FXML
+    void onKeyPressed(KeyEvent event) {
+        if (event.getCode() == KeyCode.S) {
+            isStart = !isStart;
+        }
+    }
+
+    private int findPosPlayerHome(String player){
+        int i =0;
+        for(PlayerMatchAchievements p : home){
+            if ((p.getPlayer().getName() + " " + p.getPlayer().getSurname()).equals(player)){
+                return i;
+            }
+            i++;
+        }
+        return -1; // :((( but... NOT POSSIBLE ;)
+    }
+    public void oneH(){
+        String player =(String) homeTeam.getSelectionModel().getSelectedItem();
+        if(player!=null) //player is not selected
+            achievementsHome[findPosPlayerHome(player)][0] +=1;
+    }
+    public void twoH(){
+        String player =(String) homeTeam.getSelectionModel().getSelectedItem();
+        if (player != null)
+            achievementsHome[findPosPlayerHome(player)][0] +=2;
+    }
+    public void threeH(){
+        String player =(String) homeTeam.getSelectionModel().getSelectedItem();
+        if (player!=null)
+            achievementsHome[findPosPlayerHome(player)][0] +=3;
+    }
+    public void stealsH(){
+        String player =(String) homeTeam.getSelectionModel().getSelectedItem();
+        if (player!=null)
+            achievementsHome[findPosPlayerHome(player)][1]+=1;
+    }
+    public void blockH(){
+        String player =(String) homeTeam.getSelectionModel().getSelectedItem();
+        if (player!=null)
+            achievementsHome[findPosPlayerHome(player)][2]+=1;
+    }
+    public void reboundH(){
+        String player =(String) homeTeam.getSelectionModel().getSelectedItem();
+        if (player!=null)
+            achievementsHome[findPosPlayerHome(player)][3]+=1;
+    }
+    public void foulH(){
+        String player =(String) homeTeam.getSelectionModel().getSelectedItem();
+        if (player!=null)
+            achievementsHome[findPosPlayerHome(player)][4]+=1;
+    }
+    public void techFoulH(){
+        String player =(String) homeTeam.getSelectionModel().getSelectedItem();
+        if (player!=null)
+            achievementsHome[findPosPlayerHome(player)][5]+=1;
+    }
+
+    private int findPosPlayerAway(String player){
+        int i =0;
+        for(PlayerMatchAchievements p : away){
+            if ((p.getPlayer().getName() + " " + p.getPlayer().getSurname()).equals(player)){
+                return i;
+            }
+            i++;
+        }
+        return -1; // :((( but... NOT POSSIBLE ;)
+    }
+    public void oneA(){
+        String player =(String) awayTeam.getSelectionModel().getSelectedItem();
+        if(player!=null) //player is not selected
+            achievementsAway[findPosPlayerAway(player)][0] +=1;
+    }
+    public void twoA(){
+        String player =(String) awayTeam.getSelectionModel().getSelectedItem();
+        if (player != null)
+            achievementsAway[findPosPlayerAway(player)][0] +=2;
+    }
+    public void threeA(){
+        String player =(String) awayTeam.getSelectionModel().getSelectedItem();
+        if (player!=null)
+            achievementsAway[findPosPlayerAway(player)][0] +=3;
+    }
+    public void stealsA(){
+        String player =(String) awayTeam.getSelectionModel().getSelectedItem();
+        if (player!=null)
+            achievementsAway[findPosPlayerAway(player)][1]+=1;
+    }
+    public void blockA(){
+        String player =(String) awayTeam.getSelectionModel().getSelectedItem();
+        if (player!=null)
+            achievementsAway[findPosPlayerAway(player)][2]+=1;
+    }
+    public void reboundA(){
+        String player =(String) awayTeam.getSelectionModel().getSelectedItem();
+        if (player!=null)
+            achievementsAway[findPosPlayerAway(player)][3]+=1;
+    }
+    public void foulA(){
+        String player =(String) awayTeam.getSelectionModel().getSelectedItem();
+        if (player!=null)
+            achievementsAway[findPosPlayerAway(player)][4]+=1;
+    }
+    public void techFoulA(){
+        String player =(String) awayTeam.getSelectionModel().getSelectedItem();
+        if (player!=null)
+            achievementsAway[findPosPlayerAway(player)][5]+=1;
+    }
+
+    private void finishedMatch(){
+        setAchievementsToLists();
+        toTesting();
+        PlayerMatchAchievementsService playerMatchAchievementsService = new PlayerMatchAchievementsService();
+        playerMatchAchievementsService.save(home);
+        playerMatchAchievementsService.save(away);
+
+    }
     public void onClickButtonOK() {
         int matchSelected = -1;
         String matchT = matchesComboBox.getValue();
@@ -126,15 +249,14 @@ public class Statistician implements Initializable {
             playersListTeamH = new ArrayList<>();
             playersListTeamA = new ArrayList<>();
             match = matchs.get(matchSelected);
-
             Teams teamH = match.getHostTeam();
             Teams teamA = match.getGuestTeam();
             int id_TeamH = teamH.getId();
             int id_TeamA = teamA.getId();
 
             PlayersService playersDAO = new PlayersService();
-            List<Players> playersTeamH = playersDAO.getPlayers(id_TeamH);
-            List<Players> playersTeamA = playersDAO.getPlayers(id_TeamA);
+            playersTeamH = playersDAO.getPlayers(id_TeamH);
+            playersTeamA = playersDAO.getPlayers(id_TeamA);
             ObservableList<String> playersA = FXCollections.observableArrayList();
             ObservableList<String> playersH = FXCollections.observableArrayList();
 
@@ -190,17 +312,63 @@ public class Statistician implements Initializable {
 
             v.setInvisibleC(choiceText, buttonOK, matchesComboBox);
             v.setInvisibleS(homeTeamChoice,awayTeamChoice,homeTeamFive,awayTeamFive,homeTeamName,awayTeamName,confirmSquad,addHT,remHT,addAT,remAT,listPlayers,firstSquad);
-            v.setVisibleM(oneH,twoH,threeH,oneA,twoA,threeA,BH,BA,RH,RA,FH,FA,TFH,TFA,SH,SA,homeTeam,awayTeam,buttonBack,matchText);
+            v.setVisibleM(oneH,twoH,threeH,oneA,twoA,threeA,BH,BA,RH,RA,FH,FA,TFH,TFA,SH,SA,homeTeam,awayTeam,buttonBack,matchText,min,sec,colon, StH, StA);
 
         }
+        initCollectAchievements();
     }
-
     public void onClickButtonBack() {
         v.setVisibleC(choiceText,buttonOK,matchesComboBox);
         v.setInvisibleS(homeTeamChoice,awayTeamChoice,homeTeamFive,awayTeamFive,homeTeamName,awayTeamName,confirmSquad,addHT,remHT,addAT,remAT,listPlayers,firstSquad);
-        v.setInvisibleM(oneH,twoH,threeH,oneA,twoA,threeA,BH,BA,RH,RA,FH,FA,TFH,TFA,SH,SA,homeTeam,awayTeam,buttonBack,matchText);
+        v.setInvisibleM(oneH,twoH,threeH,oneA,twoA,threeA,BH,BA,RH,RA,FH,FA,TFH,TFA,SH,SA,homeTeam,awayTeam,buttonBack,matchText,min,sec,colon,StH, StA);
     }
 
+    @SuppressWarnings("Duplicates")
+    private void setAchievementsToLists(){
+        int i=0;
+        for (PlayerMatchAchievements p : home){
+            p.setScoredPoints(achievementsHome[i][0]);
+            p.setSteals(achievementsHome[i][1]);
+            p.setBlocks(achievementsHome[i][2]);
+            p.setRebounds(achievementsHome[i][3]);
+            p.setFouls(achievementsHome[i][4]);
+            p.setTechnicalFouls(achievementsHome[i][5]);
+            i++;
+        }
+        i =0;
+        for (PlayerMatchAchievements p : away){
+            p.setScoredPoints(achievementsAway[i][0]);
+            p.setSteals(achievementsAway[i][1]);
+            p.setBlocks(achievementsAway[i][2]);
+            p.setRebounds(achievementsAway[i][3]);
+            p.setFouls(achievementsAway[i][4]);
+            p.setTechnicalFouls(achievementsAway[i][5]);
+            i++;
+        }
+    }
+    private void toTesting(){
+        System.out.println("=======================HOME=============================");
+        for (PlayerMatchAchievements p : home){System.out.println(p.getPlayer().toString() + p.getMatch().toString() + p.toString());}
+        System.out.println("======================AWAY===============================");
+        for (PlayerMatchAchievements p : away){System.out.println(p.getPlayer().toString() + p.getMatch().toString() + p.toString());}
+    }
+
+    private int[][] achievementsHome; //table with achievements -> x is 'id' player, y-> is points, blocks etc
+    private int[][] achievementsAway;
+    private ArrayList<PlayerMatchAchievements> home = new ArrayList<>();
+    private ArrayList<PlayerMatchAchievements> away = new ArrayList<>();
+    private void initCollectAchievements(){
+        for (Players p: playersTeamH){
+            home.add(new PlayerMatchAchievements(p, match));
+        }
+        for (Players p : playersTeamA){
+            away.add(new PlayerMatchAchievements(p,match));
+        }
+        achievementsHome = new int[playersTeamH.size()][6]; //6 because collecting points, blocks, rebounds, fouls and tech fouls
+        achievementsAway = new int[playersTeamA.size()][6];
+
+    }
+    @SuppressWarnings("Duplicates")
     public void onClickButtonAddH() {
         String player =(String) homeTeamChoice.getSelectionModel().getSelectedItem();
         if(player==null)
@@ -313,6 +481,39 @@ public class Statistician implements Initializable {
         }
     }
 
+    //STOPPER
+    private int seconds =0;
+    private int minutes= 0;
+    private Timer myTimer = new Timer();
+    private TimerTask task = new TimerTask() {
+        @Override
+        public void run() {
+            if (isStart) {
+                seconds = Integer.parseInt(sec.getText());
+                if (seconds != 59){
+                    seconds++;
+                }
+                else{
+                    seconds = 0;
+                    minutes++;
+                }
+                if (seconds >= 10)
+                    sec.setText(String.valueOf(seconds));
+                else
+                    sec.setText(0 + String.valueOf(seconds));
+                if (minutes >= 10)
+                    min.setText(String.valueOf(minutes));
+                else
+                    min.setText(0 + String.valueOf(minutes));
+            }
+            if (minutes == 1 && seconds == 0) { //MATCH FINISHED if time is 01:00 -> for testing
+                finishedMatch();
+
+            }
+        }
+    };
+
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
@@ -346,9 +547,12 @@ public class Statistician implements Initializable {
         }
          homeTeamChoice.setItems(players);
 */
-        choice = FXCollections.observableArrayList
-                (matchesT);
+        choice = FXCollections.observableArrayList(matchesT);
         matchesComboBox.setItems(choice);
+
+        myTimer.schedule(task,1000,1000);
+
+
 
     }
 

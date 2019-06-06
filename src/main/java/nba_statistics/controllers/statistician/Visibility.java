@@ -4,6 +4,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.text.Text;
+import nba_statistics.entities.Teams;
 
 public class Visibility {
 
@@ -21,7 +22,9 @@ public class Visibility {
         matchesComboBox.setVisible(true);
     }
 
-    public void setInvisibleM(Button oneH, Button twoH, Button threeH, Button oneA, Button twoA, Button threeA, Button BH, Button BA, Button RH, Button RA, Button FH, Button FA, Button TFH, Button TFA, Button SH, Button SA, ListView homeTeam,ListView awayTeam, Button buttonBack, Text matchText)
+    public void setInvisibleM(Button oneH, Button twoH, Button threeH, Button oneA, Button twoA, Button threeA, Button BH, Button BA,
+                              Button RH, Button RA, Button FH, Button FA, Button TFH, Button TFA, Button SH, Button SA, ListView homeTeam,
+                              ListView awayTeam, Button buttonBack, Text matchText, Text min, Text sec, Text colon, Button StH, Button StA)
     {
         oneH.setVisible(false);
         twoH.setVisible(false);
@@ -43,9 +46,16 @@ public class Visibility {
         awayTeam.setVisible(false);
         buttonBack.setVisible(false);
         matchText.setVisible(false);
+        min.setVisible(false);
+        sec.setVisible(false);
+        colon.setVisible(false);
+        StH.setVisible(false);
+        StA.setVisible(false);
     }
 
-    public void setVisibleM(Button oneH, Button twoH, Button threeH, Button oneA, Button twoA, Button threeA, Button BH, Button BA, Button RH, Button RA, Button FH, Button FA, Button TFH, Button TFA, Button SH, Button SA, ListView homeTeam,ListView awayTeam, Button buttonBack, Text matchText)
+    public void setVisibleM(Button oneH, Button twoH, Button threeH, Button oneA, Button twoA, Button threeA, Button BH, Button BA, Button RH,
+                            Button RA, Button FH, Button FA, Button TFH, Button TFA, Button SH, Button SA, ListView homeTeam, ListView awayTeam,
+                            Button buttonBack, Text matchText, Text min, Text sec, Text colon,Button StH, Button StA)
     {
         oneH.setVisible(true);
         twoH.setVisible(true);
@@ -67,6 +77,11 @@ public class Visibility {
         awayTeam.setVisible(true);
         buttonBack.setVisible(true);
         matchText.setVisible(true);
+        min.setVisible(true);
+        sec.setVisible(true);
+        colon.setVisible(true);
+        StH.setVisible(true);
+        StA.setVisible(true);
     }
 
     public void setVisibleS(ListView homeTeamChoice,ListView awayTeamChoice,ListView homeTeamFive,ListView awayTeamFive,Text homeTeamName,Text awayTeamName,Button confirmSquad,Button addHT,Button remHT,Button addAT,Button remAT,Text listPlayers,Text firstSquad)
