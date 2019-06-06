@@ -1,14 +1,15 @@
 package nba_statistics.controllers.preseason;
 
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 
 
 public class Visibility {
 
-    public void setVisibleD(Text d10, Text d11, Text d12, Text d13, ComboBox<String> t10, TextField t12, TextField t13){
-        d10.setVisible(true);d11.setVisible(true);d12.setVisible(true);d13.setVisible(true);
-        t10.setVisible(true);t12.setVisible(true);t13.setVisible(true);
+    public void setVisibleD(Text d10, Text d11, Text d12, Text d13, Text p46, ComboBox<String> t10, TextField t12, TextField t13, Button imageBtn, ImageView image){
+        d10.setVisible(true);d11.setVisible(true);d12.setVisible(true);d13.setVisible(true);image.setVisible(true);
+        t10.setVisible(true);t12.setVisible(true);t13.setVisible(true);p46.setVisible(true);imageBtn.setVisible(true);
 
     }
     public void setInvisibleD(Text d10, Text d11, Text d12, Text d13, ComboBox<String> t10, TextField t12, TextField t13, ComboBox<String> DivE, ComboBox<String> DivW ){
@@ -32,18 +33,18 @@ public class Visibility {
         addedSeasonBtn.setVisible(false);
     }
 
-    public void setInvisibleP(Text p40,Text p41,Text p42,Text p43,Text p44,Text p45, TextField t40, TextField t41, ComboBox<String> t42,TextField t43, TextField t44, TextField t45, Text p, TextField pp){
-        p40.setVisible(false);p41.setVisible(false);p42.setVisible(false);p43.setVisible(false);p44.setVisible(false);p45.setVisible(false); p.setVisible(false);
-        t40.setVisible(false);t41.setVisible(false);t42.setVisible(false);t43.setVisible(false);t44.setVisible(false);t45.setVisible(false); pp.setVisible(false);
+    public void setInvisibleP(Text p40,Text p41,Text p42,Text p43,Text p44,Text p45, Text p46, TextField t40, TextField t41, ComboBox<String> t42,TextField t43, TextField t44, TextField t45, Text p, TextField pp, Button b, ImageView image){
+        p40.setVisible(false);p41.setVisible(false);p42.setVisible(false);p43.setVisible(false);p44.setVisible(false);p45.setVisible(false); p46.setVisible(false);p.setVisible(false);
+        t40.setVisible(false);t41.setVisible(false);t42.setVisible(false);t43.setVisible(false);t44.setVisible(false);t45.setVisible(false); pp.setVisible(false);b.setVisible(false);image.setVisible(false);
     }
-    public void setVisibleNewPlayerT(Text p40,Text p41,Text p42,Text p43,Text p44,Text p45, TextField t40, TextField t41, ComboBox<String> t42,TextField t43, TextField t44, TextField t45){
-        p40.setVisible(true);p41.setVisible(true);p42.setVisible(true);p43.setVisible(true);p44.setVisible(true);p45.setVisible(true);
-        t40.setVisible(true);t41.setVisible(true);t42.setVisible(true);t43.setVisible(true);t44.setVisible(true);t45.setVisible(true);
+    public void setVisibleNewPlayerT(Text p40,Text p41,Text p42,Text p43,Text p44,Text p45, Text p46,  TextField t40, TextField t41, ComboBox<String> t42,TextField t43, TextField t44, TextField t45, Button b, ImageView image){
+        p40.setVisible(true);p41.setVisible(true);p42.setVisible(true);p43.setVisible(true);p44.setVisible(true);p45.setVisible(true); p46.setVisible(true);
+        t40.setVisible(true);t41.setVisible(true);t42.setVisible(true);t43.setVisible(true);t44.setVisible(true);t45.setVisible(true); b.setVisible(true); image.setVisible(true);
     }
 
-    public void setVisibleTransferT(Text playerText,Text p41,TextField playerField, ComboBox<String> t42){
-        playerText.setVisible(true);p41.setVisible(true);
-        playerField.setVisible(true);t42.setVisible(true);
+    public void setVisibleTransferT(Text playerText,Text p41, Text p46,TextField playerField, ComboBox<String> t42,Button pictureBtn, ImageView image){
+        playerText.setVisible(true);p41.setVisible(true); image.setVisible(true);p46.setVisible(true);
+        playerField.setVisible(true);t42.setVisible(true);pictureBtn.setVisible(true);
     }
 
     public void setVisibleCheckBox(CheckBox newPlayerCheckBox, CheckBox transferCheckBox){

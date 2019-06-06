@@ -42,8 +42,8 @@ public class    TeamsDao extends Dao implements ITeamsDao {
         return d;
     }
 
-    public void getData(String division, String conference, String name, String location){
-        Teams d = new Teams(division, conference, name, location);
+    public void getData(String division, String conference, String name, String location, String imageURL){
+        Teams d = new Teams(division, conference, name, location,imageURL);
         persist(d);
     }
 

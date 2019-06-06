@@ -39,6 +39,9 @@ public class Players {
     @Column(name = "weight")
     private float weight;
 
+    @Column(name="image")
+    private String imageURL;
+
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE,
             CascadeType.DETACH, CascadeType.REFRESH})
     @JoinColumn(name = "team_id")
@@ -68,12 +71,13 @@ public class Players {
     public Players() {
     }
 
-    public Players(String name, String surname, String dateOfBirth, float height, float weight) {
+    public Players(String name, String surname, String dateOfBirth, float height, float weight,String imageURL) {
         this.name = name;
         this.surname = surname;
         this.dateOfBirth = dateOfBirth;
         this.height = height;
         this.weight = weight;
+        this.imageURL=imageURL;
     }
 
     public int getId() {
@@ -131,6 +135,10 @@ public class Players {
     public void setTeam(Teams team) {
         this.team = team;
     }
+
+    public String getImageURL() { return imageURL;}
+
+    public void setImageURL(String imageURL) { this.imageURL = imageURL; }
 
     public List<PlayerTeamsHistory> getPlayerTeamsHistory() {
         return playerTeamsHistory;

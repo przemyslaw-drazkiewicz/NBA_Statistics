@@ -30,8 +30,10 @@ CREATE TABLE `players` (
   `height` double DEFAULT NULL,
   `weight` double DEFAULT NULL,
   `team_id` int(11) DEFAULT NULL,
+  `image` varchar(255),
   PRIMARY KEY (`player_id`),
   KEY `team_id_idx2` (`team_id`),
+  UNIQUE KEY `image_UNIQUE` (`image`),
   CONSTRAINT `team_id2` FOREIGN KEY (`team_id`) REFERENCES `teams` (`team_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -42,7 +44,7 @@ CREATE TABLE `players` (
 
 LOCK TABLES `players` WRITE;
 /*!40000 ALTER TABLE `players` DISABLE KEYS */;
-INSERT INTO `players` VALUES (4,'Marcin','Gortat','1980-02-10',202,101,11),(5,'Marcin','Gortat','1980-02-10',202,101,NULL);
+/*INSERT INTO `players` VALUES (4,'Marcin','Gortat','1980-02-10',202,101,6,null);*/
 /*!40000 ALTER TABLE `players` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

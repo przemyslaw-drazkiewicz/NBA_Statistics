@@ -28,7 +28,9 @@ CREATE TABLE `teams` (
   `conference` varchar(45) DEFAULT NULL,
   `name` varchar(45) DEFAULT NULL,
   `location` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`team_id`)
+  `image` varchar(255),
+  PRIMARY KEY (`team_id`),
+  UNIQUE KEY `image_UNIQUE` (`image`)
 ) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -38,7 +40,7 @@ CREATE TABLE `teams` (
 
 LOCK TABLES `teams` WRITE;
 /*!40000 ALTER TABLE `teams` DISABLE KEYS */;
-INSERT INTO `teams` VALUES (6,'Atlantic','Eastern','Toronto Raptors','Toronto'),(7,'Central','Eastern','Indiana Pacers','Indiana'),(8,'Pacific','Western','Phoenix Suns','Phoenix'),(9,'Atlantic','Eastern','Toronto Raptors','Toronto'),(10,'Central','Eastern','Indiana Pacers','Indiana'),(11,'Pacific','Western','Phoenix Suns','Phoenix'),(12,'Central','Eastern','Indiana Pacers','Indiana'),(13,'Pacific','Western','Phoenix Suns','Phoenix'),(14,'Central','Eastern','Indiana Pacers','Indiana');
+INSERT INTO `teams` VALUES (6,'Atlantic','Eastern','Toronto Raptors','Toronto',null),(7,'Central','Eastern','Indiana Pacers','Indiana',null),(8,'Pacific','Western','Phoenix Suns','Phoenix',null);
 /*!40000 ALTER TABLE `teams` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
