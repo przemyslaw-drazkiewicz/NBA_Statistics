@@ -1,7 +1,8 @@
-package nba_statistics.controllers;
+package nba_statistics.controllers.viewer;
 
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -9,8 +10,11 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import nba_statistics.controllers.AccountController;
 import nba_statistics.services.MatchesService;
 import nba_statistics.services.PlayersService;
 import nba_statistics.services.SeasonsService;
@@ -36,7 +40,7 @@ public class DataViewer implements Initializable {
 
 
 
-    public void changeScreen(ActionEvent event) throws IOException {
+    public void changeScreen(Event event) throws IOException {
         //Parent preseasonParent = FXMLLoader.load(getClass().getResource("/AccountView.fxml"));
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/AccountView.fxml"));
         Parent accountParent = (Parent)loader.load();
@@ -48,7 +52,7 @@ public class DataViewer implements Initializable {
         window.show();
     }
 
-    public void changeScreenToSelectData(ActionEvent event) throws IOException {
+    public void changeScreenToSelectData(Event event) throws IOException {
         Parent selectDataParent = FXMLLoader.load(getClass().getResource("/SelectData.fxml"));
         Scene selectDataScene = new Scene(selectDataParent);
 
@@ -62,6 +66,24 @@ public class DataViewer implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+    }
+
+    @FXML
+    void onKeyPressed(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            try {
+                changeScreenToSelectData(event);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        if (event.getCode() == KeyCode.ESCAPE) {
+            try{
+                changeScreen(event);
+            }catch(IOException e){
+                e.printStackTrace();
+            }
+        }
     }
 
 

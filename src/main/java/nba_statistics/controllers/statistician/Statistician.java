@@ -3,6 +3,7 @@ package nba_statistics.controllers.statistician;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -12,6 +13,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -90,7 +93,7 @@ public class Statistician implements Initializable {
     private List<Matches> matchs;
 
 
-    public void changeScreen(ActionEvent event) throws IOException {
+    public void changeScreen(Event event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/AccountView.fxml"));
         Parent accountParent = loader.load();
         AccountController accountController = loader.getController();
@@ -347,5 +350,18 @@ public class Statistician implements Initializable {
                 (matchesT);
         matchesComboBox.setItems(choice);
 
+    }
+
+    @FXML
+    void onKeyPressed(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            onClickButtonOK();        }
+        if (event.getCode() == KeyCode.ESCAPE) {
+            try{
+                changeScreen(event);
+            }catch(IOException e){
+                e.printStackTrace();
+            }
+        }
     }
 }

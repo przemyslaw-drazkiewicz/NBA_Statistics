@@ -1,8 +1,9 @@
-package nba_statistics.controllers;
+package nba_statistics.controllers.admin;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -13,8 +14,11 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import nba_statistics.controllers.AccountController;
 import nba_statistics.entities.Users;
 import nba_statistics.services.RolesService;
 import nba_statistics.services.UsersService;
@@ -41,7 +45,7 @@ public class AdminController implements Initializable {
 
     private ObservableList<String> roleNames;
 
-    public void changeScreen(ActionEvent event) throws IOException {
+    public void changeScreen(Event event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/AccountView.fxml"));
         Parent accountParent = (Parent)loader.load();
         AccountController accountController = loader.getController();
@@ -107,5 +111,19 @@ public class AdminController implements Initializable {
 //        Roles role = rolesService.getRole(roleName);
 //        user.setRole(role);
     }
+    @FXML
+    void onKeyPressed(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            onClickApply();
+        }
+        if (event.getCode() == KeyCode.ESCAPE) {
+            try{
+                changeScreen(event);
+            }catch(IOException e){
+                e.printStackTrace();
+            }
+        }
+    }
+
 
 }

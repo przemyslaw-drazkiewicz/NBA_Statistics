@@ -1,4 +1,4 @@
-package nba_statistics.controllers;
+package nba_statistics.controllers.viewer;
 
 import com.sun.org.apache.xerces.internal.impl.xpath.regex.Match;
 import javafx.beans.property.ReadOnlyStringWrapper;
@@ -10,6 +10,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -18,9 +19,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import nba_statistics.controllers.AccountController;
 import nba_statistics.entities.*;
 //import nba_statistics.services.PlayerTeamsHistoryService;
 import nba_statistics.services.MatchesService;
@@ -246,7 +250,7 @@ public class SelectData implements Initializable {
         window.show();
     }
 
-    public void changeScreenBack(ActionEvent event) throws IOException {
+    public void changeScreenBack(Event event) throws IOException {
         Parent backParent = FXMLLoader.load(getClass().getResource("/DataViewer.fxml"));
         Scene backScene = new Scene(backParent);
 
@@ -514,7 +518,19 @@ public class SelectData implements Initializable {
         extraTime.setCellValueFactory(new PropertyValueFactory<>("extraTimeCount"));
     }
 
-
+    @FXML
+    void onKeyPressed(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+                whatKindOfDataIsSelected();
+        }
+        if (event.getCode() == KeyCode.ESCAPE) {
+            try{
+                changeScreenBack(event);
+            }catch(IOException e){
+                e.printStackTrace();
+            }
+        }
+    }
 
 
 }

@@ -1,5 +1,6 @@
 package nba_statistics.controllers;
 
+import javafx.application.Platform;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -95,6 +96,9 @@ public class MainController implements Initializable {
     void onKeyPressed(KeyEvent event) {
         if (event.getCode() == KeyCode.ENTER) {
           authorize(event);
+        }
+        if (event.getCode() == KeyCode.ESCAPE) {
+            Platform.exit();
         }
     }
 

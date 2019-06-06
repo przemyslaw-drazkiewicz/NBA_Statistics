@@ -3,6 +3,7 @@ package nba_statistics.controllers.preseason;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -10,6 +11,8 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import nba_statistics.controllers.AccountController;
@@ -70,7 +73,7 @@ public class Preseason implements Initializable {
     private String currSeason;
     private Visibility v;
 
-    public void changeScreen(ActionEvent event) throws IOException {
+    public void changeScreen(Event event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/AccountView.fxml"));
         Parent accountParent = loader.load();
         AccountController accountController = loader.getController();
@@ -365,6 +368,23 @@ public class Preseason implements Initializable {
                         break;
                 }
 
+        }
+    }
+
+    @FXML
+    void onKeyPressed(KeyEvent event) {
+        if (event.getCode() == KeyCode.ESCAPE) {
+            try {
+                changeScreen(event);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        if (event.getCode() == KeyCode.ENTER) {
+            if(!sendBtn.isVisible())
+                addedSeason();
+            else
+                sendToDatabase();
         }
     }
 

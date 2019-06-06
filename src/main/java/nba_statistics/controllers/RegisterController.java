@@ -2,6 +2,7 @@ package nba_statistics.controllers;
 
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -11,6 +12,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import nba_statistics.services.UsersService;
@@ -23,7 +26,8 @@ import static nba_statistics.others.Alerts.information;
 public class RegisterController implements Initializable {
     @FXML  private TextField userField; @FXML private PasswordField passwordField; @FXML private PasswordField passwordField2;
     @FXML private Text errorText;
-    public void changeScreen(ActionEvent event) throws IOException {
+
+    public void changeScreen(Event event) throws IOException {
         FXMLLoader loader =new FXMLLoader(getClass().getResource("/MainView.fxml"));
         Parent registerParent = loader.load();
         Scene registerScene = new Scene(registerParent);
@@ -41,7 +45,7 @@ public class RegisterController implements Initializable {
             return false;
         return true;
     }
-    public void addUser(ActionEvent event){
+    public void addUser(Event event){
         UsersService usersService = new UsersService();
         if(!checkFields(userField,passwordField,passwordField2)){
             errorText.setVisible(true);
@@ -58,6 +62,20 @@ public class RegisterController implements Initializable {
                     errorText.setText(addUserResult);
                     errorText.setVisible(true);
                 }
+        }
+    }
+
+    @FXML
+    void onKeyPressed(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            addUser(event);
+        }
+        if (event.getCode() == KeyCode.ESCAPE) {
+            try{
+                changeScreen(event);
+            }catch(IOException e){
+                e.printStackTrace();
+            }
         }
     }
 }

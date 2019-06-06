@@ -1,6 +1,8 @@
 package nba_statistics.controllers;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -8,6 +10,8 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import nba_statistics.entities.Roles;
@@ -70,51 +74,89 @@ public class AccountController implements Initializable {
 //    public AccountController(Users loggedInUser){
 //        user=loggedInUser;
 //    }
-    public void logout(ActionEvent event) throws IOException {
-        Parent mainParent = FXMLLoader.load(getClass().getResource("/MainView.fxml"));
-        Scene preseasonScene = new Scene(mainParent);
+
+    private void createScene(Parent parent,Event event){
+        Scene preseasonScene = new Scene(parent);
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(preseasonScene);
         window.show();
     }
-    public void changeScreen(ActionEvent event) throws IOException {
+
+    public void logout(Event event) throws IOException {
+        Parent mainParent = FXMLLoader.load(getClass().getResource("/MainView.fxml"));
+        createScene(mainParent,event);
+    }
+//    public void changeScreen(Event event) throws IOException {
+//        Parent preseasonParent = FXMLLoader.load(getClass().getResource("/Preseason.fxml"));
+//        createScene(preseasonParent,event);
+//    }
+    public void changeScreenToStatistician(Event event) throws IOException {
+        Parent statisticianParent = FXMLLoader.load(getClass().getResource("/Statistician.fxml"));
+        createScene(statisticianParent,event);
+    }
+    public void changeScreenToAdmin(Event event) throws IOException {
+        Parent adminParent = FXMLLoader.load(getClass().getResource("/AdminView.fxml"));
+        createScene(adminParent,event);
+    }
+    public void changeScreenToPreseason(Event event) throws IOException {
         Parent preseasonParent = FXMLLoader.load(getClass().getResource("/Preseason.fxml"));
-        Scene preseasonScene = new Scene(preseasonParent);
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-        window.setScene(preseasonScene);
-        window.showAndWait();
-
-       // window.show();
-    }
-    public void changeScreenToStatistician(ActionEvent event) throws IOException {
-        Parent reviewerParent = FXMLLoader.load(getClass().getResource("/Statistician.fxml"));
-        Scene reviewerScene = new Scene(reviewerParent);
-
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-        window.setScene(reviewerScene);
-        window.show();
-    }
-    public void changeScreenToAdmin(ActionEvent event) throws IOException {
-        Parent reviewerParent = FXMLLoader.load(getClass().getResource("/AdminView.fxml"));
-        Scene reviewerScene = new Scene(reviewerParent);
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-        window.setScene(reviewerScene);
-        window.show();
-    }
-    public void changeScreenToPreseason(ActionEvent event) throws IOException {
-        Parent preseasonParent = FXMLLoader.load(getClass().getResource("/Preseason.fxml"));
-        Scene preseasonScene = new Scene(preseasonParent);
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-        window.setScene(preseasonScene);
-        window.show();
+        createScene(preseasonParent,event);
     }
 
-    public void changeScreenToReviewer(ActionEvent event) throws IOException {
+    public void changeScreenToReviewer(Event event) throws IOException {
         Parent reviewerParent = FXMLLoader.load(getClass().getResource("/DataViewer.fxml"));
-        Scene reviewerScene = new Scene(reviewerParent);
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-        window.setScene(reviewerScene);
-        window.show();
+        createScene(reviewerParent,event);
+    }
+
+    @FXML
+    void onKeyPressed(KeyEvent event) {
+        if (event.getCode() == KeyCode.ESCAPE) {
+            try {
+                logout(event);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    @FXML
+    void onKeyPressedPre(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            try {
+                changeScreenToPreseason(event);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    @FXML
+    void onKeyPressedStat(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            try {
+                changeScreenToStatistician(event);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    @FXML
+    void onKeyPressedView(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            try {
+                changeScreenToReviewer(event);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    @FXML
+    void onKeyPressedAdmin(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            try {
+                changeScreenToAdmin(event);
+            } catch (IOException e) {
+                //e.printStackTrace();
+            }
+        }
     }
 
 }
