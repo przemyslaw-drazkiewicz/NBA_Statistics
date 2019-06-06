@@ -20,12 +20,12 @@
             <Font name="Perpetua" size="48.0" />
          </font>
       </Text>
-      <TextField fx:id="userField" layoutX="199.0" layoutY="163.0" onKeyPressed="#onKeyPressed" prefHeight="25.0" prefWidth="200.0" promptText="Username">
+      <TextField fx:id="userField" layoutX="199.0" layoutY="163.0" prefHeight="25.0" prefWidth="200.0" promptText="Username">
          <effect>
             <Reflection fraction="0.82" topOpacity="0.0" />
          </effect>
       </TextField>
-      <PasswordField fx:id="passwordField" layoutX="199.0" layoutY="213.0" onKeyPressed="#onKeyPressed" prefHeight="25.0" prefWidth="200.0" promptText="Password" />
+      <PasswordField fx:id="passwordField" layoutX="199.0" layoutY="213.0" prefHeight="25.0" prefWidth="200.0" promptText="Password" />
       <Button id="registerBtn" layoutX="185.0" layoutY="296.0" mnemonicParsing="false" onAction="#changeScreenToRegister" style="-fx-border-color: transparent; -fx-background-color: transparent; -fx-cursor: hand;" text="Sign up" textFill="#fffbfb" underline="true" />
       <Text fx:id="errorText" fill="RED" layoutX="214.0" layoutY="369.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Invalid Username/Password!" textAlignment="CENTER" visible="false" />
    </children>
