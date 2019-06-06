@@ -2,94 +2,19 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <AnchorPane onKeyPressed="#onKeyPressed" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nba_statistics.controllers.statistician.Statistician">
    <children>
-      <ComboBox fx:id="matchesComboBox" layoutX="239.0" layoutY="88.0" prefHeight="25.0" prefWidth="337.0" />
-      <Button fx:id="buttonOK" layoutX="391.0" layoutY="195.0" mnemonicParsing="false" onAction="#onClickButtonOK" text="OK" />
-       <Text fx:id="choiceText" layoutX="317.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choice match">
+      <ComboBox fx:id="matchesComboBox" layoutX="132.0" layoutY="141.0" prefHeight="25.0" prefWidth="337.0" />
+      <Button fx:id="buttonOK" layoutX="284.0" layoutY="248.0" mnemonicParsing="false" onAction="#onClickButtonOK" text="OK" />
+       <Text fx:id="choiceText" layoutX="210.0" layoutY="111.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choice match">
            <font>
                <Font size="30.0" />
            </font>
        </Text>
-       <Text fx:id="matchText" layoutX="201.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" visible="false" wrappingWidth="424.0">
-           <font>
-               <Font size="20.0" />
-           </font>
-       </Text>
-      <Button layoutX="726.0" layoutY="26.0" mnemonicParsing="false" onAction="#changeScreen" text="Back" />
-      <Button fx:id="buttonBack" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#onClickButtonBack" text="Back to choice match" visible="false" />
-      <Button fx:id="oneH" layoutX="118.0" layoutY="178.0" mnemonicParsing="false" onAction="#oneH" prefHeight="25.0" prefWidth="57.0" text="+1  pts" visible="false" />
-      <Button fx:id="twoH" layoutX="215.0" layoutY="178.0" mnemonicParsing="false" onAction="#twoH" prefHeight="25.0" prefWidth="57.0" text="+2  pts" visible="false" />
-      <Button fx:id="threeH" layoutX="312.0" layoutY="178.0" mnemonicParsing="false" onAction="#threeH" prefHeight="25.0" prefWidth="57.0" text="+3  pts" visible="false" />
-      <Button fx:id="oneA" layoutX="409.0" layoutY="178.0" mnemonicParsing="false" onAction="#oneA" prefHeight="25.0" prefWidth="57.0" text="+1  pts" visible="false" />
-      <Button fx:id="twoA" layoutX="506.0" layoutY="178.0" mnemonicParsing="false" onAction="#twoA" prefHeight="25.0" prefWidth="57.0" text="+2  pts" visible="false" />
-      <Button fx:id="threeA" layoutX="603.0" layoutY="178.0" mnemonicParsing="false" onAction="#threeA" prefHeight="25.0" prefWidth="57.0" text="+3  pts" visible="false" />
-      <Button fx:id="StH" layoutX="262.0" layoutY="227.0" mnemonicParsing="false" onAction="#stealsH" prefHeight="25.0" prefWidth="98.0" text="Steals" visible="false" />
-      <Button fx:id="StA" layoutX="416.0" layoutY="227.0" mnemonicParsing="false" onAction="#stealsA" prefHeight="25.0" prefWidth="98.0" text="Steals" visible="false" />
-      <Button fx:id="BH" layoutX="262.0" layoutY="273.0" mnemonicParsing="false" onAction="#blockH" prefHeight="25.0" prefWidth="98.0" text="Block" visible="false" />
-      <Button fx:id="BA" layoutX="416.0" layoutY="273.0" mnemonicParsing="false" onAction="#blockA" prefHeight="25.0" prefWidth="98.0" text="Block" visible="false" />
-      <Button fx:id="RH" layoutX="262.0" layoutY="329.0" mnemonicParsing="false" onAction="#reboundH" prefHeight="25.0" prefWidth="98.0" text="Rebound" visible="false" />
-      <Button fx:id="RA" layoutX="416.0" layoutY="329.0" mnemonicParsing="false" onAction="#reboundA" prefHeight="25.0" prefWidth="98.0" text="Rebound" visible="false" />
-      <Button fx:id="FH" layoutX="262.0" layoutY="388.0" mnemonicParsing="false" onAction="#foulH" prefHeight="25.0" prefWidth="98.0" text="Foul" visible="false" />
-      <Button fx:id="FA" layoutX="416.0" layoutY="388.0" mnemonicParsing="false" onAction="#foulA" prefHeight="25.0" prefWidth="98.0" text="Foul" visible="false" />
-      <Button fx:id="TFH" layoutX="262.0" layoutY="443.0" mnemonicParsing="false" onAction="#techFoulH" prefHeight="25.0" prefWidth="98.0" text="Technical foul" visible="false" />
-      <Button fx:id="TFA" layoutX="416.0" layoutY="443.0" mnemonicParsing="false" onAction="#techFoulA" prefHeight="25.0" prefWidth="98.0" text="Technical foul" visible="false" />
-      <Button fx:id="SH" layoutX="262.0" layoutY="498.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="98.0" text="Substitute" visible="false" />
-      <Button fx:id="SA" layoutX="416.0" layoutY="498.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="98.0" text="Substitute" visible="false" />
-      <Text fx:id="min" layoutX="300.0" layoutY="142.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00" visible="false">
-         <font>
-            <Font size="90.0" />
-         </font>
-      </Text>
-      <Text fx:id="sec" layoutX="417.0" layoutY="141.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00" visible="false">
-         <font>
-            <Font size="90.0" />
-         </font>
-      </Text>
-      <Text fx:id="colon" layoutX="399.0" layoutY="132.0" strokeType="OUTSIDE" strokeWidth="0.0" text=":" visible="false">
-         <font>
-            <Font size="90.0" />
-         </font>
-      </Text>
-      <ListView fx:id="homeTeam" layoutX="103.0" layoutY="283.0" prefHeight="130.0" prefWidth="150.0" visible="false" />
-      <ListView fx:id="awayTeam" layoutX="535.0" layoutY="283.0" prefHeight="130.0" prefWidth="150.0" visible="false" />
-      <ListView fx:id="homeTeamChoice" layoutX="150.0" layoutY="111.0" prefHeight="117.0" prefWidth="200.0" visible="false" />
-      <ListView fx:id="awayTeamChoice" layoutX="150.0" layoutY="281.0" prefHeight="117.0" prefWidth="200.0" visible="false" />
-      <ListView fx:id="homeTeamFive" layoutX="464.0" layoutY="111.0" prefHeight="117.0" prefWidth="200.0" visible="false" />
-       <ListView fx:id="awayTeamFive" layoutX="464.0" layoutY="281.0" prefHeight="117.0" prefWidth="200.0" visible="false" />
-       <Text fx:id="homeTeamName" layoutX="357.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HOME TEAM" textAlignment="CENTER" visible="false">
-           <font>
-               <Font size="20.0" />
-           </font>
-       </Text>
-       <Text fx:id="awayTeamName" layoutX="357.0" layoutY="261.0" strokeType="OUTSIDE" strokeWidth="0.0" text="AWAY TEAM" textAlignment="CENTER" visible="false">
-           <font>
-               <Font size="20.0" />
-           </font>
-       </Text>
-      <Button fx:id="addHT" layoutX="388.0" layoutY="131.0" mnemonicParsing="false" onAction="#onClickButtonAddH" text="Add" visible="false" />
-      <Button fx:id="remHT" layoutX="378.0" layoutY="181.0" mnemonicParsing="false" onAction="#onClickButtonRemH" text="Remove" visible="false" />
-      <Button fx:id="addAT" layoutX="388.0" layoutY="296.0" mnemonicParsing="false" onAction="#onClickButtonAddA" text="Add" visible="false" />
-      <Button fx:id="remAT" layoutX="378.0" layoutY="351.0" mnemonicParsing="false" onAction="#onClickButtonRemA" text="Remove" visible="false" />
-      <Button fx:id="confirmSquad" layoutX="359.0" layoutY="423.0" mnemonicParsing="false" onAction="#onClickButtonConfirm" prefHeight="57.0" prefWidth="96.0" text="Confirm" textAlignment="CENTER" visible="false">
-         <font>
-            <Font name="System Bold Italic" size="12.0" />
-         </font>
-      </Button>
-       <Text fx:id="listPlayers" layoutX="215.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Players" textAlignment="CENTER" visible="false">
-           <font>
-               <Font size="20.0" />
-           </font>
-       </Text>
-       <Text fx:id="firstSquad" layoutX="516.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="First squad" textAlignment="CENTER" visible="false">
-           <font>
-               <Font size="20.0" />
-           </font>
-       </Text>
+      <Button fx:id="btnBack" layoutX="521.0" layoutY="27.0" mnemonicParsing="false" onAction="#changeScreen" text="Back" />
    </children>
 </AnchorPane>
