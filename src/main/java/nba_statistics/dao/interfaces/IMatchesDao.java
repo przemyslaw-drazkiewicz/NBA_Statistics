@@ -12,4 +12,5 @@ public interface IMatchesDao {
     void persist(Matches matches);
     List<PlayerMatchAchievements> getAchievementPlayerInMatch(int idPlayer, int idSeason, int idTeam);
     List<Matches> getMatches(String team, String date);
+    List<PlayerMatchAchievements> getAchievementPlayerInSeason(int idSeason);
 }

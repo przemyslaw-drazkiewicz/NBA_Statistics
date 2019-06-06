@@ -35,6 +35,7 @@ import nba_statistics.services.SeasonsService;
 import nba_statistics.services.TeamsService;
 
 import java.io.IOException;
+import java.io.LineNumberInputStream;
 import java.net.URL;
 import java.util.*;
 
@@ -284,24 +285,23 @@ public class SelectData implements Initializable {
         if(players.size()==0){
              //alert if all data is not available
              if(name.getText().length() == 0 || surname.getText().length() == 0){
-                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                /* Alert alert = new Alert(Alert.AlertType.INFORMATION);
                  alert.setTitle("Warning");
                  alert.setHeaderText("Wrong Data");
                  alert.setContentText("You have to enter all data");
-                 alert.showAndWait();
+                 alert.showAndWait();*/
+                getAlertPlayer();
              }else{
-                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                /* Alert alert = new Alert(Alert.AlertType.INFORMATION);
                  alert.setTitle("Warning");
                  alert.setHeaderText("No found a player");
                  alert.setContentText("Player is not exist");
-                 alert.showAndWait();
+                 alert.showAndWait();*/
+                 getAlertNoPlayer();
              }
 
-        }
-
-
-        //if is more people with the same name and surname
-        if(players.size() > 1){
+        }//if is more people with the same name and surname
+        else if(players.size() > 1){
             //TO DO
             setVisibleDateOfBirth();
             for(int i = 0; i<players.size(); i++){
@@ -309,82 +309,83 @@ public class SelectData implements Initializable {
             }
             setInisibleDateOfBirth();
         }
+        else{
+            int idPlayer = players.get(0).getId(); //   ObservableList<PlayerTeamsHistory> playerSeasons = FXCollections.observableArrayList(PlayerTeamsHistoryService.getPlayerSeasons(id));
+            final int[] idSeason = {-1};
+            final int[] idTeam = {-1};
+
+            //choice season
+            setVisibleSeasons();
+            List<PlayerTeamsHistory> playerSeasons = playersService.getPlayerTeamsHistory(idPlayer);
+
+            List<String> nameSeason = new ArrayList<String>(playerSeasons.size());
+            for(PlayerTeamsHistory nameS : playerSeasons){
+                nameSeason.add(nameS.getSeason().getName());
+            }
+
+            if(!nameSeason.isEmpty()){
+
+                ObservableList<String> oNameSeason = FXCollections.observableArrayList(nameSeason);
+                listSeasons.setItems(oNameSeason);
+                listSeasons.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 
 
-        int idPlayer = players.get(0).getId(); //   ObservableList<PlayerTeamsHistory> playerSeasons = FXCollections.observableArrayList(PlayerTeamsHistoryService.getPlayerSeasons(id));
-        final int[] idSeason = {-1};
-        final int[] idTeam = {-1};
+                listSeasons.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+                    @Override
+                    public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                        label.setText("Season: " + newValue);
+                        label2.setText("Name: " + players.get(0).getName()); //
+                        label3.setText("Surname: " + players.get(0).getSurname());
 
-        //choice season
-
-        setVisibleSeasons();
-        List<PlayerTeamsHistory> playerSeasons = playersService.getPlayerTeamsHistory(idPlayer);
-
-        List<String> nameSeason = new ArrayList<String>(playerSeasons.size());
-        for(PlayerTeamsHistory nameS : playerSeasons){
-            nameSeason.add(nameS.getSeason().getName());
-        }
-
-        if(nameSeason.size() >0){
-
-
-            ObservableList<String> oNameSeason = FXCollections.observableArrayList(nameSeason);
-            listSeasons.setItems(oNameSeason);
-            listSeasons.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-
-
-            listSeasons.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
-                @Override
-                public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                    label.setText("Season: " + newValue);
-                    label2.setText("Name: " + players.get(0).getName()); //
-                    label3.setText("Surname: " + players.get(0).getSurname());
-
-                    for(int i =0; i<playerSeasons.size(); i++){
-                        if( newValue.equalsIgnoreCase(playerSeasons.get(i).getSeason().getName())) {
-                            label4.setText("Team: " + playerSeasons.get(i).getTeam().getName());
-                            idSeason[0] = playerSeasons.get(i).getSeason().getId();
-                            idTeam[0] =playerSeasons.get(i).getTeam().getId();
+                        for(int i =0; i<playerSeasons.size(); i++){
+                            if( newValue.equalsIgnoreCase(playerSeasons.get(i).getSeason().getName())) {
+                                label4.setText("Team: " + playerSeasons.get(i).getTeam().getName());
+                                idSeason[0] = playerSeasons.get(i).getSeason().getId();
+                                idTeam[0] =playerSeasons.get(i).getTeam().getId();
+                            }
                         }
+
+
+                        List<PlayerMatchAchievements> achievementPlayer = matchesService.getAchievementPlayerInMatch(idPlayer, idSeason[0], idTeam[0] );
+                        label5.setText("Number matches: " + achievementPlayer.size());
+
+
+                        int points = 0, steals = 0, blocks = 0, rebounds = 0, fouls = 0, techFaul = 0;
+
+                        for(PlayerMatchAchievements os : achievementPlayer){
+                            points += os.getScoredPoints();
+                            steals += os.getSteals();
+                            blocks += os.getBlocks();
+                            rebounds += os.getRebounds();
+                            fouls += os.getFouls();
+                            techFaul += os.getTechnicalFouls();
+                        }
+
+                        label6.setText("Points earned: " + points);
+                        label7.setText("Steals: " + steals);
+                        label8.setText("Blocks: " + blocks);
+                        label9.setText("Rebounds: " + rebounds);
+                        label10.setText("Fouls: " + fouls);
+                        label11.setText("Technical fouls: " + techFaul);
+                        image.setImage(new Image(players.get(0).getImageURL()));
+                        setVisibleLabelsPlayerAchievements();
+
                     }
+                });
+            } else{
+                setInvisibleSeasons();
 
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Warning");
+                alert.setHeaderText("No seasons");
+                alert.setContentText("No seasons for this player");
+                alert.showAndWait();
 
-                    List<PlayerMatchAchievements> achievementPlayer = matchesService.getAchievementPlayerInMatch(idPlayer, idSeason[0], idTeam[0] );
-                    label5.setText("Number matches: " + achievementPlayer.size());
-
-
-                    int points = 0, steals = 0, blocks = 0, rebounds = 0, fouls = 0, techFaul = 0;
-
-                    for(PlayerMatchAchievements os : achievementPlayer){
-                        points += os.getScoredPoints();
-                        steals += os.getSteals();
-                        blocks += os.getBlocks();
-                        rebounds += os.getRebounds();
-                        fouls += os.getFouls();
-                        techFaul += os.getTechnicalFouls();
-                    }
-
-                    label6.setText("Points earned: " + points);
-                    label7.setText("Steals: " + steals);
-                    label8.setText("Blocks: " + blocks);
-                    label9.setText("Rebounds: " + rebounds);
-                    label10.setText("Fouls: " + fouls);
-                    label11.setText("Technical fouls: " + techFaul);
-                    image.setImage(new Image(players.get(0).getImageURL()));
-                    setVisibleLabelsPlayerAchievements();
-
-                }
-            });
-        } else{
-            setInvisibleSeasons();
-
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Warning");
-            alert.setHeaderText("No seasons");
-            alert.setContentText("No seasons for this player");
-            alert.showAndWait();
-
+            }
         }
+
+
+
 
 
 
@@ -394,8 +395,9 @@ public class SelectData implements Initializable {
     public void selectListTopTenSchooters(){
 
         SeasonsService seasonsService = new SeasonsService();
+        MatchesService matchesService = new MatchesService();
 
-        String nameSeason = "";
+        String nameSeason = null;
         System.out.println(comboBoxSeasons.getValue());
         nameSeason = comboBoxSeasons.getValue();
 
@@ -403,6 +405,8 @@ public class SelectData implements Initializable {
         season = seasonsService.getSeason(nameSeason);
 
         System.out.println(season.getId());
+
+        List<PlayerMatchAchievements> playerMatchAchievements = matchesService.getAchievementsPlayersInSeason(season.getId());
 
     }
 

@@ -90,7 +90,7 @@ public class MatchesDao extends Dao implements IMatchesDao{
         List<PlayerMatchAchievements> tmp = new ArrayList<>();
         List<PlayerMatchAchievements> achievements = new ArrayList<>();
 
-        System.out.println(matches.size());
+       // System.out.println(matches.size());
 
         for(int i =0; i<matches.size(); i++){
             idMatch = matches.get(i).getId();
@@ -120,5 +120,23 @@ public class MatchesDao extends Dao implements IMatchesDao{
 
         List <Matches> matchesList = theQuery.getResultList();
         return matchesList;
+    }
+
+    public List<PlayerMatchAchievements> getAchievementPlayerInSeason(int idSeason) {
+
+        List<PlayerMatchAchievements> achievements = new ArrayList<>();
+/*
+        Query <Matches> theQuery = getCurrentSession().createQuery("from Matches where season_id = : idSeason").setParameter("idSeason", idSeason);
+        List <Matches> matchesList = theQuery.getResultList();
+        int idMatch = -1;
+
+        for(int i =0; i<matchesList.size();i++){
+            idMatch = matchesList.get(i).getId();
+            Query <PlayerMatchAchievements> query2 = getCurrentSession().createQuery("select player_id, sum(scored_points) as suma from  PlayerMatchAchievements where match_id =: idMatch group by player_id order by suma desc").setParameter("idMatch", idMatch);
+          //  if(query2.getResultList().size() != 0) achievements.add(query2.getResultList());
+            achievements.add((PlayerMatchAchievements) query2.getResultList());
+            System.out.println(achievements);
+        }*/
+        return achievements;
     }
 }

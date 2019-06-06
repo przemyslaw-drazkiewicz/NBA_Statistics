@@ -30,6 +30,15 @@ public class Alerts {
         errorAlert.showAndWait();
     }
 
+    public static void getAlertNoPlayer(){
+
+        Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+        errorAlert.setTitle("ERROR");
+        errorAlert.setHeaderText("No found a player");
+        errorAlert.setContentText("Player not exist");
+        errorAlert.showAndWait();
+    }
+
     public static void getAlertSeason(String s){
 
         Alert errorAlert = new Alert(Alert.AlertType.ERROR);

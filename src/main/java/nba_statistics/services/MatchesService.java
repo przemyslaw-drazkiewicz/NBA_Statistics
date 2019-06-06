@@ -55,4 +55,11 @@ public class MatchesService{
         matchesDao.closeCurrentSession();
         return matchesList;
     }
+
+    public List<PlayerMatchAchievements> getAchievementsPlayersInSeason(int nameSeason) {
+        matchesDao.openCurrentSessionwithTransaction();
+        List<PlayerMatchAchievements> achievements = matchesDao.getAchievementPlayerInSeason(nameSeason);
+        matchesDao.closeCurrentSessionwithTransaction();
+        return achievements;
+    }
 }
