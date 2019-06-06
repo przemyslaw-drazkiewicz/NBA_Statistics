@@ -2,7 +2,6 @@ package nba_statistics.controllers.statistician;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -96,7 +95,7 @@ public class Statistician implements Initializable {
 
     private Date date = new Date();
 
-    private List<Matches> matchs;
+    private List<Matches> matches;
 
     public void changeScreen(Event event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/AccountView.fxml"));
@@ -114,7 +113,7 @@ public class Statistician implements Initializable {
 
 
     private int findPosPlayerHome(String player){
-        int i =0;
+        int i = 0;
         for(PlayerMatchAchievements p : home){
             if ((p.getPlayer().getName() + " " + p.getPlayer().getSurname()).equals(player)){
                 return i;
@@ -126,42 +125,42 @@ public class Statistician implements Initializable {
     public void oneH(){
         String player =(String) homeTeam.getSelectionModel().getSelectedItem();
         if(player!=null) //player is not selected
-            achievementsHome[findPosPlayerHome(player)][0] +=1;
+            home.get(findPosPlayerHome(player)).addPoints(1);
     }
     public void twoH(){
         String player =(String) homeTeam.getSelectionModel().getSelectedItem();
         if (player != null)
-            achievementsHome[findPosPlayerHome(player)][0] +=2;
+            home.get(findPosPlayerHome(player)).addPoints(2);
     }
     public void threeH(){
         String player =(String) homeTeam.getSelectionModel().getSelectedItem();
         if (player!=null)
-            achievementsHome[findPosPlayerHome(player)][0] +=3;
+            home.get(findPosPlayerHome(player)).addPoints(3);
     }
     public void stealsH(){
         String player =(String) homeTeam.getSelectionModel().getSelectedItem();
         if (player!=null)
-            achievementsHome[findPosPlayerHome(player)][1]+=1;
+            home.get(findPosPlayerHome(player)).addSteal();
     }
     public void blockH(){
         String player =(String) homeTeam.getSelectionModel().getSelectedItem();
         if (player!=null)
-            achievementsHome[findPosPlayerHome(player)][2]+=1;
+            home.get(findPosPlayerHome(player)).addBlock();
     }
     public void reboundH(){
         String player =(String) homeTeam.getSelectionModel().getSelectedItem();
         if (player!=null)
-            achievementsHome[findPosPlayerHome(player)][3]+=1;
+            home.get(findPosPlayerHome(player)).addRebound();
     }
     public void foulH(){
         String player =(String) homeTeam.getSelectionModel().getSelectedItem();
         if (player!=null)
-            achievementsHome[findPosPlayerHome(player)][4]+=1;
+            home.get(findPosPlayerHome(player)).addFoul();
     }
     public void techFoulH(){
         String player =(String) homeTeam.getSelectionModel().getSelectedItem();
         if (player!=null)
-            achievementsHome[findPosPlayerHome(player)][5]+=1;
+            home.get(findPosPlayerHome(player)).addTechFoul();
     }
 
     private int findPosPlayerAway(String player){
@@ -177,46 +176,45 @@ public class Statistician implements Initializable {
     public void oneA(){
         String player =(String) awayTeam.getSelectionModel().getSelectedItem();
         if(player!=null) //player is not selected
-            achievementsAway[findPosPlayerAway(player)][0] +=1;
+            away.get(findPosPlayerAway(player)).addPoints(1);
     }
     public void twoA(){
         String player =(String) awayTeam.getSelectionModel().getSelectedItem();
         if (player != null)
-            achievementsAway[findPosPlayerAway(player)][0] +=2;
+            away.get(findPosPlayerAway(player)).addPoints(2);
     }
     public void threeA(){
         String player =(String) awayTeam.getSelectionModel().getSelectedItem();
         if (player!=null)
-            achievementsAway[findPosPlayerAway(player)][0] +=3;
+            away.get(findPosPlayerAway(player)).addPoints(3);
     }
     public void stealsA(){
         String player =(String) awayTeam.getSelectionModel().getSelectedItem();
         if (player!=null)
-            achievementsAway[findPosPlayerAway(player)][1]+=1;
+            away.get(findPosPlayerAway(player)).addSteal();
     }
     public void blockA(){
         String player =(String) awayTeam.getSelectionModel().getSelectedItem();
         if (player!=null)
-            achievementsAway[findPosPlayerAway(player)][2]+=1;
+            away.get(findPosPlayerAway(player)).addBlock();
     }
     public void reboundA(){
         String player =(String) awayTeam.getSelectionModel().getSelectedItem();
         if (player!=null)
-            achievementsAway[findPosPlayerAway(player)][3]+=1;
+            away.get(findPosPlayerAway(player)).addRebound();
     }
     public void foulA(){
         String player =(String) awayTeam.getSelectionModel().getSelectedItem();
         if (player!=null)
-            achievementsAway[findPosPlayerAway(player)][4]+=1;
+            away.get(findPosPlayerAway(player)).addFoul();
     }
     public void techFoulA(){
         String player =(String) awayTeam.getSelectionModel().getSelectedItem();
         if (player!=null)
-            achievementsAway[findPosPlayerAway(player)][5]+=1;
+            away.get(findPosPlayerAway(player)).addTechFoul();
     }
 
     private void finishedMatch(){
-        setAchievementsToLists();
         toTesting();
         PlayerMatchAchievementsService playerMatchAchievementsService = new PlayerMatchAchievementsService();
         playerMatchAchievementsService.save(home);
@@ -242,7 +240,7 @@ public class Statistician implements Initializable {
             awayTeamSquad = new ArrayList<>();
             playersListTeamH = new ArrayList<>();
             playersListTeamA = new ArrayList<>();
-            match = matchs.get(matchSelected);
+            match = matches.get(matchSelected);
             Teams teamH = match.getHostTeam();
             Teams teamA = match.getGuestTeam();
             int id_TeamH = teamH.getId();
@@ -317,29 +315,7 @@ public class Statistician implements Initializable {
         v.setInvisibleM(oneH,twoH,threeH,oneA,twoA,threeA,BH,BA,RH,RA,FH,FA,TFH,TFA,SH,SA,homeTeam,awayTeam,buttonBack,matchText,min,sec,colon,StH, StA);
     }
 
-    @SuppressWarnings("Duplicates")
-    private void setAchievementsToLists(){
-        int i=0;
-        for (PlayerMatchAchievements p : home){
-            p.setScoredPoints(achievementsHome[i][0]);
-            p.setSteals(achievementsHome[i][1]);
-            p.setBlocks(achievementsHome[i][2]);
-            p.setRebounds(achievementsHome[i][3]);
-            p.setFouls(achievementsHome[i][4]);
-            p.setTechnicalFouls(achievementsHome[i][5]);
-            i++;
-        }
-        i =0;
-        for (PlayerMatchAchievements p : away){
-            p.setScoredPoints(achievementsAway[i][0]);
-            p.setSteals(achievementsAway[i][1]);
-            p.setBlocks(achievementsAway[i][2]);
-            p.setRebounds(achievementsAway[i][3]);
-            p.setFouls(achievementsAway[i][4]);
-            p.setTechnicalFouls(achievementsAway[i][5]);
-            i++;
-        }
-    }
+
     private void toTesting(){
         System.out.println("=======================HOME=============================");
         for (PlayerMatchAchievements p : home){System.out.println(p.getPlayer().toString() + p.getMatch().toString() + p.toString());}
@@ -347,8 +323,6 @@ public class Statistician implements Initializable {
         for (PlayerMatchAchievements p : away){System.out.println(p.getPlayer().toString() + p.getMatch().toString() + p.toString());}
     }
 
-    private int[][] achievementsHome; //table with achievements -> x is 'id' player, y-> is points, blocks etc
-    private int[][] achievementsAway;
     private ArrayList<PlayerMatchAchievements> home = new ArrayList<>();
     private ArrayList<PlayerMatchAchievements> away = new ArrayList<>();
     private void initCollectAchievements(){
@@ -358,8 +332,6 @@ public class Statistician implements Initializable {
         for (Players p : playersTeamA){
             away.add(new PlayerMatchAchievements(p,match));
         }
-        achievementsHome = new int[playersTeamH.size()][6]; //6 because collecting points, blocks, rebounds, fouls and tech fouls
-        achievementsAway = new int[playersTeamA.size()][6];
 
     }
     @SuppressWarnings("Duplicates")
@@ -500,8 +472,10 @@ public class Statistician implements Initializable {
                 else
                     min.setText(0 + String.valueOf(minutes));
             }
-            if (minutes == 1 && seconds == 0) { //MATCH FINISHED if time is 01:00 -> for testing
+            if (minutes == 0 && seconds == 20) { //MATCH FINISHED if time is 01:00 -> for testing
                 finishedMatch();
+/*                isStart = false;
+                myTimer.cancel();*/
 
             }
         }
@@ -516,11 +490,11 @@ public class Statistician implements Initializable {
         String dateS = formatter.format(date);
 
         MatchesService matchesDao = new MatchesService();
-        matchs = matchesDao.findAllAtDate(dateS);
+        matches = matchesDao.findAllAtDate(dateS);
 
         matchesT = new ArrayList<>();
 
-        for (Matches matches : matchs) {
+        for (Matches matches : matches) {
             match = matches;
 
             Teams teamH = match.getHostTeam();

@@ -138,6 +138,28 @@ public class PlayerMatchAchievements {
         this.match = match;
     }
 
+
+    public void addPoints(int points){
+        this.scoredPoints+=points;
+    }
+    public void addSteal(){
+        this.steals+=1;
+    }
+    public void addRebound(){
+        this.rebounds+=1;
+    }
+    public void addBlock(){
+        this.blocks+=1;
+    }
+    public void addFoul(){
+        this.fouls+=1;
+    }
+    public void addTechFoul(){
+        this.technicalFouls+=1;
+    }
+
+
+
     @Override
     public String toString() {
         return "PlayerMatchAchievements{" +
