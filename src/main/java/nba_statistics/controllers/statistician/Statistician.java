@@ -112,12 +112,6 @@ public class Statistician implements Initializable {
     }
     private boolean isStart = false;
 
-    @FXML
-    void onKeyPressed(KeyEvent event) {
-        if (event.getCode() == KeyCode.S) {
-            isStart = !isStart;
-        }
-    }
 
     private int findPosPlayerHome(String player){
         int i =0;
@@ -558,6 +552,9 @@ public class Statistician implements Initializable {
 
     @FXML
     void onKeyPressed(KeyEvent event) {
+        if (event.getCode() == KeyCode.S) {
+            isStart = !isStart;
+        }
         if (event.getCode() == KeyCode.ENTER) {
             onClickButtonOK();        }
         if (event.getCode() == KeyCode.ESCAPE) {

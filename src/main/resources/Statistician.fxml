@@ -8,7 +8,6 @@
 <?import javafx.scene.text.Text?>
 
 <AnchorPane onKeyPressed="#onKeyPressed" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nba_statistics.controllers.statistician.Statistician">
-<AnchorPane onKeyPressed="#onKeyPressed" prefHeight="553.0" prefWidth="792.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nba_statistics.controllers.statistician.Statistician">
    <children>
       <ComboBox fx:id="matchesComboBox" layoutX="239.0" layoutY="88.0" prefHeight="25.0" prefWidth="337.0" />
       <Button fx:id="buttonOK" layoutX="391.0" layoutY="195.0" mnemonicParsing="false" onAction="#onClickButtonOK" text="OK" />
