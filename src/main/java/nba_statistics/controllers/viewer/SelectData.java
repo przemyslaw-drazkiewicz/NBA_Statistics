@@ -19,6 +19,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.text.Text;
@@ -84,6 +86,7 @@ public class SelectData implements Initializable {
     @FXML private TableColumn<Matches, Integer> homePoints;
     @FXML private TableColumn<Matches, Integer> awayPoints;
     @FXML private TableColumn<Matches, Integer> extraTime;
+    @FXML private ImageView image;
 
 
     ObservableList<String> kindOfData = FXCollections.observableArrayList
@@ -125,6 +128,7 @@ public class SelectData implements Initializable {
         label9.setVisible(true);
         label10.setVisible(true);
         label11.setVisible(true);
+        image.setVisible(true);
 
     }
 
@@ -140,6 +144,9 @@ public class SelectData implements Initializable {
         label9.setVisible(false);
         label10.setVisible(false);
         label11.setVisible(false);
+        image.setVisible(true);
+
+
 
     }
 
@@ -363,7 +370,7 @@ public class SelectData implements Initializable {
                     label9.setText("Rebounds: " + rebounds);
                     label10.setText("Fouls: " + fouls);
                     label11.setText("Technical fouls: " + techFaul);
-
+                    image.setImage(new Image(players.get(0).getImageURL()));
                     setVisibleLabelsPlayerAchievements();
 
                 }

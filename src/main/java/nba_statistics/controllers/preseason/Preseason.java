@@ -11,14 +11,18 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import nba_statistics.controllers.AccountController;
 import nba_statistics.services.*;
 import org.controlsfx.control.textfield.TextFields;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -43,11 +47,11 @@ public class Preseason implements Initializable {
     @FXML private Text s10; @FXML private Text s11; @FXML private Text s12; @FXML private Text s13;
     @FXML private ComboBox<String> seasonsNameCombox;@FXML private TextField t30; @FXML private TextField t31; @FXML private TextField t32;
 
-    @FXML private Text p40; @FXML private Text p41; @FXML private Text p42; @FXML private Text p43; @FXML private Text p44; @FXML private Text p45;
+    @FXML private Text p40; @FXML private Text p41; @FXML private Text p42; @FXML private Text p43; @FXML private Text p44; @FXML private Text p45; @FXML private Text p46;
     @FXML private TextField t40; @FXML private TextField t41; @FXML private ComboBox<String> t42;@FXML private TextField t43; @FXML private TextField t44;@FXML private TextField t45;
 
-    @FXML private Button sendBtn; @FXML private Button addedSeasonBtn;
-
+    @FXML private Button sendBtn; @FXML private Button addedSeasonBtn; @FXML private Button pictureBtn;
+    @FXML private ImageView image;
     @FXML private Text tSeason; @FXML private Text tSeason0;
     @FXML private Text tDuration; @FXML private Text tDuration0;
 
@@ -71,6 +75,7 @@ public class Preseason implements Initializable {
 
     private String state;
     private String currSeason;
+    private String currImageURL="";
     private Visibility v;
 
     public void changeScreen(Event event) throws IOException {
@@ -190,8 +195,8 @@ public class Preseason implements Initializable {
             case "Team":
                 v.setInvisibleCheckBox(newPlayerCheckBox, transferCheckBox);
                 v.setInvisibleM(m10, m11, m12, tSeason, tSeason0, t20, t21, t22,tDuration0, tDuration);
-                v.setInvisibleP(p40, p41, p42, p43, p44, p45, t40, t41, t42, t43, t44, t45, playerText, playerField);
-                v.setVisibleD(d10, d11, d12, d13, t10, t12, t13);
+                v.setInvisibleP(p40, p41, p42, p43, p44, p45,p46, t40, t41, t42, t43, t44, t45,playerText, playerField,pictureBtn,image);
+                v.setVisibleD(d10, d11, d12, d13,p46, t10, t12, t13,pictureBtn,image);
                 t10.getSelectionModel().clearSelection();
                 v.clearTextFieldD(t12,t13);
                 state = "Team";
@@ -201,7 +206,7 @@ public class Preseason implements Initializable {
             case "Match":
                 v.setInvisibleCheckBox(newPlayerCheckBox, transferCheckBox);
                 v.setInvisibleD(d10, d11, d12, d13, t10, t12, t13, DivE, DivW);
-                v.setInvisibleP(p40, p41, p42, p43, p44, p45, t40, t41, t42, t43, t44, t45,playerText, playerField);
+                v.setInvisibleP(p40, p41, p42, p43, p44, p45,p46, t40, t41, t42, t43, t44, t45,playerText, playerField,pictureBtn,image);
                 v.setVisibleM(m10, m11, m12, tSeason, tSeason0, t20, t21, t22, tDuration0, tDuration);
                 v.clearTextFieldM(t22);
                 initComboBoxTeams();
@@ -235,8 +240,8 @@ public class Preseason implements Initializable {
     }
 
     public void addNewPlayer() {
-        v.setInvisibleP(p40, p41, p42, p43, p44, p45, t40, t41, t42, t43, t44, t45,playerText, playerField);
-        v.setVisibleNewPlayerT(p40, p41, p42, p43, p44, p45, t40, t41, t42, t43, t44, t45);
+        v.setInvisibleP(p40, p41, p42, p43, p44, p45,p46, t40, t41, t42, t43, t44, t45,playerText, playerField,pictureBtn,image);
+        v.setVisibleNewPlayerT(p40, p41, p42, p43, p44, p45,p46, t40, t41, t42, t43, t44, t45,pictureBtn,image);
         v.clearTextFieldNewPlayer(t40,t41,t43,t44,t45);
         transferCheckBox.setSelected(false);
         t42.getSelectionModel().clearSelection();
@@ -245,8 +250,8 @@ public class Preseason implements Initializable {
     }
 
     public void changeTeam() {
-        v.setInvisibleP(p40, p41, p42, p43, p44, p45, t40, t41, t42, t43, t44, t45,playerText, playerField);
-        v.setVisibleTransferT(playerText, p42,playerField , t42);
+        v.setInvisibleP(p40, p41, p42, p43, p44, p45,p46, t40, t41, t42, t43, t44, t45,playerText, playerField,pictureBtn,image);
+        v.setVisibleTransferT(playerText, p42,p46,playerField , t42, pictureBtn,image);
         v.clearTextFieldTransfer(playerField);
         state = "Transfer";
         newPlayerCheckBox.setSelected(false);
@@ -266,7 +271,7 @@ public class Preseason implements Initializable {
                         if (DivE.getValue() == null)
                             getAlertDivision();
                         else {
-                            teamsService.getData(t10.getValue(), DivE.getValue(), t12.getText(), t13.getText());
+                            teamsService.getData(t10.getValue(), DivE.getValue(), t12.getText(), t13.getText(),currImageURL);
                             information(1);
                             v.clearTextFieldD(t12, t13);
                             t10.getSelectionModel().clearSelection();DivE.setVisible(false);DivW.setVisible(false);
@@ -275,7 +280,7 @@ public class Preseason implements Initializable {
                         if (DivW.getValue() == null)
                             getAlertDivision();
                         else {
-                            teamsService.getData(t10.getValue(), DivW.getValue(), t12.getText(), t13.getText());
+                            teamsService.getData(t10.getValue(), DivW.getValue(), t12.getText(), t13.getText(),currImageURL);
                             information(1);
                             v.clearTextFieldD(t12, t13);
                             t10.getSelectionModel().clearSelection();DivE.setVisible(false);DivW.setVisible(false);
@@ -318,7 +323,7 @@ public class Preseason implements Initializable {
             case "NewPlayer":
                 PlayersService playersService = new PlayersService();
                 try {
-                    switch (playersService.getData(t40.getText(), t41.getText(), t43.getText(), Float.parseFloat(t44.getText()), Float.parseFloat(t45.getText()), t42.getValue())) {
+                    switch (playersService.getData(t40.getText(), t41.getText(), t43.getText(), Float.parseFloat(t44.getText()), Float.parseFloat(t45.getText()), t42.getValue(),currImageURL)) {
                         case 0:
                             information(3);
                             v.clearTextFieldNewPlayer(t40, t41, t43, t44, t45);
@@ -337,7 +342,7 @@ public class Preseason implements Initializable {
                 break;
             case "Transfer":
                 PlayersService playersService1 = new PlayersService();
-                switch (playersService1.updatePlayer(playerField.getText(),t42.getValue())){
+                switch (playersService1.updatePlayer(playerField.getText(),t42.getValue(),currImageURL)){
                     case 0:
                         PlayerTeamsHistoryService playerTeamsHistoryService = new PlayerTeamsHistoryService();
                         if (playerTeamsHistoryService.savePlayerTeamsHistory(playerField.getText(),t42.getValue(),currSeason)){
@@ -387,6 +392,16 @@ public class Preseason implements Initializable {
                 sendToDatabase();
         }
     }
-
+    public void setImage(Event event) throws IOException{
+        FileChooser fileChooser = new FileChooser();
+        FileChooser.ExtensionFilter imageFilter
+                = new FileChooser.ExtensionFilter("Image Files", "*.jpg", "*.png");
+        fileChooser.getExtensionFilters().add(imageFilter);
+        fileChooser.setTitle("Open Resource File");
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        File file = fileChooser.showOpenDialog(window);
+        currImageURL=file.toURI().toString();
+        image.setImage(new Image(currImageURL));
+    }
 
 }

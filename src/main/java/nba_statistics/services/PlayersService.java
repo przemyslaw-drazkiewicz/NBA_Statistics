@@ -13,9 +13,9 @@ public class PlayersService {
         playersDao = new PlayersDao();
     }
 
-    public int getData(String name, String surname, String date, float height, float weight, String team){
+    public int getData(String name, String surname, String date, float height, float weight, String team, String imageURL){
         playersDao.openCurrentSessionwithTransaction();
-        int tmp = playersDao.getData(name, surname, date,height, weight, team);
+        int tmp = playersDao.getData(name, surname, date,height, weight, team, imageURL);
         playersDao.closeCurrentSessionwithTransaction();
         return tmp;
     }
@@ -48,9 +48,9 @@ public class PlayersService {
         return list;
     }
 
-    public int updatePlayer(String name,String team){
+    public int updatePlayer(String name,String team, String imageURL){
         playersDao.openCurrentSessionwithTransaction();
-        int i = playersDao.updatePlayer(name, team);
+        int i = playersDao.updatePlayer(name, team,imageURL);
         playersDao.closeCurrentSessionwithTransaction();
         return i;
     }

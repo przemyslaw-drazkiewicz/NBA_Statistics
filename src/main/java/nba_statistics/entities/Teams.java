@@ -41,6 +41,9 @@ public class Teams {
     @Column(name = "location")
     private String location;
 
+    @Column(name="image")
+    private String imageURL;
+
     @OneToMany(mappedBy = "hostTeam", cascade={CascadeType.PERSIST, CascadeType.MERGE,
                 CascadeType.DETACH, CascadeType.REFRESH})
     private List<Matches> matchesHost;
@@ -61,11 +64,12 @@ public class Teams {
     public Teams() {
     }
 
-    public Teams(String division, String conference, String name, String location) {
+    public Teams(String division, String conference, String name, String location, String imageURL) {
         this.division = division;
         this.conference = conference;
         this.name = name;
         this.location = location;
+        this.imageURL=imageURL;
     }
 
     public void addMatchesHost(Matches mecz) {
@@ -127,6 +131,10 @@ public class Teams {
     public void setLocation(String location) {
         this.location = location;
     }
+
+    public String getImageURL() { return imageURL; }
+
+    public void setImageURL(String imageURL) { this.imageURL = imageURL; }
 
     @Override
     public String toString() {

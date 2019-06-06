@@ -26,13 +26,13 @@ public class PlayersDao extends Dao implements IPlayersDao {
         getCurrentSession().save(entity);
     }
 
-    public int getData(String name, String surname, String date, float height, float weight, String team) {
+    public int getData(String name, String surname, String date, float height, float weight, String team, String imageURL) {
         try{
             Date date1= Date.valueOf(date);
         }catch(IllegalArgumentException e){
             return 2;
         }
-        Players z = new Players(name, surname, date, height, weight);
+        Players z = new Players(name, surname, date, height, weight,imageURL);
         TeamsService teamsService = new TeamsService();
         Teams d = teamsService.getTeam(team);
         if (d == null)
@@ -44,7 +44,7 @@ public class PlayersDao extends Dao implements IPlayersDao {
     }
 
     @Override
-    public int updatePlayer(String name, String team) {
+    public int updatePlayer(String name, String team, String imageURL) {
         String[] splited = name.split("\\s+");
         String n,s,date;
         TeamsService teamsService = new TeamsService();
@@ -65,8 +65,9 @@ public class PlayersDao extends Dao implements IPlayersDao {
                 if (player.get(0).getTeam().getName().equals(team))
                     return 1;
 
-                getCurrentSession().createQuery("update Players set team_id = :id where name = :n and surname = :s")
+                getCurrentSession().createQuery("update Players set team_id = :id, imageURL = :imageURL where name = :n and surname = :s")
                         .setParameter("id", id)
+                        .setParameter("imageURL",imageURL)
                         .setParameter("n", n)
                         .setParameter("s", s)
                         .executeUpdate();
@@ -154,7 +155,7 @@ public class PlayersDao extends Dao implements IPlayersDao {
 
     @Override
     public List<String> getAll() {
-        Query<Players> theQuery = getCurrentSession().createQuery("from Players p");
+        Query<Players> theQuery = getCurrentSession().createQuery("from Players");
         List<Players> playerList = theQuery.getResultList();
         List<String> getAll = new ArrayList<>();
         int i =0;

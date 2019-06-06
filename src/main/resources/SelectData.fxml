@@ -8,11 +8,12 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane onKeyPressed="#onKeyPressed" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nba_statistics.controllers.viewer.SelectData">
+<AnchorPane onKeyPressed="#onKeyPressed" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nba_statistics.controllers.viewer.SelectData">
    <children>
       <Text fx:id="selectData" layoutX="440.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select Data" wrappingWidth="121.0">
          <font>
@@ -96,7 +97,7 @@
       </Label>
       <ComboBox fx:id="comboBoxSeasons" layoutX="319.0" layoutY="166.0" prefHeight="60.0" prefWidth="364.0" promptText="Select season" />
       <ComboBox fx:id="comboBoxTeam" layoutX="319.0" layoutY="250.0" prefHeight="60.0" prefWidth="364.0" promptText="Select team" />
-      <TableView fx:id="matchesTable" layoutX="194.0" layoutY="338.0" prefHeight="417.0" prefWidth="659.0">
+      <TableView fx:id="matchesTable" layoutX="194.0" layoutY="338.0" prefHeight="417.0" prefWidth="659.0" visible="false">
         <columns>
           <TableColumn fx:id="homeTeam" prefWidth="136.0" text="Home Team" />
           <TableColumn fx:id="awayTeam" prefWidth="136.0" text="Away Team" />
@@ -106,5 +107,6 @@
             <TableColumn fx:id="extraTime" prefWidth="83.0" text="Extra Time" />
         </columns>
       </TableView>
+      <ImageView fx:id="image" fitHeight="215.0" fitWidth="158.0" layoutX="277.0" layoutY="412.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>
