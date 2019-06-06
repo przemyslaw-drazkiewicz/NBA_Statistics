@@ -60,6 +60,12 @@ public class PlayerMatchAchievements {
         this.id = new PlayerMatchAchievementsId();
     }
 
+    public PlayerMatchAchievements(Players player, Matches match) {
+        this.player = player;
+        this.match = match;
+        this.id = new PlayerMatchAchievementsId(player.getId(), match.getId());
+    }
+
     public PlayerMatchAchievementsId getId() {
         return id;
     }
@@ -135,7 +141,8 @@ public class PlayerMatchAchievements {
     @Override
     public String toString() {
         return "PlayerMatchAchievements{" +
-                "id=" + id +
+                "idPlayer=" + id.playerId +
+                ", idMatch=" + id.matchId +
                 ", scoredPoints=" + scoredPoints +
                 ", steals=" + steals +
                 ", rebounds=" + rebounds +
