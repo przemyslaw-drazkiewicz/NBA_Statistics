@@ -60,6 +60,7 @@ public class AddPlayer implements Initializable {
                 case 0:
                     information(3);
                     t40.clear(); t41.clear(); t43.clear();t44.clear();t45.clear();
+                    image.setImage(null);currImageURL="";
                     t42.getSelectionModel().clearSelection();
                     break;
                 case 1:
@@ -68,6 +69,10 @@ public class AddPlayer implements Initializable {
                 case 2:
                     getAlertDate(t43.getText());
                     break;
+                case 3:
+                    getAlertImage();
+                    break;
+
             }
         } catch (NumberFormatException exc) {
             getAlertFloat();
@@ -82,8 +87,10 @@ public class AddPlayer implements Initializable {
         fileChooser.setTitle("Open Resource File");
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         File file = fileChooser.showOpenDialog(window);
-        currImageURL=file.toURI().toString();
-        image.setImage(new Image(currImageURL));
+        if (file!=null) {
+            currImageURL = file.toURI().toString();
+            image.setImage(new Image(currImageURL));
+        }
     }
 
     @Override

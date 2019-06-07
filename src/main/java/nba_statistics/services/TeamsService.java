@@ -27,10 +27,11 @@ public class TeamsService {
         return d;
     }
 
-    public void getData(String division, String conference, String name, String location, String imageURL){
+    public boolean getData(String division, String conference, String name, String location, String imageURL){
         teamsDao.openCurrentSessionwithTransaction();
-        teamsDao.getData(division, conference, name,location,imageURL);
+        boolean b= teamsDao.getData(division, conference, name,location,imageURL);
         teamsDao.closeCurrentSessionwithTransaction();
+        return b;
     }
     public boolean checkTeam(String team){
         teamsDao.openCurrentSession();

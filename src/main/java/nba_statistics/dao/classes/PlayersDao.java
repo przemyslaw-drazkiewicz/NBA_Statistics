@@ -11,7 +11,9 @@ import nba_statistics.services.SeasonsService;
 import nba_statistics.services.TeamsService;
 import org.hibernate.query.Query;
 
+import java.lang.reflect.InvocationTargetException;
 import java.sql.Date;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -23,7 +25,7 @@ public class PlayersDao extends Dao implements IPlayersDao {
 
     }
     public void persist(Players entity) {
-        getCurrentSession().save(entity);
+            getCurrentSession().save(entity);
     }
 
     public int getData(String name, String surname, String date, float height, float weight, String team, String imageURL) {
@@ -32,6 +34,7 @@ public class PlayersDao extends Dao implements IPlayersDao {
         }catch(IllegalArgumentException e){
             return 2;
         }
+
         Players z = new Players(name, surname, date, height, weight,imageURL);
         TeamsService teamsService = new TeamsService();
         Teams d = teamsService.getTeam(team);
@@ -39,7 +42,10 @@ public class PlayersDao extends Dao implements IPlayersDao {
             return 1;
 
         z.setTeam(d);
+        if (getPlayerByImage(imageURL)!=null)
+            return 3;
         persist(z);
+
         return 0;
     }
 
@@ -151,6 +157,15 @@ public class PlayersDao extends Dao implements IPlayersDao {
         List<PlayerTeamsHistory> history = theQuery.getResultList();
 
         return history;
+    }
+    public Players getPlayerByImage(String image){
+        Query<Players> theQuery = getCurrentSession().createQuery("from Players where imageURL=:image")
+                .setParameter("image", image);
+        try{
+            return theQuery.getSingleResult();
+        }catch(Exception e){
+            return null;
+        }
     }
 
     @Override

@@ -75,21 +75,29 @@ public class AddTeam implements Initializable {
                 if (DivE.getValue() == null)
                     getAlertDivision();
                 else {
-                    teamsService.getData(t10.getValue(), DivE.getValue(), t12.getText(), t13.getText(),currImageURL);
-                    information(1);
-                    t12.clear();
-                    t13.clear();
-                    t10.getSelectionModel().clearSelection();DivE.setVisible(false);DivW.setVisible(false);
+                    if (teamsService.getData(t10.getValue(), DivE.getValue(), t12.getText(), t13.getText(),currImageURL)) {
+                        information(1);
+                        image.setImage(null);
+                        currImageURL = "";
+                        t12.clear();
+                        t13.clear();
+                        t10.getSelectionModel().clearSelection();
+                        DivE.setVisible(false);
+                        DivW.setVisible(false);
+                    }else getAlertImage();
                 }
             } else if (t10.getValue() == "Western") {
                 if (DivW.getValue() == null)
                     getAlertDivision();
                 else {
-                    teamsService.getData(t10.getValue(), DivW.getValue(), t12.getText(), t13.getText(),currImageURL);
-                    information(1);
-                    t12.clear();
-                    t13.clear();
-                    t10.getSelectionModel().clearSelection();DivE.setVisible(false);DivW.setVisible(false);
+                    if(teamsService.getData(t10.getValue(), DivW.getValue(), t12.getText(), t13.getText(),currImageURL)) {
+                        information(1);
+                        t12.clear();
+                        t13.clear();
+                        t10.getSelectionModel().clearSelection();
+                        DivE.setVisible(false);
+                        DivW.setVisible(false);
+                    }else getAlertImage();
                 }
             } else {
                 getAlertConference();
@@ -106,8 +114,10 @@ public class AddTeam implements Initializable {
         fileChooser.setTitle("Open Resource File");
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         File file = fileChooser.showOpenDialog(window);
-        currImageURL=file.toURI().toString();
-        image.setImage(new Image(currImageURL));
+        if (file!=null) {
+            currImageURL = file.toURI().toString();
+            image.setImage(new Image(currImageURL));
+        }
     }
 
     @Override

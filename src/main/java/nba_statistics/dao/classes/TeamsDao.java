@@ -42,9 +42,13 @@ public class    TeamsDao extends Dao implements ITeamsDao {
         return d;
     }
 
-    public void getData(String division, String conference, String name, String location, String imageURL){
+    public boolean getData(String division, String conference, String name, String location, String imageURL){
         Teams d = new Teams(division, conference, name, location,imageURL);
+        if (getTeamByImage(imageURL)!=null){
+            return false;
+        }
         persist(d);
+        return true;
     }
 
     @Override
@@ -59,7 +63,15 @@ public class    TeamsDao extends Dao implements ITeamsDao {
         else
             return false;
     }
-
+    public Teams getTeamByImage(String image){
+        Query<Teams> theQuery = getCurrentSession().createQuery("from Teams where imageURL=:image")
+                .setParameter("image", image);
+        try{
+            return theQuery.getSingleResult();
+        }catch(Exception e){
+            return null;
+        }
+    }
     @Override
     public ArrayList<String> getAllTeams() {
         Query<Teams> theQuery = getCurrentSession().createQuery("from Teams", Teams.class);

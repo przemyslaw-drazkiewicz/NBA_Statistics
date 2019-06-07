@@ -30,6 +30,15 @@ public class Alerts {
         errorAlert.showAndWait();
     }
 
+    public static void getAlertImage(){
+
+        Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+        errorAlert.setTitle("ERROR");
+        errorAlert.setHeaderText("Image already exists");
+        errorAlert.setContentText("Player with this image is already in database!");
+        errorAlert.showAndWait();
+    }
+
     public static void getAlertNoPlayer(){
 
         Alert errorAlert = new Alert(Alert.AlertType.ERROR);
