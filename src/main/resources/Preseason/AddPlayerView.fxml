@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nba_statistics.controllers.preseason.AddPlayer">
+   <children>
+      <Text fx:id="p40" layoutX="148.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="First name">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <Text fx:id="p41" layoutX="149.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Last name">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <Text fx:id="p43" layoutX="136.0" layoutY="327.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date of birth">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <Text fx:id="p44" layoutX="186.0" layoutY="251.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Height">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <Text fx:id="p45" layoutX="176.0" layoutY="291.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Weight">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <Text fx:id="p46" layoutX="202.0" layoutY="209.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Image" textAlignment="RIGHT">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <TextField fx:id="t40" layoutX="280.0" layoutY="85.0" />
+      <TextField fx:id="t41" layoutX="281.0" layoutY="116.0" />
+      <ComboBox fx:id="t42" layoutX="279.0" layoutY="155.0" prefWidth="150.0" promptText="Select Team" />
+      <TextField fx:id="t44" layoutX="281.0" layoutY="231.0" />
+      <TextField fx:id="t45" layoutX="280.0" layoutY="270.0" />
+      <TextField fx:id="t43" layoutX="280.0" layoutY="308.0" />
+      <ImageView fx:id="image" fitHeight="215.0" fitWidth="158.0" layoutX="430.0" layoutY="122.0" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="pictureBtn" layoutX="281.0" layoutY="189.0" mnemonicParsing="false" onAction="#setImage" prefHeight="25.0" prefWidth="149.0" text="Open a picture..." />
+      <Text fx:id="p42" layoutX="192.0" layoutY="176.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Team">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <Text fx:id="enterDataTxt" layoutX="258.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add player">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Text>
+      <Button fx:id="sendBtn" layoutX="261.0" layoutY="352.0" mnemonicParsing="false" onAction="#sendToDatabase" prefHeight="30.0" prefWidth="113.0" text="Send" />
+      <Button fx:id="BackBtn" layoutX="535.0" layoutY="25.0" mnemonicParsing="false" onAction="#changeScreen" text="Back" />
+   </children>
+</AnchorPane>

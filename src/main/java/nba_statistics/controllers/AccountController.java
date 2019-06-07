@@ -1,7 +1,5 @@
 package nba_statistics.controllers;
 
-import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,7 +12,6 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import nba_statistics.entities.Roles;
 import nba_statistics.entities.Users;
 
 import java.io.IOException;
@@ -76,6 +73,7 @@ public class AccountController implements Initializable {
 //    }
 
     private void createScene(Parent parent,Event event){
+
         Scene preseasonScene = new Scene(parent);
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(preseasonScene);
@@ -99,7 +97,7 @@ public class AccountController implements Initializable {
         createScene(adminParent,event);
     }
     public void changeScreenToPreseason(Event event) throws IOException {
-        Parent preseasonParent = FXMLLoader.load(getClass().getResource("/Preseason.fxml"));
+        Parent preseasonParent = FXMLLoader.load(getClass().getResource("/Preseason/AddSeasonView.fxml"));
         createScene(preseasonParent,event);
     }
 
