@@ -8,6 +8,8 @@ package nba_statistics.entities;
 import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
+import javax.transaction.Transactional;
+import java.util.List;
 
 @Entity(name="PlayerMatchAchievements")
 @Table(name = "player_match_achievements")

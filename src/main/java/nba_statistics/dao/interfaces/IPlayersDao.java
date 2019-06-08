@@ -15,4 +15,5 @@ public interface IPlayersDao {
     Players getPlayer(String name, String surname, String date);
     List<PlayerTeamsHistory> getPlayerTeamsHistory(int idPlayer);
     List <String> getAll();
+    List<Players> getPlayersById(int id);
 }

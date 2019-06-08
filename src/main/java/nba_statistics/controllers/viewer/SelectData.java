@@ -73,8 +73,10 @@ public class SelectData implements Initializable {
     @FXML private Label label10;
     @FXML private Label label11;
     @FXML private TableView resultTable;
-    @FXML private ComboBox<String> selectSeasonComboBox;
-
+    @FXML private TableView<String> tenPlayers;
+    @FXML private TableColumn<String, String> namePlayerTableView;
+    @FXML private TableColumn<String, String> surnamePlayerTableView;
+    @FXML private TableColumn<String, Integer> idPlayerTableView;
     //Top 10 schooters
     @FXML private ComboBox<String> comboBoxSeasons;
 
@@ -183,7 +185,7 @@ public class SelectData implements Initializable {
 
     private void setVisibleListTopTenShooters(){
 
-        String name = "";
+        String name = null;
         SeasonsService seasonsService = new SeasonsService();
 
         List<Seasons> s  = seasonsService.getAllSeasons();
@@ -406,9 +408,12 @@ public class SelectData implements Initializable {
     }
 
     public void selectListTopTenSchooters(){
+setVisibleLabelsPlayerAchievements();
 
         SeasonsService seasonsService = new SeasonsService();
         MatchesService matchesService = new MatchesService();
+        PlayersService playersService = new PlayersService();
+
 
         String nameSeason = null;
         System.out.println(comboBoxSeasons.getValue());
@@ -421,7 +426,93 @@ public class SelectData implements Initializable {
 
         List<PlayerMatchAchievements> playerMatchAchievements = matchesService.getAchievementsPlayersInSeason(season.getId());
 
+        for(int i = 0; i<playerMatchAchievements.size(); i++){
+
+
+            System.out.println(playerMatchAchievements.get(i));
+
+        }
+
+
+         Map<Integer,Integer> map = selectTenPlayersData(playerMatchAchievements);
+        List<Players> playersList = new ArrayList<>();
+
+
+
+        if(map.size() < 10) lessThanTenGreatPlayers();
+
+        int i = 0;
+        for(Map.Entry<Integer, Integer> mapData : map.entrySet()){
+            System.out.println( mapData.getKey() +" v: " + mapData.getValue()   );
+            playersList = playersService.getPlayersById(mapData.getValue());
+
+            setVisibleLabelsPlayerAchievements();
+            i++;
+            switch(i){
+                case 1:
+                    label.setText(i + ". "+ playersList.get(0).getSurname() + " " + playersList.get(0).getName() + " Scored points: " + mapData.getKey());
+                    break;
+                case 2:
+                    label2.setText(i + ". " + playersList.get(0).getSurname() + " " + playersList.get(0).getName() + " Scored points: " + mapData.getKey());
+                    break;
+                case 3:
+                    label3.setText(i + ". " + playersList.get(0).getSurname() + " " + playersList.get(0).getName() + " Scored points: " + mapData.getKey());
+                    break;
+                case 4:
+                    label4.setText(i + ". " +playersList.get(0).getSurname() + " " + playersList.get(0).getName() + " Scored points: " + mapData.getKey());
+                    break;
+                case 5:
+                    label5.setText(i + ". " + playersList.get(0).getSurname() + " " + playersList.get(0).getName() + " Scored points: " + mapData.getKey());
+                    break;
+                case 6:
+                    label6.setText(i + ". " + playersList.get(0).getSurname() + " " + playersList.get(0).getName() + " Scored points: " + mapData.getKey());
+                    break;
+                case 7:
+                    label7.setText(i + ". " + playersList.get(0).getSurname() + " " + playersList.get(0).getName() + " Scored points: " + mapData.getKey());
+                    break;
+                case 8:
+                    label8.setText(i + ". " + playersList.get(0).getSurname() + " " + playersList.get(0).getName() + " Scored points: " + mapData.getKey());
+                    break;
+                case 9:
+                    label9.setText(i + ". " + playersList.get(0).getSurname() + " " + playersList.get(0).getName() + " Scored points: " + mapData.getKey());
+                    break;
+                case 10:
+                    label10.setText(i + ". " + playersList.get(0).getSurname() + " " + playersList.get(0).getName() + " Scored points: " + mapData.getKey());
+                    break;
+            }
+
+           // label.setText(++i + ". "playersList.get(0).getSurname() + " " + playersList.get(0).getName() + " Scored points: " + mapData.getKey());
+        }
+
+
     }
+
+    public Map<Integer, Integer>selectTenPlayersData(List<PlayerMatchAchievements> list){
+        List<?> allPlayers = new ArrayList<>();
+        Map<Integer, Integer> map = new TreeMap<Integer, Integer>();
+        int sum = 0;
+        int id = -1;
+
+        for(int i = 0; i<list.size();i++){
+            sum = 0;
+            id = list.get(i).getPlayer().getId();
+
+            for (int j = 0; j<list.size();j++){
+                if(id == list.get(j).getPlayer().getId()){
+                    sum += list.get(j).getScoredPoints();
+                    list.remove(j);
+                    j--;
+                }
+            }
+
+            map.put(sum,id);
+
+        }
+
+        return map;
+    }
+
+
 
     public void selectlistOfTeamPlayers(){
 

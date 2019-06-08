@@ -259,4 +259,12 @@ public class Alerts {
         errorAlert.setContentText("Player can transfer only one in preseason");
         errorAlert.showAndWait();
     }
+
+    public static void lessThanTenGreatPlayers(){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Warning");
+        alert.setHeaderText("No found ten players");
+        alert.setContentText("History of games have less than 10 players");
+        alert.showAndWait();
+    }
 }

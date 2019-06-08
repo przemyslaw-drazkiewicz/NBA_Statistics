@@ -125,7 +125,8 @@ public class MatchesDao extends Dao implements IMatchesDao{
     public List<PlayerMatchAchievements> getAchievementPlayerInSeason(int idSeason) {
 
         List<PlayerMatchAchievements> achievements = new ArrayList<>();
-/*
+        List<PlayerMatchAchievements> tmp = new ArrayList<>();
+/*        List<PlayerMatchAchievements> achievements = new ArrayList<>();
         Query <Matches> theQuery = getCurrentSession().createQuery("from Matches where season_id = : idSeason").setParameter("idSeason", idSeason);
         List <Matches> matchesList = theQuery.getResultList();
         int idMatch = -1;
@@ -137,6 +138,38 @@ public class MatchesDao extends Dao implements IMatchesDao{
             achievements.add((PlayerMatchAchievements) query2.getResultList());
             System.out.println(achievements);
         }*/
+
+
+        Query <Matches> theQuery = getCurrentSession().createQuery("from Matches where season_id = : idSeason").setParameter("idSeason", idSeason);
+        List <Matches> matchesList = theQuery.getResultList();
+        List<Integer> idMatches = new ArrayList<>();
+
+        for(int i =0; i<matchesList.size(); i++){
+            idMatches.add(i,matchesList.get(i).getId() );// = Collections.singletonList(matchesList.get(i).getId());
+            System.out.println(idMatches);
+        }
+
+        int sizeAchiev = 0;
+        Query<PlayerMatchAchievements> theQuery2;
+        for(int i =0; i<idMatches.size(); i++){
+            theQuery2 = getCurrentSession().createQuery("from PlayerMatchAchievements where match_id = :idMatches").setParameter("idMatches", idMatches.get(i));
+            tmp=theQuery2.getResultList();
+
+            sizeAchiev = 0;
+            for(int j = 0; j<tmp.size(); j++){
+                sizeAchiev = achievements.size();
+                achievements.add(sizeAchiev, tmp.get(j));
+
+            }
+        }
+
+
+
+
+        /*
+    Query<PlayerMatchAchievements> theQuery = getCurrentSession().createQuery("select p from PlayerMatchAchievements p left JOIN fetch" +
+            " p.Matches m  where p.match_id = m.match_id and m.season_id = 7", PlayerMatchAchievements.class);//.setParameter("idSeason", idSeason);
+    achievements = theQuery.getResultList();*/
         return achievements;
     }
 }

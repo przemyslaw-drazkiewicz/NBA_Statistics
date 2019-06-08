@@ -124,6 +124,14 @@ public class PlayersDao extends Dao implements IPlayersDao {
         return players;
     }
 
+    public List<Players> getPlayersById(int id){
+
+        Query<Players> theQuery = getCurrentSession().createQuery("from Players where player_id =:id")
+                .setParameter("id", id);
+        List<Players> players = theQuery.getResultList();
+        return players;
+    }
+
     @Override
     public List<Players> getPlayers(String name, String surname, String date) {
         Query<Players> theQuery = getCurrentSession().createQuery("from Players where name =:name and surname = :surname and date_of_birth =:date")
