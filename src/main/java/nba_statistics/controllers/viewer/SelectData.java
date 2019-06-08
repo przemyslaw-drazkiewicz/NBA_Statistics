@@ -60,6 +60,7 @@ public class SelectData implements Initializable {
     @FXML private ListView<String> listViewOfDateBirth;
     @FXML private DialogPane selectSeason;
     @FXML private ListView<String> listSeasons;
+    @FXML private ListView<String> listSeasons2;
     @FXML private Label label;
     @FXML private Label label2;
     @FXML private Label label3;
@@ -72,6 +73,7 @@ public class SelectData implements Initializable {
     @FXML private Label label10;
     @FXML private Label label11;
     @FXML private TableView resultTable;
+    @FXML private ComboBox<String> selectSeasonComboBox;
 
     //Top 10 schooters
     @FXML private ComboBox<String> comboBoxSeasons;
@@ -145,7 +147,7 @@ public class SelectData implements Initializable {
         label9.setVisible(false);
         label10.setVisible(false);
         label11.setVisible(false);
-        image.setVisible(true);
+        image.setVisible(false);
 
 
 
@@ -271,7 +273,7 @@ public class SelectData implements Initializable {
     //first option - Player's achievements
     public void selectPlayers(){
         PlayersService playersService = new PlayersService();
-        MatchesService matchesService = new MatchesService();
+
 
 
         clearLabelAndList();
@@ -311,67 +313,27 @@ public class SelectData implements Initializable {
         }
         else{
             int idPlayer = players.get(0).getId(); //   ObservableList<PlayerTeamsHistory> playerSeasons = FXCollections.observableArrayList(PlayerTeamsHistoryService.getPlayerSeasons(id));
-            final int[] idSeason = {-1};
-            final int[] idTeam = {-1};
+
 
             //choice season
-            setVisibleSeasons();
+           // setVisibleSeasons();
             List<PlayerTeamsHistory> playerSeasons = playersService.getPlayerTeamsHistory(idPlayer);
+
+            ObservableList<PlayerTeamsHistory> nameTmp = FXCollections.observableArrayList();
 
             List<String> nameSeason = new ArrayList<String>(playerSeasons.size());
             for(PlayerTeamsHistory nameS : playerSeasons){
                 nameSeason.add(nameS.getSeason().getName());
+                nameTmp.add(nameS);
             }
 
             if(!nameSeason.isEmpty()){
+                listener(players,playerSeasons);
 
                 ObservableList<String> oNameSeason = FXCollections.observableArrayList(nameSeason);
                 listSeasons.setItems(oNameSeason);
                 listSeasons.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 
-
-                listSeasons.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
-                    @Override
-                    public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                        label.setText("Season: " + newValue);
-                        label2.setText("Name: " + players.get(0).getName()); //
-                        label3.setText("Surname: " + players.get(0).getSurname());
-
-                        for(int i =0; i<playerSeasons.size(); i++){
-                            if( newValue.equalsIgnoreCase(playerSeasons.get(i).getSeason().getName())) {
-                                label4.setText("Team: " + playerSeasons.get(i).getTeam().getName());
-                                idSeason[0] = playerSeasons.get(i).getSeason().getId();
-                                idTeam[0] =playerSeasons.get(i).getTeam().getId();
-                            }
-                        }
-
-
-                        List<PlayerMatchAchievements> achievementPlayer = matchesService.getAchievementPlayerInMatch(idPlayer, idSeason[0], idTeam[0] );
-                        label5.setText("Number matches: " + achievementPlayer.size());
-
-
-                        int points = 0, steals = 0, blocks = 0, rebounds = 0, fouls = 0, techFaul = 0;
-
-                        for(PlayerMatchAchievements os : achievementPlayer){
-                            points += os.getScoredPoints();
-                            steals += os.getSteals();
-                            blocks += os.getBlocks();
-                            rebounds += os.getRebounds();
-                            fouls += os.getFouls();
-                            techFaul += os.getTechnicalFouls();
-                        }
-
-                        label6.setText("Points earned: " + points);
-                        label7.setText("Steals: " + steals);
-                        label8.setText("Blocks: " + blocks);
-                        label9.setText("Rebounds: " + rebounds);
-                        label10.setText("Fouls: " + fouls);
-                        label11.setText("Technical fouls: " + techFaul);
-                        image.setImage(new Image(players.get(0).getImageURL()));
-                        setVisibleLabelsPlayerAchievements();
-
-                    }
-                });
             } else{
                 setInvisibleSeasons();
 
@@ -384,12 +346,63 @@ public class SelectData implements Initializable {
             }
         }
 
+    }
+
+    public void listener(List<Players> players, List<PlayerTeamsHistory> playerSeasons){
+        MatchesService matchesService = new MatchesService();
+        final int[] idSeason = {-1};
+        final int[] idTeam = {-1};
 
 
+        setVisibleSeasons();
+
+        listSeasons.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+
+            if(newValue == null) listener(players,playerSeasons);
+            label.setText("Season: " + newValue);
+            label2.setText("Name: " + players.get(0).getName()); //
+            label3.setText("Surname: " + players.get(0).getSurname());
+
+            for(int i =0; i<playerSeasons.size(); i++){
+                if(newValue != null){
+                    if( newValue.equalsIgnoreCase(playerSeasons.get(i).getSeason().getName())) {
+                        label4.setText("Team: " + playerSeasons.get(i).getTeam().getName());
+                        idSeason[0] = playerSeasons.get(i).getSeason().getId();
+                        idTeam[0] =playerSeasons.get(i).getTeam().getId();
+                    }
+                }else{
+                    System.out.println("AAAAAAAAAAAAAAAAAAAAA");
+
+                }
+
+            }
 
 
+            List<PlayerMatchAchievements> achievementPlayer = matchesService.getAchievementPlayerInMatch(players.get(0).getId(), idSeason[0], idTeam[0] );
+            label5.setText("Number matches: " + achievementPlayer.size());
 
 
+            int points = 0, steals = 0, blocks = 0, rebounds = 0, fouls = 0, techFaul = 0;
+
+            for(PlayerMatchAchievements os : achievementPlayer){
+                points += os.getScoredPoints();
+                steals += os.getSteals();
+                blocks += os.getBlocks();
+                rebounds += os.getRebounds();
+                fouls += os.getFouls();
+                techFaul += os.getTechnicalFouls();
+            }
+
+            label6.setText("Points earned: " + points);
+            label7.setText("Steals: " + steals);
+            label8.setText("Blocks: " + blocks);
+            label9.setText("Rebounds: " + rebounds);
+            label10.setText("Fouls: " + fouls);
+            label11.setText("Technical fouls: " + techFaul);
+            image.setImage(new Image(players.get(0).getImageURL()));
+            setVisibleLabelsPlayerAchievements();
+
+        });
     }
 
     public void selectListTopTenSchooters(){

@@ -13,7 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane onKeyPressed="#onKeyPressed" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nba_statistics.controllers.viewer.SelectData">
+<AnchorPane onKeyPressed="#onKeyPressed" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nba_statistics.controllers.viewer.SelectData">
    <children>
       <Text fx:id="selectData" layoutX="440.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select Data" wrappingWidth="121.0">
          <font>
@@ -21,22 +21,22 @@
          </font>
       </Text>
       <Button fx:id="logOutBtn" layoutX="915.0" layoutY="23.0" mnemonicParsing="false" onAction="#changeScreen" text="Back" />
-      <Button fx:id="viewDatabaseBtn" layoutX="862.0" layoutY="467.0" mnemonicParsing="false" onAction="#whatKindOfDataIsSelected" text="View Database" />
-      <Text fx:id="writeSurname" layoutX="67.0" layoutY="278.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Write surname:" wrappingWidth="173.0">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Text>
-      <TextField fx:id="surname" layoutX="271.0" layoutY="255.0" />
-      <Button fx:id="backBtn" layoutX="922.0" layoutY="747.0" mnemonicParsing="false" onAction="#changeScreenBack" text="Back" />
-      <ListView fx:id="listViewOfDateBirth" layoutX="586.0" layoutY="222.0" prefHeight="60.0" prefWidth="194.0" />
-      <ComboBox fx:id="comboBox" layoutX="319.0" layoutY="85.0" onAction="#whatIsVisible" prefHeight="60.0" prefWidth="364.0" promptText="Select kind of date" />
       <Text fx:id="writeName" layoutX="67.0" layoutY="204.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Write name:" wrappingWidth="166.32421875">
          <font>
             <Font size="24.0" />
          </font>
       </Text>
       <TextField fx:id="name" layoutX="271.0" layoutY="183.0" />
+      <Text fx:id="writeSurname" layoutX="67.0" layoutY="278.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Write surname:" wrappingWidth="173.0">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
+      <Button fx:id="viewDatabaseBtn" layoutX="862.0" layoutY="467.0" mnemonicParsing="false" onAction="#whatKindOfDataIsSelected" text="View Database" />
+      <TextField fx:id="surname" layoutX="271.0" layoutY="255.0" />
+      <Button fx:id="backBtn" layoutX="922.0" layoutY="747.0" mnemonicParsing="false" onAction="#changeScreenBack" text="Back" />
+      <ListView fx:id="listViewOfDateBirth" layoutX="586.0" layoutY="222.0" prefHeight="60.0" prefWidth="194.0" />
+      <ComboBox fx:id="comboBox" layoutX="319.0" layoutY="85.0" onAction="#whatIsVisible" prefHeight="60.0" prefWidth="364.0" promptText="Select kind of date" />
       <DialogPane fx:id="selectDate" contentText="Select date of birth" layoutX="573.0" layoutY="167.0" prefHeight="58.0" prefWidth="185.0" />
       <ListView fx:id="listSeasons" layoutX="583.0" layoutY="252.0" prefHeight="200.0" prefWidth="200.0" />
       <DialogPane fx:id="selectSeason" contentText="Select season" layoutX="573.0" layoutY="167.0" prefHeight="58.0" prefWidth="226.0" />
@@ -108,5 +108,6 @@
         </columns>
       </TableView>
       <ImageView fx:id="image" fitHeight="215.0" fitWidth="158.0" layoutX="277.0" layoutY="412.0" pickOnBounds="true" preserveRatio="true" />
+      <ComboBox fx:id="selectSeasonComboBox" layoutX="705.0" layoutY="115.0" prefHeight="28.0" prefWidth="226.0" />
    </children>
 </AnchorPane>
