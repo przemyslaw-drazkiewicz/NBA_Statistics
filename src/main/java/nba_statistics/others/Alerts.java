@@ -260,11 +260,19 @@ public class Alerts {
         errorAlert.showAndWait();
     }
 
-    public static void lessThanTenGreatPlayers(){
+    public static void getAlertLessThanTopTenPlayers(){
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Warning");
         alert.setHeaderText("No found ten players");
-        alert.setContentText("History of games have less than 10 players");
+        alert.setContentText("History of games has less than 10 players");
+        alert.showAndWait();
+    }
+
+    public static void getAlertNoTopTenPlayers(){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Error");
+        alert.setHeaderText("No found players");
+        alert.setContentText("In this season are no players!");
         alert.showAndWait();
     }
 }
