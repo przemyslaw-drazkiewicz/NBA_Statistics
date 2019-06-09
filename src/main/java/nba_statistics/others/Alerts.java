@@ -38,6 +38,13 @@ public class Alerts {
         errorAlert.setContentText("Player with this image is already in database!");
         errorAlert.showAndWait();
     }
+    public static void getAlertNoImage(){
+        Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+        errorAlert.setTitle("ERROR");
+        errorAlert.setHeaderText("Empty image");
+        errorAlert.setContentText("Image can't be empty!");
+        errorAlert.showAndWait();
+    }
 
     public static void getAlertNoPlayer(){
 

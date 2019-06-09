@@ -34,7 +34,8 @@ public class PlayersDao extends Dao implements IPlayersDao {
         }catch(IllegalArgumentException e){
             return 2;
         }
-
+        if (imageURL.equals(""))
+            return 4;
         Players z = new Players(name, surname, date, height, weight,imageURL);
         TeamsService teamsService = new TeamsService();
         Teams d = teamsService.getTeam(team);
@@ -55,7 +56,10 @@ public class PlayersDao extends Dao implements IPlayersDao {
         String n,s,date;
         TeamsService teamsService = new TeamsService();
         Teams d = teamsService.getTeam(team);
-
+        if (imageURL.equals(""))
+            return 7;
+        if (getPlayerByImage(imageURL)!=null)
+            return 8;
         if (d == null)
             return 4;
         int id = d.getId();

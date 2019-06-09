@@ -73,6 +73,8 @@ public class AddTransferPlayer implements Initializable {
                 if (playerTeamsHistoryService.savePlayerTeamsHistory(playerField.getText(),t42.getValue(),currSeason)){
                     information(4);
                     playerField.clear();
+                    image.setImage(null);
+                    currImageURL="";
                     t42.getSelectionModel().clearSelection();
                 }
                 else
@@ -96,6 +98,12 @@ public class AddTransferPlayer implements Initializable {
             case 6:
                 getAlertWrongDate();
                 break;
+            case 7:
+                getAlertNoImage();
+                break;
+            case 8:
+                getAlertImage();
+                break;
         }
     }
 
@@ -107,8 +115,11 @@ public class AddTransferPlayer implements Initializable {
         fileChooser.setTitle("Open Resource File");
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         File file = fileChooser.showOpenDialog(window);
-        currImageURL=file.toURI().toString();
-        image.setImage(new Image(currImageURL));
+        if (file!=null){
+            currImageURL=file.toURI().toString();
+            image.setImage(new Image(currImageURL));
+        }
+
     }
 
     public void init(){

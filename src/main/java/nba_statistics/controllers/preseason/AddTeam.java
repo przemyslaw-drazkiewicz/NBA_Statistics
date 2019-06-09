@@ -68,42 +68,45 @@ public class AddTeam implements Initializable {
     }
     @SuppressWarnings("Duplicates")
     public void sendToDatabase(){
-        TeamsService teamsService = new TeamsService();
-        if (teamsService.checkTeam(t12.getText())) {
 
-            if (t10.getValue() == "Eastern") {
-                if (DivE.getValue() == null)
-                    getAlertDivision();
-                else {
-                    if (teamsService.getData(t10.getValue(), DivE.getValue(), t12.getText(), t13.getText(),currImageURL)) {
-                        information(1);
-                        image.setImage(null);
-                        currImageURL = "";
-                        t12.clear();
-                        t13.clear();
-                        t10.getSelectionModel().clearSelection();
-                        DivE.setVisible(false);
-                        DivW.setVisible(false);
-                    }else getAlertImage();
+        TeamsService teamsService = new TeamsService();
+        if (!currImageURL.equals("")) {
+            if (teamsService.checkTeam(t12.getText())) {
+                if (t10.getValue() == "Eastern") {
+                    if (DivE.getValue() == null)
+                        getAlertDivision();
+                    else {
+                        if (teamsService.getData(t10.getValue(), DivE.getValue(), t12.getText(), t13.getText(), currImageURL)) {
+                            information(1);
+                            image.setImage(null);
+                            currImageURL = "";
+                            t12.clear();
+                            t13.clear();
+                            t10.getSelectionModel().clearSelection();
+                            DivE.setVisible(false);
+                            DivW.setVisible(false);
+                        } else getAlertImage();
+                    }
+                } else if (t10.getValue() == "Western") {
+                    if (DivW.getValue() == null)
+                        getAlertDivision();
+                    else {
+                        if (teamsService.getData(t10.getValue(), DivW.getValue(), t12.getText(), t13.getText(), currImageURL)) {
+                            information(1);
+                            t12.clear();
+                            t13.clear();
+                            t10.getSelectionModel().clearSelection();
+                            DivE.setVisible(false);
+                            DivW.setVisible(false);
+                        } else getAlertImage();
+                    }
+                } else {
+                    getAlertConference();
                 }
-            } else if (t10.getValue() == "Western") {
-                if (DivW.getValue() == null)
-                    getAlertDivision();
-                else {
-                    if(teamsService.getData(t10.getValue(), DivW.getValue(), t12.getText(), t13.getText(),currImageURL)) {
-                        information(1);
-                        t12.clear();
-                        t13.clear();
-                        t10.getSelectionModel().clearSelection();
-                        DivE.setVisible(false);
-                        DivW.setVisible(false);
-                    }else getAlertImage();
-                }
-            } else {
-                getAlertConference();
-            }
-        } else
-            getAlertTeam(t12.getText());
+            } else
+                getAlertTeam(t12.getText());
+        }else
+            getAlertNoImage();
     }
     @SuppressWarnings("Duplicates")
     public void setImage(Event event) throws IOException{
