@@ -37,53 +37,93 @@ public class SelectData implements Initializable {
 
 
     //main text
-    @FXML private Button LogOutBtn;
-    @FXML private Button backBtn;
-    @FXML private Button viewDatabaseBtn;
-    @FXML private ComboBox<String> comboBox;
-    @FXML private Text dataViewer;
+    @FXML
+    private Button LogOutBtn;
+    @FXML
+    private Button backBtn;
+    @FXML
+    private Button viewDatabaseBtn;
+    @FXML
+    private ComboBox<String> comboBox;
+    @FXML
+    private Text dataViewer;
 
     //Player's achievements
-    @FXML private Text writeName;
-    @FXML private Text writeSurname;
-    @FXML private TextField surname;
-    @FXML private TextField name;
-    @FXML private DialogPane selectDate;
-    @FXML private ListView<String> listViewOfDateBirth;
-    @FXML private DialogPane selectSeason;
-    @FXML private ListView<String> listSeasons;
-    @FXML private ListView<String> listSeasons2;
-    @FXML private Label label;
-    @FXML private Label label2;
-    @FXML private Label label3;
-    @FXML private Label label4;
-    @FXML private Label label5;
-    @FXML private Label label6;
-    @FXML private Label label7;
-    @FXML private Label label8;
-    @FXML private Label label9;
-    @FXML private Label label10;
-    @FXML private Label label11;
-    @FXML private TableView resultTable;
-    @FXML private TableView<String> tenPlayers;
-    @FXML private TableColumn<String, String> namePlayerTableView;
-    @FXML private TableColumn<String, String> surnamePlayerTableView;
-    @FXML private TableColumn<String, Integer> idPlayerTableView;
+    @FXML
+    private Text writeName;
+    @FXML
+    private Text writeSurname;
+    @FXML
+    private TextField surname;
+    @FXML
+    private TextField name;
+    @FXML
+    private DialogPane selectDate;
+    @FXML
+    private ListView<String> listViewOfDateBirth;
+    @FXML
+    private DialogPane selectSeason;
+    @FXML
+    private ListView<String> listSeasons;
+    @FXML
+    private ListView<String> teamPlayersListView;
+    @FXML
+    private Label label;
+    @FXML
+    private Label label2;
+    @FXML
+    private Label label3;
+    @FXML
+    private Label label4;
+    @FXML
+    private Label label5;
+    @FXML
+    private Label label6;
+    @FXML
+    private Label label7;
+    @FXML
+    private Label label8;
+    @FXML
+    private Label label9;
+    @FXML
+    private Label label10;
+    @FXML
+    private Label label11;
+    @FXML
+    private TableView resultTable;
+    @FXML
+    private TableView<String> tenPlayers;
+    @FXML
+    private TableColumn<String, String> namePlayerTableView;
+    @FXML
+    private TableColumn<String, String> surnamePlayerTableView;
+    @FXML
+    private TableColumn<String, Integer> idPlayerTableView;
     //Top 10 schooters
-    @FXML private ComboBox<String> comboBoxSeasons;
+    @FXML
+    private ComboBox<String> comboBoxSeasons;
 
     //Timetable
-    @FXML private ComboBox<String> comboBoxTeam;
+    @FXML
+    private ComboBox<String> comboBoxTeam;
 
 
-    @FXML private TableView<Matches> matchesTable;
-    @FXML private TableColumn<Matches, String> homeTeam;
-    @FXML private TableColumn<Matches, String> awayTeam;
-    @FXML private TableColumn<Matches, String> date;
-    @FXML private TableColumn<Matches, Integer> homePoints;
-    @FXML private TableColumn<Matches, Integer> awayPoints;
-    @FXML private TableColumn<Matches, Integer> extraTime;
-    @FXML private ImageView image;
+    @FXML
+    private TableView<Matches> matchesTable;
+    @FXML
+    private TableColumn<Matches, String> homeTeam;
+    @FXML
+    private TableColumn<Matches, String> awayTeam;
+    @FXML
+    private TableColumn<Matches, String> date;
+    @FXML
+    private TableColumn<Matches, Integer> homePoints;
+    @FXML
+    private TableColumn<Matches, Integer> awayPoints;
+    @FXML
+    private TableColumn<Matches, Integer> extraTime;
+    @FXML
+    private ImageView image;
 
 
     ObservableList<String> kindOfData = FXCollections.observableArrayList
@@ -91,29 +131,29 @@ public class SelectData implements Initializable {
 
 
     //visibility Achievements
-    private void setVisibleDateOfBirth(){
+    private void setVisibleDateOfBirth() {
         selectDate.setVisible(true);
         listViewOfDateBirth.setVisible(true);
     }
 
-    private void setInisibleDateOfBirth(){
+    private void setInisibleDateOfBirth() {
         selectDate.setVisible(false);
         listViewOfDateBirth.setVisible(false);
     }
 
-    private void setVisibleSeasons(){
+    private void setVisibleSeasons() {
         listSeasons.setVisible(true);
         selectSeason.setVisible(true);
-      //  label.setVisible(true);
+        //  label.setVisible(true);
     }
 
-    private void setInvisibleSeasons(){
+    private void setInvisibleSeasons() {
         listSeasons.setVisible(false);
         selectSeason.setVisible(false);
-      //  label.setVisible(false);
+        //  label.setVisible(false);
     }
 
-    private void setVisibleLabelsPlayerAchievements(){
+    private void setVisibleLabelsPlayerAchievements() {
         label.setVisible(true);
         label2.setVisible(true);
         label3.setVisible(true);
@@ -129,7 +169,7 @@ public class SelectData implements Initializable {
 
     }
 
-    private void setInvisibleLabelsPlayerAchievements(){
+    private void setInvisibleLabelsPlayerAchievements() {
         label.setVisible(false);
         label2.setVisible(false);
         label3.setVisible(false);
@@ -146,13 +186,16 @@ public class SelectData implements Initializable {
 
 
     //visibility top 10 schooters
-    private void setVisibleComboBoxSeasons(){
-       comboBoxSeasons.setVisible(true);
+    private void setVisibleComboBoxSeasons() {
+        comboBoxSeasons.setVisible(true);
     }
-    private void setInvisibleComboBoxSeasons(){
+
+    private void setInvisibleComboBoxSeasons() {
         comboBoxSeasons.setVisible(false);
+        comboBoxSeasons.getSelectionModel().clearSelection();
     }
-    private void setVisibleLabelsTopTenSchooters(){
+
+    private void setVisibleLabelsTopTenSchooters() {
         label.setVisible(true);
         label2.setVisible(true);
         label3.setVisible(true);
@@ -164,7 +207,8 @@ public class SelectData implements Initializable {
         label9.setVisible(true);
         label10.setVisible(true);
     }
-    private void setInvisibleLabelsTopTenSchooters(){
+
+    private void setInvisibleLabelsTopTenSchooters() {
         label.setVisible(false);
         label2.setVisible(false);
         label3.setVisible(false);
@@ -177,16 +221,23 @@ public class SelectData implements Initializable {
         label10.setVisible(false);
     }
 
+    //visibitlity team players
+    private void setVisibleListViewPlayers(){
+        teamPlayersListView.setVisible(true);
+    }
+    private void setInvisibleListViewPlayers(){
+        teamPlayersListView.setVisible(false);
+    }
 
     //main view
-    private void setVisiblePlayersAchievements(){
+    private void setVisiblePlayersAchievements() {
         writeName.setVisible(true);
         writeSurname.setVisible(true);
         name.setVisible(true);
         surname.setVisible(true);
     }
 
-    private void setInvisiblePlayersAchievements(){
+    private void setInvisiblePlayersAchievements() {
         writeName.setVisible(false);
         writeSurname.setVisible(false);
         name.setVisible(false);
@@ -196,29 +247,27 @@ public class SelectData implements Initializable {
         setInvisibleLabelsPlayerAchievements();
     }
 
-    private void setVisibleListTopTenShooters(){
+    private void setVisibleListTopTenShooters() {
 
         String name = null;
         SeasonsService seasonsService = new SeasonsService();
 
-        List<Seasons> s  = seasonsService.getAllSeasons();
+        List<Seasons> s = seasonsService.getAllSeasons();
 
         List<String> nameSeasons = new ArrayList<String>(s.size());
-        for(Seasons sez : s){
+        for (Seasons sez : s) {
             nameSeasons.add(sez.getName());
         }
 
 
-
-        if(nameSeasons.size() > 0){
+        if (nameSeasons.size() > 0) {
 
             setVisibleComboBoxSeasons();
             ObservableList<String> oNameSeasons = FXCollections.observableArrayList(nameSeasons);
             comboBoxSeasons.setItems(oNameSeasons);
 
 
-
-        }else{
+        } else {
             setInvisibleListTopTenShooters();
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Warning");
@@ -228,16 +277,29 @@ public class SelectData implements Initializable {
         }
     }
 
-    private void setInvisibleListTopTenShooters(){
+    private void setInvisibleListTopTenShooters() {
         setInvisibleComboBoxSeasons();
     }
 
-    private void setVisibleTimetable(){
+    private void setVisibleTeamPlayers(){
         comboBoxTeam.setVisible(true);
         comboBoxSeasons.setVisible(true);
     }
 
-    private void setInvisibleTimetable(){
+    private void setInvisibleTeamPlayers() {
+        comboBoxTeam.setVisible(false);
+        comboBoxSeasons.setVisible(false);
+        comboBoxTeam.getSelectionModel().clearSelection();
+        comboBoxSeasons.getSelectionModel().clearSelection();
+
+    }
+
+    private void setVisibleTimetable() {
+        comboBoxTeam.setVisible(true);
+        comboBoxSeasons.setVisible(true);
+    }
+
+    private void setInvisibleTimetable() {
         comboBoxTeam.setVisible(false);
         comboBoxSeasons.setVisible(false);
         matchesTable.setVisible(false);
@@ -247,7 +309,7 @@ public class SelectData implements Initializable {
     }
 
     //clear
-    private void clearLabelAndList(){
+    private void clearLabelAndList() {
         label.setText("");
         label2.setText("");
         label3.setText("");
@@ -262,7 +324,7 @@ public class SelectData implements Initializable {
         image.setImage(null);
     }
 
-    private void clearLabels(){
+    private void clearLabels() {
         label.setText("");
         label2.setText("");
         label3.setText("");
@@ -278,11 +340,11 @@ public class SelectData implements Initializable {
     //changing screen
     public void changeScreen(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/AccountView.fxml"));
-        Parent accountParent = (Parent)loader.load();
+        Parent accountParent = (Parent) loader.load();
         AccountController accountController = loader.getController();
         accountController.init(AccountController.getUser());
         Scene parentScene = new Scene(accountParent);
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(parentScene);
         window.show();
     }
@@ -291,16 +353,15 @@ public class SelectData implements Initializable {
         Parent backParent = FXMLLoader.load(getClass().getResource("/DataViewer.fxml"));
         Scene backScene = new Scene(backParent);
 
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(backScene);
         window.show();
     }
 
 
     //first option - Player's achievements
-    public void selectPlayers(){
+    public void selectPlayers() {
         PlayersService playersService = new PlayersService();
-
 
 
         clearLabelAndList();
@@ -311,57 +372,56 @@ public class SelectData implements Initializable {
         List<Players> players = playersService.getPlayers(name.getText(), surname.getText());
 
         //if no one was found
-        if(players.size()==0){
-             //alert if all data is not available
-             if(name.getText().length() == 0 || surname.getText().length() == 0){
+        if (players.size() == 0) {
+            //alert if all data is not available
+            if (name.getText().length() == 0 || surname.getText().length() == 0) {
                 /* Alert alert = new Alert(Alert.AlertType.INFORMATION);
                  alert.setTitle("Warning");
                  alert.setHeaderText("Wrong Data");
                  alert.setContentText("You have to enter all data");
                  alert.showAndWait();*/
                 getAlertPlayer();
-             }else{
+            } else {
                 /* Alert alert = new Alert(Alert.AlertType.INFORMATION);
                  alert.setTitle("Warning");
                  alert.setHeaderText("No found a player");
                  alert.setContentText("Player is not exist");
                  alert.showAndWait();*/
-                 getAlertNoPlayer();
-             }
+                getAlertNoPlayer();
+            }
 
         }//if is more people with the same name and surname
-        else if(players.size() > 1){
+        else if (players.size() > 1) {
             //TO DO
             setVisibleDateOfBirth();
-            for(int i = 0; i<players.size(); i++){
+            for (int i = 0; i < players.size(); i++) {
                 listViewOfDateBirth.getItems().addAll(players.get(i).getDateOfBirth());
             }
             setInisibleDateOfBirth();
-        }
-        else{
+        } else {
             int idPlayer = players.get(0).getId(); //   ObservableList<PlayerTeamsHistory> playerSeasons = FXCollections.observableArrayList(PlayerTeamsHistoryService.getPlayerSeasons(id));
 
 
             //choice season
-           // setVisibleSeasons();
+            // setVisibleSeasons();
             List<PlayerTeamsHistory> playerSeasons = playersService.getPlayerTeamsHistory(idPlayer);
 
             ObservableList<PlayerTeamsHistory> nameTmp = FXCollections.observableArrayList();
 
             List<String> nameSeason = new ArrayList<String>(playerSeasons.size());
-            for(PlayerTeamsHistory nameS : playerSeasons){
+            for (PlayerTeamsHistory nameS : playerSeasons) {
                 nameSeason.add(nameS.getSeason().getName());
                 nameTmp.add(nameS);
             }
 
-            if(!nameSeason.isEmpty()){
-                listener(players,playerSeasons);
+            if (!nameSeason.isEmpty()) {
+                listener(players, playerSeasons);
 
                 ObservableList<String> oNameSeason = FXCollections.observableArrayList(nameSeason);
                 listSeasons.setItems(oNameSeason);
                 listSeasons.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 
-            } else{
+            } else {
                 setInvisibleSeasons();
 
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -375,7 +435,7 @@ public class SelectData implements Initializable {
 
     }
 
-    public void listener(List<Players> players, List<PlayerTeamsHistory> playerSeasons){
+    public void listener(List<Players> players, List<PlayerTeamsHistory> playerSeasons) {
         MatchesService matchesService = new MatchesService();
         final int[] idSeason = {-1};
         final int[] idTeam = {-1};
@@ -385,29 +445,29 @@ public class SelectData implements Initializable {
 
         listSeasons.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
 
-            if(newValue == null) listener(players,playerSeasons);
+            if (newValue == null) listener(players, playerSeasons);
             label.setText("Season: " + newValue);
             label2.setText("Name: " + players.get(0).getName()); //
             label3.setText("Surname: " + players.get(0).getSurname());
 
-            for(int i =0; i<playerSeasons.size(); i++){
-                if(newValue != null){
-                    if( newValue.equalsIgnoreCase(playerSeasons.get(i).getSeason().getName())) {
+            for (int i = 0; i < playerSeasons.size(); i++) {
+                if (newValue != null) {
+                    if (newValue.equalsIgnoreCase(playerSeasons.get(i).getSeason().getName())) {
                         label4.setText("Team: " + playerSeasons.get(i).getTeam().getName());
                         idSeason[0] = playerSeasons.get(i).getSeason().getId();
-                        idTeam[0] =playerSeasons.get(i).getTeam().getId();
+                        idTeam[0] = playerSeasons.get(i).getTeam().getId();
                     }
                 }
             }
 
 
-            List<PlayerMatchAchievements> achievementPlayer = matchesService.getAchievementPlayerInMatch(players.get(0).getId(), idSeason[0], idTeam[0] );
+            List<PlayerMatchAchievements> achievementPlayer = matchesService.getAchievementPlayerInMatch(players.get(0).getId(), idSeason[0], idTeam[0]);
             label5.setText("Number matches: " + achievementPlayer.size());
 
 
             int points = 0, steals = 0, blocks = 0, rebounds = 0, fouls = 0, techFaul = 0;
 
-            for(PlayerMatchAchievements os : achievementPlayer){
+            for (PlayerMatchAchievements os : achievementPlayer) {
                 points += os.getScoredPoints();
                 steals += os.getSteals();
                 blocks += os.getBlocks();
@@ -428,10 +488,9 @@ public class SelectData implements Initializable {
         });
     }
 
-    public void selectListTopTenSchooters(){
+    public void selectListTopTenSchooters() {
 
         clearLabels();
-       // setVisibleLabelsTopTenSchooters();
 
         SeasonsService seasonsService = new SeasonsService();
         MatchesService matchesService = new MatchesService();
@@ -449,34 +508,26 @@ public class SelectData implements Initializable {
 
         List<PlayerMatchAchievements> playerMatchAchievements = matchesService.getAchievementsPlayersInSeason(season.getId());
 
-        for(int i = 0; i<playerMatchAchievements.size(); i++){
+
+        Map<Integer, Integer> map = selectTenPlayersData(playerMatchAchievements);
+        List<Players> playersList;
 
 
-            System.out.println(playerMatchAchievements.get(i));
-
-        }
-
-
-         Map<Integer,Integer> map = selectTenPlayersData(playerMatchAchievements);
-        List<Players> playersList = new ArrayList<>();
-
-
-        if(map.size() == 0){
+        if (map.size() == 0) {
             getAlertNoTopTenPlayers();
-        }
-        else{
+        } else {
 
             int i = 0;
-            for(Map.Entry<Integer, Integer> mapData : map.entrySet()){
-                System.out.println( mapData.getKey() +" v: " + mapData.getValue()   );
+            for (Map.Entry<Integer, Integer> mapData : map.entrySet()) {
+                System.out.println(mapData.getKey() + " v: " + mapData.getValue());
                 playersList = playersService.getPlayersById(mapData.getValue());
 
 
                 setVisibleLabelsTopTenSchooters();
                 i++;
-                switch(i){
+                switch (i) {
                     case 1:
-                        label.setText(i + ". "+ playersList.get(0).getSurname() + " " + playersList.get(0).getName() + " Scored points: " + mapData.getKey());
+                        label.setText(i + ". " + playersList.get(0).getSurname() + " " + playersList.get(0).getName() + " Scored points: " + mapData.getKey());
                         break;
                     case 2:
                         label2.setText(i + ". " + playersList.get(0).getSurname() + " " + playersList.get(0).getName() + " Scored points: " + mapData.getKey());
@@ -485,7 +536,7 @@ public class SelectData implements Initializable {
                         label3.setText(i + ". " + playersList.get(0).getSurname() + " " + playersList.get(0).getName() + " Scored points: " + mapData.getKey());
                         break;
                     case 4:
-                        label4.setText(i + ". " +playersList.get(0).getSurname() + " " + playersList.get(0).getName() + " Scored points: " + mapData.getKey());
+                        label4.setText(i + ". " + playersList.get(0).getSurname() + " " + playersList.get(0).getName() + " Scored points: " + mapData.getKey());
                         break;
                     case 5:
                         label5.setText(i + ". " + playersList.get(0).getSurname() + " " + playersList.get(0).getName() + " Scored points: " + mapData.getKey());
@@ -506,56 +557,66 @@ public class SelectData implements Initializable {
                         label10.setText(i + ". " + playersList.get(0).getSurname() + " " + playersList.get(0).getName() + " Scored points: " + mapData.getKey());
                         break;
                 }
-
-                // label.setText(++i + ". "playersList.get(0).getSurname() + " " + playersList.get(0).getName() + " Scored points: " + mapData.getKey());
+                if(i == 10) break;
             }
-            if(map.size() < 10) getAlertLessThanTopTenPlayers();
-
+            if (map.size() < 10) getAlertLessThanTopTenPlayers();
         }
-
-
-
-
-
     }
 
-    public Map<Integer, Integer>selectTenPlayersData(List<PlayerMatchAchievements> list){
-        List<?> allPlayers = new ArrayList<>();
+    public Map<Integer, Integer> selectTenPlayersData(List<PlayerMatchAchievements> list) {
         Map<Integer, Integer> map = new TreeMap<Integer, Integer>();
         int sum = 0;
         int id = -1;
 
-        for(int i = 0; i<list.size();i++){
+        for (int i = 0; i < list.size(); i++) {
             sum = 0;
             id = list.get(i).getPlayer().getId();
 
-            for (int j = 0; j<list.size();j++){
-                if(id == list.get(j).getPlayer().getId()){
+            for (int j = 0; j < list.size(); j++) {
+                if (id == list.get(j).getPlayer().getId()) {
                     sum += list.get(j).getScoredPoints();
                     list.remove(j);
                     j--;
                 }
             }
-
-            map.put(sum,id);
+            map.put(sum, id);
 
         }
-
         return map;
     }
 
 
+    public void selectlistOfTeamPlayers() {
 
-    public void selectlistOfTeamPlayers(){
+        String season, team;
+        int idSeason = -1;
+        int idTeam = -1;
+        if ((season = comboBoxSeasons.getValue()) == null)
+            getAlertComboBoxSeason();
+        else if ((team = comboBoxTeam.getValue()) == null) {
+            getAlertComboBoxTeam();
+        } else {
+            PlayersService playersService = new PlayersService();
+            SeasonsService seasonsService = new SeasonsService();
+            TeamsService teamsService = new TeamsService();
+
+            idSeason = seasonsService.getId(season);
+            idTeam = teamsService.getId(team);
+
+            List<PlayerTeamsHistory> idPlayersList = playersService.getPlayersInTeam(idSeason, idTeam);
+
+            for(int i = 0; i< idPlayersList.size(); i++){
+                System.out.println(idPlayersList.get(i).getPlayer().getSurname());
+            }
+        }
 
     }
 
-    private void setTable(List<Matches> listMatches){
+    private void setTable(List<Matches> listMatches) {
 
-        if (listMatches.isEmpty()){
+        if (listMatches.isEmpty()) {
             getAlertEmptyListOfMatches();
-        }
-        else {
+        } else {
             matchesTable.setVisible(true);
             ObservableList<Matches> matchesObservableList = FXCollections.observableArrayList();
 /*            for (Matches m : listMatches) {
@@ -565,40 +626,43 @@ public class SelectData implements Initializable {
             matchesTable.setItems(matchesObservableList);
         }
     }
+
     public void selectTimetable() {
         String team, season;
         matchesTable.setVisible(false);
         if ((season = comboBoxSeasons.getValue()) == null)
             getAlertComboBoxSeason();
-        else if ((team = comboBoxTeam.getValue()) == null){
+        else if ((team = comboBoxTeam.getValue()) == null) {
             getAlertComboBoxTeam();
-        }else{
+        } else {
             MatchesService matchesService = new MatchesService();
             setTable(matchesService.getMatches(team, season));
         }
 
 
-
     }
 
-    private void initComboBoxSeasons(){
+    private void initComboBoxSeasons() {
         SeasonsService seasonsService = new SeasonsService();
         ArrayList<String> seasons = seasonsService.getAllSeasonsName();
         comboBoxSeasons.setItems(FXCollections.observableArrayList(seasons));
     }
-    private void initComboBoxTeams(){
+
+    private void initComboBoxTeams() {
         TeamsService teamsService = new TeamsService();
         ArrayList<String> teams = teamsService.getAllTeams();
         comboBoxTeam.setItems(FXCollections.observableList(teams));
     }
 
-    public void whatIsVisible(){
-        switch(comboBox.getValue()) {
+    public void whatIsVisible() {
+        switch (comboBox.getValue()) {
             case "Player's achievements":
                 setVisiblePlayersAchievements();
                 setInvisibleListTopTenShooters();
                 setInvisibleTimetable();
                 setInvisibleLabelsTopTenSchooters();
+                setInvisibleTeamPlayers();
+                setInvisibleListViewPlayers();
                 break;
 
             case "List of top 10 shooters":
@@ -606,6 +670,8 @@ public class SelectData implements Initializable {
                 setInvisibleTimetable();
                 setVisibleListTopTenShooters();
                 setInvisibleLabelsTopTenSchooters();
+                setInvisibleTeamPlayers();
+                setInvisibleListViewPlayers();
                 break;
 
             case "List of team players":
@@ -613,6 +679,10 @@ public class SelectData implements Initializable {
                 setInvisibleListTopTenShooters();
                 setInvisibleTimetable();
                 setInvisibleLabelsTopTenSchooters();
+                setVisibleTeamPlayers();
+                setVisibleListViewPlayers();
+                initComboBoxTeams();
+                initComboBoxSeasons();
                 break;
 
             case "Timetable":
@@ -620,16 +690,17 @@ public class SelectData implements Initializable {
                 setInvisibleListTopTenShooters();
                 setVisibleTimetable();
                 setInvisibleLabelsTopTenSchooters();
+                setInvisibleTeamPlayers();
                 initComboBoxTeams();
                 initComboBoxSeasons();
+                setInvisibleListViewPlayers();
                 break;
         }
     }
 
+    public void whatKindOfDataIsSelected() {
 
-    public void whatKindOfDataIsSelected(){
-
-        switch(comboBox.getValue()){
+        switch (comboBox.getValue()) {
             case "Player's achievements":
                 selectPlayers();
                 break;
@@ -649,7 +720,6 @@ public class SelectData implements Initializable {
         }
     }
 
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         comboBox.setItems(kindOfData);
@@ -660,10 +730,11 @@ public class SelectData implements Initializable {
         setInvisibleLabelsPlayerAchievements();
         setInvisibleTimetable();
         setInvisibleListTopTenShooters();
+        setInvisibleListViewPlayers();
 
         //init column in table view -> to TIMETABLE
-        homeTeam.setCellValueFactory(p ->  new ReadOnlyStringWrapper(p.getValue().getHostTeam().getName()));
-        awayTeam.setCellValueFactory(p ->  new ReadOnlyStringWrapper(p.getValue().getGuestTeam().getName()));
+        homeTeam.setCellValueFactory(p -> new ReadOnlyStringWrapper(p.getValue().getHostTeam().getName()));
+        awayTeam.setCellValueFactory(p -> new ReadOnlyStringWrapper(p.getValue().getGuestTeam().getName()));
         date.setCellValueFactory(new PropertyValueFactory<>("date"));
         homePoints.setCellValueFactory(new PropertyValueFactory<>("hostPoints"));
         awayPoints.setCellValueFactory(new PropertyValueFactory<>("guestPoints"));
@@ -673,16 +744,15 @@ public class SelectData implements Initializable {
     @FXML
     void onKeyPressed(KeyEvent event) {
         if (event.getCode() == KeyCode.ENTER) {
-                whatKindOfDataIsSelected();
+            whatKindOfDataIsSelected();
         }
         if (event.getCode() == KeyCode.ESCAPE) {
-            try{
+            try {
                 changeScreenBack(event);
-            }catch(IOException e){
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }
     }
-
 
 }

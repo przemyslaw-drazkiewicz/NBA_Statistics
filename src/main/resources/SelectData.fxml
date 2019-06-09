@@ -108,5 +108,6 @@
         </columns>
       </TableView>
       <ImageView fx:id="image" fitHeight="215.0" fitWidth="158.0" layoutX="277.0" layoutY="412.0" pickOnBounds="true" preserveRatio="true" />
+      <ListView fx:id="teamPlayersListView" layoutX="209.0" layoutY="406.0" prefHeight="200.0" prefWidth="551.0" />
    </children>
 </AnchorPane>

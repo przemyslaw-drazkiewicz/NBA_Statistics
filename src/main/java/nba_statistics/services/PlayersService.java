@@ -75,5 +75,10 @@ public class PlayersService {
     }
 
 
-
+    public List<PlayerTeamsHistory> getPlayersInTeam(int season, int team) {
+        playersDao.openCurrentSessionwithTransaction();
+        List<PlayerTeamsHistory> listPlayers = playersDao.getPlayersInTeam(season, team);
+        playersDao.closeCurrentSessionwithTransaction();
+        return listPlayers;
+    }
 }

@@ -16,4 +16,5 @@ public interface IPlayersDao {
     List<PlayerTeamsHistory> getPlayerTeamsHistory(int idPlayer);
     List <String> getAll();
     List<Players> getPlayersById(int id);
+    List<PlayerTeamsHistory> getPlayersInTeam(int season, int team);
 }

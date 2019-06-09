@@ -200,4 +200,13 @@ public class PlayersDao extends Dao implements IPlayersDao {
         return getAll;
 
     }
+
+    public List<PlayerTeamsHistory> getPlayersInTeam(int season, int team) {
+
+        Query<PlayerTeamsHistory> theQuery = getCurrentSession().createQuery("from PlayerTeamsHistory where season_id = :season and team_id = :team")
+                .setParameter("team", team)
+                .setParameter("season", season);
+        List<PlayerTeamsHistory> list = theQuery.getResultList();
+        return list;
+    }
 }
