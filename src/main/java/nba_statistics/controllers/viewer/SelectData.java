@@ -30,7 +30,10 @@ import nba_statistics.services.TeamsService;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
+import java.util.Map.Entry;
+import java.util.stream.Collectors;
 
+import static java.util.Map.Entry.comparingByValue;
 import static nba_statistics.others.Alerts.*;
 
 public class SelectData implements Initializable {
@@ -518,43 +521,43 @@ public class SelectData implements Initializable {
         } else {
 
             int i = 0;
-            for (Map.Entry<Integer, Integer> mapData : map.entrySet()) {
-                System.out.println(mapData.getKey() + " v: " + mapData.getValue());
-                playersList = playersService.getPlayersById(mapData.getValue());
+            for (Entry<Integer, Integer> mapData : map.entrySet()) {
+                System.out.println("id: " + mapData.getKey() + " v: " + mapData.getValue());
+                playersList = playersService.getPlayersById(mapData.getKey());
 
 
                 setVisibleLabelsTopTenSchooters();
                 i++;
                 switch (i) {
                     case 1:
-                        label.setText(i + ". " + playersList.get(0).getSurname() + " " + playersList.get(0).getName() + " Scored points: " + mapData.getKey());
+                        label.setText(i + ". " + playersList.get(0).getSurname() + " " + playersList.get(0).getName() + " Scored points: " + mapData.getValue());
                         break;
                     case 2:
-                        label2.setText(i + ". " + playersList.get(0).getSurname() + " " + playersList.get(0).getName() + " Scored points: " + mapData.getKey());
+                        label2.setText(i + ". " + playersList.get(0).getSurname() + " " + playersList.get(0).getName() + " Scored points: " + mapData.getValue());
                         break;
                     case 3:
-                        label3.setText(i + ". " + playersList.get(0).getSurname() + " " + playersList.get(0).getName() + " Scored points: " + mapData.getKey());
+                        label3.setText(i + ". " + playersList.get(0).getSurname() + " " + playersList.get(0).getName() + " Scored points: " + mapData.getValue());
                         break;
                     case 4:
-                        label4.setText(i + ". " + playersList.get(0).getSurname() + " " + playersList.get(0).getName() + " Scored points: " + mapData.getKey());
+                        label4.setText(i + ". " + playersList.get(0).getSurname() + " " + playersList.get(0).getName() + " Scored points: " + mapData.getValue());
                         break;
                     case 5:
-                        label5.setText(i + ". " + playersList.get(0).getSurname() + " " + playersList.get(0).getName() + " Scored points: " + mapData.getKey());
+                        label5.setText(i + ". " + playersList.get(0).getSurname() + " " + playersList.get(0).getName() + " Scored points: " + mapData.getValue());
                         break;
                     case 6:
-                        label6.setText(i + ". " + playersList.get(0).getSurname() + " " + playersList.get(0).getName() + " Scored points: " + mapData.getKey());
+                        label6.setText(i + ". " + playersList.get(0).getSurname() + " " + playersList.get(0).getName() + " Scored points: " + mapData.getValue());
                         break;
                     case 7:
-                        label7.setText(i + ". " + playersList.get(0).getSurname() + " " + playersList.get(0).getName() + " Scored points: " + mapData.getKey());
+                        label7.setText(i + ". " + playersList.get(0).getSurname() + " " + playersList.get(0).getName() + " Scored points: " + mapData.getValue());
                         break;
                     case 8:
-                        label8.setText(i + ". " + playersList.get(0).getSurname() + " " + playersList.get(0).getName() + " Scored points: " + mapData.getKey());
+                        label8.setText(i + ". " + playersList.get(0).getSurname() + " " + playersList.get(0).getName() + " Scored points: " + mapData.getValue());
                         break;
                     case 9:
-                        label9.setText(i + ". " + playersList.get(0).getSurname() + " " + playersList.get(0).getName() + " Scored points: " + mapData.getKey());
+                        label9.setText(i + ". " + playersList.get(0).getSurname() + " " + playersList.get(0).getName() + " Scored points: " + mapData.getValue());
                         break;
                     case 10:
-                        label10.setText(i + ". " + playersList.get(0).getSurname() + " " + playersList.get(0).getName() + " Scored points: " + mapData.getKey());
+                        label10.setText(i + ". " + playersList.get(0).getSurname() + " " + playersList.get(0).getName() + " Scored points: " + mapData.getValue());
                         break;
                 }
                 if(i == 10) break;
@@ -564,7 +567,7 @@ public class SelectData implements Initializable {
     }
 
     public Map<Integer, Integer> selectTenPlayersData(List<PlayerMatchAchievements> list) {
-        Map<Integer, Integer> map = new TreeMap<Integer, Integer>();
+        Map<Integer, Integer> map = new TreeMap<>();
         int sum = 0;
         int id = -1;
 
@@ -579,10 +582,18 @@ public class SelectData implements Initializable {
                     j--;
                 }
             }
-            map.put(sum, id);
+            map.put(id, sum);
 
         }
-        return map;
+
+        Map<Integer, Integer> sortedMap = map.entrySet()
+                .stream()
+                .sorted(Collections.reverseOrder(comparingByValue()))
+                .collect(Collectors.toMap(
+                        e -> e.getKey(),
+                        e-> e.getValue(),
+                        (e1, e2) -> e2, LinkedHashMap::new));
+        return sortedMap;
     }
 
 
@@ -596,6 +607,8 @@ public class SelectData implements Initializable {
         else if ((team = comboBoxTeam.getValue()) == null) {
             getAlertComboBoxTeam();
         } else {
+            setVisibleListViewPlayers();
+
             PlayersService playersService = new PlayersService();
             SeasonsService seasonsService = new SeasonsService();
             TeamsService teamsService = new TeamsService();
@@ -605,9 +618,27 @@ public class SelectData implements Initializable {
 
             List<PlayerTeamsHistory> idPlayersList = playersService.getPlayersInTeam(idSeason, idTeam);
 
+            ObservableList<String> listPlayersNameSurname = FXCollections.observableArrayList();
+
+            String tmp = null;
             for(int i = 0; i< idPlayersList.size(); i++){
-                System.out.println(idPlayersList.get(i).getPlayer().getSurname());
+                tmp = null;
+                tmp = idPlayersList.get(i).getPlayer().getName() + " " + idPlayersList.get(i).getPlayer().getSurname();
+                listPlayersNameSurname.add(tmp);
             }
+
+            if(listPlayersNameSurname.isEmpty()) {
+
+                setInvisibleListViewPlayers();
+                getAlertNoPlayersInTeam();
+            }
+            else{
+                listPlayersNameSurname.sorted();
+                teamPlayersListView.setItems(listPlayersNameSurname);
+            }
+
+
+
         }
 
     }
@@ -657,21 +688,21 @@ public class SelectData implements Initializable {
     public void whatIsVisible() {
         switch (comboBox.getValue()) {
             case "Player's achievements":
-                setVisiblePlayersAchievements();
                 setInvisibleListTopTenShooters();
                 setInvisibleTimetable();
                 setInvisibleLabelsTopTenSchooters();
                 setInvisibleTeamPlayers();
                 setInvisibleListViewPlayers();
+                setVisiblePlayersAchievements();
                 break;
 
             case "List of top 10 shooters":
                 setInvisiblePlayersAchievements();
                 setInvisibleTimetable();
-                setVisibleListTopTenShooters();
                 setInvisibleLabelsTopTenSchooters();
                 setInvisibleTeamPlayers();
                 setInvisibleListViewPlayers();
+                setVisibleListTopTenShooters();
                 break;
 
             case "List of team players":
@@ -680,7 +711,6 @@ public class SelectData implements Initializable {
                 setInvisibleTimetable();
                 setInvisibleLabelsTopTenSchooters();
                 setVisibleTeamPlayers();
-                setVisibleListViewPlayers();
                 initComboBoxTeams();
                 initComboBoxSeasons();
                 break;
@@ -688,12 +718,13 @@ public class SelectData implements Initializable {
             case "Timetable":
                 setInvisiblePlayersAchievements();
                 setInvisibleListTopTenShooters();
-                setVisibleTimetable();
+                setInvisibleListViewPlayers();
                 setInvisibleLabelsTopTenSchooters();
                 setInvisibleTeamPlayers();
+                setVisibleTimetable();
                 initComboBoxTeams();
                 initComboBoxSeasons();
-                setInvisibleListViewPlayers();
+
                 break;
         }
     }

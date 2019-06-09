@@ -282,4 +282,12 @@ public class Alerts {
         alert.setContentText("In this season are no players!");
         alert.showAndWait();
     }
+
+    public static void getAlertNoPlayersInTeam(){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Error");
+        alert.setHeaderText("No found players");
+        alert.setContentText("In this team are no players!");
+        alert.showAndWait();
+    }
 }
