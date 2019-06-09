@@ -37,6 +37,7 @@ public class DataViewer implements Initializable {
     @FXML private Text dataViewer;
     @FXML private Text question;
     @FXML private Button viewDatabaseBtn;
+    @FXML private Button timetableButton;
 
 
 
@@ -60,7 +61,31 @@ public class DataViewer implements Initializable {
         window.setScene(selectDataScene);
         window.show();
     }
+/*
+    public void changeScreentoListOfTop10Players(Event event) throws IOException {
+        Parent selectDataParent = FXMLLoader.load(getClass().getResource("/SelectData.fxml"));
+        Scene selectDataScene = new Scene(selectDataParent);
 
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        window.setScene(selectDataScene);
+        window.show();
+    }
+    public void changeScreenToListOfTeamPlayers(Event event) throws IOException {
+        Parent selectDataParent = FXMLLoader.load(getClass().getResource("/SelectData.fxml"));
+        Scene selectDataScene = new Scene(selectDataParent);
+
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        window.setScene(selectDataScene);
+        window.show();
+    }*/
+    public void changeScreenToTimetable(Event event) throws IOException {
+        Parent selectDataParent = FXMLLoader.load(getClass().getResource("/Timetable.fxml"));
+        Scene selectDataScene = new Scene(selectDataParent);
+
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        window.setScene(selectDataScene);
+        window.show();
+    }
 
 
     @Override

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nba_statistics.controllers.viewer.Timetable">
+   <children>
+      <ComboBox fx:id="seasonComboBox" layoutX="118.0" layoutY="20.0" prefHeight="50.0" prefWidth="364.0" promptText="Select season" />
+      <ComboBox fx:id="teamsComboBox" layoutX="118.0" layoutY="79.0" prefHeight="50.0" prefWidth="364.0" promptText="Select team" />
+      <Button fx:id="selectTimetableButton" layoutX="510.0" layoutY="104.0" mnemonicParsing="false" onAction="#selectTimetable" prefHeight="26.0" prefWidth="66.0" text="Select" textAlignment="CENTER" wrapText="true" />
+      <TableView fx:id="matchesTable" layoutY="148.0" prefHeight="250.0" prefWidth="600.0" visible="false">
+         <columns>
+            <TableColumn fx:id="homeTeam" prefWidth="136.0" text="Home Team" />
+            <TableColumn fx:id="awayTeam" prefWidth="136.0" text="Away Team" />
+            <TableColumn fx:id="date" prefWidth="136.0" text="Date" />
+            <TableColumn fx:id="homePoints" prefWidth="83.0" text="Home points" />
+            <TableColumn fx:id="awayPoints" minWidth="0.0" prefWidth="83.0" text="Away points" />
+            <TableColumn fx:id="extraTime" prefWidth="83.0" text="Extra Time" />
+         </columns>
+      </TableView>
+      <Button fx:id="backButton" layoutX="510.0" layoutY="20.0" mnemonicParsing="false" onAction="#changeScreenBack" prefHeight="26.0" prefWidth="66.0" text="Back" textAlignment="CENTER" wrapText="true" />
+   </children>
+</AnchorPane>
