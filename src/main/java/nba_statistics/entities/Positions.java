@@ -82,7 +82,6 @@ public class Positions {
         return "Positions{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", playerPosition=" + playerPosition +
                 '}';
     }
 }

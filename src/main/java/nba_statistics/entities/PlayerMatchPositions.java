@@ -8,6 +8,10 @@ import javax.persistence.*;
 @Table(name = "player_match_positions")
 public class PlayerMatchPositions {
 
+    public void setId(PlayerMatchPositionsId id) {
+        this.id = id;
+    }
+
     @EmbeddedId
     private PlayerMatchPositionsId id;
 
