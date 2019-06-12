@@ -34,6 +34,7 @@ CREATE TABLE `positions` (
 --
 
 LOCK TABLES `positions` WRITE;
+insert into nba.positions values (1, "Point guard"), (2, "Shooting guard"), (3, "Small forward"), (4, "Power forward"), (5, "Center");
 /*!40000 ALTER TABLE `positions` DISABLE KEYS */;
 /*!40000 ALTER TABLE `positions` ENABLE KEYS */;
 UNLOCK TABLES;

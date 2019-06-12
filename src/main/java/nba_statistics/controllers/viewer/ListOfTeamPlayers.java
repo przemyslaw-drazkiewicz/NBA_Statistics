@@ -12,6 +12,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import nba_statistics.entities.PlayerTeamsHistory;
 import nba_statistics.services.PlayersService;
@@ -38,6 +40,9 @@ public class ListOfTeamPlayers implements Initializable {
     private Button selectListButton;
     @FXML
     private ListView<String> teamPlayersListView;
+    @FXML
+    private ImageView image;
+
 
 
     private void setVisibleListViewPlayers(){
@@ -68,7 +73,7 @@ public class ListOfTeamPlayers implements Initializable {
     }
 
     public void selectlistOfTeamPlayers() {
-
+        image.setImage(null);
         String season, team;
         int idSeason = -1;
         int idTeam = -1;
@@ -96,7 +101,7 @@ public class ListOfTeamPlayers implements Initializable {
                 tmp = idPlayersList.get(i).getPlayer().getName() + " " + idPlayersList.get(i).getPlayer().getSurname();
                 listPlayersNameSurname.add(tmp);
             }
-
+            image.setImage(new Image(teamsService.getTeam(idTeam).getImageURL()));
             if(listPlayersNameSurname.isEmpty()) {
                 setInvisibleListViewPlayers();
                 getAlertNoPlayersInTeam();
@@ -104,6 +109,7 @@ public class ListOfTeamPlayers implements Initializable {
             else{
                 listPlayersNameSurname.sorted();
                 teamPlayersListView.setItems(listPlayersNameSurname);
+
             }
 
 

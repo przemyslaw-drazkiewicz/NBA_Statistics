@@ -50,7 +50,7 @@ public class Alerts {
 
         Alert errorAlert = new Alert(Alert.AlertType.ERROR);
         errorAlert.setTitle("ERROR");
-        errorAlert.setHeaderText("No found a player");
+        errorAlert.setHeaderText("Player not found!");
         errorAlert.setContentText("Player not exist");
         errorAlert.showAndWait();
     }
@@ -60,7 +60,7 @@ public class Alerts {
         Alert errorAlert = new Alert(Alert.AlertType.ERROR);
         errorAlert.setTitle("ERROR");
         errorAlert.setHeaderText("Season '" + s + "' doesnt exist");
-        errorAlert.setContentText("You must enter season name which exist in database");
+        errorAlert.setContentText("You must enter season name which exists in database");
         errorAlert.showAndWait();
     }
 
@@ -84,7 +84,7 @@ public class Alerts {
         Alert errorAlert = new Alert(Alert.AlertType.ERROR);
         errorAlert.setTitle("ERROR");
         errorAlert.setHeaderText("You can't add this player");
-        errorAlert.setContentText("You can add only five players to first squad");
+        errorAlert.setContentText("You can add only five players to the first squad");
         errorAlert.showAndWait();
     }
 
@@ -93,7 +93,7 @@ public class Alerts {
         Alert errorAlert = new Alert(Alert.AlertType.ERROR);
         errorAlert.setTitle("ERROR");
         errorAlert.setHeaderText("You don't choice a match");
-        errorAlert.setContentText("You must choice a match before click 'OK'");
+        errorAlert.setContentText("You must choose a match before clicking 'OK'");
         errorAlert.showAndWait();
     }
 
@@ -102,7 +102,7 @@ public class Alerts {
         Alert errorAlert = new Alert(Alert.AlertType.ERROR);
         errorAlert.setTitle("ERROR");
         errorAlert.setHeaderText("Season '" + s + "' exist in database");
-        errorAlert.setContentText("You must enter unique season name or click 'SKIP' to choose this season");
+        errorAlert.setContentText("You must enter a unique season name or click 'SKIP' to choose this season");
         errorAlert.showAndWait();
     }
     public static void getAlertTeam(String t){
@@ -125,7 +125,7 @@ public class Alerts {
         } else if (d.length == 1){
             errorAlert.setTitle("ERROR");
             errorAlert.setHeaderText("Date '" + d[0] + "' is incorrect format");
-            errorAlert.setContentText("Correct date format: RRRR-MM-DD");
+            errorAlert.setContentText("Correct date format: YYYY-MM-DD");
             errorAlert.showAndWait();
         }
     }
@@ -134,7 +134,7 @@ public class Alerts {
         Alert errorAlert = new Alert(Alert.AlertType.ERROR);
         errorAlert.setTitle("ERROR");
         errorAlert.setHeaderText("Date is incorrect format");
-        errorAlert.setContentText("Correct date format: RRRR-MM-DD");
+        errorAlert.setContentText("Correct date format: YYYY-MM-DD");
         errorAlert.showAndWait();
     }
 
@@ -270,7 +270,7 @@ public class Alerts {
     public static void getAlertLessThanTopTenPlayers(){
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Warning");
-        alert.setHeaderText("No found ten players");
+        alert.setHeaderText("Ten players not found");
         alert.setContentText("History of games has less than 10 players");
         alert.showAndWait();
     }
@@ -278,7 +278,7 @@ public class Alerts {
     public static void getAlertNoTopTenPlayers(){
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Error");
-        alert.setHeaderText("No found players");
+        alert.setHeaderText("Players not found");
         alert.setContentText("In this season are no players!");
         alert.showAndWait();
     }
@@ -286,7 +286,7 @@ public class Alerts {
     public static void getAlertNoPlayersInTeam(){
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Error");
-        alert.setHeaderText("No found players");
+        alert.setHeaderText("Players not found");
         alert.setContentText("In this team are no players!");
         alert.showAndWait();
     }

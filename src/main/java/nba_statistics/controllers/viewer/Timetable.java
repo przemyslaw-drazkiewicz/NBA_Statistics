@@ -15,6 +15,8 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import nba_statistics.entities.Matches;
 import nba_statistics.services.MatchesService;
@@ -53,6 +55,10 @@ public class Timetable implements Initializable {
     private TableColumn<Matches, Integer> awayPoints;
     @FXML
     private TableColumn<Matches, Integer> extraTime;
+    @FXML
+    private ImageView image;
+
+    private TeamsService teamsService = new TeamsService();
 
 
     public void changeScreenBack(Event event) throws IOException {
@@ -67,6 +73,7 @@ public class Timetable implements Initializable {
     private void setTable(List<Matches> listMatches) {
 
         if (listMatches.isEmpty()) {
+            //image.setImage(null);
             getAlertEmptyListOfMatches();
         } else {
             matchesTable.setVisible(true);
@@ -78,6 +85,7 @@ public class Timetable implements Initializable {
     }
 
     public void selectTimetable() {
+        image.setImage(null);
         String team, season;
         matchesTable.setVisible(false);
         if ((season = seasonComboBox.getValue()) == null)
@@ -85,6 +93,7 @@ public class Timetable implements Initializable {
         else if ((team = teamsComboBox.getValue()) == null) {
             getAlertComboBoxTeam();
         } else {
+            image.setImage(new Image(teamsService.getTeam(team).getImageURL()));
             MatchesService matchesService = new MatchesService();
             setTable(matchesService.getMatches(team, season));
         }

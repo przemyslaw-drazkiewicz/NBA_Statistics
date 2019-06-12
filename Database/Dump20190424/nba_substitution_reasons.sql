@@ -34,6 +34,7 @@ CREATE TABLE `substitution_reasons` (
 --
 
 LOCK TABLES `substitution_reasons` WRITE;
+insert into nba.substitution_reasons values (1, "injury"), (2, "tactical"), (3, "fouls");
 /*!40000 ALTER TABLE `substitution_reasons` DISABLE KEYS */;
 /*!40000 ALTER TABLE `substitution_reasons` ENABLE KEYS */;
 UNLOCK TABLES;
