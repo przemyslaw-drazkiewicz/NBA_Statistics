@@ -69,15 +69,15 @@ public class DataViewer implements Initializable {
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         window.setScene(selectDataScene);
         window.show();
-    }
+    }*/
     public void changeScreenToListOfTeamPlayers(Event event) throws IOException {
-        Parent selectDataParent = FXMLLoader.load(getClass().getResource("/SelectData.fxml"));
+        Parent selectDataParent = FXMLLoader.load(getClass().getResource("/ListOfTeamPlayersView.fxml"));
         Scene selectDataScene = new Scene(selectDataParent);
 
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         window.setScene(selectDataScene);
         window.show();
-    }*/
+    }
     public void changeScreenToTimetable(Event event) throws IOException {
         Parent selectDataParent = FXMLLoader.load(getClass().getResource("/Timetable.fxml"));
         Scene selectDataScene = new Scene(selectDataParent);
