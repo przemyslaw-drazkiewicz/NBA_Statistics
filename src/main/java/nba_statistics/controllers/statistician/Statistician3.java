@@ -67,6 +67,8 @@ public class Statistician3 implements Initializable {
     //info
     @FXML private Text info;
 
+    @FXML private Button backToChoice;
+
     private List<Players> playersTeamH;
     private List<Players> playersTeamA;
 
@@ -113,6 +115,18 @@ public class Statistician3 implements Initializable {
         Parent accountParent = loader.load();
         Statistician2 controller = loader.getController();
         controller.setMatch(match);
+        controller.init();
+        Scene preseasonScene = new Scene(accountParent);
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        window.setScene(preseasonScene);
+        window.show();
+    }
+
+    public void matchFinished(Event event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Statistician.fxml"));
+        Parent accountParent = loader.load();
+        Statistician controller = loader.getController();
+        controller.setMatchToRemove(match);
         controller.init();
         Scene preseasonScene = new Scene(accountParent);
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -251,6 +265,8 @@ public class Statistician3 implements Initializable {
         MatchesService matchesService = new MatchesService();
         matchesService.update(match);
         myTimer.cancel();
+        backToChoice.setVisible(true);
+
 
 
 

@@ -80,10 +80,15 @@
             <Font size="25.0" />
          </font>
       </Text>
-      <Text fx:id="info" fill="RED" layoutX="196.0" layoutY="166.0" strokeType="OUTSIDE" strokeWidth="0.0" text="information" textAlignment="CENTER" visible="false" wrappingWidth="424.0">
+      <Text fx:id="info" fill="RED" layoutX="196.0" layoutY="166.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please press 's' to start stopper" textAlignment="CENTER" wrappingWidth="424.0">
          <font>
             <Font size="15.0" />
          </font>
       </Text>
+      <Button fx:id="backToChoice" layoutX="-2.0" layoutY="1.0" mnemonicParsing="false" onAction="#matchFinished" prefHeight="523.0" prefWidth="767.0" text="Back to choice match (to jest button jak coś xd)" visible="false">
+         <font>
+            <Font size="29.0" />
+         </font>
+      </Button>
     </children>
 </AnchorPane>
