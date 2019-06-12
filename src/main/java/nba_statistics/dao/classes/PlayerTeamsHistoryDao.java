@@ -18,6 +18,7 @@ public class PlayerTeamsHistoryDao extends Dao implements IPlayerTeamsHistoryDao
         getCurrentSession().save(entity);
     }
 
+    @SuppressWarnings("Duplicates")
     @Override
     public boolean savePlayerTeamsHistory(String playerName, String teamName, String seasonName ) {
 
@@ -52,5 +53,25 @@ public class PlayerTeamsHistoryDao extends Dao implements IPlayerTeamsHistoryDao
             else
                 return true;
     }
+
+    @SuppressWarnings("Duplicates")
+    @Override
+    public void saveNewPlayerTeamsHistory(String playerName, String teamName, String seasonName){
+        SeasonsService seasonsService = new SeasonsService();
+        Seasons currSeason = seasonsService.getSeason(seasonName);
+
+        TeamsService teamsService = new TeamsService();
+        Teams currTeam = teamsService.getTeam(teamName);
+
+        PlayersService playersService = new PlayersService();
+        String[] splited = playerName.split("\\s+");
+        Players currPlayer = playersService.getPlayer(splited[0], splited[1],splited[2]);
+        PlayerTeamsHistory playerTeamsHistory = new PlayerTeamsHistory();
+        playerTeamsHistory.setPlayer(currPlayer);
+        playerTeamsHistory.setSeason(currSeason);
+        playerTeamsHistory.setTeam(currTeam);
+        persist(playerTeamsHistory);
+    }
+
 
 }

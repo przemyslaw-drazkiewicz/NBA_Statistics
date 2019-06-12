@@ -21,4 +21,10 @@ public class PlayerTeamsHistoryService {
         playerTeamsHistoryDao.closeCurrentSessionwithTransaction();
         return i;
     }
+
+    public void saveNewPlayerTeamsHistory(String playerName, String teamName, String seasonName){
+        playerTeamsHistoryDao.openCurrentSessionwithTransaction();
+        playerTeamsHistoryDao.saveNewPlayerTeamsHistory(playerName, teamName, seasonName);
+        playerTeamsHistoryDao.closeCurrentSessionwithTransaction();
+    }
 }

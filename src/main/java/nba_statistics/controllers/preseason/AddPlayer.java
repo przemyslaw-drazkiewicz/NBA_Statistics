@@ -16,6 +16,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import nba_statistics.services.PlayerTeamsHistoryService;
 import nba_statistics.services.PlayersService;
 import nba_statistics.services.TeamsService;
 
@@ -63,6 +64,11 @@ public class AddPlayer implements Initializable {
         try {
             switch (playersService.getData(t40.getText(), t41.getText(), t43.getText(), Float.parseFloat(t44.getText()), Float.parseFloat(t45.getText()), t42.getValue(),currImageURL)) {
                 case 0:
+                    PlayerTeamsHistoryService playerTeamsHistoryService = new PlayerTeamsHistoryService();
+                    playerTeamsHistoryService.saveNewPlayerTeamsHistory(t40.getText() + " " + t41.getText() +" " + t43.getText(),t42.getValue(),currSeason);
+                    image.setImage(null);
+                    currImageURL="";
+                    t42.getSelectionModel().clearSelection();
                     information(3);
                     t40.clear(); t41.clear(); t43.clear();t44.clear();t45.clear();
                     image.setImage(null);currImageURL="";
