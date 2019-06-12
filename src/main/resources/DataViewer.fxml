@@ -16,7 +16,7 @@
             <Font size="25.0" />
          </font>
       </Button>
-      <Button layoutX="273.0" layoutY="33.0" mnemonicParsing="false" prefHeight="156.0" prefWidth="213.0" text="List of top 10 shooters" textAlignment="CENTER" wrapText="true">
+      <Button layoutX="273.0" layoutY="33.0" mnemonicParsing="false" onAction="#changeScreentoListOfTop10Players" prefHeight="156.0" prefWidth="213.0" text="List of top 10 shooters" textAlignment="CENTER" wrapText="true">
          <font>
             <Font size="25.0" />
          </font>
