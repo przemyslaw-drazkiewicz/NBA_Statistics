@@ -6,10 +6,10 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane onKeyPressed="#onKeyPressed" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nba_statistics.controllers.statistician.Statistician3">
+<AnchorPane onKeyPressed="#onKeyPressed" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nba_statistics.controllers.statistician.Statistician3">
     <children>
 
-        <Text fx:id="matchText" layoutX="201.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" visible="true" wrappingWidth="424.0">
+        <Text fx:id="matchText" layoutX="201.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="team vs team" textAlignment="CENTER" visible="true" wrappingWidth="424.0">
             <font>
                 <Font size="20.0" />
             </font>
@@ -33,22 +33,57 @@
         <Button fx:id="TFA" layoutX="416.0" layoutY="443.0" mnemonicParsing="false" onAction="#techFoulA" prefHeight="25.0" prefWidth="98.0" text="Technical foul" visible="true" />
         <Button fx:id="SH" layoutX="262.0" layoutY="498.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="98.0" text="Substitute" visible="true" />
         <Button fx:id="SA" layoutX="416.0" layoutY="498.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="98.0" text="Substitute" visible="true" />
-        <Text fx:id="min" layoutX="300.0" layoutY="142.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00" visible="true">
-            <font>
-                <Font size="90.0" />
-            </font>
+        <Text fx:id="min" layoutX="14.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00" visible="true">
+         <font>
+            <Font size="50.0" />
+         </font>
         </Text>
-        <Text fx:id="sec" layoutX="417.0" layoutY="141.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00" visible="true">
-            <font>
-                <Font size="90.0" />
-            </font>
+        <Text fx:id="sec" layoutX="79.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00" visible="true">
+         <font>
+            <Font size="50.0" />
+         </font>
         </Text>
-        <Text fx:id="colon" layoutX="399.0" layoutY="132.0" strokeType="OUTSIDE" strokeWidth="0.0" text=":" visible="true">
-            <font>
-                <Font size="90.0" />
-            </font>
+        <Text fx:id="colon" layoutX="68.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text=":" visible="true">
+         <font>
+            <Font size="50.0" />
+         </font>
         </Text>
         <ListView fx:id="homeTeam" layoutX="103.0" layoutY="283.0" prefHeight="130.0" prefWidth="150.0" visible="true" />
         <ListView fx:id="awayTeam" layoutX="535.0" layoutY="283.0" prefHeight="130.0" prefWidth="150.0" visible="true" />
+      <Text fx:id="pointsHome" layoutX="237.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="RIGHT" visible="true" wrappingWidth="150.00000093877316">
+         <font>
+            <Font size="90.0" />
+         </font>
+      </Text>
+      <Text fx:id="pointsAway" layoutX="431.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" visible="true" wrappingWidth="150.00000665336847">
+         <font>
+            <Font size="90.0" />
+         </font>
+      </Text>
+      <Text fx:id="colon1" layoutX="390.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-" visible="true">
+         <font>
+            <Font size="90.0" />
+         </font>
+      </Text>
+      <Text fx:id="couter" layoutX="18.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1" visible="true">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Text>
+      <Text fx:id="txt" layoutX="39.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="quarter" visible="true">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Text>
+      <Text fx:id="extraTimeCouter" layoutX="25.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1" visible="false">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Text>
+      <Text fx:id="info" fill="RED" layoutX="196.0" layoutY="166.0" strokeType="OUTSIDE" strokeWidth="0.0" text="information" textAlignment="CENTER" visible="false" wrappingWidth="424.0">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Text>
     </children>
 </AnchorPane>
