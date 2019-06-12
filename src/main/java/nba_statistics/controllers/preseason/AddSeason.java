@@ -73,15 +73,14 @@ public class AddSeason implements Initializable {
     private void initScene(Event event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Preseason/SelectionView.fxml"));
         Parent accountParent = loader.load();
-/*        Selection controller = loader.getController();
+        Selection controller = loader.getController();
         controller.setCurrSeasonTmp(currSeason);
-        controller.setCurrSeasonTmp2(currSeason);*/
         Scene preseasonScene = new Scene(accountParent);
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(preseasonScene);
         window.show();
     }
-    @SuppressWarnings("Duplicates")
+
     public void addedSeason(Event event) throws IOException {
 
         if (newSeasonRadioBtn.isSelected()){

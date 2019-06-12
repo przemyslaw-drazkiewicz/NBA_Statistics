@@ -45,10 +45,19 @@ public class AddTeam implements Initializable {
             ("Northwest", "Pacific", "Southwest");
 
     private String currImageURL="";
+    private String currSeason="";
 
+    public void setCurrSeason(String currSeason) {this.currSeason = currSeason; }
+
+    @SuppressWarnings("Duplicates")
     public void changeScreen(Event event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Preseason/SelectionView.fxml"));
         Parent accountParent = loader.load();
+
+        Selection controller = loader.getController();
+        controller.setCurrSeasonTmp(currSeason);
+        //controller.init();
+
         Scene preseasonScene = new Scene(accountParent);
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(preseasonScene);

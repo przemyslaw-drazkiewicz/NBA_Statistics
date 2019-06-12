@@ -31,9 +31,12 @@ public class AddMatch implements Initializable {
     @FXML private Text tDuration; @FXML private Text tDuration0;
     @FXML private Button sendBtn; @FXML private Text enterDataTxt;
 
+    @SuppressWarnings("Duplicates")
     public void changeScreen(Event event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Preseason/SelectionView.fxml"));
         Parent accountParent = loader.load();
+        Selection controller = loader.getController();
+        controller.setCurrSeasonTmp(currSeason);
         Scene preseasonScene = new Scene(accountParent);
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(preseasonScene);
@@ -80,9 +83,10 @@ public class AddMatch implements Initializable {
     }
 
     public void init(){
-/*        tSeason.setText(currSeason);
+
+        tSeason.setText(currSeason);
         SeasonsService seasonsService = new SeasonsService();
-        tDuration.setText(seasonsService.getSeason(currSeason).getStartDate() + " / " + seasonsService.getSeason(currSeason).getEndDate());*/
+        tDuration.setText(seasonsService.getSeason(currSeason).getStartDate() + " / " + seasonsService.getSeason(currSeason).getEndDate());
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {

@@ -8,9 +8,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nba_statistics.controllers.preseason.AddTransferPlayer">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nba_statistics.controllers.preseason.AddTransferPlayer">
    <children>
-      <Button fx:id="backBtn" layoutX="529.0" layoutY="24.0" mnemonicParsing="false" onAction="#changeScreen" text="Back" />
+      <Button fx:id="backBtn" layoutX="532.0" layoutY="19.0" mnemonicParsing="false" onAction="#changeScreen" text="Back" />
       <Button fx:id="sendBtn" layoutX="258.0" layoutY="310.0" mnemonicParsing="false" onAction="#sendToDatabase" prefHeight="30.0" prefWidth="113.0" text="Send" />
       <Text fx:id="enterDataTxt" layoutX="242.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Transfer player">
          <font>

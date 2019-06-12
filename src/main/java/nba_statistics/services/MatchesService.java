@@ -14,6 +14,11 @@ public class MatchesService{
     }
 
 
+    public void update(Matches match){
+        matchesDao.openCurrentSessionwithTransaction();
+        matchesDao.update(match);
+        matchesDao.closeCurrentSessionwithTransaction();
+    }
 
     public List<Matches> findAll(){
         matchesDao.openCurrentSession();
