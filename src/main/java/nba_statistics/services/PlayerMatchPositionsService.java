@@ -13,9 +13,9 @@ public class PlayerMatchPositionsService {
 
     public int getData(Players player, Matches match, Positions position)
     {
-        playerMatchPositionsDao.openCurrentSession();
+        playerMatchPositionsDao.openCurrentSessionwithTransaction();
         int tmp = playerMatchPositionsDao.getData(player,match,position);
-        playerMatchPositionsDao.closeCurrentSession();
+        playerMatchPositionsDao.closeCurrentSessionwithTransaction();
         return tmp;
     }
 }

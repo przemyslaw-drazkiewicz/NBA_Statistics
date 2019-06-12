@@ -67,8 +67,8 @@ public class Alerts {
     public static void getAlertChoicePlayer(String s){
         Alert errorAlert = new Alert(Alert.AlertType.ERROR);
         errorAlert.setTitle("ERROR");
-        errorAlert.setHeaderText("You don't choice a player");
-        errorAlert.setContentText("You must choice a player before click '" + s +"'");
+        errorAlert.setHeaderText("You don't choice a player or position");
+        errorAlert.setContentText("You must choice a player and position before click '" + s +"'");
         errorAlert.showAndWait();
     }
 
