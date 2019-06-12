@@ -37,17 +37,19 @@ public class AddTransferPlayer implements Initializable {
     @FXML private ComboBox<String> t42; @FXML private Button pictureBtn;
 
     private String currImageURL = "";
-    private String currSeason = "2019/2020";//until bug is fixed
+    private String currSeason = "";
 
     public void setCurrSeason(String currSeason){
         this.currSeason = currSeason;
     }
 
+    @SuppressWarnings("Duplicates")
     public void changeScreen(Event event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Preseason/SelectionView.fxml"));
         Parent accountParent = loader.load();
+        Selection controller = loader.getController();
+        controller.setCurrSeasonTmp(currSeason);
         Scene preseasonScene = new Scene(accountParent);
-
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(preseasonScene);
         window.show();
@@ -122,10 +124,7 @@ public class AddTransferPlayer implements Initializable {
 
     }
 
-    public void init(){
-        //System.out.println("currSeason=================" + currSeason);
 
-    }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         t42.getSelectionModel().clearSelection();

@@ -35,15 +35,20 @@ public class AddPlayer implements Initializable {
     @FXML private Button sendBtn; @FXML private ImageView image; @FXML private Text enterDataTxt; @FXML private Button BackBtn;
 
     private String currImageURL="";
+    private String currSeason = "";
 
+    public void setCurrSeason(String currSeason) {this.currSeason = currSeason;}
+
+    @SuppressWarnings("Duplicates")
     public void changeScreen(Event event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Preseason/SelectionView.fxml"));
         Parent accountParent = loader.load();
+        Selection controller = loader.getController();
+        controller.setCurrSeasonTmp(currSeason);
         Scene preseasonScene = new Scene(accountParent);
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(preseasonScene);
         window.show();
-        //logOutBtn.getScene().getWindow().hide();
     }
 
     private void initComboBoxTeams(){
@@ -98,7 +103,6 @@ public class AddPlayer implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //t42.getSelectionModel().clearSelection();
         initComboBoxTeams();
     }
 }

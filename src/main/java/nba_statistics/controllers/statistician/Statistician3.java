@@ -69,6 +69,8 @@ public class Statistician3 implements Initializable {
 
     private String matchT2;
 
+    private int extraTimeCount = 0;
+
     private ObservableList<String> playersSquadA = FXCollections.observableArrayList();
     private ObservableList<String> playersSquadH = FXCollections.observableArrayList();
     private ArrayList<PlayerMatchAchievements> home = new ArrayList<>();
@@ -222,6 +224,23 @@ public class Statistician3 implements Initializable {
         playerMatchAchievementsService.save(home);
         playerMatchAchievementsService.save(away);
 
+        match.setHostPoints(getPoints(home));
+        match.setGuestPoints(getPoints(away));
+        match.setExtraTimeCount(extraTimeCount);
+
+        MatchesService matchesService = new MatchesService();
+        matchesService.update(match);
+
+
+
+
+    }
+    private int getPoints(ArrayList<PlayerMatchAchievements> team){
+        int points = 0;
+        for (PlayerMatchAchievements p : team){
+            points+=p.getScoredPoints();
+        }
+        return points;
     }
 
 
@@ -247,6 +266,7 @@ public class Statistician3 implements Initializable {
     //STOPPER
     private int seconds =0;
     private int minutes= 0;
+    private int []matchTime= {0,10}; //zero pos -> minutes, first pos -> seconds, now match duration= 10sec
     private Timer myTimer = new Timer();
     private TimerTask task = new TimerTask() {
         @Override
@@ -268,13 +288,26 @@ public class Statistician3 implements Initializable {
                     min.setText(String.valueOf(minutes));
                 else
                     min.setText(0 + String.valueOf(minutes));
-            }
-            if (minutes == 0 && seconds == 20) { //MATCH FINISHED if time is 01:00 -> for testing
-                finishedMatch();
+
+                if (matchTime[0] == minutes && matchTime[1] == seconds) { //MATCH FINISHED (or not)
+                    isStart = false;
+
+                    if (getPoints(home) == getPoints(away)) //extra time, match not finished
+                    {
+                        extraTimeCount++;
+                        matchTime[1]+=5; // for example: extra time duration = 5 sec xd
+
+                    }
+                    else
+                        finishedMatch();
+
+
 /*                isStart = false;
                 myTimer.cancel();*/
 
+                }
             }
+
         }
     };
 

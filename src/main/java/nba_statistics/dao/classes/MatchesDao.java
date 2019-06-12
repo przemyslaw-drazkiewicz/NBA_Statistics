@@ -34,6 +34,11 @@ public class MatchesDao extends Dao implements IMatchesDao{
         getCurrentSession().save(entity);
     }
 
+    public void updateMatch(Matches entity) {getCurrentSession().update(entity);}
+
+    public void update(Matches match) {
+        updateMatch(match);
+    }
     public int getData(String home, String away, String date, String season){
         TeamsService teamsService = new TeamsService();
         SeasonsService seasonsService = new SeasonsService();

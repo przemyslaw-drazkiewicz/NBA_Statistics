@@ -25,10 +25,7 @@ public class Selection {
     public void setCurrSeasonTmp(String currSeasonTmp){
         this.currSeasonTmp = currSeasonTmp;
     }
-    private String currSeasonTmp2;
-    public void setCurrSeasonTmp2(String currSeasonTmp2){
-        this.currSeasonTmp2 = currSeasonTmp2;
-    }
+
 
     private void createScene(Parent parent,Event event){
         Scene scene = new Scene(parent);
@@ -45,28 +42,33 @@ public class Selection {
     public void changeScreenToAddMatch(Event event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Preseason/AddMatchView.fxml"));
         Parent accountParent = loader.load();
-/*        AddMatch controller = loader.getController();
+        AddMatch controller = loader.getController();
         controller.setCurrSeason(currSeasonTmp);
-        controller.init();*/
+        controller.init();
         createScene(accountParent,event);
     }
 
     public void changeScreenToTeam(Event event) throws IOException {
-        Parent adminParent = FXMLLoader.load(getClass().getResource("/Preseason/AddTeamView.fxml"));
-        createScene(adminParent,event);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Preseason/AddTeamView.fxml"));
+        Parent accountParent = loader.load();
+        AddTeam controller = loader.getController();
+        controller.setCurrSeason(currSeasonTmp);
+        createScene(accountParent,event);
     }
 
     public void changeScreenToAddPlayer(Event event) throws IOException {
-        Parent preseasonParent = FXMLLoader.load(getClass().getResource("/Preseason/AddPlayerView.fxml"));
-        createScene(preseasonParent,event);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Preseason/AddPlayerView.fxml"));
+        Parent accountParent = loader.load();
+        AddPlayer controller = loader.getController();
+        controller.setCurrSeason(currSeasonTmp);
+        createScene(accountParent,event);
     }
 
     public void changeScreenToTransferPlayer(Event event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Preseason/AddTransferPlayerView.fxml"));
         Parent accountParent = loader.load();
-/*        AddTransferPlayer controller = loader.getController();
-        controller.setCurrSeason(currSeasonTmp2);
-        controller.init();*/
+        AddTransferPlayer controller = loader.getController();
+        controller.setCurrSeason(currSeasonTmp);
         createScene(accountParent,event);
     }
 }
