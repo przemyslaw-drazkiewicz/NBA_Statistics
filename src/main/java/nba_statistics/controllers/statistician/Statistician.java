@@ -49,20 +49,6 @@ public class Statistician implements Initializable {
 
     private List<Matches> matches;
 
-    private Matches matchToRemove;
-
-    public void setMatchToRemove(Matches matchToRemove) {
-        this.matchToRemove = matchToRemove;
-    }
-    public void init(){
-
-        if (matchToRemove != null){
-            matches.remove(matchToRemove);
-        }
-        choice.removeAll();
-        initCombobox();
-
-    }
 
     public void changeScreen(Event event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/AccountView.fxml"));
@@ -123,13 +109,7 @@ public class Statistician implements Initializable {
 
         MatchesService matchesDao = new MatchesService();
         matches = matchesDao.findAllAtDate(dateS);
-        initCombobox();
 
-
-
-    }
-
-    private void initCombobox(){
         matchesT = new ArrayList<>();
         for (Matches matches : matches) {
             match = matches;
@@ -143,7 +123,10 @@ public class Statistician implements Initializable {
 
         choice = FXCollections.observableArrayList(matchesT);
         matchesComboBox.setItems(choice);
+
+
     }
+
 
     @FXML
     void onKeyPressed(KeyEvent event) {

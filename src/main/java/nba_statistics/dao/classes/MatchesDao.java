@@ -23,7 +23,7 @@ public class MatchesDao extends Dao implements IMatchesDao{
 
     public List<Matches> findAllAtDate(String date) {
 
-        Query<Matches> theQuery = getCurrentSession().createQuery("from Matches where date = :date")
+        Query<Matches> theQuery = getCurrentSession().createQuery("from Matches where date = :date and host_points = 0 and guest_points = 0")
                 .setParameter("date",date);
         List<Matches> matches = theQuery.getResultList();
 

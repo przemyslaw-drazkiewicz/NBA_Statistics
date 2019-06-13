@@ -125,9 +125,6 @@ public class Statistician3 implements Initializable {
     public void matchFinished(Event event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Statistician.fxml"));
         Parent accountParent = loader.load();
-        Statistician controller = loader.getController();
-        controller.setMatchToRemove(match);
-        controller.init();
         Scene preseasonScene = new Scene(accountParent);
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         window.setScene(preseasonScene);

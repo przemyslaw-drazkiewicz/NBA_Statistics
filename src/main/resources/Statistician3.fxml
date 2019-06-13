@@ -85,9 +85,9 @@
             <Font size="15.0" />
          </font>
       </Text>
-      <Button fx:id="backToChoice" layoutX="-2.0" layoutY="1.0" mnemonicParsing="false" onAction="#matchFinished" prefHeight="523.0" prefWidth="767.0" text="Back to choice match (to jest button jak coś xd)" visible="false">
+      <Button fx:id="backToChoice" layoutX="-2.0" layoutY="1.0" mnemonicParsing="false" onAction="#matchFinished" prefHeight="523.0" prefWidth="767.0" text="Match finished, click on button" visible="false">
          <font>
-            <Font size="29.0" />
+            <Font size="46.0" />
          </font>
       </Button>
     </children>
