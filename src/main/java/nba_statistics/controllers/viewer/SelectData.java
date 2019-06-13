@@ -32,12 +32,16 @@ import java.net.URL;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import static java.util.Map.Entry.comparingByValue;
 import static nba_statistics.others.Alerts.*;
 
 public class SelectData implements Initializable {
 
+
+
+    List<Players> players = new ArrayList<>();
 
     //main text
     @FXML
@@ -48,7 +52,8 @@ public class SelectData implements Initializable {
     private Button viewDatabaseBtn;
 
 
-
+    @FXML
+    private Button OfDateBirthbtt;
     @FXML
     private Text writeName;
     @FXML
@@ -62,6 +67,8 @@ public class SelectData implements Initializable {
     @FXML
     private ListView<String> listViewOfDateBirth;
     @FXML
+    private ComboBox<String> comboBoxOfDateBirth;
+    @FXML
     private Text selectSeason;
     @FXML
     private ListView<String> listSeasons;
@@ -74,12 +81,17 @@ public class SelectData implements Initializable {
     //visibility Achievements
     private void setVisibleDateOfBirth() {
         selectDate.setVisible(true);
-        listViewOfDateBirth.setVisible(true);
+       // listViewOfDateBirth.setVisible(true);
+        comboBoxOfDateBirth.setVisible(true);
+        OfDateBirthbtt.setVisible(true);
     }
 
     private void setInisibleDateOfBirth() {
         selectDate.setVisible(false);
-        listViewOfDateBirth.setVisible(false);
+       // listViewOfDateBirth.setVisible(false);
+        comboBoxOfDateBirth.setVisible(false);
+        OfDateBirthbtt.setVisible(false);
+        comboBoxOfDateBirth.getSelectionModel().clearSelection();
     }
 
     private void setVisibleSeasons() {
@@ -125,12 +137,13 @@ public class SelectData implements Initializable {
     public void selectPlayers() {
         PlayersService playersService = new PlayersService();
 
-
+        listSeasons.getSelectionModel().clearSelection();
         setInvisibleLabelsPlayerAchievements();
         setInvisibleSeasons();
 
         //list of players
-        List<Players> players = playersService.getPlayers(name.getText(), surname.getText());
+        if(players.size() > 0)        players.clear();
+         players = playersService.getPlayers(name.getText(), surname.getText());
 
         //if no one was found
         if (players.size() == 0) {
@@ -145,11 +158,48 @@ public class SelectData implements Initializable {
         else if (players.size() > 1) {
             //TO DO
             setVisibleDateOfBirth();
-            for (int i = 0; i < players.size(); i++) {
-                listViewOfDateBirth.getItems().addAll(players.get(i).getDateOfBirth());
-            }
-            setInisibleDateOfBirth();
+
+            comboBoxOfDateBirth.getSelectionModel().clearSelection();
+            IntStream.range(0, players.size()).forEach(i -> comboBoxOfDateBirth.getItems().addAll(players.get(i).getDateOfBirth()));
+
         } else {
+            dataPlayer();
+        }
+
+    }
+
+    public void selectDateBtt(){
+       String s = comboBoxOfDateBirth.getValue();
+        System.out.println(s);
+        setInisibleDateOfBirth();
+
+        List<Players> playersTmp = new ArrayList<>();
+
+
+        for(Players p: players) {
+            playersTmp.add(p);
+        }
+
+        players.clear();
+
+        for(Players p: playersTmp) {
+            if (p.getDateOfBirth().equalsIgnoreCase(s)){
+                players.add(p);
+            }
+
+        }
+
+        playersTmp.clear();
+
+        dataPlayer();
+    }
+
+
+    public void dataPlayer(){
+        {
+
+            PlayersService playersService = new PlayersService();
+
             int idPlayer = players.get(0).getId();
 
             List<PlayerTeamsHistory> playerSeasons = playersService.getPlayerTeamsHistory(idPlayer);
@@ -162,7 +212,7 @@ public class SelectData implements Initializable {
             }
 
             if (!nameSeason.isEmpty()) {
-                listener(players, playerSeasons);
+                listener( playerSeasons);
 
                 ObservableList<String> oNameSeason = FXCollections.observableArrayList(nameSeason);
                 listSeasons.setItems(oNameSeason);
@@ -179,10 +229,9 @@ public class SelectData implements Initializable {
 
             }
         }
-
     }
 
-    private void listener(List<Players> players, List<PlayerTeamsHistory> playerSeasons) {
+    private void listener(List<PlayerTeamsHistory> playerSeasons) {
         MatchesService matchesService = new MatchesService();
         final int[] idSeason = {-1};
         final int[] idTeam = {-1};
@@ -193,7 +242,7 @@ public class SelectData implements Initializable {
 
         listSeasons.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
 
-            if (newValue == null) listener(players, playerSeasons);
+            if (newValue == null) listener( playerSeasons);
             listString.add("Season: " + newValue);
             listString.add("Name: " + players.get(0).getName()); //
             listString.add("Surname: " + players.get(0).getSurname());
@@ -234,6 +283,7 @@ public class SelectData implements Initializable {
 
             playerAchievListView.setItems(listString);
             setVisibleLabelsPlayerAchievements();
+
 
         });
     }
