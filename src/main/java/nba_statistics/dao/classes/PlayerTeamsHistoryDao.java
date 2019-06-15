@@ -20,12 +20,11 @@ public class PlayerTeamsHistoryDao extends Dao implements IPlayerTeamsHistoryDao
 
     @SuppressWarnings("Duplicates")
     @Override
-    public boolean savePlayerTeamsHistory(String playerName, String teamName, String seasonName ) {
+    public void savePlayerTeamsHistory(String playerName, String teamName, String seasonName ) {
 
         SeasonsService seasonsService = new SeasonsService();
         Seasons currSeason = seasonsService.getSeason(seasonName);
-        TeamsService teamsService = new TeamsService();
-        Teams currTeam = teamsService.getTeam(teamName);
+
         PlayersService playersService = new PlayersService();
         String[] splited = playerName.split("\\s+");
         Players currPlayer;
@@ -34,17 +33,26 @@ public class PlayerTeamsHistoryDao extends Dao implements IPlayerTeamsHistoryDao
         }else{ //=3
             currPlayer = playersService.getPlayer(splited[0], splited[1],splited[2]);
         }
-        if (isRepeatTransferInSeason(currPlayer.getId(),currSeason.getId()))
-            return false;
+/*        if (isRepeatTransferInSeason(currPlayer.getId(),currSeason.getId()))
+            return false;*/
+
+
+        TeamsService teamsService = new TeamsService();
+        Teams currTeam;
+        if (teamName == null) //no team changed
+            currTeam = currPlayer.getTeam();
+        else
+            currTeam = teamsService.getTeam(teamName);
+
 
         PlayerTeamsHistory playerTeamsHistory = new PlayerTeamsHistory();
         playerTeamsHistory.setPlayer(currPlayer);
         playerTeamsHistory.setSeason(currSeason);
         playerTeamsHistory.setTeam(currTeam);
         persist(playerTeamsHistory);
-        return true;
+        //return true;
     }
-    private boolean isRepeatTransferInSeason(int idPlayer, int idSeason){
+/*    public boolean isRepeatTransferInSeason(int idPlayer, int idSeason){
             Query<PlayerTeamsHistory> theQuery = getCurrentSession().createQuery("from PlayerTeamsHistory where player_id=:idPlayer and season_id =:idSeason")
                     .setParameter("idPlayer", idPlayer)
                     .setParameter("idSeason", idSeason);
@@ -52,7 +60,7 @@ public class PlayerTeamsHistoryDao extends Dao implements IPlayerTeamsHistoryDao
                 return false;
             else
                 return true;
-    }
+    }*/
 
     @SuppressWarnings("Duplicates")
     @Override

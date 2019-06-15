@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface IPlayersDao {
     int getData(String name, String surname, String date, float height, float weight, String team, String imageURL);
-    int updatePlayer(String name,String team, String imageURL);
+    int updatePlayer(Players name,String team, String imageURL, String height, String weight, int currSeason);
     List<Players> getPlayers(String name, String surname);
     List<Players> getPlayers(int id);
     List<Players> getPlayers(String name, String surname, String date);
@@ -17,4 +17,5 @@ public interface IPlayersDao {
     List <String> getAll();
     List<Players> getPlayersById(int id);
     List<PlayerTeamsHistory> getPlayersInTeam(int season, int team);
+    Players getPlayerFromAutoCompleteField(String value);
 }

@@ -1,25 +1,23 @@
 package nba_statistics.controllers.preseason;
 
 import javafx.event.Event;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.stage.Stage;
-import nba_statistics.controllers.AccountController;
-import nba_statistics.controllers.statistician.Statistician2;
 
 import java.io.IOException;
 
 public class Selection {
+/*
     @FXML private Button addMatchBtn;
     @FXML private Button addTeamBtn;
     @FXML private Button addPlayerBtn;
-    @FXML private Button transferPlayerBtn;
+    @FXML private Button updatePlayerBtn;
     @FXML private Button logOutBtn;
     @FXML private Button logOutBtn1;
+*/
 
     private String currSeasonTmp;
     public void setCurrSeasonTmp(String currSeasonTmp){
@@ -41,10 +39,11 @@ public class Selection {
 
     public void changeScreenToAddMatch(Event event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Preseason/AddMatchView.fxml"));
-        Parent accountParent = loader.load();
+        System.out.println("currSeason= /Selection/ ==============" + currSeasonTmp);
         AddMatch controller = loader.getController();
         controller.setCurrSeason(currSeasonTmp);
         controller.init();
+        Parent accountParent = loader.load();
         createScene(accountParent,event);
     }
 
@@ -64,10 +63,10 @@ public class Selection {
         createScene(accountParent,event);
     }
 
-    public void changeScreenToTransferPlayer(Event event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Preseason/AddTransferPlayerView.fxml"));
+    public void changeScreenToUpdatePlayer(Event event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Preseason/UpdatePlayerView.fxml"));
         Parent accountParent = loader.load();
-        AddTransferPlayer controller = loader.getController();
+        UpdatePlayer controller = loader.getController();
         controller.setCurrSeason(currSeasonTmp);
         createScene(accountParent,event);
     }

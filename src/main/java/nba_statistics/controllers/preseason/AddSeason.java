@@ -15,11 +15,13 @@ import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import nba_statistics.controllers.AccountController;
+import nba_statistics.entities.Seasons;
 import nba_statistics.services.SeasonsService;
-
 import java.io.IOException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.sql.Date;
 import java.util.ResourceBundle;
 
 import static nba_statistics.others.Alerts.*;
@@ -49,6 +51,18 @@ public class AddSeason implements Initializable {
         v = new Visibility();
         newSeasonRadioBtn.setSelected(true);
         initSeasonName();
+
+    }
+
+    private Date getCurrDate(){
+        java.util.Date date = new  java.util.Date(); //date from util
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        return (Date.valueOf(formatter.format(date)));
+    }
+
+    private Date getSeasonStart(){
+        SeasonsService seasonsService = new SeasonsService();
+        return Date.valueOf(seasonsService.getSeason(currSeason).getStartDate());
     }
 
     private void initSeasonName()
@@ -75,6 +89,7 @@ public class AddSeason implements Initializable {
         Parent accountParent = loader.load();
         Selection controller = loader.getController();
         controller.setCurrSeasonTmp(currSeason);
+        System.out.println("currSeason= /addSeason/ ==============" + currSeason);
         Scene preseasonScene = new Scene(accountParent);
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(preseasonScene);
@@ -110,7 +125,10 @@ public class AddSeason implements Initializable {
             SeasonsService seasonsDao = new SeasonsService();
             if (seasonsDao.checkSeason(seasonsNameCombox.getValue())) {
                 currSeason = seasonsNameCombox.getValue(); //get season but not save to database 'this season exist in database'
-                initScene(event);
+                if(getSeasonStart().compareTo(getCurrDate()) > 0)
+                    initScene(event);
+                    else
+                    getAlertSeasonIsStarted();
             } else {
                 getAlertSeason(seasonsNameCombox.getValue());
             }

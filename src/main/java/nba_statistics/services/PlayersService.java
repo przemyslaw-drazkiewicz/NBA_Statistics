@@ -55,9 +55,9 @@ public class PlayersService {
         return list;
     }
 
-    public int updatePlayer(String name,String team, String imageURL){
+    public int updatePlayer(Players name,String team, String imageURL, String height, String weight, int seasonId){
         playersDao.openCurrentSessionwithTransaction();
-        int i = playersDao.updatePlayer(name, team,imageURL);
+        int i = playersDao.updatePlayer(name, team,imageURL, height, weight, seasonId);
         playersDao.closeCurrentSessionwithTransaction();
         return i;
     }
@@ -80,5 +80,12 @@ public class PlayersService {
         List<PlayerTeamsHistory> listPlayers = playersDao.getPlayersInTeam(season, team);
         playersDao.closeCurrentSessionwithTransaction();
         return listPlayers;
+    }
+
+    public Players getPlayerFromAutoCompleteField(String value) {
+        playersDao.openCurrentSessionwithTransaction();
+        Players p = playersDao.getPlayerFromAutoCompleteField(value);
+        playersDao.closeCurrentSessionwithTransaction();
+        return p;
     }
 }

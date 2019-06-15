@@ -12,7 +12,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.ListView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
@@ -26,8 +25,6 @@ import javafx.scene.text.Text;
 import nba_statistics.controllers.AccountController;
 import nba_statistics.entities.*;
 import nba_statistics.services.MatchesService;
-import nba_statistics.services.PlayerMatchAchievementsService;
-import nba_statistics.services.PlayersService;
 
 import static nba_statistics.others.Alerts.*;
 

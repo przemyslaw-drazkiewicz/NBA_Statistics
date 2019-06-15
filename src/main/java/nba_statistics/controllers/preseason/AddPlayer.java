@@ -86,6 +86,9 @@ public class AddPlayer implements Initializable {
                 case 4:
                     getAlertNoImage();
                     break;
+                case 5:
+                    getAlertNegativeValue();
+                    break;
 
             }
         } catch (NumberFormatException exc) {

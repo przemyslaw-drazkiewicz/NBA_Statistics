@@ -52,7 +52,7 @@ public class AddMatch implements Initializable {
         t20.setItems(FXCollections.observableArrayList(allTeams));
         t21.setItems(FXCollections.observableArrayList(allTeams));
     }
-    private String currSeason = "2019/2020"; // until bug is fixed
+    private String currSeason = ""; // until bug is fixed
 
     @SuppressWarnings("Duplicates")
     public void sendToDatabase() {
@@ -83,13 +83,14 @@ public class AddMatch implements Initializable {
     }
 
     public void init(){
-
+        System.out.println("currSeason= /init/ADDMATCH ==============" + currSeason);
         tSeason.setText(currSeason);
         SeasonsService seasonsService = new SeasonsService();
         tDuration.setText(seasonsService.getSeason(currSeason).getStartDate() + " / " + seasonsService.getSeason(currSeason).getEndDate());
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        System.out.println("currSeason= /initialize/ADDMATCH  ==============" + currSeason);
         tSeason.setText(currSeason);
         SeasonsService seasonsService = new SeasonsService();
         tDuration.setText(seasonsService.getSeason(currSeason).getStartDate() + " / " + seasonsService.getSeason(currSeason).getEndDate());

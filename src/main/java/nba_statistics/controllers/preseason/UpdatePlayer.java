@@ -16,8 +16,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import nba_statistics.entities.Players;
 import nba_statistics.services.PlayerTeamsHistoryService;
 import nba_statistics.services.PlayersService;
+import nba_statistics.services.SeasonsService;
 import nba_statistics.services.TeamsService;
 import org.controlsfx.control.textfield.TextFields;
 
@@ -29,19 +31,21 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import static nba_statistics.others.Alerts.*;
-import static nba_statistics.others.Alerts.getAlertWrongDate;
 
-public class AddTransferPlayer implements Initializable {
+public class UpdatePlayer implements Initializable {
     @FXML private ImageView image;@FXML private Button backBtn; @FXML private Button sendBtn;
     @FXML private Text playerText; @FXML private TextField playerField;
     @FXML private ComboBox<String> t42; @FXML private Button pictureBtn;
+    @FXML private TextField heightField; @FXML private TextField weightField;
 
     private String currImageURL = "";
-    private String currSeason = "";
+    private String currSeason = "2019/2020";
+    Players p;
 
     public void setCurrSeason(String currSeason){
         this.currSeason = currSeason;
     }
+
 
     @SuppressWarnings("Duplicates")
     public void changeScreen(Event event) throws IOException {
@@ -58,54 +62,87 @@ public class AddTransferPlayer implements Initializable {
     private void initComboBoxTeamsTransfer(){
         TeamsService teamsService = new TeamsService();
         ArrayList<String> allTeams = teamsService.getAllTeams();
+        allTeams.add("RETIRED");
         t42.setItems(FXCollections.observableArrayList(allTeams));
     }
 
+    public void initFields(){
+        PlayersService playersService = new PlayersService();
+        p = playersService.getPlayerFromAutoCompleteField(playerField.getText());
+        if (p != null) {
+            if (p.getTeam() != null)
+                t42.setValue(p.getTeam().getName());
+            else
+                t42.setValue("RETIRED");
+
+            heightField.setText(String.valueOf(p.getHeight()));
+            weightField.setText(String.valueOf(p.getWeight()));
+            image.setImage(new Image(p.getImageURL()));
+        }
+        else
+            getAlertNoPlayer();
+
+
+    }
+
+    private Players getPlayerToCheck(){
+        PlayersService playersService = new PlayersService();
+        return playersService.getPlayerFromAutoCompleteField(playerField.getText());
+    }
     private List<String> getPlayers(){
         PlayersService playersService = new PlayersService();
         return playersService.getAll();
     }
 
+    private void clearFields(){
+        playerField.clear();
+        image.setImage(null);
+        currImageURL="";
+        t42.getSelectionModel().clearSelection();
+        heightField.clear();
+        weightField.clear();
+    }
+    private void clearFields2(){
+        image.setImage(null);
+        currImageURL="";
+        t42.getSelectionModel().clearSelection();
+        heightField.clear();
+        weightField.clear();
+    }
+
+    private int getSeasonId(){
+        SeasonsService seasonsService = new SeasonsService();
+        return seasonsService.getId(currSeason);
+    }
     @SuppressWarnings("Duplicates")
     public void sendToDatabase(){
-        PlayersService playersService1 = new PlayersService();
-        switch (playersService1.updatePlayer(playerField.getText(),t42.getValue(),currImageURL)){
-            case 0:
-                PlayerTeamsHistoryService playerTeamsHistoryService = new PlayerTeamsHistoryService();
-                if (playerTeamsHistoryService.savePlayerTeamsHistory(playerField.getText(),t42.getValue(),currSeason)){
+        if (p != null && p.equals(getPlayerToCheck())) {
+            PlayersService playersService1 = new PlayersService();
+            switch (playersService1.updatePlayer(p, t42.getValue(), currImageURL, heightField.getText(), weightField.getText(), getSeasonId())) {
+                case 0:
+                    PlayerTeamsHistoryService playerTeamsHistoryService = new PlayerTeamsHistoryService();
+                    playerTeamsHistoryService.savePlayerTeamsHistory(playerField.getText(), t42.getValue(), currSeason);
                     information(4);
-                    playerField.clear();
-                    image.setImage(null);
-                    currImageURL="";
-                    t42.getSelectionModel().clearSelection();
-                }
-                else
+                    clearFields();
+                    break;
+                case 8:
+                    getAlertImage();
+                    break;
+                case 60:
+                    getAlertFloat();
+                    break;
+                case 70:
+                    getAlertNegativeValue();
+                    break;
+                case 80:
                     getAlertSecondTransfer();
-                break;
-            case 1:
-                getAlertTransferToTheSameTeam();
-                break;
-            case 2:
-                getAlertPlayer();
-                break;
-            case 3:
-                getAlertWrongFormat();
-                break;
-            case 4:
-                getAlertComboBoxTeam();
-                break;
-            case 5:
-                getAlertNoDate();
-                break;
-            case 6:
-                getAlertWrongDate();
-                break;
-            case 7:
-                getAlertNoImage();
-                break;
-            case 8:
-                getAlertImage();
-                break;
+                    break;
+
+            }
+        }
+        else {
+            getAlertClickOkButton();
+            clearFields2();
         }
     }
 
@@ -127,6 +164,7 @@ public class AddTransferPlayer implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        System.out.println("CURRSEASON TRANSFER= "+currSeason);
         t42.getSelectionModel().clearSelection();
         playerField.clear();
         initComboBoxTeamsTransfer();

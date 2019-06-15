@@ -3,19 +3,12 @@ package nba_statistics.dao.classes;
 import nba_statistics.dao.interfaces.IPlayersDao;
 import nba_statistics.entities.PlayerTeamsHistory;
 import nba_statistics.entities.Players;
-import nba_statistics.entities.Seasons;
 import nba_statistics.entities.Teams;
-import nba_statistics.services.PlayerTeamsHistoryService;
-import nba_statistics.services.PlayersService;
-import nba_statistics.services.SeasonsService;
 import nba_statistics.services.TeamsService;
 import org.hibernate.query.Query;
 
-import java.lang.reflect.InvocationTargetException;
 import java.sql.Date;
-import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public class PlayersDao extends Dao implements IPlayersDao {
@@ -28,12 +21,16 @@ public class PlayersDao extends Dao implements IPlayersDao {
             getCurrentSession().save(entity);
     }
 
+    public void updatePlayerToDatabase(Players entity) {getCurrentSession().update(entity);}
+
     public int getData(String name, String surname, String date, float height, float weight, String team, String imageURL) {
         try{
             Date date1= Date.valueOf(date);
         }catch(IllegalArgumentException e){
             return 2;
         }
+        if (height <= 0 || weight <=0)
+            return 5;
         if (imageURL.equals(""))
             return 4;
         Players z = new Players(name, surname, date, height, weight,imageURL);
@@ -51,65 +48,59 @@ public class PlayersDao extends Dao implements IPlayersDao {
     }
 
     @Override
-    public int updatePlayer(String name, String team, String imageURL) {
-        String[] splited = name.split("\\s+");
-        String n,s,date;
-        TeamsService teamsService = new TeamsService();
-        Teams d = teamsService.getTeam(team);
-        if (imageURL.equals(""))
-            return 7;
-        if (getPlayerByImage(imageURL)!=null)
-            return 8;
-        if (d == null)
-            return 4;
-        int id = d.getId();
-        switch (splited.length){
-            case 2:
-                n = splited[0];
-                s = splited[1];
-                List<Players> player = getPlayers(n, s);
-                if (player.size() == 0)
-                    return 2;
-                else if (player.size() > 1)
-                    return 5;
-                if (player.get(0).getTeam().getName().equals(team))
-                    return 1;
+    public int updatePlayer(Players player, String team, String imageURL, String height, String weight, int currSeason) {
 
-                getCurrentSession().createQuery("update Players set team_id = :id, imageURL = :imageURL where name = :n and surname = :s")
-                        .setParameter("id", id)
-                        .setParameter("imageURL",imageURL)
-                        .setParameter("n", n)
-                        .setParameter("s", s)
-                        .executeUpdate();
-
-
+        if ((isTransferRepeat(player.getId(), currSeason))) {
+            return 80; //only one update in the season
+        }
+        else
+        {
+            TeamsService teamsService = new TeamsService();
+            if (team.equals("RETIRED")){
+                player.setTeam(null);
+                updatePlayerToDatabase(player);
                 return 0;
-            case 3:
-                n = splited[0];
-                s = splited[1];
-                date = splited[2];
-                try{Date checkDate = Date.valueOf(date);}
-                catch(IllegalArgumentException e){return 6;}
-                List<Players> player2 = getPlayers(n, s, date);
-                if (player2.size() == 0)
-                    return 2;
-                if (player2.get(0).getTeam().getName().equals(team))
-                    return 1;
-                getCurrentSession().createQuery("update Players set team_id = :id where name = :n and surname = :s and date_of_birth = :date")
-                        .setParameter("id", id)
-                        .setParameter("n", n)
-                        .setParameter("s", s)
-                        .setParameter("date", date)
-                        .executeUpdate();
-                return 0;
-                default:
-                    return 3;
-
+            }else {
+                Teams d = teamsService.getTeam(team); //not null for sure
+                player.setTeam(d);
+            }
         }
 
+        if (!(imageURL.equals(""))) //if equal ="" mean no update image
+        {
+            if (getPlayerByImage(imageURL)!=null )
+                return 8; //not unique
+            else
+                player.setImageURL(imageURL);
+        }
+
+        try{
+            float weightFloat = Float.parseFloat(weight);
+            float heightFloat = Float.parseFloat(height);
+            if (weightFloat <= 0 || heightFloat <= 0 )
+                return 70;
+            else{
+                player.setWeight(weightFloat);
+                player.setHeight(heightFloat);
+            }
+
+        }catch(NumberFormatException exc){
+            return 60;
+        }
+        updatePlayerToDatabase(player);
+        return 0;
 
     }
 
+    private boolean isTransferRepeat(int idPlayer, int idSeason){
+        Query<PlayerTeamsHistory> theQuery = getCurrentSession().createQuery("from PlayerTeamsHistory where player_id=:idPlayer and season_id =:idSeason")
+                .setParameter("idPlayer", idPlayer)
+                .setParameter("idSeason", idSeason);
+        if (theQuery.getResultList().size() == 0)
+            return false;
+        else
+            return true;
+    }
     public List<Players> getPlayers(String name, String surname){
 
         Query<Players> theQuery = getCurrentSession().createQuery("from Players where name =:name and surname = :surname")
@@ -151,7 +142,11 @@ public class PlayersDao extends Dao implements IPlayersDao {
             Query<Players> theQuery = getCurrentSession().createQuery("from Players where name=:name and surname =:surname")
                     .setParameter("name", name)
                     .setParameter("surname", surname);
+        try{
             return theQuery.getSingleResult();
+        }catch(Exception e){
+            return null;
+        }
     }
 
     @Override
@@ -160,7 +155,11 @@ public class PlayersDao extends Dao implements IPlayersDao {
                 .setParameter("name", name)
                 .setParameter("surname", surname)
                 .setParameter("date", date);
-        return theQuery.getSingleResult();
+        try{
+            return theQuery.getSingleResult();
+        }catch(Exception e){
+            return null;
+        }
     }
 
     public List<PlayerTeamsHistory> getPlayerTeamsHistory(int idPlayer){
@@ -212,5 +211,18 @@ public class PlayersDao extends Dao implements IPlayersDao {
                 .setParameter("season", season);
         List<PlayerTeamsHistory> list = theQuery.getResultList();
         return list;
+    }
+
+    @Override
+    public Players getPlayerFromAutoCompleteField(String value) {
+        String[] splited = value.split("\\s+");
+
+        if (splited.length != 2 && splited.length !=3)
+            return null;
+        if (splited.length == 2){
+            return getPlayer(splited[0],splited[1]);
+        }else{ //=3
+            return getPlayer(splited[0], splited[1],splited[2]);
+        }
     }
 }

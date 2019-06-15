@@ -15,11 +15,12 @@ public class PlayerTeamsHistoryService {
         playerTeamsHistoryDao.persist(entity);
     }
 
-    public boolean savePlayerTeamsHistory(String player, String team, String season){
+    public void savePlayerTeamsHistory(String player, String team, String season){
         playerTeamsHistoryDao.openCurrentSessionwithTransaction();
-        boolean i = playerTeamsHistoryDao.savePlayerTeamsHistory(player, team, season);
+        //boolean i = playerTeamsHistoryDao.savePlayerTeamsHistory(player, team, season);
+        playerTeamsHistoryDao.savePlayerTeamsHistory(player, team, season);
         playerTeamsHistoryDao.closeCurrentSessionwithTransaction();
-        return i;
+        //return i;
     }
 
     public void saveNewPlayerTeamsHistory(String playerName, String teamName, String seasonName){

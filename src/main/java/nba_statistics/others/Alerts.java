@@ -191,7 +191,7 @@ public class Alerts {
                 information.setHeaderText("Added new player");
                 break;
             case 4:
-                information.setHeaderText("Changed player's team");
+                information.setHeaderText("Updated player");
                 break;
             case 5:
                 information.setHeaderText("Changed player role");
@@ -232,7 +232,7 @@ public class Alerts {
         errorAlert.showAndWait();
     }
 
-    public static void getAlertTransferToTheSameTeam(){
+/*    public static void getAlertTransferToTheSameTeam(){
 
         Alert errorAlert = new Alert(Alert.AlertType.ERROR);
         errorAlert.setTitle("ERROR");
@@ -256,7 +256,7 @@ public class Alerts {
         errorAlert.setHeaderText("Select player from fields or write correct date");
         errorAlert.setContentText("If two player has the same name and surname date is necessary");
         errorAlert.showAndWait();
-    }
+    }*/
 
     public static void getAlertSecondTransfer(){
 
@@ -290,4 +290,43 @@ public class Alerts {
         alert.setContentText("In this team are no players!");
         alert.showAndWait();
     }
+
+    public static void getAlertNegativeValue(){
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText("Height or/and weight are negative numbers");
+        alert.setContentText("Height and weight must be positive numbers");
+        alert.showAndWait();
+    }
+
+    public static void getAlertClickOkButton(){
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText("Click 'OK' button");
+        alert.setContentText("You must click 'OK' button to load data");
+        alert.showAndWait();
+    }
+
+    public static void getAlertSeasonIsStarted(){
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText("Season is started");
+        alert.setContentText("Cannot add match, player and team if season was started");
+        alert.showAndWait();
+    }
+/*    public static void getAlertNoChanged(){
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText("Nothing was changed!");
+        alert.setContentText("Should change at least one parameter");
+        alert.showAndWait();
+    }
+
+    public static void getAlertChangedTeamButNotChangedImage(){
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText("Changed team but not changed image!");
+        alert.setContentText("If player changed team, image must changed too");
+        alert.showAndWait();
+    }*/
 }

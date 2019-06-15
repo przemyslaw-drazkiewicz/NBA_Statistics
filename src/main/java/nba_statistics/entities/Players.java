@@ -212,7 +212,7 @@ public class Players {
 
     @Override
     public String toString() {
-        return "Players{" + "id=" + id + ", name=" + name + ", surname=" + surname + ", dateOfBirth=" + dateOfBirth + ", height=" + height + ", weight=" + weight + '}';
+        return "Players{" + "id=" + id + ", name=" + name + ", surname=" + surname + ", dateOfBirth=" + dateOfBirth + ", height=" + height + ", weight=" + weight + "team= " + team.getName()+ '}';
     }
 
 }
