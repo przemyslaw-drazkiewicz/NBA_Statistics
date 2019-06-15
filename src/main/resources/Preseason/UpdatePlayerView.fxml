@@ -11,7 +11,7 @@
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nba_statistics.controllers.preseason.UpdatePlayer">
    <children>
       <Button fx:id="backBtn" layoutX="532.0" layoutY="19.0" mnemonicParsing="false" onAction="#changeScreen" text="Back" />
-      <Button fx:id="sendBtn" layoutX="258.0" layoutY="310.0" mnemonicParsing="false" onAction="#sendToDatabase" prefHeight="30.0" prefWidth="113.0" text="Send" />
+      <Button fx:id="sendBtn" layoutX="255.0" layoutY="356.0" mnemonicParsing="false" onAction="#sendToDatabase" prefHeight="30.0" prefWidth="113.0" text="Send" />
       <Text fx:id="enterDataTxt" layoutX="242.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Update player">
          <font>
             <Font size="25.0" />
@@ -49,5 +49,25 @@
       <TextField fx:id="heightField" layoutX="270.0" layoutY="192.0" />
       <TextField fx:id="weightField" layoutX="269.0" layoutY="231.0" />
       <Button fx:id="OKbtn" layoutX="509.0" layoutY="63.0" mnemonicParsing="false" onAction="#initFields" text="OK" />
+      <Text fx:id="tSeason0" layoutX="123.0" layoutY="295.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Season name">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <Text fx:id="tSeason" layoutX="276.0" layoutY="296.0" strokeType="OUTSIDE" strokeWidth="0.0" text="working" wrappingWidth="169.783203125">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <Text fx:id="tDuration0" layoutX="161.0" layoutY="334.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Duration">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <Text fx:id="tDuration" layoutX="274.0" layoutY="335.0" strokeType="OUTSIDE" strokeWidth="0.0" text="working" wrappingWidth="330.783203125">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>

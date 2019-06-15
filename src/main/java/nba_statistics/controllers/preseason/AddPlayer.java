@@ -36,7 +36,7 @@ public class AddPlayer implements Initializable {
     @FXML private Button sendBtn; @FXML private ImageView image; @FXML private Text enterDataTxt; @FXML private Button BackBtn;
 
     private String currImageURL="";
-    private String currSeason = "";
+    private String currSeason;
 
     public void setCurrSeason(String currSeason) {this.currSeason = currSeason;}
 
@@ -58,6 +58,15 @@ public class AddPlayer implements Initializable {
         t42.setItems(FXCollections.observableArrayList(allTeams));
     }
 
+    private void clearFields(){
+        image.setImage(null);
+        currImageURL="";
+        t42.getSelectionModel().clearSelection();
+        information(3);
+        t40.clear(); t41.clear(); t43.clear();t44.clear();t45.clear();
+        t42.getSelectionModel().clearSelection();
+    }
+
     @SuppressWarnings("Duplicates")
     public void sendToDatabase(){
         PlayersService playersService = new PlayersService();
@@ -66,13 +75,7 @@ public class AddPlayer implements Initializable {
                 case 0:
                     PlayerTeamsHistoryService playerTeamsHistoryService = new PlayerTeamsHistoryService();
                     playerTeamsHistoryService.saveNewPlayerTeamsHistory(t40.getText() + " " + t41.getText() +" " + t43.getText(),t42.getValue(),currSeason);
-                    image.setImage(null);
-                    currImageURL="";
-                    t42.getSelectionModel().clearSelection();
-                    information(3);
-                    t40.clear(); t41.clear(); t43.clear();t44.clear();t45.clear();
-                    image.setImage(null);currImageURL="";
-                    t42.getSelectionModel().clearSelection();
+                    clearFields();
                     break;
                 case 1:
                     getAlertTeams(t42.getValue());

@@ -37,10 +37,11 @@ public class UpdatePlayer implements Initializable {
     @FXML private Text playerText; @FXML private TextField playerField;
     @FXML private ComboBox<String> t42; @FXML private Button pictureBtn;
     @FXML private TextField heightField; @FXML private TextField weightField;
+    @FXML private Text tSeason; @FXML private Text tDuration;
 
     private String currImageURL = "";
-    private String currSeason = "2019/2020";
-    Players p;
+    private String currSeason;
+    private Players p;
 
     public void setCurrSeason(String currSeason){
         this.currSeason = currSeason;
@@ -161,10 +162,13 @@ public class UpdatePlayer implements Initializable {
 
     }
 
-
+    public void init(){
+        tSeason.setText(currSeason);
+        SeasonsService seasonsService = new SeasonsService();
+        tDuration.setText(seasonsService.getSeason(currSeason).getStartDate() + " / " + seasonsService.getSeason(currSeason).getEndDate());
+    }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        System.out.println("CURRSEASON TRANSFER= "+currSeason);
         t42.getSelectionModel().clearSelection();
         playerField.clear();
         initComboBoxTeamsTransfer();

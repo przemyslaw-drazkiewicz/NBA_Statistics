@@ -10,14 +10,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class Selection {
-/*
-    @FXML private Button addMatchBtn;
-    @FXML private Button addTeamBtn;
-    @FXML private Button addPlayerBtn;
-    @FXML private Button updatePlayerBtn;
-    @FXML private Button logOutBtn;
-    @FXML private Button logOutBtn1;
-*/
 
     private String currSeasonTmp;
     public void setCurrSeasonTmp(String currSeasonTmp){
@@ -39,11 +31,10 @@ public class Selection {
 
     public void changeScreenToAddMatch(Event event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Preseason/AddMatchView.fxml"));
-        System.out.println("currSeason= /Selection/ ==============" + currSeasonTmp);
+        Parent accountParent = loader.load();
         AddMatch controller = loader.getController();
         controller.setCurrSeason(currSeasonTmp);
         controller.init();
-        Parent accountParent = loader.load();
         createScene(accountParent,event);
     }
 
@@ -68,6 +59,7 @@ public class Selection {
         Parent accountParent = loader.load();
         UpdatePlayer controller = loader.getController();
         controller.setCurrSeason(currSeasonTmp);
+        controller.init();
         createScene(accountParent,event);
     }
 }

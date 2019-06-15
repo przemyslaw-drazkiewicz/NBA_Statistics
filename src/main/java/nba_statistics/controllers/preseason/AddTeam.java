@@ -45,7 +45,7 @@ public class AddTeam implements Initializable {
             ("Northwest", "Pacific", "Southwest");
 
     private String currImageURL="";
-    private String currSeason="";
+    private String currSeason;
 
     public void setCurrSeason(String currSeason) {this.currSeason = currSeason; }
 
@@ -75,6 +75,16 @@ public class AddTeam implements Initializable {
         }
 
     }
+    private void clearFields(){
+        information(1);
+        image.setImage(null);
+        currImageURL = "";
+        t12.clear();
+        t13.clear();
+        t10.getSelectionModel().clearSelection();
+        DivE.setVisible(false);
+        DivW.setVisible(false);
+    }
     @SuppressWarnings("Duplicates")
     public void sendToDatabase(){
 
@@ -86,14 +96,7 @@ public class AddTeam implements Initializable {
                         getAlertDivision();
                     else {
                         if (teamsService.getData(t10.getValue(), DivE.getValue(), t12.getText(), t13.getText(), currImageURL)) {
-                            information(1);
-                            image.setImage(null);
-                            currImageURL = "";
-                            t12.clear();
-                            t13.clear();
-                            t10.getSelectionModel().clearSelection();
-                            DivE.setVisible(false);
-                            DivW.setVisible(false);
+                            clearFields();
                         } else getAlertImage();
                     }
                 } else if (t10.getValue() == "Western") {
@@ -101,12 +104,7 @@ public class AddTeam implements Initializable {
                         getAlertDivision();
                     else {
                         if (teamsService.getData(t10.getValue(), DivW.getValue(), t12.getText(), t13.getText(), currImageURL)) {
-                            information(1);
-                            t12.clear();
-                            t13.clear();
-                            t10.getSelectionModel().clearSelection();
-                            DivE.setVisible(false);
-                            DivW.setVisible(false);
+                            clearFields();
                         } else getAlertImage();
                     }
                 } else {

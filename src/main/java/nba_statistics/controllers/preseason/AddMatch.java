@@ -24,7 +24,7 @@ import java.util.ResourceBundle;
 
 import static nba_statistics.others.Alerts.*;
 
-public class AddMatch implements Initializable {
+public class AddMatch{
     @FXML private Text m10; @FXML private Text m11; @FXML private Text m12;
     @FXML private ComboBox<String> t20; @FXML private ComboBox<String> t21; @FXML private TextField t22;
     @FXML private Text tSeason; @FXML private Text tSeason0;
@@ -43,16 +43,18 @@ public class AddMatch implements Initializable {
         window.show();
     }
 
+    private String currSeason;
     public void setCurrSeason(String currSeason){
         this.currSeason = currSeason;
     }
+
     private void initComboBoxTeams(){
         TeamsService teamsService = new TeamsService();
         ArrayList<String> allTeams = teamsService.getAllTeams();
         t20.setItems(FXCollections.observableArrayList(allTeams));
         t21.setItems(FXCollections.observableArrayList(allTeams));
     }
-    private String currSeason = ""; // until bug is fixed
+
 
     @SuppressWarnings("Duplicates")
     public void sendToDatabase() {
@@ -83,14 +85,6 @@ public class AddMatch implements Initializable {
     }
 
     public void init(){
-        System.out.println("currSeason= /init/ADDMATCH ==============" + currSeason);
-        tSeason.setText(currSeason);
-        SeasonsService seasonsService = new SeasonsService();
-        tDuration.setText(seasonsService.getSeason(currSeason).getStartDate() + " / " + seasonsService.getSeason(currSeason).getEndDate());
-    }
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        System.out.println("currSeason= /initialize/ADDMATCH  ==============" + currSeason);
         tSeason.setText(currSeason);
         SeasonsService seasonsService = new SeasonsService();
         tDuration.setText(seasonsService.getSeason(currSeason).getStartDate() + " / " + seasonsService.getSeason(currSeason).getEndDate());

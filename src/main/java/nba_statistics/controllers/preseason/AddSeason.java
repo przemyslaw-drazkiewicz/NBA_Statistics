@@ -89,7 +89,6 @@ public class AddSeason implements Initializable {
         Parent accountParent = loader.load();
         Selection controller = loader.getController();
         controller.setCurrSeasonTmp(currSeason);
-        System.out.println("currSeason= /addSeason/ ==============" + currSeason);
         Scene preseasonScene = new Scene(accountParent);
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(preseasonScene);
