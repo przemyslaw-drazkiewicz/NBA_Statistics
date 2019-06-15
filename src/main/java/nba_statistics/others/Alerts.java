@@ -321,12 +321,12 @@ public class Alerts {
         alert.setContentText("Should change at least one parameter");
         alert.showAndWait();
     }
-
+*/
     public static void getAlertChangedTeamButNotChangedImage(){
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
         alert.setHeaderText("Changed team but not changed image!");
         alert.setContentText("If player changed team, image must changed too");
         alert.showAndWait();
-    }*/
+    }
 }

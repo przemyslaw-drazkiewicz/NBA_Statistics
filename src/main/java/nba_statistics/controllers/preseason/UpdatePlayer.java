@@ -138,6 +138,9 @@ public class UpdatePlayer implements Initializable {
                 case 80:
                     getAlertSecondTransfer();
                     break;
+                case 90:
+                    getAlertChangedTeamButNotChangedImage();
+                    break;
 
             }
         }

@@ -50,6 +50,8 @@ public class PlayersDao extends Dao implements IPlayersDao {
     @Override
     public int updatePlayer(Players player, String team, String imageURL, String height, String weight, int currSeason) {
 
+        boolean isChangedTeam = false;
+
         if ((isTransferRepeat(player.getId(), currSeason))) {
             return 80; //only one update in the season
         }
@@ -62,6 +64,8 @@ public class PlayersDao extends Dao implements IPlayersDao {
                 return 0;
             }else {
                 Teams d = teamsService.getTeam(team); //not null for sure
+                if (!(d.equals(player.getTeam()))) //changed team
+                    isChangedTeam = true;
                 player.setTeam(d);
             }
         }
@@ -72,6 +76,10 @@ public class PlayersDao extends Dao implements IPlayersDao {
                 return 8; //not unique
             else
                 player.setImageURL(imageURL);
+        }
+        else { //no update image but...
+            if (isChangedTeam) //...must changed image if changed team
+                return 90;
         }
 
         try{
