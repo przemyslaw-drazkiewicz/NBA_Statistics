@@ -171,7 +171,7 @@ public class PlayersDao extends Dao implements IPlayersDao {
     }
 
     public List<PlayerTeamsHistory> getPlayerTeamsHistory(int idPlayer){
-        Query<PlayerTeamsHistory> theQuery = getCurrentSession().createQuery("from PlayerTeamsHistory where player_id = :idPlayer")
+        Query<PlayerTeamsHistory> theQuery = getCurrentSession().createQuery("from PlayerTeamsHistory where player_id = :idPlayer and team_id != null")
                 .setParameter("idPlayer", idPlayer);
         List<PlayerTeamsHistory> history = theQuery.getResultList();
 

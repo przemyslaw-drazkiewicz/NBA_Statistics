@@ -1,9 +1,7 @@
 package nba_statistics.controllers.viewer;
 
-import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,102 +10,58 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import nba_statistics.controllers.AccountController;
 import nba_statistics.entities.*;
-//import nba_statistics.services.PlayerTeamsHistoryService;
 import nba_statistics.services.MatchesService;
 import nba_statistics.services.PlayersService;
 import nba_statistics.services.SeasonsService;
 import nba_statistics.services.TeamsService;
+import org.controlsfx.control.textfield.TextFields;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
-import java.util.Map.Entry;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
-import static java.util.Map.Entry.comparingByValue;
 import static nba_statistics.others.Alerts.*;
 
 public class SelectData implements Initializable {
 
 
+    List<PlayerTeamsHistory> playerSeasons= new ArrayList<>();
 
-    List<Players> players = new ArrayList<>();
+    private Players p;
+    private Teams t;
 
-    //main text
-    @FXML
-    private Button logOutBtn;
     @FXML
     private Button backBtn;
     @FXML
-    private Button viewDatabaseBtn;
-
-
+    private Button OKbtn;
     @FXML
-    private Button OfDateBirthbtt;
+    private Button seasonBtn;
     @FXML
     private Text writeName;
     @FXML
-    private Text writeSurname;
-    @FXML
-    private TextField surname;
-    @FXML
-    private TextField name;
-    @FXML
-    private Text selectDate;
-    @FXML
-    private ListView<String> listViewOfDateBirth;
-    @FXML
-    private ComboBox<String> comboBoxOfDateBirth;
-    @FXML
     private Text selectSeason;
     @FXML
-    private ListView<String> listSeasons;
+    private TextField playerField;
+    @FXML
+    private ComboBox<String> seasonsComboBox;
     @FXML
     private ListView<String> playerAchievListView;
     @FXML
     private ImageView image;
 
+    int points = 0, steals = 0, blocks = 0, rebounds = 0, fouls = 0, techFaul = 0;
 
-    //visibility Achievements
-    private void setVisibleDateOfBirth() {
-        selectDate.setVisible(true);
-       // listViewOfDateBirth.setVisible(true);
-        comboBoxOfDateBirth.setVisible(true);
-        OfDateBirthbtt.setVisible(true);
-    }
-
-    private void setInisibleDateOfBirth() {
-        selectDate.setVisible(false);
-       // listViewOfDateBirth.setVisible(false);
-        comboBoxOfDateBirth.setVisible(false);
-        OfDateBirthbtt.setVisible(false);
-        comboBoxOfDateBirth.getSelectionModel().clearSelection();
-    }
-
-    private void setVisibleSeasons() {
-        listSeasons.setVisible(true);
-        selectSeason.setVisible(true);
-    }
-
-    private void setInvisibleSeasons() {
-        listSeasons.setVisible(false);
-        selectSeason.setVisible(false);
-    }
-
+    //visibility
     private void setVisibleLabelsPlayerAchievements() {
         playerAchievListView.setVisible(true);
         image.setVisible(true);
-
     }
 
     private void setInvisibleLabelsPlayerAchievements() {
@@ -115,14 +69,19 @@ public class SelectData implements Initializable {
         image.setVisible(false);
     }
 
-
-    private void setInvisiblePlayersAchievements() {
-        setInvisibleSeasons();
-        setInisibleDateOfBirth();
-        setInvisibleLabelsPlayerAchievements();
+    private void setVisibleSelectSeason(){
+        seasonsComboBox.setVisible(true);
+        selectSeason.setVisible(true);
+        seasonBtn.setVisible(true);
     }
 
+    private void setInvisibleSelectSeason(){
+        seasonsComboBox.setVisible(false);
+        selectSeason.setVisible(false);
+        seasonBtn.setVisible(false);
+    }
 
+    //screen changing
     public void changeScreenBack(Event event) throws IOException {
         Parent backParent = FXMLLoader.load(getClass().getResource("/DataViewer.fxml"));
         Scene backScene = new Scene(backParent);
@@ -132,137 +91,76 @@ public class SelectData implements Initializable {
         window.show();
     }
 
+    //list all players
+    private List<String> getPlayers(){
+        PlayersService playersService = new PlayersService();
+        return playersService.getAll();
+    }
 
-    //first option - Player's achievements
-    public void selectPlayers() {
+
+    //OKbutton
+    public void initFields(){
         PlayersService playersService = new PlayersService();
 
-        listSeasons.getSelectionModel().clearSelection();
+        setInvisibleSelectSeason();
         setInvisibleLabelsPlayerAchievements();
-        setInvisibleSeasons();
 
-        //list of players
-        if(players.size() > 0)        players.clear();
-         players = playersService.getPlayers(name.getText(), surname.getText());
+        p = playersService.getPlayerFromAutoCompleteField(playerField.getText());
+        if (p != null) {
+            playerSeasons = playersService.getPlayerTeamsHistory(p.getId());
 
-        //if no one was found
-        if (players.size() == 0) {
-            //alert if all data is not available
-            if (name.getText().length() == 0 || surname.getText().length() == 0) {
-                getAlertPlayer();
-            } else {
-                getAlertNoPlayer();
+            if(playerSeasons.isEmpty()) getAlertNoSeasonsForPlayer();
+            else{
+                ArrayList<String> seasonsNameList = new ArrayList<>();
+                for (PlayerTeamsHistory seasonName : playerSeasons){
+                    seasonsNameList.add(seasonName.getSeason().getName());
+                }
+                setVisibleSelectSeason();
+                seasonsComboBox.setItems(FXCollections.observableArrayList(seasonsNameList));
             }
-
-        }//if is more people with the same name and surname
-        else if (players.size() > 1) {
-            //TO DO
-            setVisibleDateOfBirth();
-
-            comboBoxOfDateBirth.getSelectionModel().clearSelection();
-            IntStream.range(0, players.size()).forEach(i -> comboBoxOfDateBirth.getItems().addAll(players.get(i).getDateOfBirth()));
-
-        } else {
-            dataPlayer();
         }
-
+        else
+            getAlertNoPlayer();
     }
 
-    public void selectDateBtt(){
-       String s = comboBoxOfDateBirth.getValue();
-        System.out.println(s);
-        setInisibleDateOfBirth();
+    //selectButton
+    public void selectAchievements(){
 
-        List<Players> playersTmp = new ArrayList<>();
-
-
-        for(Players p: players) {
-            playersTmp.add(p);
-        }
-
-        players.clear();
-
-        for(Players p: playersTmp) {
-            if (p.getDateOfBirth().equalsIgnoreCase(s)){
-                players.add(p);
-            }
-
-        }
-
-        playersTmp.clear();
-
-        dataPlayer();
-    }
-
-
-    public void dataPlayer(){
-        {
-
-            PlayersService playersService = new PlayersService();
-
-            int idPlayer = players.get(0).getId();
-
-            List<PlayerTeamsHistory> playerSeasons = playersService.getPlayerTeamsHistory(idPlayer);
-            ObservableList<PlayerTeamsHistory> nameTmp = FXCollections.observableArrayList();
-
-            List<String> nameSeason = new ArrayList<String>(playerSeasons.size());
-            for (PlayerTeamsHistory nameS : playerSeasons) {
-                nameSeason.add(nameS.getSeason().getName());
-                nameTmp.add(nameS);
-            }
-
-            if (!nameSeason.isEmpty()) {
-                listener( playerSeasons);
-
-                ObservableList<String> oNameSeason = FXCollections.observableArrayList(nameSeason);
-                listSeasons.setItems(oNameSeason);
-                listSeasons.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-
-            } else {
-                setInvisibleSeasons();
-
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Warning");
-                alert.setHeaderText("No seasons");
-                alert.setContentText("No seasons for this player");
-                alert.showAndWait();
-
-            }
-        }
-    }
-
-    private void listener(List<PlayerTeamsHistory> playerSeasons) {
         MatchesService matchesService = new MatchesService();
-        final int[] idSeason = {-1};
-        final int[] idTeam = {-1};
+        SeasonsService seasonsService = new SeasonsService();
+        TeamsService teamsService = new TeamsService();
 
-        setVisibleSeasons();
+        String seasonName = seasonsComboBox.getValue();
 
-        ObservableList<String> listString = FXCollections.observableArrayList();
+        if(seasonName != null){
+            int seasonId = seasonsService.getId(seasonName);
+            int teamId = -1;
 
-        listSeasons.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            ObservableList<String> listString = FXCollections.observableArrayList();
 
-            if (newValue == null) listener( playerSeasons);
-            listString.add("Season: " + newValue);
-            listString.add("Name: " + players.get(0).getName()); //
-            listString.add("Surname: " + players.get(0).getSurname());
+            listString.add("Season: " + seasonName);
+            listString.add("Name: " + p.getName()); //
+            listString.add("Surname: " + p.getSurname());
 
             for (int i = 0; i < playerSeasons.size(); i++) {
-                if (newValue != null) {
-                    if (newValue.equalsIgnoreCase(playerSeasons.get(i).getSeason().getName())) {
-                        listString.add("Team: " + playerSeasons.get(i).getTeam().getName());
-                        idSeason[0] = playerSeasons.get(i).getSeason().getId();
-                        idTeam[0] = playerSeasons.get(i).getTeam().getId();
-                    }
+                if (seasonName.equalsIgnoreCase(playerSeasons.get(i).getSeason().getName())) {
+                    teamId = playerSeasons.get(i).getTeam().getId();
+
                 }
             }
 
+            t = teamsService.getTeam(teamId);
+            listString.add("Team: " + t.getName());
 
-            List<PlayerMatchAchievements> achievementPlayer = matchesService.getAchievementPlayerInMatch(players.get(0).getId(), idSeason[0], idTeam[0]);
+            List<PlayerMatchAchievements> achievementPlayer = matchesService.getAchievementPlayerInMatch(p.getId(), seasonId, teamId);
             listString.add("Number matches: " + achievementPlayer.size());
 
-
-            int points = 0, steals = 0, blocks = 0, rebounds = 0, fouls = 0, techFaul = 0;
+            points = 0;
+            steals = 0;
+            blocks = 0;
+            rebounds = 0;
+            fouls = 0;
+            techFaul = 0;
 
             for (PlayerMatchAchievements os : achievementPlayer) {
                 points += os.getScoredPoints();
@@ -279,36 +177,30 @@ public class SelectData implements Initializable {
             listString.add("Rebounds: " + rebounds);
             listString.add("Fouls: " + fouls);
             listString.add("Technical fouls: " + techFaul);
-            image.setImage(new Image(players.get(0).getImageURL()));
+            image.setImage(new Image(p.getImageURL()));
 
             playerAchievListView.setItems(listString);
             setVisibleLabelsPlayerAchievements();
-
-
-        });
+        }
+        else if(playerSeasons.isEmpty()) getAlertClickOkButton();
+        else getAlertSelectSeason();
     }
-
-
-
-
 
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
-        setInisibleDateOfBirth();
-        setInvisiblePlayersAchievements();
-        setInvisibleSeasons();
         setInvisibleLabelsPlayerAchievements();
+        setInvisibleLabelsPlayerAchievements();
+        setInvisibleSelectSeason();
 
-
+        TextFields.bindAutoCompletion(playerField, getPlayers());
     }
 
     @FXML
     void onKeyPressed(KeyEvent event) {
         if (event.getCode() == KeyCode.ENTER) {
-            selectPlayers();
+            initFields();
         }
         if (event.getCode() == KeyCode.ESCAPE) {
             try {

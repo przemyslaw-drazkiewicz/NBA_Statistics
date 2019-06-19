@@ -307,6 +307,14 @@ public class Alerts {
         alert.showAndWait();
     }
 
+    public static void getAlertSelectSeason(){
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText("Select Season");
+        alert.setContentText("You must select season to load data");
+        alert.showAndWait();
+    }
+
     public static void getAlertSeasonIsStarted(){
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
@@ -329,4 +337,13 @@ public class Alerts {
         alert.setContentText("If player changed team, image must changed too");
         alert.showAndWait();
     }
+
+    public static void getAlertNoSeasonsForPlayer(){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Warning");
+        alert.setHeaderText("No seasons");
+        alert.setContentText("No seasons for this player");
+        alert.showAndWait();
+    }
+
 }
