@@ -2,6 +2,7 @@ package nba_statistics.controllers.viewer;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,6 +16,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import nba_statistics.entities.*;
 import nba_statistics.services.MatchesService;
@@ -23,7 +25,7 @@ import nba_statistics.services.SeasonsService;
 import nba_statistics.services.TeamsService;
 import org.controlsfx.control.textfield.TextFields;
 
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
 import java.util.*;
 
@@ -33,7 +35,7 @@ public class SelectData implements Initializable {
 
 
     List<PlayerTeamsHistory> playerSeasons= new ArrayList<>();
-
+    List<String> toPrint= new ArrayList<>();
     private Players p;
     private Teams t;
 
@@ -55,6 +57,10 @@ public class SelectData implements Initializable {
     private ListView<String> playerAchievListView;
     @FXML
     private ImageView image;
+    @FXML
+    private Stage stage;
+    @FXML
+    private MenuBar toPrintMenu;
 
     int points = 0, steals = 0, blocks = 0, rebounds = 0, fouls = 0, techFaul = 0;
 
@@ -62,11 +68,13 @@ public class SelectData implements Initializable {
     private void setVisibleLabelsPlayerAchievements() {
         playerAchievListView.setVisible(true);
         image.setVisible(true);
+
     }
 
     private void setInvisibleLabelsPlayerAchievements() {
         playerAchievListView.setVisible(false);
         image.setVisible(false);
+
     }
 
     private void setVisibleSelectSeason(){
@@ -181,16 +189,50 @@ public class SelectData implements Initializable {
 
             playerAchievListView.setItems(listString);
             setVisibleLabelsPlayerAchievements();
+
+            for(String s : listString){
+                toPrint.add(s);
+            }
         }
         else if(playerSeasons.isEmpty()) getAlertClickOkButton();
         else getAlertSelectSeason();
+
+
     }
 
+    //print
+    public void printToFile(ActionEvent event) throws IOException  {
+        if(toPrint.isEmpty()) getAlertNoSeasonsOrNoPlayer();
+        else{
+            ObservableList<String> stringList = FXCollections.observableArrayList();
+            stringList.add("a");
+            stringList.add("b");
+
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Save Copy of Report");
+            fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
+            fileChooser.setInitialFileName("First report.txt");
+
+            File file = fileChooser.showSaveDialog(stage);
+
+
+            if(file!= null){
+                FileWriter fileWriter = new FileWriter(file);
+
+                fileWriter.write(toPrint.toString() + "\n");
+
+                fileWriter.flush();
+                fileWriter.close();
+            }
+            toPrint.clear();
+        }
+
+    }
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        setInvisibleLabelsPlayerAchievements();
+
         setInvisibleLabelsPlayerAchievements();
         setInvisibleSelectSeason();
 

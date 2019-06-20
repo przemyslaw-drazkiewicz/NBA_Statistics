@@ -9,9 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.ListView;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import nba_statistics.entities.PlayerMatchAchievements;
 import nba_statistics.entities.Players;
@@ -39,6 +37,7 @@ public class ListOfTop10Shooters implements Initializable {
     private Button backButton;
     @FXML
     private Button selectListButton;
+
 
 
     public void setVisibleLabelsTopTenSchooters() {
@@ -95,6 +94,7 @@ public class ListOfTop10Shooters implements Initializable {
 
                 i++;
                 listString.add(i + ". " + playersList.get(0).getSurname() + " " + playersList.get(0).getName() + "\t\t Scored points: " + mapData.getValue());
+
                 if (i == 10) break;
             }
             topTenListView.setItems(listString);
@@ -137,5 +137,6 @@ public class ListOfTop10Shooters implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         setInvisibleLabelsTopTenSchooters();
         initComboBoxSeasons();
+
     }
 }

@@ -120,7 +120,7 @@ public class Timetable implements Initializable {
         initComboBoxTeams();
 
         //init column in table view -> to TIMETABLE
-        homeTeam.setCellValueFactory(p -> new ReadOnlyStringWrapper(p.getValue().getHostTeam().getName()));
+        homeTeam.setCellValueFactory((TableColumn.CellDataFeatures<Matches, String> p) -> new ReadOnlyStringWrapper(p.getValue().getHostTeam().getName()));
         awayTeam.setCellValueFactory(p -> new ReadOnlyStringWrapper(p.getValue().getGuestTeam().getName()));
         date.setCellValueFactory(new PropertyValueFactory<>("date"));
         homePoints.setCellValueFactory(new PropertyValueFactory<>("hostPoints"));

@@ -346,4 +346,12 @@ public class Alerts {
         alert.showAndWait();
     }
 
+    public static void getAlertNoSeasonsOrNoPlayer(){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Warning");
+        alert.setHeaderText("Wrong arguments");
+        alert.setContentText("You must select a player and season");
+        alert.showAndWait();
+    }
+
 }
