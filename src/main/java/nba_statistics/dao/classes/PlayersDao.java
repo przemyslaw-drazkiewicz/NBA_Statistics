@@ -64,7 +64,7 @@ public class PlayersDao extends Dao implements IPlayersDao {
                 return 0;
             }else {
                 Teams d = teamsService.getTeam(team); //not null for sure
-                if (!(d.equals(player.getTeam()))) //changed team
+                if (!(d.getName().equals(player.getTeam().getName()))) //changed team
                     isChangedTeam = true;
                 player.setTeam(d);
             }

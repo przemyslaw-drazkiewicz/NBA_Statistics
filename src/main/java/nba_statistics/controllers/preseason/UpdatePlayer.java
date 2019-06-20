@@ -67,6 +67,7 @@ public class UpdatePlayer implements Initializable {
         t42.setItems(FXCollections.observableArrayList(allTeams));
     }
 
+    private boolean clickOK = false;
     public void initFields(){
         PlayersService playersService = new PlayersService();
         p = playersService.getPlayerFromAutoCompleteField(playerField.getText());
@@ -83,6 +84,7 @@ public class UpdatePlayer implements Initializable {
         else
             getAlertNoPlayer();
 
+        clickOK = true;
 
     }
 
@@ -117,8 +119,9 @@ public class UpdatePlayer implements Initializable {
     }
     @SuppressWarnings("Duplicates")
     public void sendToDatabase(){
-        if (p != null && p.equals(getPlayerToCheck())) {
+        if (p != null && p.equals(getPlayerToCheck()) && clickOK) {
             PlayersService playersService1 = new PlayersService();
+            clickOK = false;
             switch (playersService1.updatePlayer(p, t42.getValue(), currImageURL, heightField.getText(), weightField.getText(), getSeasonId())) {
                 case 0:
                     PlayerTeamsHistoryService playerTeamsHistoryService = new PlayerTeamsHistoryService();

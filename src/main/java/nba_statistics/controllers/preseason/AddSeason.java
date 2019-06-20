@@ -124,10 +124,10 @@ public class AddSeason implements Initializable {
             SeasonsService seasonsDao = new SeasonsService();
             if (seasonsDao.checkSeason(seasonsNameCombox.getValue())) {
                 currSeason = seasonsNameCombox.getValue(); //get season but not save to database 'this season exist in database'
-                if(getSeasonStart().compareTo(getCurrDate()) > 0)
+                //if(getSeasonStart().compareTo(getCurrDate()) > 0)
                     initScene(event);
-                    else
-                    getAlertSeasonIsStarted();
+                  //  else
+                  //  getAlertSeasonIsStarted();
             } else {
                 getAlertSeason(seasonsNameCombox.getValue());
             }
