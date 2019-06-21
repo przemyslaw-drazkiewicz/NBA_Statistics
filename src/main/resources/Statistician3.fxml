@@ -113,15 +113,15 @@
             <Font size="20.0" />
          </font>
       </Text>
-      <ListView fx:id="reserveAT" layoutX="628.0" layoutY="391.0" prefHeight="130.0" prefWidth="150.0" visible="true" />
-      <ListView fx:id="substitutionsAT" layoutX="817.0" layoutY="138.0" prefHeight="226.0" prefWidth="150.0" visible="true" />
-      <ListView fx:id="positionsAT" layoutX="817.0" layoutY="391.0" prefHeight="130.0" prefWidth="150.0" visible="true" />
-      <Text layoutX="612.0" layoutY="382.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Substitution reasons" textAlignment="CENTER" visible="true" wrappingWidth="182.0">
+      <ListView fx:id="positionsAT" layoutX="628.0" layoutY="391.0" prefHeight="130.0" prefWidth="150.0" visible="true" />
+      <ListView fx:id="reserveAT" layoutX="817.0" layoutY="138.0" prefHeight="226.0" prefWidth="150.0" visible="true" />
+      <ListView fx:id="substitutionsAT" layoutX="817.0" layoutY="391.0" prefHeight="130.0" prefWidth="150.0" visible="true" />
+      <Text layoutX="810.0" layoutY="382.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Substitution reasons" textAlignment="CENTER" visible="true" wrappingWidth="182.0">
          <font>
             <Font size="20.0" />
          </font>
       </Text>
-      <Text layoutX="810.0" layoutY="381.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Positions" textAlignment="CENTER" visible="true" wrappingWidth="165.0">
+      <Text layoutX="621.0" layoutY="382.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Positions" textAlignment="CENTER" visible="true" wrappingWidth="165.0">
          <font>
             <Font size="20.0" />
          </font>

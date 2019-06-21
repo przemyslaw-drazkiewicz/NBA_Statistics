@@ -20,6 +20,7 @@ import nba_statistics.entities.PlayerMatchAchievements;
 import nba_statistics.entities.Players;
 import nba_statistics.services.MatchesService;
 import nba_statistics.services.PlayerMatchAchievementsService;
+import nba_statistics.services.PositionsService;
 
 import java.io.IOException;
 import java.net.URL;
@@ -69,8 +70,19 @@ public class Statistician3 implements Initializable {
 
     @FXML private Button backToChoice;
 
+    @FXML private ListView reserveHT;
+    @FXML private ListView reserveAT;
+
+    @FXML private ListView substitutionsHT;
+    @FXML private ListView substitutionsAT;
+
+    @FXML private ListView positionsHT;
+    @FXML private ListView positionsAT;
+
     private List<Players> playersTeamH;
     private List<Players> playersTeamA;
+
+
 
     private Matches match;
 
@@ -384,8 +396,22 @@ public class Statistician3 implements Initializable {
         matchText.setText(matchT2);
         homeTeam.setItems(playersSquadH);
         awayTeam.setItems(playersSquadA);
+        PositionsService positionsDAO = new PositionsService();
+        ArrayList<String> positions = positionsDAO.findAllPositionsName();
+        ObservableList<String> positionsA = FXCollections.observableArrayList();
+        ObservableList<String> positionsH = FXCollections.observableArrayList();
+
+        for (String position : positions) {
+            positionsA.add(position);
+            positionsH.add(position);
+        }
+
+        positionsAT.setItems(positionsA);
+        positionsHT.setItems(positionsH);
 
         initCollectAchievements();
+
+
 
         playersTeamA = new ArrayList<>();
         playersTeamH = new ArrayList<>();
