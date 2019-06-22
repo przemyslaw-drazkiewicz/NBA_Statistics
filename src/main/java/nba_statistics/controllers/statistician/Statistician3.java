@@ -15,13 +15,8 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import nba_statistics.entities.Matches;
-import nba_statistics.entities.PlayerMatchAchievements;
-import nba_statistics.entities.Players;
-import nba_statistics.services.MatchesService;
-import nba_statistics.services.PlayerMatchAchievementsService;
-import nba_statistics.services.PositionsService;
-import nba_statistics.services.SubstitutionReasonService;
+import nba_statistics.entities.*;
+import nba_statistics.services.*;
 
 import java.io.IOException;
 import java.net.URL;
@@ -86,7 +81,11 @@ public class Statistician3 implements Initializable {
     private ObservableList<String> reserveTeamH;
     private ObservableList<String> reserveTeamA;
 
+    private List<String> homeTeamSquad;
+    private List<String> awayTeamSquad;
 
+    private List<String> positionsListTeamH;
+    private List<String> positionsListTeamA;
 
     private Matches match;
 
@@ -129,6 +128,22 @@ public class Statistician3 implements Initializable {
 
     public void setPlayersTeamA(List<Players> playersTeamA) {
         this.playersTeamA = playersTeamA;
+    }
+
+    public void setHomeTeamSquad(List<String> homeTeamSquad) {
+        this.homeTeamSquad = homeTeamSquad;
+    }
+
+    public void setAwayTeamSquad(List<String> awayTeamSquad) {
+        this.awayTeamSquad = awayTeamSquad;
+    }
+
+    public void setPositionsListTeamH(List<String> positionsListTeamH) {
+        this.positionsListTeamH = positionsListTeamH;
+    }
+
+    public void setPositionsListTeamA(List<String> positionsListTeamA) {
+        this.positionsListTeamA = positionsListTeamA;
     }
 
     public void setMatch(Matches match) {
@@ -280,6 +295,8 @@ public class Statistician3 implements Initializable {
         playerMatchAchievementsService.save(home);
         playerMatchAchievementsService.save(away);
 
+        savePlayerMatchPositions();
+
         match.setHostPoints(getPoints(home));
         match.setGuestPoints(getPoints(away));
         match.setExtraTimeCount(extraTimeCount);
@@ -302,8 +319,43 @@ public class Statistician3 implements Initializable {
         return points;
     }
 
-
-
+private void savePlayerMatchPositions() {
+    PlayersService playersDao = new PlayersService();
+    PositionsService positionsDao = new PositionsService();
+    PlayerMatchPositionsService playerMatchPositionsDao = new PlayerMatchPositionsService();
+    for (int i = 0; i < 5; i++) {
+        String homeTeamPlayer = homeTeamSquad.get(i);
+        String[] homeNamePlayer = homeTeamPlayer.split(" ");
+        String homefirstname = homeNamePlayer[0];
+        String homesurname = homeNamePlayer[1];
+        String awayTeamPlayer = awayTeamSquad.get(i);
+        String[] awayNamePlayer = awayTeamPlayer.split(" ");
+        String awayfirstname = awayNamePlayer[0];
+        String awaysurname = awayNamePlayer[1];
+        Players homePlayer = null;
+        Players awayPlayer = null;
+        List<Players> homePlayers = playersDao.getPlayers(homefirstname, homesurname);
+        for (Players player : homePlayers) {
+            if (player.getTeam().getId() == match.getHostTeam().getId()) {
+                homePlayer = player;
+            }
+        }
+        List<Players> awayPlayers = playersDao.getPlayers(awayfirstname, awaysurname);
+        for (Players player : awayPlayers) {
+            if (player.getTeam().getId() == match.getGuestTeam().getId()) {
+                awayPlayer = player;
+            }
+        }
+        SeasonsService seasonsService = new SeasonsService();
+        Seasons sezon = seasonsService.getSeason("Play Offs");
+        String homeTeamPlayerPosition = positionsListTeamH.get(i);
+        String awayTeamPlayerPosition = positionsListTeamA.get(i);
+        Positions positionHomePlayer = positionsDao.getPosition(homeTeamPlayerPosition);
+        Positions positionAwayPlayer = positionsDao.getPosition(awayTeamPlayerPosition);
+        playerMatchPositionsDao.getData(homePlayer, match, positionHomePlayer);
+        playerMatchPositionsDao.getData(awayPlayer, match, positionAwayPlayer);
+    }
+}
     private void toTesting(){
         System.out.println("=======================HOME=============================");
         for (PlayerMatchAchievements p : home){System.out.println(p.getPlayer().toString() + p.getMatch().toString() + p.toString());}

@@ -93,6 +93,10 @@ public class Statistician2 implements Initializable {
         controller.setPlayersTeamA(playersTeamA);
         controller.setReserveTeamH(reserveListTeamH);
         controller.setReserveTeamA(reserveListTeamA);
+        controller.setHomeTeamSquad(homeTeamSquad);
+        controller.setAwayTeamSquad(awayTeamSquad);
+        controller.setPositionsListTeamH(positionsListTeamH);
+        controller.setPositionsListTeamA(positionsListTeamA);
         controller.setMatch(match);
         controller.setMatchT2(matchT2);
         controller.init();
@@ -125,43 +129,7 @@ public class Statistician2 implements Initializable {
 
             matchT2 = teamH.getName() + " vs. " + teamA.getName();
 
-            PlayersService playersDao = new PlayersService();
-            PositionsService positionsDao = new PositionsService();
-            PlayerMatchPositionsService playerMatchPositionsDao = new PlayerMatchPositionsService();
-            for(int i=0;i<5;i++)
-            {
-                String homeTeamPlayer = homeTeamSquad.get(i);
-                String [] homeNamePlayer = homeTeamPlayer.split(" ");
-                String homefirstname = homeNamePlayer[0];
-                String homesurname = homeNamePlayer[1];
-                String awayTeamPlayer = awayTeamSquad.get(i);
-                String [] awayNamePlayer = awayTeamPlayer.split(" ");
-                String awayfirstname = awayNamePlayer[0];
-                String awaysurname = awayNamePlayer[1];
-                Players homePlayer = null;
-                Players awayPlayer = null;
-                List<Players> homePlayers = playersDao.getPlayers(homefirstname,homesurname);
-                for (Players player:homePlayers) {
-                    if(player.getTeam().getId() == match.getHostTeam().getId())
-                    {
-                        homePlayer = player;
-                    }
-                }
-                List<Players> awayPlayers = playersDao.getPlayers(awayfirstname,awaysurname);
-                for (Players player:awayPlayers) {
-                    if(player.getTeam().getId() == match.getGuestTeam().getId())
-                    {
-                        awayPlayer = player;
-                    }
-                }
-                SeasonsService seasonsService = new SeasonsService();
-                Seasons sezon = seasonsService.getSeason("Play Offs");
-                String homeTeamPlayerPosition =  positionsListTeamH.get(i);
-                String awayTeamPlayerPosition =  positionsListTeamA.get(i);
-                Positions positionHomePlayer = positionsDao.getPosition(homeTeamPlayerPosition);
-                Positions positionAwayPlayer = positionsDao.getPosition(awayTeamPlayerPosition);
-                playerMatchPositionsDao.getData(homePlayer,match,positionHomePlayer);
-                playerMatchPositionsDao.getData(awayPlayer,match,positionAwayPlayer);
+
 
             }
 
@@ -172,7 +140,7 @@ public class Statistician2 implements Initializable {
             }
 
         }
-    }
+
 
     @SuppressWarnings("Duplicates")
     public void onClickButtonAddH() {
