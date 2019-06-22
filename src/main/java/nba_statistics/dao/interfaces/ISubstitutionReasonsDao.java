@@ -4,7 +4,7 @@ import nba_statistics.entities.SubstitutionReasons;
 
 import java.util.ArrayList;
 
-public interface SubstitutionReasonsDao {
+public interface ISubstitutionReasonsDao {
     SubstitutionReasons getSubstitutionReason(String name);
     ArrayList<String> findAllSubstitutionReasonsName();
 }

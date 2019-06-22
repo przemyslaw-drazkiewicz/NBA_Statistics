@@ -6,7 +6,7 @@ import org.hibernate.query.Query;
 
 import java.util.ArrayList;
 
-public class SubstitutionReasonsDao extends Dao implements nba_statistics.dao.interfaces.SubstitutionReasonsDao {
+public class SubstitutionReasonsDao extends Dao implements nba_statistics.dao.interfaces.ISubstitutionReasonsDao {
     @Override
     public SubstitutionReasons getSubstitutionReason(String name)
     {

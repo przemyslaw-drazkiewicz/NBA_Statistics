@@ -10,7 +10,7 @@ public class SubstitutionReasonService {
 
     public SubstitutionReasonService(){substitutionReasonsDao=new SubstitutionReasonsDao();};
 
-    public SubstitutionReasons getPosition (String name){
+    public SubstitutionReasons getSubstitutionReason (String name){
 
         substitutionReasonsDao.openCurrentSession();
         SubstitutionReasons substitutionReason= substitutionReasonsDao.getSubstitutionReason(name);

@@ -31,8 +31,8 @@
         <Button fx:id="FA" layoutX="516.0" layoutY="388.0" mnemonicParsing="false" onAction="#foulA" prefHeight="25.0" prefWidth="98.0" text="Foul" visible="true" />
         <Button fx:id="TFH" layoutX="362.0" layoutY="443.0" mnemonicParsing="false" onAction="#techFoulH" prefHeight="25.0" prefWidth="98.0" text="Technical foul" visible="true" />
         <Button fx:id="TFA" layoutX="516.0" layoutY="443.0" mnemonicParsing="false" onAction="#techFoulA" prefHeight="25.0" prefWidth="98.0" text="Technical foul" visible="true" />
-        <Button fx:id="SH" layoutX="363.0" layoutY="498.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="98.0" text="Substitute" visible="true" />
-        <Button fx:id="SA" layoutX="516.0" layoutY="498.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="98.0" text="Substitute" visible="true" />
+        <Button fx:id="SH" layoutX="363.0" layoutY="498.0" mnemonicParsing="false" onAction="#substitutionHT" prefHeight="25.0" prefWidth="98.0" text="Substitute" visible="true" />
+        <Button fx:id="SA" layoutX="516.0" layoutY="498.0" mnemonicParsing="false" onAction="#substitutionAT" prefHeight="25.0" prefWidth="98.0" text="Substitute" visible="true" />
         <Text fx:id="min" layoutX="14.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00" visible="true">
          <font>
             <Font size="50.0" />
