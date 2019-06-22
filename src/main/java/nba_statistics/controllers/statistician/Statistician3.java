@@ -83,6 +83,9 @@ public class Statistician3 implements Initializable {
     private List<Players> playersTeamH;
     private List<Players> playersTeamA;
 
+    private ObservableList<String> reserveTeamH;
+    private ObservableList<String> reserveTeamA;
+
 
 
     private Matches match;
@@ -103,8 +106,17 @@ public class Statistician3 implements Initializable {
     }
 
     public void setPlayersSquadH(ObservableList<String> playersSquadH) {
-        System.out.println("SET IN STAT3");
         this.playersSquadH = playersSquadH;
+    }
+
+    public void setReserveTeamH(ObservableList<String> reserveTeamH)
+    {
+        this.reserveTeamH=reserveTeamH;
+    }
+
+    public void setReserveTeamA(ObservableList<String> reserveTeamA)
+    {
+        this.reserveTeamA=reserveTeamA;
     }
 
     public void setMatchT2(String matchT2) {
@@ -422,6 +434,9 @@ public class Statistician3 implements Initializable {
 
         substitutionsAT.setItems(substitutionReasonsA);
         substitutionsHT.setItems(substitutionReasonsH);
+
+        reserveAT.setItems(reserveTeamA);
+        reserveHT.setItems(reserveTeamH);
 
         initCollectAchievements();
 

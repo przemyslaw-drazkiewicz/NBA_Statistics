@@ -53,6 +53,8 @@ public class Statistician2 implements Initializable {
     private List<String> playersListTeamA;
     private List<String> positionsListTeamH;
     private List<String> positionsListTeamA;
+    private ObservableList<String> reserveListTeamH;
+    private ObservableList<String> reserveListTeamA;
 
     private List<Players> playersTeamH;
     private List<Players> playersTeamA;
@@ -89,6 +91,8 @@ public class Statistician2 implements Initializable {
         controller.setPlayersSquadH(playersSquadH);
         controller.setPlayersTeamH(playersTeamH);
         controller.setPlayersTeamA(playersTeamA);
+        controller.setReserveTeamH(reserveListTeamH);
+        controller.setReserveTeamA(reserveListTeamA);
         controller.setMatch(match);
         controller.setMatchT2(matchT2);
         controller.init();
@@ -200,6 +204,7 @@ public class Statistician2 implements Initializable {
 
             homeTeamChoice.setItems(playersListH);
             homeTeamFive.setItems(playersSquadH);
+            reserveListTeamH = playersListH;
         }
     }
 
@@ -238,6 +243,7 @@ public class Statistician2 implements Initializable {
 
             homeTeamChoice.setItems(playersListH);
             homeTeamFive.setItems(playersSquadH);
+            reserveListTeamH = playersListH;
         }
     }
 
@@ -271,6 +277,7 @@ public class Statistician2 implements Initializable {
 
             awayTeamChoice.setItems(playersListA);
             awayTeamFive.setItems(playersSquadA);
+            reserveListTeamA = playersListA;
         }
     }
 
@@ -309,6 +316,7 @@ public class Statistician2 implements Initializable {
 
             awayTeamChoice.setItems(playersListA);
             awayTeamFive.setItems(playersSquadA);
+            reserveListTeamA = playersListA;
         }
     }
 
