@@ -21,6 +21,7 @@ import nba_statistics.entities.Players;
 import nba_statistics.services.MatchesService;
 import nba_statistics.services.PlayerMatchAchievementsService;
 import nba_statistics.services.PositionsService;
+import nba_statistics.services.SubstitutionReasonService;
 
 import java.io.IOException;
 import java.net.URL;
@@ -397,17 +398,30 @@ public class Statistician3 implements Initializable {
         homeTeam.setItems(playersSquadH);
         awayTeam.setItems(playersSquadA);
         PositionsService positionsDAO = new PositionsService();
+        SubstitutionReasonService substitutionReasonDao = new SubstitutionReasonService();
         ArrayList<String> positions = positionsDAO.findAllPositionsName();
         ObservableList<String> positionsA = FXCollections.observableArrayList();
         ObservableList<String> positionsH = FXCollections.observableArrayList();
+
+        ArrayList<String> substitutionReasons = substitutionReasonDao.findAllSubstitutionReasonsName();
+        ObservableList<String> substitutionReasonsH = FXCollections.observableArrayList();
+        ObservableList<String> substitutionReasonsA = FXCollections.observableArrayList();
 
         for (String position : positions) {
             positionsA.add(position);
             positionsH.add(position);
         }
 
+        for (String substitutionReason : substitutionReasons) {
+            substitutionReasonsA.add(substitutionReason);
+            substitutionReasonsH.add(substitutionReason);
+        }
+
         positionsAT.setItems(positionsA);
         positionsHT.setItems(positionsH);
+
+        substitutionsAT.setItems(substitutionReasonsA);
+        substitutionsHT.setItems(substitutionReasonsH);
 
         initCollectAchievements();
 
