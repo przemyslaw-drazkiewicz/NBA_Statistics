@@ -14,11 +14,14 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import nba_statistics.controllers.AccountController;
+import nba_statistics.controllers.HelpController;
 import nba_statistics.entities.Users;
 import nba_statistics.services.RolesService;
 import nba_statistics.services.UsersService;
@@ -38,6 +41,7 @@ public class AdminController implements Initializable {
     @FXML private Text empFieldText;
     @FXML private Text okText;
     @FXML private Text invUserText;
+    @FXML private ImageView helpBtn;
 
     private Users currUser;
 
@@ -76,6 +80,7 @@ public class AdminController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         initUserLogins();
         initRoleNames();
+        helpBtn.setImage(new Image("/help.png"));
     }
 
     public void onClickApply(){
@@ -111,6 +116,21 @@ public class AdminController implements Initializable {
 //        Roles role = rolesService.getRole(roleName);
 //        user.setRole(role);
     }
+    @SuppressWarnings("Duplicates")
+    @FXML
+    void helpClicked(Event event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Help.fxml"));
+        Parent accountParent = (Parent)loader.load();
+
+        HelpController helpController = loader.getController();
+        helpController.setView("/AdminView.fxml");
+        helpController.init();
+        Scene reviewerScene = new Scene(accountParent);
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        window.setScene(reviewerScene);
+        window.show();
+    }
+
     @FXML
     void onKeyPressed(KeyEvent event) {
         if (event.getCode() == KeyCode.ENTER) {

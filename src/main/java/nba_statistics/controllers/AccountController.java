@@ -8,6 +8,8 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.text.Text;
@@ -32,6 +34,8 @@ public class AccountController implements Initializable {
     private Button statButton;
     @FXML
     private Button logoutButton;
+    @FXML
+    private ImageView helpBtn;
 
 
 
@@ -66,6 +70,7 @@ public class AccountController implements Initializable {
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        helpBtn.setImage(new Image("/help.png"));
     }
 
 //    public AccountController(Users loggedInUser){
@@ -155,6 +160,22 @@ public class AccountController implements Initializable {
                 //e.printStackTrace();
             }
         }
+    }
+
+    @SuppressWarnings("Duplicates")
+    @FXML
+    void helpClicked(Event event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Help.fxml"));
+        Parent accountParent = (Parent)loader.load();
+
+        HelpController helpController = loader.getController();
+        helpController.setView("/AccountView.fxml");
+        helpController.init();
+
+        Scene reviewerScene = new Scene(accountParent);
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        window.setScene(reviewerScene);
+        window.show();
     }
 
 }

@@ -16,6 +16,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import nba_statistics.controllers.HelpController;
 import nba_statistics.entities.Players;
 import nba_statistics.services.PlayerTeamsHistoryService;
 import nba_statistics.services.PlayersService;
@@ -37,7 +38,7 @@ public class UpdatePlayer implements Initializable {
     @FXML private Text playerText; @FXML private TextField playerField;
     @FXML private ComboBox<String> t42; @FXML private Button pictureBtn;
     @FXML private TextField heightField; @FXML private TextField weightField;
-    @FXML private Text tSeason; @FXML private Text tDuration;
+    @FXML private Text tSeason; @FXML private Text tDuration;@FXML private ImageView helpBtn;
 
     private String currImageURL = "";
     private String currSeason;
@@ -173,11 +174,29 @@ public class UpdatePlayer implements Initializable {
         SeasonsService seasonsService = new SeasonsService();
         tDuration.setText(seasonsService.getSeason(currSeason).getStartDate() + " / " + seasonsService.getSeason(currSeason).getEndDate());
     }
+
+    @SuppressWarnings("Duplicates")
+    @FXML
+    void helpClicked(Event event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Help.fxml"));
+        Parent accountParent = (Parent)loader.load();
+
+        HelpController helpController = loader.getController();
+        helpController.setView("/Preseason/UpdatePlayerView.fxml");
+        helpController.setCurrSeason(currSeason);
+        helpController.init();
+        Scene reviewerScene = new Scene(accountParent);
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        window.setScene(reviewerScene);
+        window.show();
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         t42.getSelectionModel().clearSelection();
         playerField.clear();
         initComboBoxTeamsTransfer();
         TextFields.bindAutoCompletion(playerField, getPlayers());
+        helpBtn.setImage(new Image("/help.png"));
     }
 }

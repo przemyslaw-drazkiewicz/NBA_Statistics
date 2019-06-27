@@ -12,27 +12,27 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane onKeyPressed="#onKeyPressed" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nba_statistics.controllers.viewer.SelectData">
+<AnchorPane onKeyPressed="#onKeyPressed" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nba_statistics.controllers.viewer.SelectData">
    <children>
-      <Text fx:id="writeName" layoutX="30.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player: " wrappingWidth="104.32421875">
+      <Text fx:id="writeName" layoutX="60.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player: " wrappingWidth="104.32421875">
          <font>
             <Font size="24.0" />
          </font>
       </Text>
-      <TextField fx:id="playerField" layoutX="122.0" layoutY="44.0" prefHeight="26.0" prefWidth="275.0" />
-      <Button fx:id="OKbtn" layoutX="415.0" layoutY="41.0" minWidth="33.0" mnemonicParsing="false" onAction="#initFields" prefHeight="32.0" prefWidth="56.0" text="ok" />
-      <Text fx:id="selectSeason" layoutX="30.0" layoutY="127.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select season:" wrappingWidth="158.0">
+      <TextField fx:id="playerField" layoutX="152.0" layoutY="45.0" prefHeight="26.0" prefWidth="275.0" />
+      <Button fx:id="OKbtn" layoutX="445.0" layoutY="42.0" minWidth="33.0" mnemonicParsing="false" onAction="#initFields" prefHeight="32.0" prefWidth="56.0" text="ok" />
+      <Text fx:id="selectSeason" layoutX="60.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select season:" wrappingWidth="158.0">
          <font>
             <Font size="24.0" />
          </font>
       </Text>
-      <ComboBox fx:id="seasonsComboBox" layoutX="190.0" layoutY="103.0" prefHeight="28.0" prefWidth="206.0" />
-      <Button fx:id="seasonBtn" layoutX="416.0" layoutY="105.0" mnemonicParsing="false" onAction="#selectAchievements" text="Select" />
-      <ListView fx:id="playerAchievListView" layoutX="33.0" layoutY="165.0" prefHeight="200.0" prefWidth="396.0" />
+      <ComboBox fx:id="seasonsComboBox" layoutX="220.0" layoutY="99.0" prefHeight="28.0" prefWidth="206.0" />
+      <Button fx:id="seasonBtn" layoutX="446.0" layoutY="101.0" mnemonicParsing="false" onAction="#selectAchievements" text="Select" />
+      <ListView fx:id="playerAchievListView" layoutX="22.0" layoutY="165.0" prefHeight="200.0" prefWidth="396.0" />
       <ImageView fx:id="image" fitHeight="200.0" fitWidth="158.0" layoutX="429.0" layoutY="165.0" pickOnBounds="true" preserveRatio="true" />
       <Button fx:id="backBtn" layoutX="510.0" layoutY="20.0" mnemonicParsing="false" onAction="#changeScreenBack" prefHeight="32.0" prefWidth="66.0" text="Back" textAlignment="CENTER" />
       <Button fx:id="printToFile" layoutX="524.0" layoutY="353.0" mnemonicParsing="false" text="Button" />
-      <MenuBar fx:id="toPrintMenu" layoutX="430.0" layoutY="354.0">
+      <MenuBar fx:id="toPrintMenu" layoutX="411.0" layoutY="366.0">
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
@@ -41,5 +41,6 @@
           </Menu>
         </menus>
       </MenuBar>
+      <ImageView fx:id="helpBtn" fitHeight="46.0" fitWidth="43.0" layoutX="14.0" layoutY="13.0" onMouseClicked="#helpClicked" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>

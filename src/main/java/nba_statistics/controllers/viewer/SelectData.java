@@ -18,6 +18,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import nba_statistics.controllers.HelpController;
 import nba_statistics.entities.*;
 import nba_statistics.services.MatchesService;
 import nba_statistics.services.PlayersService;
@@ -61,6 +62,8 @@ public class SelectData implements Initializable {
     private Stage stage;
     @FXML
     private MenuBar toPrintMenu;
+    @FXML
+    private ImageView helpBtn;
 
     int points = 0, steals = 0, blocks = 0, rebounds = 0, fouls = 0, techFaul = 0;
 
@@ -229,13 +232,26 @@ public class SelectData implements Initializable {
 
     }
 
+    @SuppressWarnings("Duplicates")
+    @FXML
+    void helpClicked(Event event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Help.fxml"));
+        Parent accountParent = (Parent)loader.load();
 
+        HelpController helpController = loader.getController();
+        helpController.setView("/SelectData.fxml");
+        helpController.init();
+        Scene reviewerScene = new Scene(accountParent);
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        window.setScene(reviewerScene);
+        window.show();
+    }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
         setInvisibleLabelsPlayerAchievements();
         setInvisibleSelectSeason();
-
+        helpBtn.setImage(new Image("/help.png"));
         TextFields.bindAutoCompletion(playerField, getPlayers());
     }
 

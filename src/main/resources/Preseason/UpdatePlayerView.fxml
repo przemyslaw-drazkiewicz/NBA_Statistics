@@ -69,5 +69,6 @@
             <Font size="20.0" />
          </font>
       </Text>
+      <ImageView fx:id="helpBtn" fitHeight="46.0" fitWidth="43.0" layoutX="14.0" layoutY="9.0" onMouseClicked="#helpClicked" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>

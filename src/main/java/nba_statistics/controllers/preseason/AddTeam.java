@@ -17,6 +17,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import nba_statistics.controllers.HelpController;
 import nba_statistics.services.TeamsService;
 
 import java.io.File;
@@ -33,7 +34,7 @@ public class AddTeam implements Initializable {
     @FXML private Text d10; @FXML private Text d11; @FXML private Text d12; @FXML private Text d13;
     @FXML private ComboBox<String> t10;@FXML private TextField t12; @FXML private TextField t13;
     @FXML private Button sendBtn; @FXML private Button pictureBtn;  @FXML private ImageView image;
-    @FXML private Text enterDataTxt; @FXML private Button BackBtn;
+    @FXML private Text enterDataTxt; @FXML private Button BackBtn; @FXML private ImageView helpBtn;
 
     private ObservableList<String> conference = FXCollections.observableArrayList
             ("Eastern", "Western");
@@ -130,6 +131,22 @@ public class AddTeam implements Initializable {
         }
     }
 
+    @SuppressWarnings("Duplicates")
+    @FXML
+    void helpClicked(Event event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Help.fxml"));
+        Parent accountParent = (Parent)loader.load();
+
+        HelpController helpController = loader.getController();
+        helpController.setView("/Preseason/AddTeamView.fxml");
+        helpController.setCurrSeason(currSeason);
+        helpController.init();
+        Scene reviewerScene = new Scene(accountParent);
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        window.setScene(reviewerScene);
+        window.show();
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         DivE.setItems(divisionEastern);
@@ -137,5 +154,6 @@ public class AddTeam implements Initializable {
         t10.setItems(conference);
         t10.getSelectionModel().clearSelection();
         DivE.setVisible(false);DivW.setVisible(false);
+        helpBtn.setImage(new Image("/help.png"));
     }
 }

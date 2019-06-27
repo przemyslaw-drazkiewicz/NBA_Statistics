@@ -11,12 +11,16 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import nba_statistics.controllers.HelpController;
 import nba_statistics.services.MatchesService;
 import nba_statistics.services.SeasonsService;
 import nba_statistics.services.TeamsService;
 
+import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -24,12 +28,12 @@ import java.util.ResourceBundle;
 
 import static nba_statistics.others.Alerts.*;
 
-public class AddMatch{
+public class AddMatch implements Initializable{
     @FXML private Text m10; @FXML private Text m11; @FXML private Text m12;
     @FXML private ComboBox<String> t20; @FXML private ComboBox<String> t21; @FXML private TextField t22;
     @FXML private Text tSeason; @FXML private Text tSeason0;
     @FXML private Text tDuration; @FXML private Text tDuration0;
-    @FXML private Button sendBtn; @FXML private Text enterDataTxt;
+    @FXML private Button sendBtn; @FXML private Text enterDataTxt; @FXML private ImageView helpBtn;
 
     @SuppressWarnings("Duplicates")
     public void changeScreen(Event event) throws IOException {
@@ -89,5 +93,26 @@ public class AddMatch{
         SeasonsService seasonsService = new SeasonsService();
         tDuration.setText(seasonsService.getSeason(currSeason).getStartDate() + " / " + seasonsService.getSeason(currSeason).getEndDate());
         initComboBoxTeams();
+    }
+
+    @SuppressWarnings("Duplicates")
+    @FXML
+    void helpClicked(Event event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Help.fxml"));
+        Parent accountParent = (Parent)loader.load();
+
+        HelpController helpController = loader.getController();
+        helpController.setView("/Preseason/AddMatchView.fxml");
+        helpController.setCurrSeason(currSeason);
+        helpController.init();
+        Scene reviewerScene = new Scene(accountParent);
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        window.setScene(reviewerScene);
+        window.show();
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        helpBtn.setImage(new Image("/help.png"));
     }
 }

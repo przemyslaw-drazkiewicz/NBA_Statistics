@@ -12,6 +12,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.text.Text;
@@ -25,7 +27,7 @@ import static nba_statistics.others.Alerts.information;
 
 public class RegisterController implements Initializable {
     @FXML  private TextField userField; @FXML private PasswordField passwordField; @FXML private PasswordField passwordField2;
-    @FXML private Text errorText;
+    @FXML private Text errorText; @FXML private ImageView helpBtn;
 
     public void changeScreen(Event event) throws IOException {
         FXMLLoader loader =new FXMLLoader(getClass().getResource("/MainView.fxml"));
@@ -38,6 +40,7 @@ public class RegisterController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        helpBtn.setImage(new Image("/help.png"));
     }
 
     private boolean checkFields(TextField tf1, PasswordField tf2, PasswordField tf3){
@@ -64,7 +67,20 @@ public class RegisterController implements Initializable {
                 }
         }
     }
+    @SuppressWarnings("Duplicates")
+    @FXML
+    void helpClicked(Event event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Help.fxml"));
+        Parent accountParent = (Parent)loader.load();
 
+        HelpController helpController = loader.getController();
+        helpController.setView("/RegisterView.fxml");
+        helpController.init();
+        Scene reviewerScene = new Scene(accountParent);
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        window.setScene(reviewerScene);
+        window.show();
+    }
     @FXML
     void onKeyPressed(KeyEvent event) {
         if (event.getCode() == KeyCode.ENTER) {

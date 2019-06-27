@@ -4,11 +4,12 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nba_statistics.controllers.preseason.AddSeason">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nba_statistics.controllers.preseason.AddSeason">
    <children>
       <Button fx:id="logOutBtn" layoutX="532.0" layoutY="19.0" mnemonicParsing="false" onAction="#changeScreen" text="Back" />
       <Text fx:id="s10" layoutX="207.0" layoutY="134.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name">
@@ -38,5 +39,6 @@
       <RadioButton fx:id="newSeasonRadioBtn" layoutX="194.0" layoutY="82.0" mnemonicParsing="false" onAction="#selectNewSeason" text="Add new season" />
       <RadioButton fx:id="existingSeasonRadioBtn" layoutX="340.0" layoutY="82.0" mnemonicParsing="false" onAction="#selectExistingSeason" text="Go to existing season" />
       <ComboBox fx:id="seasonsNameCombox" layoutX="288.0" layoutY="113.0" prefWidth="150.0" visible="false" />
+      <ImageView fx:id="helpBtn" fitHeight="46.0" fitWidth="43.0" layoutX="14.0" layoutY="13.0" onMouseClicked="#helpClicked" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>

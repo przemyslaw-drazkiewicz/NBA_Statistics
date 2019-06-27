@@ -12,9 +12,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import nba_statistics.controllers.AccountController;
+import nba_statistics.controllers.HelpController;
 import nba_statistics.entities.Seasons;
 import nba_statistics.services.SeasonsService;
 import java.io.IOException;
@@ -32,6 +35,7 @@ public class AddSeason implements Initializable {
     @FXML private Text s10; @FXML private Text s11; @FXML private Text s12; @FXML private Text s13;
     @FXML private ComboBox<String> seasonsNameCombox;@FXML private TextField t30; @FXML private TextField t31; @FXML private TextField t32;
     @FXML private RadioButton newSeasonRadioBtn; @FXML private RadioButton existingSeasonRadioBtn; @FXML private Button addedSeasonBtn;
+    @FXML private ImageView helpBtn;
     private Visibility v;
     private String currSeason;
 
@@ -51,6 +55,7 @@ public class AddSeason implements Initializable {
         v = new Visibility();
         newSeasonRadioBtn.setSelected(true);
         initSeasonName();
+        helpBtn.setImage(new Image("/help.png"));
 
     }
 
@@ -136,5 +141,20 @@ public class AddSeason implements Initializable {
 
 
 
+    }
+
+    @SuppressWarnings("Duplicates")
+    @FXML
+    void helpClicked(Event event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Help.fxml"));
+        Parent accountParent = (Parent)loader.load();
+
+        HelpController helpController = loader.getController();
+        helpController.setView("/Preseason/AddSeasonView.fxml");
+        helpController.init();
+        Scene reviewerScene = new Scene(accountParent);
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        window.setScene(reviewerScene);
+        window.show();
     }
 }

@@ -12,8 +12,11 @@ import javafx.scene.control.Button;
 import javafx.event.ActionEvent;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import nba_statistics.entities.Roles;
@@ -38,15 +41,13 @@ public class MainController implements Initializable {
     private TextField userField;
     @FXML
     private Text errorText;
+    @FXML
+    private ImageView helpBtn;
 
-
-    public void onActionButton(ActionEvent actionEvent){
-
-    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        helpBtn.setImage(new Image("/help.png"));
     }
 
 
@@ -100,6 +101,20 @@ public class MainController implements Initializable {
         if (event.getCode() == KeyCode.ESCAPE) {
             Platform.exit();
         }
+    }
+    @SuppressWarnings("Duplicates")
+    @FXML
+    void helpClicked(Event event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Help.fxml"));
+        Parent accountParent = (Parent)loader.load();
+
+        HelpController helpController = loader.getController();
+        helpController.setView("/MainView.fxml");
+        helpController.init();
+        Scene reviewerScene = new Scene(accountParent);
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        window.setScene(reviewerScene);
+        window.show();
     }
 
 }

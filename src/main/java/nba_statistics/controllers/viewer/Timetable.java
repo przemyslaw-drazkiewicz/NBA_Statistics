@@ -18,6 +18,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import nba_statistics.controllers.HelpController;
 import nba_statistics.entities.Matches;
 import nba_statistics.services.MatchesService;
 import nba_statistics.services.SeasonsService;
@@ -57,6 +58,7 @@ public class Timetable implements Initializable {
     private TableColumn<Matches, Integer> extraTime;
     @FXML
     private ImageView image;
+    @FXML private ImageView helpBtn;
 
     private TeamsService teamsService = new TeamsService();
 
@@ -113,12 +115,25 @@ public class Timetable implements Initializable {
         teamsComboBox.setItems(FXCollections.observableList(teams));
     }
 
+    @SuppressWarnings("Duplicates")
+    @FXML
+    void helpClicked(Event event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Help.fxml"));
+        Parent accountParent = (Parent)loader.load();
 
+        HelpController helpController = loader.getController();
+        helpController.setView("/Timetable.fxml");
+        helpController.init();
+        Scene reviewerScene = new Scene(accountParent);
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        window.setScene(reviewerScene);
+        window.show();
+    }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         initComboBoxSeasons();
         initComboBoxTeams();
-
+        helpBtn.setImage(new Image("/help.png"));
         //init column in table view -> to TIMETABLE
         homeTeam.setCellValueFactory((TableColumn.CellDataFeatures<Matches, String> p) -> new ReadOnlyStringWrapper(p.getValue().getHostTeam().getName()));
         awayTeam.setCellValueFactory(p -> new ReadOnlyStringWrapper(p.getValue().getGuestTeam().getName()));

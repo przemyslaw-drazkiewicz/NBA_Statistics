@@ -16,6 +16,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import nba_statistics.controllers.HelpController;
 import nba_statistics.services.PlayerTeamsHistoryService;
 import nba_statistics.services.PlayersService;
 import nba_statistics.services.TeamsService;
@@ -33,7 +34,7 @@ public class AddPlayer implements Initializable {
 
     @FXML private Text p40; @FXML private Text p41; @FXML private Text p42; @FXML private Text p43; @FXML private Text p44; @FXML private Text p45; @FXML private Text p46;
     @FXML private TextField t40; @FXML private TextField t41; @FXML private ComboBox<String> t42;@FXML private TextField t43; @FXML private TextField t44;@FXML private TextField t45;
-    @FXML private Button sendBtn; @FXML private ImageView image; @FXML private Text enterDataTxt; @FXML private Button BackBtn;
+    @FXML private Button sendBtn; @FXML private ImageView image; @FXML private Text enterDataTxt; @FXML private Button BackBtn; @FXML private ImageView helpBtn;
 
     private String currImageURL="";
     private String currSeason;
@@ -112,9 +113,25 @@ public class AddPlayer implements Initializable {
             image.setImage(new Image(currImageURL));
         }
     }
+    @SuppressWarnings("Duplicates")
+    @FXML
+    void helpClicked(Event event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Help.fxml"));
+        Parent accountParent = (Parent)loader.load();
+
+        HelpController helpController = loader.getController();
+        helpController.setView("/Preseason/AddPlayerView.fxml");
+        helpController.setCurrSeason(currSeason);
+        helpController.init();
+        Scene reviewerScene = new Scene(accountParent);
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        window.setScene(reviewerScene);
+        window.show();
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        helpBtn.setImage(new Image("/help.png"));
         initComboBoxTeams();
     }
 }

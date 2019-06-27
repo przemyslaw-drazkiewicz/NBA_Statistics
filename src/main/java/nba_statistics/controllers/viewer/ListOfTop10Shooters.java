@@ -10,7 +10,10 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import nba_statistics.controllers.HelpController;
 import nba_statistics.entities.PlayerMatchAchievements;
 import nba_statistics.entities.Players;
 import nba_statistics.entities.Seasons;
@@ -37,6 +40,8 @@ public class ListOfTop10Shooters implements Initializable {
     private Button backButton;
     @FXML
     private Button selectListButton;
+    @FXML
+    private ImageView helpBtn;
 
 
 
@@ -133,10 +138,26 @@ public class ListOfTop10Shooters implements Initializable {
         return sortedMap;
     }
 
+    @SuppressWarnings("Duplicates")
+    @FXML
+    void helpClicked(Event event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Help.fxml"));
+        Parent accountParent = (Parent)loader.load();
+
+        HelpController helpController = loader.getController();
+        helpController.setView("/ListOfTop10ShootersViewer.fxml");
+        helpController.init();
+        Scene reviewerScene = new Scene(accountParent);
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        window.setScene(reviewerScene);
+        window.show();
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         setInvisibleLabelsTopTenSchooters();
         initComboBoxSeasons();
+        helpBtn.setImage(new Image("/help.png"));
 
     }
 }

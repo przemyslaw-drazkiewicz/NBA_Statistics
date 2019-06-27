@@ -1,16 +1,25 @@
 package nba_statistics.controllers.preseason;
 
 import javafx.event.Event;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import nba_statistics.controllers.HelpController;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class Selection {
+public class Selection implements Initializable {
 
+    @FXML
+    private ImageView helpBtn;
     private String currSeasonTmp;
     public void setCurrSeasonTmp(String currSeasonTmp){
         this.currSeasonTmp = currSeasonTmp;
@@ -61,5 +70,26 @@ public class Selection {
         controller.setCurrSeason(currSeasonTmp);
         controller.init();
         createScene(accountParent,event);
+    }
+
+    @SuppressWarnings("Duplicates")
+    @FXML
+    void helpClicked(Event event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Help.fxml"));
+        Parent accountParent = (Parent)loader.load();
+
+        HelpController helpController = loader.getController();
+        helpController.setView("/Preseason/SelectionView.fxml");
+        helpController.setCurrSeason(currSeasonTmp);
+        helpController.init();
+        Scene reviewerScene = new Scene(accountParent);
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        window.setScene(reviewerScene);
+        window.show();
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        helpBtn.setImage(new Image("/help.png"));
     }
 }
