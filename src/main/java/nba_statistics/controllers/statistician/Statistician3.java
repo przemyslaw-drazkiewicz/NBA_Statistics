@@ -366,7 +366,7 @@ public class Statistician3 implements Initializable {
                 Players playerInP = playersDao.getPlayer(playerInS[0], playerInS[1]);
                 Positions positions = positionsDao.getPosition(position);
                 SubstitutionReasons substitutionReason = substitutionReasonDao.getSubstitutionReason(reason);
-                substitutionHistoriesHT.add(new MatchSubstitutionHistory(playerOutP.getId(), minutes + ":" + seconds, playerInP.getId(), substitutionReason));
+                substitutionHistoriesHT.add(new MatchSubstitutionHistory(playerOutP.getId(), minutes + ":" + seconds, playerInP.getId(), substitutionReason,match));
                 boolean find = false;
                 PlayerMatchPositions playerMatchPositions = new PlayerMatchPositions(playerInP, match, positions);
                 for (int i = 0; i < homePositionsHistory.size(); i++) {
@@ -414,7 +414,7 @@ public class Statistician3 implements Initializable {
                 Players playerInP = playersDao.getPlayer(playerInS[0], playerInS[1]);
                 Positions positions = positionsDao.getPosition(position);
                 SubstitutionReasons substitutionReason = substitutionReasonDao.getSubstitutionReason(reason);
-                substitutionHistoriesAT.add(new MatchSubstitutionHistory(playerOutP.getId(), minutes + ":" + seconds, playerInP.getId(), substitutionReason));
+                substitutionHistoriesAT.add(new MatchSubstitutionHistory(playerOutP.getId(), minutes + ":" + seconds, playerInP.getId(), substitutionReason, match));
                 boolean find = false;
                 PlayerMatchPositions playerMatchPositions = new PlayerMatchPositions(playerInP, match, positions);
                 for (int i = 0; i < awayPositionsHistory.size(); i++) {

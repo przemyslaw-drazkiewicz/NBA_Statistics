@@ -35,9 +35,10 @@ public class MatchSubstitutionHistory {
     @Column(name = "match_substitution_history_id")
     private int id;
 
-    //bez tego -> klucz obcy do tabeli Matches -> bo Uni-directional
-   // @Column(name = "id_meczu")
-   // private Matches mecz;
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE,
+            CascadeType.DETACH, CascadeType.REFRESH})
+    @JoinColumn(name= "match_id")
+    private Matches match;
 
     @Column(name = "leaving_player_id")
     private int leavingPlayerId;
@@ -57,11 +58,12 @@ public class MatchSubstitutionHistory {
     public MatchSubstitutionHistory() {
     }
 
-    public MatchSubstitutionHistory(int leavingPlayerId, String substitutionTime, int enteringPlayerId, SubstitutionReasons substitutionReason) {
+    public MatchSubstitutionHistory(int leavingPlayerId, String substitutionTime, int enteringPlayerId, SubstitutionReasons substitutionReason, Matches match) {
         this.leavingPlayerId = leavingPlayerId;
         this.substitutionTime = substitutionTime;
         this.enteringPlayerId = enteringPlayerId;
         this.substitutionReason = substitutionReason;
+        this.match=match;
     }
 
     public int getId() {
@@ -71,15 +73,15 @@ public class MatchSubstitutionHistory {
     public void setId(int id) {
         this.id = id;
     }
-/*
+
     public Matches getMatch() {
-        return mecz;
+        return match;
     }
 
-    public void setMatch(Matches mecz) {
-        this.mecz = mecz;
+    public void setMatch(Matches match) {
+        this.match = match;
     }
-*/
+
     public int getLeavingPlayerId() {
         return leavingPlayerId;
     }
