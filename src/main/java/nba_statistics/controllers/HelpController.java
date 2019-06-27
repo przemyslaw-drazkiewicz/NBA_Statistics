@@ -29,12 +29,8 @@ public void setCurrSeason(String currSeason){
     this.currSeason = currSeason;
 }
     public void init(){
-        //TAK MA DZIALAC ALE MAPOWANIE ZAWODZI
         HelpService helpService = new HelpService();
         txt.setText(helpService.getText(view));
-
-
-        //txt.setText(view + " HELPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP me"); //for testing
     }
 
 
@@ -44,7 +40,6 @@ public void setCurrSeason(String currSeason){
         Parent accountParent = loader.load();
         switch (view){
             case "/AccountView.fxml":
-                //case "/DataViewer.fxml": //multiple condition (accountView OR dataViewer)
                 AccountController accountController = loader.getController();
                 accountController.init(AccountController.getUser());
                 break;

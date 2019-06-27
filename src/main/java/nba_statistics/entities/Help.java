@@ -1,14 +1,12 @@
 package nba_statistics.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "help")
 public class Help {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "help_id")
     private int id;
 
@@ -19,8 +17,9 @@ public class Help {
     private String text;
 
     public Help(){}
-    public Help(String text){
-        this.text = text;
+    public Help(String view, String text_help){
+        this.text = text_help;
+        this.view = view;
     }
 
     public int getId() {
