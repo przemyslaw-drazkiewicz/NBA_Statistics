@@ -85,11 +85,6 @@
             <Font size="15.0" />
          </font>
       </Text>
-      <Button fx:id="backToChoice" layoutX="-2.0" layoutY="1.0" mnemonicParsing="false" onAction="#matchFinished" prefHeight="523.0" prefWidth="767.0" text="Match finished, click on button" visible="false">
-         <font>
-            <Font size="46.0" />
-         </font>
-      </Button>
       <ListView fx:id="reserveHT" layoutX="18.0" layoutY="138.0" prefHeight="226.0" prefWidth="150.0" visible="true" />
       <ListView fx:id="substitutionsHT" layoutX="18.0" layoutY="391.0" prefHeight="130.0" prefWidth="150.0" visible="true" />
       <ListView fx:id="positionsHT" layoutX="201.0" layoutY="391.0" prefHeight="130.0" prefWidth="150.0" visible="true" />
@@ -136,5 +131,10 @@
             <Font size="20.0" />
          </font>
       </Text>
+      <Button fx:id="backToChoice" layoutX="-2.0" layoutY="1.0" mnemonicParsing="false" onAction="#matchFinished" prefHeight="523.0" prefWidth="1000.0" text="Match finished, click on button" visible="false">
+         <font>
+            <Font size="46.0" />
+         </font>
+      </Button>
     </children>
 </AnchorPane>
