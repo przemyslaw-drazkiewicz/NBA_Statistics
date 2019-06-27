@@ -7,7 +7,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nba_statistics.controllers.viewer.Timetable">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nba_statistics.controllers.viewer.Timetable">
    <children>
       <ComboBox fx:id="seasonComboBox" layoutX="182.0" layoutY="20.0" prefHeight="50.0" prefWidth="300.0" promptText="Select season" />
       <ComboBox fx:id="teamsComboBox" layoutX="182.0" layoutY="79.0" prefHeight="50.0" prefWidth="300.0" promptText="Select team" />
@@ -24,6 +24,6 @@
       </TableView>
       <Button fx:id="backButton" layoutX="510.0" layoutY="20.0" mnemonicParsing="false" onAction="#changeScreenBack" prefHeight="26.0" prefWidth="66.0" text="Back" textAlignment="CENTER" wrapText="true" />
       <ImageView fx:id="image" fitHeight="130.0" fitWidth="158.0" layoutX="14.0" layoutY="129.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="helpBtn" fitHeight="46.0" fitWidth="43.0" layoutX="14.0" layoutY="10.0" onMouseClicked="#helpClicked" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="helpBtn" fitHeight="46.0" fitWidth="43.0" layoutX="14.0" layoutY="14.0" onMouseClicked="#helpClicked" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>

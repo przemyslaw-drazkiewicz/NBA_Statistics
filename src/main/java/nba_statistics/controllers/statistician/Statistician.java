@@ -12,8 +12,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -23,6 +26,7 @@ import java.util.*;
 
 import javafx.scene.text.Text;
 import nba_statistics.controllers.AccountController;
+import nba_statistics.controllers.HelpController;
 import nba_statistics.entities.*;
 import nba_statistics.services.MatchesService;
 
@@ -33,6 +37,7 @@ public class Statistician implements Initializable {
     @FXML private ComboBox<String> matchesComboBox;
     @FXML private Text choiceText;
     @FXML private Button buttonOK;
+    @FXML private ImageView helpBtn;
 
     private List<String> matchesT;
 
@@ -100,6 +105,7 @@ public class Statistician implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        helpBtn.setImage(new Image("/help.png"));
         v = new Visibility();
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         String dateS = formatter.format(date);
@@ -123,7 +129,25 @@ public class Statistician implements Initializable {
 
 
     }
-
+    @SuppressWarnings("Duplicates")
+    @FXML
+    void helpClicked(Event event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Help.fxml"));
+        Parent accountParent = (Parent)loader.load();
+        HelpController helpController = loader.getController();
+        helpController.setView("/Statistician.fxml");
+        helpController.init();
+        Stage parent = (Stage)((Node)event.getSource()).getScene().getWindow();
+        Stage window = new Stage();
+        window.initModality(Modality.WINDOW_MODAL);
+        window.initOwner(parent);
+        window.setHeight(350);
+        window.setWidth(500);
+        window.setTitle("Help window");
+        Scene reviewerScene = new Scene(accountParent);
+        window.setScene(reviewerScene);
+        window.show();
+    }
 
     @FXML
     void onKeyPressed(KeyEvent event) {

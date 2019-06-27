@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane onKeyPressed="#onKeyPressed" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nba_statistics.controllers.admin.AdminController">
+<AnchorPane onKeyPressed="#onKeyPressed" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nba_statistics.controllers.admin.AdminController">
     <Button fx:id="logOutBtn" layoutX="534.0" layoutY="14.0" mnemonicParsing="false" onAction="#changeScreen" text="Back" />
    <ComboBox fx:id="userBox" layoutX="123.0" layoutY="140.0" prefWidth="150.0" />
    <Text layoutX="181.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Change role" textAlignment="CENTER" wrappingWidth="238.0">
@@ -26,6 +26,6 @@
    <Text fx:id="okText" fill="#d00101" layoutX="255.0" layoutY="345.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Successful changed!" textAlignment="CENTER" visible="false" />
    <Text fx:id="empFieldText" fill="#d00101" layoutX="236.0" layoutY="345.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Required field are not filled!" textAlignment="CENTER" visible="false" />
    <Text fx:id="invUserText" fill="#d00101" layoutX="255.0" layoutY="345.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Invalid username" textAlignment="CENTER" visible="false" />
-   <ImageView fx:id="helpBtn" fitHeight="46.0" fitWidth="43.0" layoutX="14.0" layoutY="16.0" onMouseClicked="#helpClicked" pickOnBounds="true" preserveRatio="true" />
+   <ImageView fx:id="helpBtn" fitHeight="46.0" fitWidth="43.0" layoutX="14.0" layoutY="14.0" onMouseClicked="#helpClicked" pickOnBounds="true" preserveRatio="true" />
 
 </AnchorPane>

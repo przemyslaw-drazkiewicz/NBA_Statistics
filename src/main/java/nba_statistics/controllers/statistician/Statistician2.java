@@ -12,11 +12,15 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import nba_statistics.controllers.AccountController;
+import nba_statistics.controllers.HelpController;
 import nba_statistics.entities.*;
 import nba_statistics.services.*;
 
@@ -38,6 +42,7 @@ public class Statistician2 implements Initializable {
     @FXML private ListView positionsChoice;
     @FXML private Text homeTeamName;
     @FXML private Text awayTeamName;
+    @FXML private ImageView helpBtn;
     @FXML private Button confirmSquad;
     @FXML private Button addHT;
     @FXML private Button remHT;
@@ -340,12 +345,30 @@ public class Statistician2 implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        helpBtn.setImage(new Image("/help.png"));
         System.out.println(match + " initialize");
 
 //        v = new Visibility();
     }
-
+    @SuppressWarnings("Duplicates")
+    @FXML
+    void helpClicked(Event event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Help.fxml"));
+        Parent accountParent = (Parent)loader.load();
+        HelpController helpController = loader.getController();
+        helpController.setView("/Statistician2.fxml");
+        helpController.init();
+        Stage parent = (Stage)((Node)event.getSource()).getScene().getWindow();
+        Stage window = new Stage();
+        window.initModality(Modality.WINDOW_MODAL);
+        window.initOwner(parent);
+        window.setHeight(350);
+        window.setWidth(500);
+        window.setTitle("Help window");
+        Scene reviewerScene = new Scene(accountParent);
+        window.setScene(reviewerScene);
+        window.show();
+    }
     @FXML
     void onKeyPressed(KeyEvent event) {
         if (event.getCode() == KeyCode.ENTER) {

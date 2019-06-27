@@ -11,10 +11,14 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import nba_statistics.controllers.HelpController;
 import nba_statistics.entities.*;
 import nba_statistics.services.*;
 
@@ -111,6 +115,8 @@ public class Statistician3 implements Initializable {
     private ListView positionsHT;
     @FXML
     private ListView positionsAT;
+    @FXML
+    private ImageView helpBtn;
 
     private List<Players> playersTeamH;
     private List<Players> playersTeamA;
@@ -668,11 +674,29 @@ private void savePlayerMatchPositions() {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        helpBtn.setImage(new Image("/help.png"));
        myTimer.schedule(task,1000,1000);
 
     }
-
+    @SuppressWarnings("Duplicates")
+    @FXML
+    void helpClicked(Event event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Help.fxml"));
+        Parent accountParent = (Parent)loader.load();
+        HelpController helpController = loader.getController();
+        helpController.setView("/Statistician3.fxml");
+        helpController.init();
+        Stage parent = (Stage)((Node)event.getSource()).getScene().getWindow();
+        Stage window = new Stage();
+        window.initModality(Modality.WINDOW_MODAL);
+        window.initOwner(parent);
+        window.setHeight(350);
+        window.setWidth(500);
+        window.setTitle("Help window");
+        Scene reviewerScene = new Scene(accountParent);
+        window.setScene(reviewerScene);
+        window.show();
+    }
     @FXML
     void onKeyPressed(KeyEvent event) {
         if (event.getCode() == KeyCode.S) {

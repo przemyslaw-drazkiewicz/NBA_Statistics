@@ -24,13 +24,10 @@ private String view;
 public void setView(String view){
     this.view = view;
 }
-private String currSeason;
-public void setCurrSeason(String currSeason){
-    this.currSeason = currSeason;
-}
+
     public void init(){
         HelpService helpService = new HelpService();
-        txt.setText(helpService.getText(view));
+        txt.setText(view + "\n" + helpService.getText( view));
     }
 
 
@@ -38,7 +35,7 @@ public void setCurrSeason(String currSeason){
     public void changeScreen(Event event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(view));
         Parent accountParent = loader.load();
-        switch (view){
+/*        switch (view){
             case "/AccountView.fxml":
                 AccountController accountController = loader.getController();
                 accountController.init(AccountController.getUser());
@@ -66,9 +63,7 @@ public void setCurrSeason(String currSeason){
                 updatePlayer.init();
                 break;
 
-        }
-        //Selection controller = loader.getController();
-        //controller.setCurrSeasonTmp(currSeason);
+        }*/
         Scene preseasonScene = new Scene(accountParent);
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(preseasonScene);
