@@ -15,6 +15,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import nba_statistics.controllers.HelpController;
 import nba_statistics.entities.Players;
@@ -180,13 +181,17 @@ public class UpdatePlayer implements Initializable {
     void helpClicked(Event event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Help.fxml"));
         Parent accountParent = (Parent)loader.load();
-
         HelpController helpController = loader.getController();
         helpController.setView("/Preseason/UpdatePlayerView.fxml");
-        helpController.setCurrSeason(currSeason);
         helpController.init();
+        Stage parent = (Stage)((Node)event.getSource()).getScene().getWindow();
+        Stage window = new Stage();
+        window.initModality(Modality.WINDOW_MODAL);
+        window.initOwner(parent);
+        window.setHeight(350);
+        window.setWidth(500);
+        window.setTitle("Help window");
         Scene reviewerScene = new Scene(accountParent);
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         window.setScene(reviewerScene);
         window.show();
     }
