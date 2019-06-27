@@ -10,7 +10,10 @@ import javax.persistence.Table;
 public class Help {
     @Id
     @Column(name = "help_id")
-    private String id;
+    private int id;
+
+    @Column(name="view")
+    private String view;
 
     @Column(name="text_help")
     private String text;
@@ -20,13 +23,17 @@ public class Help {
         this.text = text;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
+
+    public String getView(){return view; }
+
+    public void setView(String view){this.view=view; }
 
     public String getText() {
         return text;

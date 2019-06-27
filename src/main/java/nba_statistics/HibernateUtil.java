@@ -15,6 +15,7 @@ public class HibernateUtil {
 
           return new Configuration()
                     .configure("hibernate.cfg.xml")
+                    .addAnnotatedClass(Help.class)
                     .addAnnotatedClass(Matches.class)
                     .addAnnotatedClass(Teams.class)
                     .addAnnotatedClass(PlayerTeamsHistory.class)

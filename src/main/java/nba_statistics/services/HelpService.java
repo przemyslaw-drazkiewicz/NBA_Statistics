@@ -10,9 +10,9 @@ public class HelpService {
         helpDao = new HelpDao();
     }
 
-    public String getText(String id){
+    public String getText(String view){
         helpDao.openCurrentSession();
-        String text = helpDao.getText(id);
+        String text = helpDao.getText(view);
         helpDao.closeCurrentSession();
         return text;
 

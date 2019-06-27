@@ -30,11 +30,11 @@ public void setCurrSeason(String currSeason){
 }
     public void init(){
         //TAK MA DZIALAC ALE MAPOWANIE ZAWODZI
-        //HelpService helpService = new HelpService();
-        //txt.setText(helpService.getText(view));
+        HelpService helpService = new HelpService();
+        txt.setText(helpService.getText(view));
 
 
-        txt.setText(view + " HELPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP me"); //for testing
+        //txt.setText(view + " HELPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP me"); //for testing
     }
 
 

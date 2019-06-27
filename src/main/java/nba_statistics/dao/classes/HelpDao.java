@@ -9,7 +9,7 @@ import java.util.List;
 
 public class HelpDao extends Dao implements IHelpDao {
     @Override
-    public String getText(String id) {
+    public String getText(String view) {
         Query<Help> theQuery = getCurrentSession().createQuery("from Help");
         try{return theQuery.getSingleResult().getText();}
         catch(Exception e){ return null;}

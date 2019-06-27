@@ -23,7 +23,8 @@ DROP TABLE IF EXISTS `help`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `help` (
-  `help_id` varchar(30) NOT NULL,
+  `help_id` int(11) NOT NULL AUTO_INCREMENT,
+  `view` varchar(30) DEFAULT NULL,
   `text_help` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`help_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -35,7 +36,7 @@ CREATE TABLE `help` (
 
 LOCK TABLES `help` WRITE;
 /*!40000 ALTER TABLE `help` DISABLE KEYS */;
-INSERT INTO `help` VALUES ('/MainView.fxml','tutuj helppp');
+INSERT INTO `help` VALUES (1,'/MainView.fxml','tutuj helppp');
 /*!40000 ALTER TABLE `help` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
