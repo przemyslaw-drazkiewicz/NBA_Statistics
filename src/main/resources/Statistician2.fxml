@@ -7,44 +7,40 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane onKeyPressed="#onKeyPressed" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nba_statistics.controllers.statistician.Statistician2">
+<AnchorPane onKeyPressed="#onKeyPressed" prefHeight="480.0" prefWidth="700.0" style="-fx-background-color: #002B5E;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nba_statistics.controllers.statistician.Statistician2">
     <children>
-        <Button layoutX="726.0" layoutY="26.0" mnemonicParsing="false" onAction="#changeScreenBack" text="Back" />
-        <ListView fx:id="homeTeamChoice" layoutX="245.0" layoutY="111.0" prefHeight="117.0" prefWidth="200.0" visible="true" />
-        <ListView fx:id="awayTeamChoice" layoutX="245.0" layoutY="282.0" prefHeight="117.0" prefWidth="200.0" visible="true" />
-        <ListView fx:id="homeTeamFive" layoutX="547.0" layoutY="111.0" prefHeight="117.0" prefWidth="200.0" visible="true" />
-        <ListView fx:id="awayTeamFive" layoutX="547.0" layoutY="282.0" prefHeight="117.0" prefWidth="200.0" visible="true" />
-        <Text fx:id="positions" layoutX="82.0" layoutY="177.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Positions" textAlignment="CENTER" visible="true">
+        <Button layoutX="726.0" layoutY="26.0" mnemonicParsing="false" onAction="#changeScreenBack" style="-fx-background-color: #B8C4CA;" text="Back" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0" />
+        <ListView fx:id="homeTeamChoice" layoutX="245.0" layoutY="111.0" prefHeight="117.0" prefWidth="200.0" visible="true" AnchorPane.leftAnchor="220.0" AnchorPane.topAnchor="120.0" />
+        <ListView fx:id="awayTeamChoice" layoutX="245.0" layoutY="282.0" prefHeight="117.0" prefWidth="200.0" visible="true" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="220.0" />
+        <ListView fx:id="homeTeamFive" layoutX="547.0" layoutY="111.0" prefHeight="117.0" prefWidth="200.0" visible="true" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="120.0" />
+        <ListView fx:id="awayTeamFive" layoutX="547.0" layoutY="282.0" prefHeight="117.0" prefWidth="200.0" visible="true" AnchorPane.bottomAnchor="70.0" AnchorPane.rightAnchor="10.0" />
+        <Text fx:id="positions" fill="WHITE" layoutX="70.0" layoutY="175.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Positions" textAlignment="CENTER" visible="true">
             <font>
                 <Font size="20.0" />
             </font>
         </Text>
-        <Text fx:id="awayTeamName" layoutX="446.0" layoutY="262.0" strokeType="OUTSIDE" strokeWidth="0.0" text="AWAY TEAM" textAlignment="CENTER" visible="true">
+        <Text fx:id="awayTeamName" fill="WHITE" layoutX="399.0" layoutY="286.0" strokeType="OUTSIDE" strokeWidth="0.0" text="AWAY TEAM" textAlignment="CENTER" visible="true">
             <font>
                 <Font size="20.0" />
             </font>
         </Text>
-        <Button fx:id="addHT" layoutX="483.0" layoutY="134.0" mnemonicParsing="false" onAction="#onClickButtonAddH" text="Add" visible="true" />
-        <Button fx:id="remHT" layoutX="473.0" layoutY="182.0" mnemonicParsing="false" onAction="#onClickButtonRemH" text="Remove" visible="true" />
-        <Button fx:id="addAT" layoutX="484.0" layoutY="299.0" mnemonicParsing="false" onAction="#onClickButtonAddA" text="Add" visible="true" />
-        <Button fx:id="remAT" layoutX="473.0" layoutY="350.0" mnemonicParsing="false" onAction="#onClickButtonRemA" text="Remove" visible="true" />
-        <Button fx:id="confirmSquad" layoutX="359.0" layoutY="423.0" mnemonicParsing="false" onAction="#onClickButtonConfirm" prefHeight="57.0" prefWidth="96.0" text="Confirm" textAlignment="CENTER" visible="true">
-            <font>
-                <Font name="System Bold Italic" size="12.0" />
-            </font>
-        </Button>
-        <Text fx:id="listPlayers" layoutX="314.0" layoutY="98.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Players" textAlignment="CENTER" visible="true">
+        <Button fx:id="addHT" layoutX="436.0" layoutY="142.0" mnemonicParsing="false" onAction="#onClickButtonAddH" style="-fx-background-color: #00538C;" text="Add" textFill="WHITE" visible="true" AnchorPane.rightAnchor="225.0" />
+        <Button fx:id="remHT" layoutX="425.0" layoutY="182.0" mnemonicParsing="false" onAction="#onClickButtonRemH" style="-fx-background-color: #00538C;" text="Remove" textFill="WHITE" visible="true" AnchorPane.rightAnchor="215.0" />
+        <Button fx:id="addAT" layoutX="436.0" layoutY="325.0" mnemonicParsing="false" onAction="#onClickButtonAddA" style="-fx-background-color: #00538C;" text="Add" textFill="WHITE" visible="true" AnchorPane.rightAnchor="225.60000000000002" />
+        <Button fx:id="remAT" layoutX="425.0" layoutY="363.0" mnemonicParsing="false" onAction="#onClickButtonRemA" style="-fx-background-color: #00538C;" text="Remove" textFill="WHITE" visible="true" AnchorPane.rightAnchor="215.8" />
+        <Button fx:id="confirmSquad" layoutX="408.0" layoutY="430.0" mnemonicParsing="false" onAction="#onClickButtonConfirm" prefHeight="35.0" prefWidth="96.0" style="-fx-background-color: #0033ff;" text="Confirm" textAlignment="CENTER" textFill="WHITE" visible="true" />
+        <Text fx:id="listPlayers" fill="WHITE" layoutX="289.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Players" textAlignment="CENTER" visible="true">
             <font>
                 <Font size="20.0" />
             </font>
         </Text>
-        <Text fx:id="firstSquad" layoutX="599.0" layoutY="99.0" strokeType="OUTSIDE" strokeWidth="0.0" text="First squad" textAlignment="CENTER" visible="true">
+        <Text fx:id="firstSquad" fill="WHITE" layoutX="542.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="First squad" textAlignment="CENTER" visible="true">
             <font>
                 <Font size="20.0" />
             </font>
         </Text>
-      <ListView fx:id="positionsChoice" layoutX="22.0" layoutY="195.0" prefHeight="117.0" prefWidth="200.0" visible="true" />
-      <Text fx:id="homeTeamName" layoutX="445.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HOME TEAM" textAlignment="CENTER" visible="true">
+      <ListView fx:id="positionsChoice" layoutX="22.0" layoutY="195.0" prefHeight="117.0" prefWidth="200.0" visible="true" AnchorPane.leftAnchor="10.0" />
+      <Text fx:id="homeTeamName" fill="WHITE" layoutX="397.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HOME TEAM" textAlignment="CENTER" visible="true">
          <font>
             <Font size="20.0" />
          </font>

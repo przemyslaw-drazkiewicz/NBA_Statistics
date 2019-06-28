@@ -9,14 +9,14 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane onKeyPressed="#onKeyPressed" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #2D3447;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nba_statistics.controllers.MainController">
+<AnchorPane onKeyPressed="#onKeyPressed" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #002B5E;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nba_statistics.controllers.MainController">
    <children>
       <Button id="loginBtn" fx:id="loginBtn" layoutX="289.0" layoutY="290.0" mnemonicParsing="false" onAction="#authorize" prefHeight="39.0" prefWidth="131.0" style="-fx-background-color: #0033ff; -fx-cursor: hand;" text="Sign in" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Text fill="#a29af5" layoutX="176.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="NBA Statistics">
+      <Text fill="#90d3ff" layoutX="176.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="NBA Statistics">
          <font>
             <Font name="Perpetua" size="48.0" />
          </font>

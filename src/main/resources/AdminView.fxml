@@ -8,21 +8,21 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane onKeyPressed="#onKeyPressed" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nba_statistics.controllers.admin.AdminController">
-    <Button fx:id="logOutBtn" layoutX="534.0" layoutY="14.0" mnemonicParsing="false" onAction="#changeScreen" text="Back" />
+<AnchorPane onKeyPressed="#onKeyPressed" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #002B5E;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nba_statistics.controllers.admin.AdminController">
+    <Button fx:id="logOutBtn" layoutX="534.0" layoutY="14.0" mnemonicParsing="false" onAction="#changeScreen" style="-fx-background-color: #B8C4CA;" text="Back" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0" />
    <ComboBox fx:id="userBox" layoutX="123.0" layoutY="140.0" prefWidth="150.0" />
-   <Text layoutX="181.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Change role" textAlignment="CENTER" wrappingWidth="238.0">
+   <Text fill="WHITE" layoutX="181.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Change role" textAlignment="CENTER" wrappingWidth="238.0">
       <font>
          <Font size="26.0" />
       </font>
    </Text>
    <ComboBox fx:id="roleBox" layoutX="352.0" layoutY="188.0" prefWidth="150.0" />
    <TextField fx:id="userField" layoutX="125.0" layoutY="244.0" />
-   <Button fx:id="btnApply" layoutX="436.0" layoutY="283.0" mnemonicParsing="false" onAction="#onClickApply" prefHeight="35.0" prefWidth="66.0" text="Apply" />
-   <Text layoutX="80.0" layoutY="130.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select user" textAlignment="CENTER" wrappingWidth="238.0" />
-   <Text layoutX="81.0" layoutY="201.0" strokeType="OUTSIDE" strokeWidth="0.0" text="or" textAlignment="CENTER" wrappingWidth="238.0" />
-   <Text layoutX="80.0" layoutY="235.0" strokeType="OUTSIDE" strokeWidth="0.0" text="input user" textAlignment="CENTER" wrappingWidth="238.0" />
-   <Text layoutX="308.0" layoutY="178.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select role" textAlignment="CENTER" wrappingWidth="238.0" />
+   <Button fx:id="btnApply" layoutX="436.0" layoutY="283.0" mnemonicParsing="false" onAction="#onClickApply" prefHeight="35.0" prefWidth="66.0" style="-fx-background-color: #00538C;" text="Apply" textFill="WHITE" />
+   <Text fill="WHITE" layoutX="80.0" layoutY="130.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select user" textAlignment="CENTER" wrappingWidth="238.0" />
+   <Text fill="WHITE" layoutX="81.0" layoutY="201.0" strokeType="OUTSIDE" strokeWidth="0.0" text="or" textAlignment="CENTER" wrappingWidth="238.0" />
+   <Text fill="WHITE" layoutX="80.0" layoutY="235.0" strokeType="OUTSIDE" strokeWidth="0.0" text="input user" textAlignment="CENTER" wrappingWidth="238.0" />
+   <Text fill="WHITE" layoutX="308.0" layoutY="178.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select role" textAlignment="CENTER" wrappingWidth="238.0" />
    <Text fx:id="okText" fill="#d00101" layoutX="255.0" layoutY="345.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Successful changed!" textAlignment="CENTER" visible="false" />
    <Text fx:id="empFieldText" fill="#d00101" layoutX="236.0" layoutY="345.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Required field are not filled!" textAlignment="CENTER" visible="false" />
    <Text fx:id="invUserText" fill="#d00101" layoutX="255.0" layoutY="345.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Invalid username" textAlignment="CENTER" visible="false" />

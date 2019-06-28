@@ -6,26 +6,26 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane onKeyPressed="#onKeyPressed" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nba_statistics.controllers.AccountController">
+<AnchorPane maxHeight="400.0" maxWidth="600.0" onKeyPressed="#onKeyPressed" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #002B5E;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nba_statistics.controllers.AccountController">
    <children>
-      <Button fx:id="viewButton" layoutX="205.0" layoutY="126.0" mnemonicParsing="false" onAction="#changeScreenToReviewer" onKeyPressed="#onKeyPressedView" prefHeight="148.0" prefWidth="191.0" text="View data" textAlignment="CENTER">
+      <Button fx:id="viewButton" layoutX="205.0" layoutY="126.0" mnemonicParsing="false" onAction="#changeScreenToReviewer" onKeyPressed="#onKeyPressedView" prefHeight="148.0" prefWidth="191.0" style="-fx-background-color: #00538C;" text="View data" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="204.0" AnchorPane.rightAnchor="204.0">
          <font>
             <Font size="25.0" />
          </font>
       </Button>
-      <Button fx:id="adminButton" layoutX="418.0" layoutY="291.0" mnemonicParsing="false" onAction="#changeScreenToAdmin" onKeyPressed="#onKeyPressedAdmin" prefHeight="95.0" prefWidth="167.0" text="Admin panel" textFill="#3700ff">
+      <Button fx:id="adminButton" layoutX="23.0" layoutY="295.0" mnemonicParsing="false" onAction="#changeScreenToAdmin" onKeyPressed="#onKeyPressedAdmin" prefHeight="46.0" prefWidth="562.0" style="-fx-background-color: #0033ff;" text="Admin panel" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
          <font>
             <Font size="23.0" />
          </font>
       </Button>
-      <Button fx:id="logoutButton" layoutX="521.0" layoutY="14.0" mnemonicParsing="false" onAction="#logout" prefHeight="31.0" prefWidth="65.0" text="Logout" />
-      <Text fx:id="loginText" layoutX="14.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Logged in as: " textAlignment="RIGHT" wrappingWidth="487.13671875" />
-      <Button fx:id="statButton" layoutX="406.0" layoutY="126.0" mnemonicParsing="false" onAction="#changeScreenToStatistician" onKeyPressed="#onKeyPressedStat" prefHeight="148.0" prefWidth="191.0" text="Begin collecting statistics" textAlignment="CENTER" wrapText="true">
+      <Button fx:id="logoutButton" layoutX="506.0" layoutY="14.0" mnemonicParsing="false" onAction="#logout" prefHeight="31.0" prefWidth="80.0" style="-fx-background-color: #B8C4CA;" text="Logout" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0" />
+      <Text fx:id="loginText" layoutX="14.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Logged in as: " textAlignment="RIGHT" wrappingWidth="461.53668212890625" AnchorPane.leftAnchor="14.0" />
+      <Button fx:id="statButton" layoutX="406.0" layoutY="126.0" mnemonicParsing="false" onAction="#changeScreenToStatistician" onKeyPressed="#onKeyPressedStat" prefHeight="148.0" prefWidth="191.0" style="-fx-background-color: #00538C;" text="Begin collecting statistics" textAlignment="CENTER" textFill="WHITE" wrapText="true" AnchorPane.rightAnchor="9.0">
          <font>
-            <Font size="24.0" />
+            <Font size="25.0" />
          </font>
       </Button>
-      <Button fx:id="preButton" layoutX="8.0" layoutY="126.0" mnemonicParsing="false" onAction="#changeScreenToPreseason" onKeyPressed="#onKeyPressedPre" prefHeight="148.0" prefWidth="191.0" text="Enter preseason data" textAlignment="CENTER" wrapText="true">
+      <Button fx:id="preButton" layoutX="8.0" layoutY="126.0" mnemonicParsing="false" onAction="#changeScreenToPreseason" onKeyPressed="#onKeyPressedPre" prefHeight="148.0" prefWidth="191.0" style="-fx-background-color: #00538C;" text="Enter preseason data" textAlignment="CENTER" textFill="WHITE" wrapText="true" AnchorPane.leftAnchor="9.0">
          <font>
             <Font size="25.0" />
          </font>

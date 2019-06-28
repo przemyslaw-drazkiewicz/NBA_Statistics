@@ -8,47 +8,47 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nba_statistics.controllers.preseason.AddTeam">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #002B5E;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nba_statistics.controllers.preseason.AddTeam">
    <children>
-      <Text fx:id="d11" layoutX="122.0" layoutY="210.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Conference">
+      <Text fx:id="d11" fill="WHITE" layoutX="122.0" layoutY="210.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Conference" AnchorPane.rightAnchor="360.777734375" AnchorPane.topAnchor="200.0">
          <font>
             <Font size="20.0" />
          </font>
       </Text>
-      <Text fx:id="d10" layoutX="153.0" layoutY="244.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Division">
+      <Text fx:id="d10" fill="WHITE" layoutX="153.0" layoutY="244.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Division" AnchorPane.rightAnchor="360.777734375" AnchorPane.topAnchor="240.0">
          <font>
             <Font size="20.0" />
          </font>
       </Text>
-      <Text fx:id="d12" layoutX="171.0" layoutY="141.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name">
+      <Text fx:id="d12" fill="WHITE" layoutX="171.0" layoutY="141.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name" AnchorPane.rightAnchor="360.0" AnchorPane.topAnchor="120.0">
          <font>
             <Font size="20.0" />
          </font>
       </Text>
-      <Text fx:id="d13" layoutX="150.0" layoutY="282.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Location">
+      <Text fx:id="d13" fill="WHITE" layoutX="150.0" layoutY="282.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Location" AnchorPane.rightAnchor="360.777734375" AnchorPane.topAnchor="280.0">
          <font>
             <Font size="20.0" />
          </font>
       </Text>
-      <TextField fx:id="t12" layoutX="249.0" layoutY="123.0" />
-      <TextField fx:id="t13" layoutX="249.0" layoutY="261.0" />
-      <Button fx:id="sendBtn" layoutX="244.0" layoutY="330.0" mnemonicParsing="false" onAction="#sendToDatabase" prefHeight="30.0" prefWidth="113.0" text="Send" />
-      <Text fx:id="p46" layoutX="170.0" layoutY="177.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Image" textAlignment="RIGHT">
+      <TextField fx:id="t12" layoutX="249.0" layoutY="123.0" AnchorPane.leftAnchor="270.0" AnchorPane.topAnchor="120.0" />
+      <TextField fx:id="t13" layoutX="249.0" layoutY="261.0" AnchorPane.leftAnchor="270.0" AnchorPane.topAnchor="280.0" />
+      <Button fx:id="sendBtn" layoutX="244.0" layoutY="330.0" mnemonicParsing="false" onAction="#sendToDatabase" prefHeight="30.0" prefWidth="113.0" style="-fx-background-color: #00538C;" text="Send" textFill="WHITE" AnchorPane.bottomAnchor="30.0" />
+      <Text fx:id="p46" fill="WHITE" layoutX="170.0" layoutY="177.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Image" textAlignment="RIGHT" AnchorPane.rightAnchor="360.777734375" AnchorPane.topAnchor="160.0">
          <font>
             <Font size="20.0" />
          </font>
       </Text>
       <ImageView fx:id="image" fitHeight="215.0" fitWidth="158.0" layoutX="411.0" layoutY="115.0" pickOnBounds="true" preserveRatio="true" />
-      <Button fx:id="pictureBtn" layoutX="249.0" layoutY="157.0" mnemonicParsing="false" onAction="#setImage" prefHeight="25.0" prefWidth="149.0" text="Open a picture..." />
-      <ComboBox fx:id="t10" layoutX="249.0" layoutY="192.0" onAction="#getConference" prefHeight="27.0" prefWidth="150.0" promptText="Conference" />
-      <ComboBox fx:id="DivE" layoutX="249.0" layoutY="226.0" prefWidth="150.0" promptText="Division" />
-      <ComboBox fx:id="DivW" layoutX="249.0" layoutY="226.0" prefWidth="150.0" promptText="Division" />
-      <Text fx:id="enterDataTxt" layoutX="258.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add team">
+      <Button fx:id="pictureBtn" layoutX="249.0" layoutY="157.0" mnemonicParsing="false" onAction="#setImage" prefHeight="25.0" prefWidth="149.0" text="Open a picture..." AnchorPane.leftAnchor="270.0" AnchorPane.topAnchor="160.0" />
+      <ComboBox fx:id="t10" layoutX="249.0" layoutY="192.0" onAction="#getConference" prefHeight="27.0" prefWidth="150.0" promptText="Conference" AnchorPane.leftAnchor="270.0" AnchorPane.topAnchor="200.0" />
+      <ComboBox fx:id="DivE" layoutX="249.0" layoutY="226.0" prefWidth="150.0" promptText="Division" AnchorPane.leftAnchor="270.0" AnchorPane.topAnchor="240.0" />
+      <ComboBox fx:id="DivW" layoutX="249.0" layoutY="226.0" prefWidth="150.0" promptText="Division" AnchorPane.leftAnchor="270.0" AnchorPane.topAnchor="240.0" />
+      <Text fx:id="enterDataTxt" fill="WHITE" layoutX="258.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add team" AnchorPane.topAnchor="20.0">
          <font>
             <Font size="25.0" />
          </font>
       </Text>
-      <Button fx:id="BackBtn" layoutX="532.0" layoutY="19.0" mnemonicParsing="false" onAction="#changeScreen" text="Back" />
+      <Button fx:id="BackBtn" layoutX="532.0" layoutY="19.0" mnemonicParsing="false" onAction="#changeScreen" style="-fx-background-color: #B8C4CA;" text="Back" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0" />
       <ImageView fx:id="helpBtn" fitHeight="46.0" fitWidth="43.0" layoutX="14.0" layoutY="14.0" onMouseClicked="#helpClicked" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>

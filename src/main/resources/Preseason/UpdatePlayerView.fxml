@@ -8,63 +8,63 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nba_statistics.controllers.preseason.UpdatePlayer">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #002B5E;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nba_statistics.controllers.preseason.UpdatePlayer">
    <children>
-      <Button fx:id="backBtn" layoutX="532.0" layoutY="19.0" mnemonicParsing="false" onAction="#changeScreen" text="Back" />
-      <Button fx:id="sendBtn" layoutX="255.0" layoutY="356.0" mnemonicParsing="false" onAction="#sendToDatabase" prefHeight="30.0" prefWidth="113.0" text="Send" />
-      <Text fx:id="enterDataTxt" layoutX="242.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Update player">
+      <Button fx:id="backBtn" layoutX="532.0" layoutY="19.0" mnemonicParsing="false" onAction="#changeScreen" style="-fx-background-color: #B8C4CA;" text="Back" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0" />
+      <Button fx:id="sendBtn" layoutX="255.0" layoutY="356.0" mnemonicParsing="false" onAction="#sendToDatabase" prefHeight="30.0" prefWidth="113.0" style="-fx-background-color: #00538C;" text="Send" textFill="WHITE" AnchorPane.bottomAnchor="10.0" />
+      <Text fx:id="enterDataTxt" fill="WHITE" layoutX="242.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Update player" AnchorPane.topAnchor="20.0">
          <font>
             <Font size="25.0" />
          </font>
       </Text>
-      <Text fx:id="p46" layoutX="179.0" layoutY="168.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Image" textAlignment="RIGHT">
+      <Text fx:id="p46" fill="WHITE" layoutX="179.0" layoutY="168.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Image" textAlignment="RIGHT" AnchorPane.rightAnchor="360.289453125" AnchorPane.topAnchor="160.0">
          <font>
             <Font size="20.0" />
          </font>
       </Text>
       <ImageView fx:id="image" fitHeight="215.0" fitWidth="158.0" layoutX="429.0" layoutY="174.0" pickOnBounds="true" preserveRatio="true" />
-      <Button fx:id="pictureBtn" layoutX="269.0" layoutY="148.0" mnemonicParsing="false" onAction="#setImage" prefHeight="25.0" prefWidth="149.0" text="Open a picture..." />
-      <Text fx:id="p42" layoutX="182.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Team">
+      <Button fx:id="pictureBtn" layoutX="269.0" layoutY="148.0" mnemonicParsing="false" onAction="#setImage" prefHeight="25.0" prefWidth="149.0" text="Open a picture..." AnchorPane.leftAnchor="270.0" AnchorPane.topAnchor="160.0" />
+      <Text fx:id="p42" fill="WHITE" layoutX="182.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Team" AnchorPane.rightAnchor="360.289453125" AnchorPane.topAnchor="120.0">
          <font>
             <Font size="20.0" />
          </font>
       </Text>
-      <ComboBox fx:id="t42" layoutX="266.0" layoutY="105.0" prefWidth="150.0" promptText="Select Team" />
-      <Text fx:id="playerText" layoutX="173.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player">
+      <ComboBox fx:id="t42" layoutX="266.0" layoutY="105.0" prefWidth="150.0" promptText="Select Team" AnchorPane.leftAnchor="270.0" AnchorPane.topAnchor="120.0" />
+      <Text fx:id="playerText" fill="WHITE" layoutX="173.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player" AnchorPane.rightAnchor="360.0" AnchorPane.topAnchor="80.0">
          <font>
             <Font size="20.0" />
          </font>
       </Text>
-      <TextField fx:id="playerField" layoutX="263.0" layoutY="63.0" prefHeight="25.0" prefWidth="246.0" />
-      <Text fx:id="p44" layoutX="176.0" layoutY="212.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Height">
+      <TextField fx:id="playerField" layoutX="263.0" layoutY="63.0" prefHeight="25.0" prefWidth="246.0" AnchorPane.leftAnchor="270.0" AnchorPane.topAnchor="80.0" />
+      <Text fx:id="p44" fill="WHITE" layoutX="176.0" layoutY="212.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Height" AnchorPane.rightAnchor="360.289453125" AnchorPane.topAnchor="200.0">
          <font>
             <Font size="20.0" />
          </font>
       </Text>
-      <Text fx:id="p45" layoutX="173.0" layoutY="254.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Weight">
+      <Text fx:id="p45" fill="WHITE" layoutX="173.0" layoutY="254.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Weight" AnchorPane.rightAnchor="360.289453125" AnchorPane.topAnchor="240.0">
          <font>
             <Font size="20.0" />
          </font>
       </Text>
-      <TextField fx:id="heightField" layoutX="270.0" layoutY="192.0" />
-      <TextField fx:id="weightField" layoutX="269.0" layoutY="231.0" />
-      <Button fx:id="OKbtn" layoutX="509.0" layoutY="63.0" mnemonicParsing="false" onAction="#initFields" text="OK" />
-      <Text fx:id="tSeason0" layoutX="123.0" layoutY="295.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Season name">
+      <TextField fx:id="heightField" layoutX="270.0" layoutY="192.0" AnchorPane.leftAnchor="270.0" AnchorPane.topAnchor="200.0" />
+      <TextField fx:id="weightField" layoutX="269.0" layoutY="231.0" AnchorPane.leftAnchor="270.0" AnchorPane.topAnchor="240.0" />
+      <Button fx:id="OKbtn" layoutX="536.0" layoutY="80.0" mnemonicParsing="false" onAction="#initFields" style="-fx-background-color: #00538C;" text="OK" textFill="WHITE" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="80.0" />
+      <Text fx:id="tSeason0" fill="WHITE" layoutX="123.0" layoutY="295.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Season name" AnchorPane.rightAnchor="360.289453125" AnchorPane.topAnchor="280.0">
          <font>
             <Font size="20.0" />
          </font>
       </Text>
-      <Text fx:id="tSeason" layoutX="276.0" layoutY="296.0" strokeType="OUTSIDE" strokeWidth="0.0" text="working" wrappingWidth="169.783203125">
+      <Text fx:id="tSeason" fill="WHITE" layoutX="276.0" layoutY="296.0" strokeType="OUTSIDE" strokeWidth="0.0" text="working" wrappingWidth="169.783203125" AnchorPane.leftAnchor="270.0" AnchorPane.topAnchor="280.0">
          <font>
             <Font size="20.0" />
          </font>
       </Text>
-      <Text fx:id="tDuration0" layoutX="161.0" layoutY="334.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Duration">
+      <Text fx:id="tDuration0" fill="WHITE" layoutX="161.0" layoutY="334.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Duration" AnchorPane.rightAnchor="360.289453125" AnchorPane.topAnchor="320.0">
          <font>
             <Font size="20.0" />
          </font>
       </Text>
-      <Text fx:id="tDuration" layoutX="274.0" layoutY="335.0" strokeType="OUTSIDE" strokeWidth="0.0" text="working" wrappingWidth="330.783203125">
+      <Text fx:id="tDuration" fill="WHITE" layoutX="274.0" layoutY="335.0" strokeType="OUTSIDE" strokeWidth="0.0" text="working" wrappingWidth="330.783203125" AnchorPane.leftAnchor="270.0" AnchorPane.topAnchor="320.0">
          <font>
             <Font size="20.0" />
          </font>

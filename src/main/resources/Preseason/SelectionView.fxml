@@ -5,29 +5,29 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nba_statistics.controllers.preseason.Selection">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #002B5E;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nba_statistics.controllers.preseason.Selection">
    <children>
-      <Button fx:id="addPlayerBtn" layoutX="79.0" layoutY="241.0" mnemonicParsing="false" onAction="#changeScreenToAddPlayer" prefHeight="137.0" prefWidth="199.0" text="Add player" textAlignment="CENTER">
+      <Button fx:id="addPlayerBtn" layoutX="79.0" layoutY="241.0" mnemonicParsing="false" onAction="#changeScreenToAddPlayer" prefHeight="137.0" prefWidth="199.0" style="-fx-background-color: #00538C;" text="Add player" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font size="25.0" />
          </font>
       </Button>
-      <Button fx:id="addTeamBtn" layoutX="333.0" layoutY="80.0" mnemonicParsing="false" onAction="#changeScreenToTeam" prefHeight="137.0" prefWidth="199.0" text="Add team" textAlignment="CENTER" wrapText="true">
+      <Button fx:id="addTeamBtn" layoutX="333.0" layoutY="80.0" mnemonicParsing="false" onAction="#changeScreenToTeam" prefHeight="137.0" prefWidth="199.0" style="-fx-background-color: #00538C;" text="Add team" textAlignment="CENTER" textFill="WHITE" wrapText="true">
          <font>
             <Font size="24.0" />
          </font>
       </Button>
-      <Button fx:id="addMatchBtn" layoutX="79.0" layoutY="80.0" mnemonicParsing="false" onAction="#changeScreenToAddMatch" prefHeight="137.0" prefWidth="199.0" text="Add match" textAlignment="CENTER" wrapText="true">
+      <Button fx:id="addMatchBtn" layoutX="79.0" layoutY="80.0" mnemonicParsing="false" onAction="#changeScreenToAddMatch" prefHeight="137.0" prefWidth="199.0" style="-fx-background-color: #00538C;" text="Add match" textAlignment="CENTER" textFill="WHITE" wrapText="true">
          <font>
             <Font size="25.0" />
          </font>
       </Button>
-      <Button fx:id="updatePlayerBtn" layoutX="333.0" layoutY="241.0" mnemonicParsing="false" onAction="#changeScreenToUpdatePlayer" prefHeight="137.0" prefWidth="199.0" text="Update player" textAlignment="CENTER">
+      <Button fx:id="updatePlayerBtn" layoutX="333.0" layoutY="241.0" mnemonicParsing="false" onAction="#changeScreenToUpdatePlayer" prefHeight="137.0" prefWidth="199.0" style="-fx-background-color: #00538C;" text="Update player" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font size="25.0" />
          </font>
       </Button>
-      <Button fx:id="logOutBtn1" layoutX="532.0" layoutY="19.0" mnemonicParsing="false" onAction="#changeScreenSeason" text="Back" />
+      <Button fx:id="logOutBtn1" layoutX="532.0" layoutY="19.0" mnemonicParsing="false" onAction="#changeScreenSeason" style="-fx-background-color: #B8C4CA;" text="Back" />
       <ImageView fx:id="helpBtn" fitHeight="46.0" fitWidth="43.0" layoutX="14.0" layoutY="14.0" onMouseClicked="#helpClicked" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>

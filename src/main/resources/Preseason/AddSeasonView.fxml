@@ -9,35 +9,35 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nba_statistics.controllers.preseason.AddSeason">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #002B5E;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nba_statistics.controllers.preseason.AddSeason">
    <children>
-      <Button fx:id="logOutBtn" layoutX="532.0" layoutY="19.0" mnemonicParsing="false" onAction="#changeScreen" text="Back" />
-      <Text fx:id="s10" layoutX="207.0" layoutY="134.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name">
+      <Button fx:id="logOutBtn" layoutX="532.0" layoutY="19.0" mnemonicParsing="false" onAction="#changeScreen" style="-fx-background-color: #B8C4CA;" text="Back" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0" />
+      <Text fx:id="s10" fill="WHITE" layoutX="207.0" layoutY="134.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name" AnchorPane.rightAnchor="360.0" AnchorPane.topAnchor="140.0">
          <font>
             <Font size="20.0" />
          </font>
       </Text>
-      <Text fx:id="s11" layoutX="177.0" layoutY="171.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Start date">
+      <Text fx:id="s11" fill="WHITE" layoutX="177.0" layoutY="171.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Start date" AnchorPane.rightAnchor="360.777734375" AnchorPane.topAnchor="180.0">
          <font>
             <Font size="20.0" />
          </font>
       </Text>
-      <Text fx:id="s12" layoutX="181.0" layoutY="213.0" strokeType="OUTSIDE" strokeWidth="0.0" text="End date">
+      <Text fx:id="s12" fill="WHITE" layoutX="181.0" layoutY="213.0" strokeType="OUTSIDE" strokeWidth="0.0" text="End date" AnchorPane.rightAnchor="360.777734375" AnchorPane.topAnchor="220.0">
          <font>
             <Font size="20.0" />
          </font>
       </Text>
-      <TextField fx:id="t30" layoutX="283.0" layoutY="113.0" />
-      <TextField fx:id="t31" layoutX="283.0" layoutY="151.0" />
-      <TextField fx:id="t32" layoutX="283.0" layoutY="192.0" />
-      <Button fx:id="addedSeasonBtn" layoutX="288.0" layoutY="244.0" mnemonicParsing="false" onAction="#addedSeason" text="Next" />
-      <Text fx:id="s13" layoutX="244.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter season">
+      <TextField fx:id="t30" layoutX="283.0" layoutY="113.0" AnchorPane.leftAnchor="270.0" AnchorPane.topAnchor="140.0" />
+      <TextField fx:id="t31" layoutX="283.0" layoutY="151.0" AnchorPane.leftAnchor="270.0" AnchorPane.topAnchor="180.0" />
+      <TextField fx:id="t32" layoutX="283.0" layoutY="192.0" AnchorPane.leftAnchor="270.0" AnchorPane.topAnchor="220.0" />
+      <Button fx:id="addedSeasonBtn" layoutX="279.0" layoutY="308.0" mnemonicParsing="false" onAction="#addedSeason" style="-fx-background-color: #00538C;" text="Next" textFill="WHITE" AnchorPane.bottomAnchor="50.0" />
+      <Text fx:id="s13" fill="WHITE" layoutX="244.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter season">
          <font>
             <Font size="25.0" />
          </font>
       </Text>
-      <RadioButton fx:id="newSeasonRadioBtn" layoutX="194.0" layoutY="82.0" mnemonicParsing="false" onAction="#selectNewSeason" text="Add new season" />
-      <RadioButton fx:id="existingSeasonRadioBtn" layoutX="340.0" layoutY="82.0" mnemonicParsing="false" onAction="#selectExistingSeason" text="Go to existing season" />
+      <RadioButton fx:id="newSeasonRadioBtn" layoutX="194.0" layoutY="82.0" mnemonicParsing="false" onAction="#selectNewSeason" text="Add new season" textFill="WHITE" AnchorPane.leftAnchor="160.0" AnchorPane.topAnchor="90.0" />
+      <RadioButton fx:id="existingSeasonRadioBtn" layoutX="340.0" layoutY="82.0" mnemonicParsing="false" onAction="#selectExistingSeason" text="Go to existing season" textFill="WHITE" AnchorPane.rightAnchor="160.0" AnchorPane.topAnchor="90.0" />
       <ComboBox fx:id="seasonsNameCombox" layoutX="288.0" layoutY="113.0" prefWidth="150.0" visible="false" />
       <ImageView fx:id="helpBtn" fitHeight="46.0" fitWidth="43.0" layoutX="14.0" layoutY="14.0" onMouseClicked="#helpClicked" pickOnBounds="true" preserveRatio="true" />
    </children>

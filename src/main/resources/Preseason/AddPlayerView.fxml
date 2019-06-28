@@ -8,58 +8,58 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nba_statistics.controllers.preseason.AddPlayer">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #002B5E;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nba_statistics.controllers.preseason.AddPlayer">
    <children>
-      <Text fx:id="p40" layoutX="148.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="First name">
+      <Text fx:id="p40" fill="WHITE" layoutX="148.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="First name" AnchorPane.rightAnchor="360.0" AnchorPane.topAnchor="80.0">
          <font>
             <Font size="20.0" />
          </font>
       </Text>
-      <Text fx:id="p41" layoutX="149.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Last name">
+      <Text fx:id="p41" fill="WHITE" layoutX="149.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Last name" AnchorPane.rightAnchor="360.0" AnchorPane.topAnchor="120.0">
          <font>
             <Font size="20.0" />
          </font>
       </Text>
-      <Text fx:id="p43" layoutX="136.0" layoutY="327.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date of birth">
+      <Text fx:id="p43" fill="WHITE" layoutX="136.0" layoutY="327.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date of birth" AnchorPane.rightAnchor="360.515625" AnchorPane.topAnchor="320.0">
          <font>
             <Font size="20.0" />
          </font>
       </Text>
-      <Text fx:id="p44" layoutX="186.0" layoutY="251.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Height">
+      <Text fx:id="p44" fill="WHITE" layoutX="186.0" layoutY="251.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Height" AnchorPane.rightAnchor="360.515625" AnchorPane.topAnchor="240.0">
          <font>
             <Font size="20.0" />
          </font>
       </Text>
-      <Text fx:id="p45" layoutX="176.0" layoutY="291.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Weight">
+      <Text fx:id="p45" fill="WHITE" layoutX="176.0" layoutY="291.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Weight" AnchorPane.rightAnchor="360.515625" AnchorPane.topAnchor="280.0">
          <font>
             <Font size="20.0" />
          </font>
       </Text>
-      <Text fx:id="p46" layoutX="202.0" layoutY="209.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Image" textAlignment="RIGHT">
+      <Text fx:id="p46" fill="WHITE" layoutX="202.0" layoutY="209.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Image" textAlignment="RIGHT" AnchorPane.rightAnchor="360.515625" AnchorPane.topAnchor="200.0">
          <font>
             <Font size="20.0" />
          </font>
       </Text>
-      <TextField fx:id="t40" layoutX="280.0" layoutY="85.0" />
-      <TextField fx:id="t41" layoutX="281.0" layoutY="116.0" />
-      <ComboBox fx:id="t42" layoutX="279.0" layoutY="155.0" prefWidth="150.0" promptText="Select Team" />
-      <TextField fx:id="t44" layoutX="281.0" layoutY="231.0" />
-      <TextField fx:id="t45" layoutX="280.0" layoutY="270.0" />
-      <TextField fx:id="t43" layoutX="280.0" layoutY="308.0" />
-      <ImageView fx:id="image" fitHeight="215.0" fitWidth="158.0" layoutX="430.0" layoutY="122.0" pickOnBounds="true" preserveRatio="true" />
-      <Button fx:id="pictureBtn" layoutX="281.0" layoutY="189.0" mnemonicParsing="false" onAction="#setImage" prefHeight="25.0" prefWidth="149.0" text="Open a picture..." />
-      <Text fx:id="p42" layoutX="192.0" layoutY="176.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Team">
+      <TextField fx:id="t40" layoutX="280.0" layoutY="85.0" AnchorPane.leftAnchor="270.0" AnchorPane.topAnchor="80.0" />
+      <TextField fx:id="t41" layoutX="281.0" layoutY="116.0" AnchorPane.leftAnchor="270.0" AnchorPane.topAnchor="120.0" />
+      <ComboBox fx:id="t42" layoutX="279.0" layoutY="155.0" prefWidth="150.0" promptText="Select Team" AnchorPane.leftAnchor="270.0" AnchorPane.topAnchor="160.0" />
+      <TextField fx:id="t44" layoutX="281.0" layoutY="231.0" AnchorPane.leftAnchor="270.0" AnchorPane.topAnchor="240.0" />
+      <TextField fx:id="t45" layoutX="280.0" layoutY="270.0" AnchorPane.leftAnchor="270.0" AnchorPane.topAnchor="280.0" />
+      <TextField fx:id="t43" layoutX="280.0" layoutY="308.0" AnchorPane.leftAnchor="270.0" AnchorPane.topAnchor="320.0" />
+      <ImageView fx:id="image" fitHeight="215.0" fitWidth="158.0" layoutX="430.0" layoutY="122.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="10.0" />
+      <Button fx:id="pictureBtn" layoutX="281.0" layoutY="189.0" mnemonicParsing="false" onAction="#setImage" prefHeight="25.0" prefWidth="149.0" text="Open a picture..." AnchorPane.leftAnchor="270.0" AnchorPane.topAnchor="200.0" />
+      <Text fx:id="p42" fill="WHITE" layoutX="192.0" layoutY="176.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Team" AnchorPane.rightAnchor="360.0" AnchorPane.topAnchor="160.0">
          <font>
             <Font size="20.0" />
          </font>
       </Text>
-      <Text fx:id="enterDataTxt" layoutX="258.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add player">
+      <Text fx:id="enterDataTxt" fill="WHITE" layoutX="258.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add player" AnchorPane.topAnchor="20.0">
          <font>
             <Font size="25.0" />
          </font>
       </Text>
-      <Button fx:id="sendBtn" layoutX="261.0" layoutY="352.0" mnemonicParsing="false" onAction="#sendToDatabase" prefHeight="30.0" prefWidth="113.0" text="Send" />
-      <Button fx:id="BackBtn" layoutX="532.0" layoutY="19.0" mnemonicParsing="false" onAction="#changeScreen" text="Back" />
+      <Button fx:id="sendBtn" layoutX="261.0" layoutY="352.0" mnemonicParsing="false" onAction="#sendToDatabase" prefHeight="30.0" prefWidth="113.0" style="-fx-background-color: #00538C;" text="Send" textFill="WHITE" AnchorPane.bottomAnchor="10.0" />
+      <Button fx:id="BackBtn" layoutX="532.0" layoutY="19.0" mnemonicParsing="false" onAction="#changeScreen" style="-fx-background-color: #B8C4CA;" text="Back" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0" />
       <ImageView fx:id="helpBtn" fitHeight="46.0" fitWidth="43.0" layoutX="14.0" layoutY="14.0" onMouseClicked="#helpClicked" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>

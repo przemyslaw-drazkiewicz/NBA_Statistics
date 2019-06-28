@@ -7,11 +7,11 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nba_statistics.controllers.viewer.Timetable">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #002B5E;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nba_statistics.controllers.viewer.Timetable">
    <children>
       <ComboBox fx:id="seasonComboBox" layoutX="182.0" layoutY="20.0" prefHeight="50.0" prefWidth="300.0" promptText="Select season" />
       <ComboBox fx:id="teamsComboBox" layoutX="182.0" layoutY="79.0" prefHeight="50.0" prefWidth="300.0" promptText="Select team" />
-      <Button fx:id="selectTimetableButton" layoutX="510.0" layoutY="104.0" mnemonicParsing="false" onAction="#selectTimetable" prefHeight="26.0" prefWidth="66.0" text="Select" textAlignment="CENTER" wrapText="true" />
+      <Button fx:id="selectTimetableButton" layoutX="510.0" layoutY="104.0" mnemonicParsing="false" onAction="#selectTimetable" prefHeight="26.0" prefWidth="66.0" style="-fx-background-color: #00538C;" text="Select" textAlignment="CENTER" textFill="WHITE" wrapText="true" AnchorPane.rightAnchor="19.99999999999997" />
       <TableView fx:id="matchesTable" layoutY="148.0" prefHeight="250.0" prefWidth="600.0" visible="false">
          <columns>
             <TableColumn fx:id="homeTeam" prefWidth="136.0" text="Home Team" />
@@ -22,8 +22,8 @@
             <TableColumn fx:id="extraTime" prefWidth="83.0" text="Extra Time" />
          </columns>
       </TableView>
-      <Button fx:id="backButton" layoutX="510.0" layoutY="20.0" mnemonicParsing="false" onAction="#changeScreenBack" prefHeight="26.0" prefWidth="66.0" text="Back" textAlignment="CENTER" wrapText="true" />
-      <ImageView fx:id="image" fitHeight="130.0" fitWidth="158.0" layoutX="14.0" layoutY="129.0" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="backButton" layoutX="510.0" layoutY="20.0" mnemonicParsing="false" onAction="#changeScreenBack" prefHeight="26.0" prefWidth="66.0" style="-fx-background-color: #B8C4CA;" text="Back" textAlignment="CENTER" wrapText="true" AnchorPane.rightAnchor="20.0" />
+      <ImageView fx:id="image" fitHeight="91.0" fitWidth="158.0" layoutX="14.0" layoutY="52.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="helpBtn" fitHeight="46.0" fitWidth="43.0" layoutX="14.0" layoutY="14.0" onMouseClicked="#helpClicked" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>
