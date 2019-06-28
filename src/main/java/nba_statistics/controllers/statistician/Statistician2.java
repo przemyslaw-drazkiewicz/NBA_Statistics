@@ -134,16 +134,13 @@ public class Statistician2 implements Initializable {
 
             matchT2 = teamH.getName() + " vs. " + teamA.getName();
 
-
-
-            }
-
             try {
                 changeScreen(event);
             } catch (IOException e) {
                 e.printStackTrace();
             }
 
+            }
         }
 
 
