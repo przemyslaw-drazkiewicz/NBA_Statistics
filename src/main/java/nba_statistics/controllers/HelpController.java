@@ -27,7 +27,7 @@ public void setView(String view){
 
     public void init(){
         HelpService helpService = new HelpService();
-        txt.setText(view + "\n" + helpService.getText( view));
+        txt.setText(helpService.getText(view));
     }
 
 

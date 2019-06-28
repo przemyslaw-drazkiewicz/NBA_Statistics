@@ -5,10 +5,10 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
 
-<AnchorPane prefHeight="350.0" prefWidth="500.0" style="-fx-background-color: #B8C4CA;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nba_statistics.controllers.HelpController">
+<AnchorPane prefHeight="350.0" prefWidth="500.0" style="-fx-background-color: #B8C4CA;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nba_statistics.controllers.HelpController">
    <children>
 <!--      <Button fx:id="BackBtn" layoutX="532.0" layoutY="19.0" mnemonicParsing="false" onAction="#changeScreen" text="Back" />-->
-      <TextFlow layoutX="72.0" layoutY="50.0" prefHeight="282.0" prefWidth="448.0">
+      <TextFlow layoutX="40.0" layoutY="49.0" prefHeight="258.0" prefWidth="416.0">
          <children>
             <Text fx:id="txt" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
                <font>
@@ -17,7 +17,7 @@
             </Text>
          </children>
       </TextFlow>
-      <Text layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HELP" textAlignment="CENTER" wrappingWidth="600.0">
+      <Text layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HELP" textAlignment="CENTER" wrappingWidth="500.0">
          <font>
             <Font size="32.0" />
          </font>
