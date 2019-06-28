@@ -23,9 +23,9 @@ DROP TABLE IF EXISTS `help`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `help` (
-  `help_id` int(11) NOT NULL AUTO_INCREMENT,
-  `view` varchar(30) DEFAULT NULL,
-  `text_help` varchar(100) DEFAULT NULL,
+  `help_id` int(11) NOT NULL,
+  `view` varchar(50) DEFAULT NULL,
+  `text_help` blob,
   PRIMARY KEY (`help_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -36,7 +36,7 @@ CREATE TABLE `help` (
 
 LOCK TABLES `help` WRITE;
 /*!40000 ALTER TABLE `help` DISABLE KEYS */;
-INSERT INTO `help` VALUES (1,'/MainView.fxml','tutuj helppp');
+INSERT INTO `help` VALUES (1,'/MainView.fxml',_binary 'to do'),(2,'/AdminView.fxml',_binary 'to do'),(3,'/Preseason/AddMatchView.fxml',_binary 'to do'),(4,'/Preseason/AddPlayerView.fxml',_binary 'to do'),(5,'/Preseason/AddSeasonView.fxml',_binary 'to do'),(6,'/Preseason/AddTeamView.fxml',_binary 'to do'),(7,'/Preseason/SelectionView.fxml',_binary 'to do'),(8,'/Preseason/UpdatePlayerView.fxml',_binary 'to do'),(9,'/Statistician.fxml',_binary 'to do'),(10,'/Statistician2.fxml',_binary 'to do'),(11,'/Statistician3.fxml',_binary 'to do'),(12,'/DataViewer.fxml',_binary 'to do'),(13,'/ListOfTeamPlayersView.fxml',_binary 'to do'),(14,'/ListOfTop10ShootersViewer.fxml',_binary 'to do'),(15,'/SelectData.fxml',_binary 'to do'),(16,'/Timetable.fxml',_binary 'to do'),(17,'/AccountView.fxml',_binary 'to do'),(18,'/RegisterView.fxml',_binary 'to do');
 /*!40000 ALTER TABLE `help` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -49,4 +49,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-06-27 17:58:43
+-- Dump completed on 2019-06-28 13:27:03
