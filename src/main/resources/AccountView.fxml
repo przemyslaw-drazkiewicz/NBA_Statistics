@@ -19,7 +19,7 @@
          </font>
       </Button>
       <Button fx:id="logoutButton" layoutX="506.0" layoutY="14.0" mnemonicParsing="false" onAction="#logout" prefHeight="31.0" prefWidth="80.0" style="-fx-background-color: #B8C4CA;" text="Logout" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0" />
-      <Text fx:id="loginText" layoutX="14.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Logged in as: " textAlignment="RIGHT" wrappingWidth="461.53668212890625" AnchorPane.leftAnchor="14.0" />
+      <Text fx:id="loginText" fill="WHITE" layoutX="14.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Logged in as: " textAlignment="RIGHT" wrappingWidth="461.53668212890625" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="28.0" />
       <Button fx:id="statButton" layoutX="406.0" layoutY="126.0" mnemonicParsing="false" onAction="#changeScreenToStatistician" onKeyPressed="#onKeyPressedStat" prefHeight="148.0" prefWidth="191.0" style="-fx-background-color: #00538C;" text="Begin collecting statistics" textAlignment="CENTER" textFill="WHITE" wrapText="true" AnchorPane.rightAnchor="9.0">
          <font>
             <Font size="25.0" />

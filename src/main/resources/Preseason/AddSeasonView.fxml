@@ -37,8 +37,8 @@
          </font>
       </Text>
       <RadioButton fx:id="newSeasonRadioBtn" layoutX="194.0" layoutY="82.0" mnemonicParsing="false" onAction="#selectNewSeason" text="Add new season" textFill="WHITE" AnchorPane.leftAnchor="160.0" AnchorPane.topAnchor="90.0" />
-      <RadioButton fx:id="existingSeasonRadioBtn" layoutX="340.0" layoutY="82.0" mnemonicParsing="false" onAction="#selectExistingSeason" text="Go to existing season" textFill="WHITE" AnchorPane.rightAnchor="160.0" AnchorPane.topAnchor="90.0" />
-      <ComboBox fx:id="seasonsNameCombox" layoutX="288.0" layoutY="113.0" prefWidth="150.0" visible="false" />
+      <RadioButton fx:id="existingSeasonRadioBtn" layoutX="340.0" layoutY="82.0" mnemonicParsing="false" onAction="#selectExistingSeason" text="Go to existing season" textFill="WHITE" AnchorPane.rightAnchor="140.0" AnchorPane.topAnchor="90.0" />
+      <ComboBox fx:id="seasonsNameCombox" layoutX="288.0" layoutY="113.0" prefWidth="150.0" visible="false" AnchorPane.leftAnchor="270.0" AnchorPane.topAnchor="140.0" />
       <ImageView fx:id="helpBtn" fitHeight="46.0" fitWidth="43.0" layoutX="14.0" layoutY="14.0" onMouseClicked="#helpClicked" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>

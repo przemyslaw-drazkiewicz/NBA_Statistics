@@ -17,6 +17,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -47,9 +48,7 @@ public class MainController implements Initializable {
 
 
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        helpBtn.setImage(new Image("/help.png"));
-    }
+    public void initialize(URL location, ResourceBundle resources) {helpBtn.setImage(new Image("/help.png"));}
 
 
     public void changeScreenToRegister(ActionEvent event)throws IOException{

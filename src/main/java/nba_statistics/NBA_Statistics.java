@@ -30,7 +30,7 @@ public class NBA_Statistics extends Application {
         AnchorPane anchorPane = loader.load();
         Scene scene = new Scene(anchorPane);
 
-
+primaryStage.setResizable(false);
         primaryStage.setScene(scene);
         primaryStage.setTitle("NBA Statistics");
         primaryStage.show();
