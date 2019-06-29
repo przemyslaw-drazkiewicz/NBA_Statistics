@@ -3,6 +3,7 @@ package nba_statistics.controllers.viewer;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,6 +18,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import nba_statistics.controllers.HelpController;
@@ -25,12 +27,15 @@ import nba_statistics.services.MatchesService;
 import nba_statistics.services.SeasonsService;
 import nba_statistics.services.TeamsService;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import static java.lang.String.*;
 import static nba_statistics.others.Alerts.*;
 
 public class Timetable implements Initializable {
@@ -59,7 +64,12 @@ public class Timetable implements Initializable {
     private TableColumn<Matches, Integer> extraTime;
     @FXML
     private ImageView image;
-    @FXML private ImageView helpBtn;
+    @FXML
+    private ImageView helpBtn;
+    @FXML
+    private Stage stage;
+
+    List<Matches> toPrint= new ArrayList<>();
 
     private TeamsService teamsService = new TeamsService();
 
@@ -84,6 +94,10 @@ public class Timetable implements Initializable {
 
             matchesObservableList.addAll(listMatches);
             matchesTable.setItems(matchesObservableList);
+
+            for(Matches m : listMatches){
+                toPrint.add(m);
+            }
         }
     }
 
@@ -100,8 +114,6 @@ public class Timetable implements Initializable {
             MatchesService matchesService = new MatchesService();
             setTable(matchesService.getMatches(team, season));
         }
-
-
     }
 
     private void initComboBoxSeasons() {
@@ -135,6 +147,41 @@ public class Timetable implements Initializable {
         window.setScene(reviewerScene);
         window.show();
     }
+
+    //print
+    public void printToFile(ActionEvent event) throws IOException  {
+        if(toPrint.isEmpty()) getAlertNoSeasonsOrNoPlayer();
+        else{
+            ObservableList<String> stringList = FXCollections.observableArrayList();
+            stringList.add("a");
+            stringList.add("b");
+
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Save Copy of Report");
+            fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
+            fileChooser.setInitialFileName("Fourth report.txt");
+
+            File file = fileChooser.showSaveDialog(stage);
+
+            if(file!= null){
+                FileWriter fileWriter = new FileWriter(file);
+                for(int i = 0; i< toPrint.size();i++){
+
+                    fileWriter.write(format("%20s %20s %20s %20s %20s %20s", "Host team: " + toPrint.get(i).getHostTeam().getName(),
+                            "Away Team: " + toPrint.get(i).getGuestTeam().getName(),
+                            "Date: " + toPrint.get(i).getDate(),
+                            "Home points: " + toPrint.get(i).getHostPoints(),
+                            "Away points: " + toPrint.get(i).getGuestPoints(),
+                            "Extra time: " + toPrint.get(i).getExtraTimeCount()));
+                    fileWriter.write(System.getProperty( "line.separator" ));
+                }
+                fileWriter.flush();
+                fileWriter.close();
+            }
+            toPrint.clear();
+        }
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         initComboBoxSeasons();

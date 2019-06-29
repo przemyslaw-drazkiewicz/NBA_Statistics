@@ -2,6 +2,7 @@ package nba_statistics.controllers.viewer;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,6 +15,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import nba_statistics.controllers.HelpController;
@@ -22,6 +24,8 @@ import nba_statistics.services.PlayersService;
 import nba_statistics.services.SeasonsService;
 import nba_statistics.services.TeamsService;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -46,8 +50,10 @@ public class ListOfTeamPlayers implements Initializable {
     private ImageView image;
     @FXML
     private ImageView helpBtn;
+    @FXML
+    private Stage stage;
 
-
+    List<String> toPrint= new ArrayList<>();
 
     private void setVisibleListViewPlayers(){
         teamPlayersListView.setVisible(true);
@@ -96,7 +102,6 @@ public class ListOfTeamPlayers implements Initializable {
             idTeam = teamsService.getId(team);
 
             List<PlayerTeamsHistory> idPlayersList = playersService.getPlayersInTeam(idSeason, idTeam);
-
             ObservableList<String> listPlayersNameSurname = FXCollections.observableArrayList();
 
             String tmp = null;
@@ -114,13 +119,13 @@ public class ListOfTeamPlayers implements Initializable {
                 listPlayersNameSurname.sorted();
                 teamPlayersListView.setItems(listPlayersNameSurname);
 
+                for(String s : listPlayersNameSurname){
+                    toPrint.add(s);
+                }
             }
-
-
-
         }
-
     }
+
     @SuppressWarnings("Duplicates")
     @FXML
     void helpClicked(Event event) throws IOException {
@@ -140,6 +145,32 @@ public class ListOfTeamPlayers implements Initializable {
         window.setScene(reviewerScene);
         window.show();
     }
+
+    //print
+    public void printToFile(ActionEvent event) throws IOException  {
+        if(toPrint.isEmpty()) getAlertNoSeasonsOrNoPlayer();
+        else{
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Save Copy of Report");
+            fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
+            fileChooser.setInitialFileName("Third report.txt");
+
+            File file = fileChooser.showSaveDialog(stage);
+
+            if(file!= null){
+                FileWriter fileWriter = new FileWriter(file);
+                for(int i = 0; i< toPrint.size();i++){
+                    fileWriter.write(toPrint.get(i));
+                    fileWriter.write(System.getProperty( "line.separator" ));
+                }
+                fileWriter.flush();
+                fileWriter.close();
+            }
+            toPrint.clear();
+        }
+
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         initComboBoxSeasons();

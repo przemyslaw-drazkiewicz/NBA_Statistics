@@ -208,10 +208,6 @@ public class SelectData implements Initializable {
     public void printToFile(ActionEvent event) throws IOException  {
         if(toPrint.isEmpty()) getAlertNoSeasonsOrNoPlayer();
         else{
-            ObservableList<String> stringList = FXCollections.observableArrayList();
-            stringList.add("a");
-            stringList.add("b");
-
             FileChooser fileChooser = new FileChooser();
             fileChooser.setTitle("Save Copy of Report");
             fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
@@ -219,12 +215,12 @@ public class SelectData implements Initializable {
 
             File file = fileChooser.showSaveDialog(stage);
 
-
             if(file!= null){
                 FileWriter fileWriter = new FileWriter(file);
-
-                fileWriter.write(toPrint.toString() + "\n");
-
+                for(int i = 0; i< toPrint.size();i++){
+                    fileWriter.write(toPrint.get(i));
+                    fileWriter.write(System.getProperty( "line.separator" ));
+                }
                 fileWriter.flush();
                 fileWriter.close();
             }
