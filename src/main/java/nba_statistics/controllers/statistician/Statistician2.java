@@ -359,7 +359,7 @@ public class Statistician2 implements Initializable {
         Stage window = new Stage();
         window.initModality(Modality.WINDOW_MODAL);
         window.initOwner(parent);
-        window.setHeight(350);
+        window.setHeight(450);
         window.setWidth(500);
         window.setTitle("Help window");
         Scene reviewerScene = new Scene(accountParent);

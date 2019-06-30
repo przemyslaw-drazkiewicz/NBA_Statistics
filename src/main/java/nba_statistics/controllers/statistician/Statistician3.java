@@ -468,6 +468,7 @@ public class Statistician3 implements Initializable {
         MatchesService matchesService = new MatchesService();
         matchesService.update(match);
         myTimer.cancel();
+        helpBtn.setVisible(false);
         backToChoice.setVisible(true);
     }
     private int getPoints(ArrayList<PlayerMatchAchievements> team){

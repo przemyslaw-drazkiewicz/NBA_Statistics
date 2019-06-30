@@ -188,7 +188,7 @@ public class UpdatePlayer implements Initializable {
         Stage window = new Stage();
         window.initModality(Modality.WINDOW_MODAL);
         window.initOwner(parent);
-        window.setHeight(350);
+        window.setHeight(400);
         window.setWidth(500);
         window.setTitle("Help window");
         Scene reviewerScene = new Scene(accountParent);
