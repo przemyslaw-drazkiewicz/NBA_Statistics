@@ -1,5 +1,6 @@
 package nba_statistics.controllers.viewer;
 
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -11,6 +12,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
@@ -101,7 +103,7 @@ public class ListOfTop10Shooters implements Initializable {
                 setVisibleLabelsTopTenSchooters();
 
                 i++;
-                listString.add(i + ". " + playersList.get(0).getSurname() + " " + playersList.get(0).getName() + "\t\t Scored points: " + mapData.getValue());
+                listString.add(i + ". " + playersList.get(0).getSurname() + " " + playersList.get(0).getName() + "\r\t\t\t\t\t\t Scored points: " + mapData.getValue());
 
                 if (i == 10) break;
             }
@@ -130,6 +132,7 @@ public class ListOfTop10Shooters implements Initializable {
                     sum += list.get(j).getScoredPoints();
                     list.remove(j);
                     j--;
+                    i--;
                 }
             }
             map.put(id, sum);
@@ -199,6 +202,5 @@ public class ListOfTop10Shooters implements Initializable {
         setInvisibleLabelsTopTenSchooters();
         initComboBoxSeasons();
         helpBtn.setImage(new Image("/help.png"));
-
     }
 }
