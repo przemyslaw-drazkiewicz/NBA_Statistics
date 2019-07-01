@@ -26,7 +26,7 @@ CREATE TABLE `substitution_reasons` (
   `reason_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`reason_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -34,8 +34,8 @@ CREATE TABLE `substitution_reasons` (
 --
 
 LOCK TABLES `substitution_reasons` WRITE;
-insert into nba.substitution_reasons values (1, "injury"), (2, "tactical"), (3, "fouls");
 /*!40000 ALTER TABLE `substitution_reasons` DISABLE KEYS */;
+INSERT INTO `substitution_reasons` VALUES (1,'injury'),(2,'tactical'),(3,'fouls');
 /*!40000 ALTER TABLE `substitution_reasons` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -48,4 +48,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-04-24  1:20:01
+-- Dump completed on 2019-07-01 19:39:43

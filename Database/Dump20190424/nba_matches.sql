@@ -38,7 +38,7 @@ CREATE TABLE `matches` (
   CONSTRAINT `guest_team_id` FOREIGN KEY (`guest_team_id`) REFERENCES `teams` (`team_id`),
   CONSTRAINT `host_team_id` FOREIGN KEY (`host_team_id`) REFERENCES `teams` (`team_id`),
   CONSTRAINT `season_id2` FOREIGN KEY (`season_id`) REFERENCES `seasons` (`season_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -47,7 +47,6 @@ CREATE TABLE `matches` (
 
 LOCK TABLES `matches` WRITE;
 /*!40000 ALTER TABLE `matches` DISABLE KEYS */;
-INSERT INTO `matches` VALUES (2,9,10,'2010-02-20',111,120,1,NULL),(3,NULL,NULL,'2030-01-20',90,73,0,NULL),(4,NULL,NULL,'2030-01-20',90,73,0,1),(6,12,13,'2030-01-20',90,73,0,3);
 /*!40000 ALTER TABLE `matches` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -60,4 +59,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-04-24  1:20:05
+-- Dump completed on 2019-07-01 19:39:42

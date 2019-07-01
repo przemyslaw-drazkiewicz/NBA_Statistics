@@ -28,10 +28,11 @@ CREATE TABLE `users` (
   `password` varchar(45) NOT NULL,
   `role_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`user_id`),
-  KEY `user_idx` (`user_id`),
   UNIQUE KEY `login_UNIQUE` (`login`),
+  KEY `user_idx` (`user_id`),
+  KEY `role_id` (`role_id`),
   CONSTRAINT `role_id` FOREIGN KEY (`role_id`) REFERENCES `roles` (`role_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -53,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-05-28  0:01:32
+-- Dump completed on 2019-07-01 19:39:44

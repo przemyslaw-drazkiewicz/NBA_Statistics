@@ -26,7 +26,7 @@ CREATE TABLE `positions` (
   `position_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`position_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -34,8 +34,8 @@ CREATE TABLE `positions` (
 --
 
 LOCK TABLES `positions` WRITE;
-insert into nba.positions values (1, "Point guard"), (2, "Shooting guard"), (3, "Small forward"), (4, "Power forward"), (5, "Center");
 /*!40000 ALTER TABLE `positions` DISABLE KEYS */;
+INSERT INTO `positions` VALUES (1,'Point guard'),(2,'Shooting guard'),(3,'Small forward'),(4,'Power forward'),(5,'Center');
 /*!40000 ALTER TABLE `positions` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -48,4 +48,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-04-24  1:20:06
+-- Dump completed on 2019-07-01 19:39:42

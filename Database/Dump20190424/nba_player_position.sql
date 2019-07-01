@@ -27,8 +27,8 @@ CREATE TABLE `player_position` (
   `position_id` int(11) NOT NULL,
   PRIMARY KEY (`player_id`,`position_id`),
   KEY `position_id_idx` (`position_id`),
-  CONSTRAINT `position_id` FOREIGN KEY (`position_id`) REFERENCES `positions` (`position_id`),
-  CONSTRAINT `player_id3` FOREIGN KEY (`player_id`) REFERENCES `players` (`player_id`)
+  CONSTRAINT `player_id3` FOREIGN KEY (`player_id`) REFERENCES `players` (`player_id`),
+  CONSTRAINT `position_id` FOREIGN KEY (`position_id`) REFERENCES `positions` (`position_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -50,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-04-24  1:20:02
+-- Dump completed on 2019-07-01 19:39:44

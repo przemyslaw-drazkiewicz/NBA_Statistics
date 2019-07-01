@@ -34,10 +34,10 @@ CREATE TABLE `match_substitution_history` (
   KEY `substitution_reason_id_idx` (`substitution_reason_id`),
   KEY `leaving_player_id_idx` (`leaving_player_id`),
   KEY `entering_player_id_idx` (`entering_player_id`),
-  CONSTRAINT `match_id2` FOREIGN KEY (`match_id`) REFERENCES `matches` (`match_id`),
-  CONSTRAINT `substitution_reason_id` FOREIGN KEY (`substitution_reason_id`) REFERENCES `substitution_reasons` (`reason_id`),
+  CONSTRAINT `entering_player_id` FOREIGN KEY (`entering_player_id`) REFERENCES `players` (`player_id`),
   CONSTRAINT `leaving_player_id` FOREIGN KEY (`leaving_player_id`) REFERENCES `players` (`player_id`),
-  CONSTRAINT `entering_player_id` FOREIGN KEY (`entering_player_id`) REFERENCES `players` (`player_id`)
+  CONSTRAINT `match_id2` FOREIGN KEY (`match_id`) REFERENCES `matches` (`match_id`),
+  CONSTRAINT `substitution_reason_id` FOREIGN KEY (`substitution_reason_id`) REFERENCES `substitution_reasons` (`reason_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -59,4 +59,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-04-24  1:20:06
+-- Dump completed on 2019-07-01 19:39:42

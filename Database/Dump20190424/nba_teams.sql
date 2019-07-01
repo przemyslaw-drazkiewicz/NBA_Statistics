@@ -28,10 +28,10 @@ CREATE TABLE `teams` (
   `conference` varchar(45) DEFAULT NULL,
   `name` varchar(45) DEFAULT NULL,
   `location` varchar(45) DEFAULT NULL,
-  `image` varchar(255),
+  `image` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`team_id`),
   UNIQUE KEY `image_UNIQUE` (`image`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,7 +40,6 @@ CREATE TABLE `teams` (
 
 LOCK TABLES `teams` WRITE;
 /*!40000 ALTER TABLE `teams` DISABLE KEYS */;
-INSERT INTO `teams` VALUES (6,'Atlantic','Eastern','Toronto Raptors','Toronto',null),(7,'Central','Eastern','Indiana Pacers','Indiana',null),(8,'Pacific','Western','Phoenix Suns','Phoenix',null);
 /*!40000 ALTER TABLE `teams` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -53,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-04-24  1:20:03
+-- Dump completed on 2019-07-01 19:39:43

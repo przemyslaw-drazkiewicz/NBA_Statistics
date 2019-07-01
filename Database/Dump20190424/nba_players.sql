@@ -30,12 +30,12 @@ CREATE TABLE `players` (
   `height` double DEFAULT NULL,
   `weight` double DEFAULT NULL,
   `team_id` int(11) DEFAULT NULL,
-  `image` varchar(255),
+  `image` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`player_id`),
-  KEY `team_id_idx2` (`team_id`),
   UNIQUE KEY `image_UNIQUE` (`image`),
+  KEY `team_id_idx2` (`team_id`),
   CONSTRAINT `team_id2` FOREIGN KEY (`team_id`) REFERENCES `teams` (`team_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -44,7 +44,6 @@ CREATE TABLE `players` (
 
 LOCK TABLES `players` WRITE;
 /*!40000 ALTER TABLE `players` DISABLE KEYS */;
-/*INSERT INTO `players` VALUES (4,'Marcin','Gortat','1980-02-10',202,101,6,null);*/
 /*!40000 ALTER TABLE `players` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -57,4 +56,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-04-24  1:20:03
+-- Dump completed on 2019-07-01 19:39:43

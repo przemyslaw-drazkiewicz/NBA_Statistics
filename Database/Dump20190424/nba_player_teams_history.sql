@@ -31,10 +31,10 @@ CREATE TABLE `player_teams_history` (
   KEY `team_id_idx` (`team_id`),
   KEY `season_id_idx` (`season_id`),
   KEY `player_id2_idx` (`player_id`),
-  CONSTRAINT `team_id` FOREIGN KEY (`team_id`) REFERENCES `teams` (`team_id`),
+  CONSTRAINT `player_id2` FOREIGN KEY (`player_id`) REFERENCES `players` (`player_id`),
   CONSTRAINT `season_id` FOREIGN KEY (`season_id`) REFERENCES `seasons` (`season_id`),
-  CONSTRAINT `player_id2` FOREIGN KEY (`player_id`) REFERENCES `players` (`player_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  CONSTRAINT `team_id` FOREIGN KEY (`team_id`) REFERENCES `teams` (`team_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -43,7 +43,6 @@ CREATE TABLE `player_teams_history` (
 
 LOCK TABLES `player_teams_history` WRITE;
 /*!40000 ALTER TABLE `player_teams_history` DISABLE KEYS */;
-INSERT INTO `player_teams_history` VALUES (2,5,4,14);
 /*!40000 ALTER TABLE `player_teams_history` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -56,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-04-24  1:20:04
+-- Dump completed on 2019-07-01 19:39:44
