@@ -1,5 +1,7 @@
 package nba_statistics.controllers.viewer;
 
+import com.itextpdf.text.*;
+import com.itextpdf.text.pdf.PdfWriter;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -16,7 +18,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.text.Text;
-import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import nba_statistics.controllers.HelpController;
@@ -28,8 +29,10 @@ import nba_statistics.services.TeamsService;
 import org.controlsfx.control.textfield.TextFields;
 
 import java.io.*;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.*;
+import java.util.List;
 
 import static nba_statistics.others.Alerts.*;
 
@@ -67,6 +70,8 @@ public class SelectData implements Initializable {
     private ImageView helpBtn;
 
     int points = 0, steals = 0, blocks = 0, rebounds = 0, fouls = 0, techFaul = 0;
+
+    String path = null;
 
     //visibility
     private void setVisibleLabelsPlayerAchievements() {
@@ -136,7 +141,7 @@ public class SelectData implements Initializable {
     }
 
     //selectButton
-    public void selectAchievements(){
+    public void selectAchievements() throws URISyntaxException {
 
         MatchesService matchesService = new MatchesService();
         SeasonsService seasonsService = new SeasonsService();
@@ -190,6 +195,7 @@ public class SelectData implements Initializable {
             listString.add("Fouls: " + fouls);
             listString.add("Technical fouls: " + techFaul);
             image.setImage(new Image(p.getImageURL()));
+            path = p.getImageURL();
 
             playerAchievListView.setItems(listString);
             setVisibleLabelsPlayerAchievements();
@@ -204,29 +210,54 @@ public class SelectData implements Initializable {
 
     }
 
+
     //print
-    public void printToFile(ActionEvent event) throws IOException  {
-        if(toPrint.isEmpty()) getAlertNoSeasonsOrNoPlayer();
-        else{
-            FileChooser fileChooser = new FileChooser();
-            fileChooser.setTitle("Save Copy of Report");
-            fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
-            fileChooser.setInitialFileName("First report.txt");
+    public void printToFile(ActionEvent event) throws IOException, DocumentException, URISyntaxException {
 
-            File file = fileChooser.showSaveDialog(stage);
 
-            if(file!= null){
-                FileWriter fileWriter = new FileWriter(file);
-                for(int i = 0; i< toPrint.size();i++){
-                    fileWriter.write(toPrint.get(i));
-                    fileWriter.write(System.getProperty( "line.separator" ));
-                }
-                fileWriter.flush();
-                fileWriter.close();
-            }
-            toPrint.clear();
-        }
+        Document document = new Document();
+        PdfWriter.getInstance(document, new FileOutputStream("PlayerAchievement.pdf"));
 
+        document.open();
+        Font title = FontFactory.getFont(FontFactory.COURIER_BOLD, 20, BaseColor.BLACK);
+        Font subtitle = FontFactory.getFont(FontFactory.COURIER, 16, BaseColor.BLACK);
+        Font text = FontFactory.getFont(FontFactory.COURIER, 12, BaseColor.BLACK);
+        Chunk chunk = new Chunk(toPrint.get(1).substring(6) + " " + toPrint.get(2).substring(9), title);
+
+        Chunk chunk2 = new Chunk("The achievements in season: " + toPrint.get(0).substring(8), subtitle);
+        Chunk chunk3 = new Chunk(toPrint.get(3), text);
+        Chunk chunk4 = new Chunk(toPrint.get(4), text);
+        Chunk chunk5 = new Chunk(toPrint.get(5), text);
+        Chunk chunk6 = new Chunk(toPrint.get(6), text);
+        Chunk chunk7 = new Chunk(toPrint.get(7), text);
+        Chunk chunk8 = new Chunk(toPrint.get(8), text);
+        Chunk chunk9 = new Chunk(toPrint.get(9), text);
+        Chunk chunk10 = new Chunk(toPrint.get(10), text);
+
+        com.itextpdf.text.Image img  = com.itextpdf.text.Image.getInstance(path);
+        img.setAbsolutePosition(250,450);
+        document.add(img);
+        document.add(Chunk.NEWLINE );
+        document.add(new Paragraph(chunk));
+        document.add(Chunk.NEWLINE );
+        document.add(new Paragraph(chunk2));
+        document.add(Chunk.NEWLINE );
+        document.add(new Paragraph(chunk3));
+        document.add(Chunk.NEWLINE );
+        document.add(new Paragraph(chunk4));
+        document.add(Chunk.NEWLINE );
+        document.add(new Paragraph(chunk5));
+        document.add(Chunk.NEWLINE );
+        document.add(new Paragraph(chunk6));
+        document.add(Chunk.NEWLINE );
+        document.add(new Paragraph(chunk7));
+        document.add(Chunk.NEWLINE );
+        document.add(new Paragraph(chunk8));
+        document.add(Chunk.NEWLINE );
+        document.add(new Paragraph(chunk9));
+        document.add(Chunk.NEWLINE );
+        document.add(new Paragraph(chunk10));
+        document.close();
     }
 
     @SuppressWarnings("Duplicates")
@@ -271,5 +302,4 @@ public class SelectData implements Initializable {
             }
         }
     }
-
 }
