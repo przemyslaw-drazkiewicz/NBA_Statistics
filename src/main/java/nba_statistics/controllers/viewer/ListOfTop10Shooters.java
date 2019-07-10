@@ -1,5 +1,7 @@
 package nba_statistics.controllers.viewer;
 
+import com.itextpdf.text.*;
+import com.itextpdf.text.pdf.PdfWriter;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -27,10 +29,12 @@ import nba_statistics.services.PlayersService;
 import nba_statistics.services.SeasonsService;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import static java.util.Map.Entry.comparingByValue;
@@ -124,6 +128,7 @@ public class ListOfTop10Shooters implements Initializable {
         int id = -1;
 
         for (int i = 0; i < list.size(); i++) {
+
             sum = 0;
             id = list.get(i).getPlayer().getId();
 
@@ -136,6 +141,7 @@ public class ListOfTop10Shooters implements Initializable {
                 }
             }
             map.put(id, sum);
+            if(i<0) i=0;
         }
 
         Map<Integer, Integer> sortedMap = map.entrySet()
@@ -169,29 +175,32 @@ public class ListOfTop10Shooters implements Initializable {
     }
 
     //print
-    public void printToFile(ActionEvent event) throws IOException  {
+    public void printToFile(ActionEvent event) throws IOException, DocumentException {
         if(toPrint.isEmpty()) getAlertNoSeasonsOrNoPlayer();
         else{
-            ObservableList<String> stringList = FXCollections.observableArrayList();
-            stringList.add("a");
-            stringList.add("b");
+            Document document = new Document();
+            PdfWriter.getInstance(document, new FileOutputStream("ListOfTopTenShooters.pdf"));
 
-            FileChooser fileChooser = new FileChooser();
-            fileChooser.setTitle("Save Copy of Report");
-            fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
-            fileChooser.setInitialFileName("Second report.txt");
+            document.open();
+            Font title = FontFactory.getFont(FontFactory.COURIER_BOLD, 20, BaseColor.BLACK);
+            Font subtitle = FontFactory.getFont(FontFactory.COURIER, 16, BaseColor.BLACK);
+            Font text = FontFactory.getFont(FontFactory.COURIER, 12, BaseColor.BLACK);
+            Chunk chunk2 = new Chunk("List of Top Ten Shooters                   in season " + seasonComboBox.getValue(), title);
+            document.add(new Paragraph(chunk2));
+            document.add(Chunk.NEWLINE );
 
-            File file = fileChooser.showSaveDialog(stage);
+            Chunk chunk3 = new Chunk(String.format("%15s %20s", "Surname Name", "Scored points"), subtitle);
+            document.add(new Paragraph(chunk3));
+            document.add(Chunk.NEWLINE );
 
-            if(file!= null){
-                FileWriter fileWriter = new FileWriter(file);
-                for(int i = 0; i< toPrint.size();i++){
-                    fileWriter.write(toPrint.get(i));
-                    fileWriter.write(System.getProperty( "line.separator" ));
-                }
-                fileWriter.flush();
-                fileWriter.close();
+            for(int i = 0; i < toPrint.size(); i++){
+                Chunk chunk = new Chunk( String.format("%20s %20s", toPrint.get(i).substring(0, toPrint.get(i).lastIndexOf(
+                        "\r\t\t\t\t\t\t Scored")) ,toPrint.get(i).substring(toPrint.get(i).indexOf(":")+1)), text);
+                document.add(new Paragraph(chunk));
+                document.add(Chunk.NEWLINE );
             }
+
+            document.close();
             toPrint.clear();
         }
 

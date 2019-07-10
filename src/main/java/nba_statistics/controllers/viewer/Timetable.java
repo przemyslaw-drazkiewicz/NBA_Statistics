@@ -1,5 +1,9 @@
 package nba_statistics.controllers.viewer;
 
+import com.itextpdf.text.*;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -28,12 +32,14 @@ import nba_statistics.services.SeasonsService;
 import nba_statistics.services.TeamsService;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.stream.Stream;
 
 import static java.lang.String.*;
 import static nba_statistics.others.Alerts.*;
@@ -149,10 +155,10 @@ public class Timetable implements Initializable {
     }
 
     //print
-    public void printToFile(ActionEvent event) throws IOException  {
+    public void printToFile(ActionEvent event) throws IOException, DocumentException {
         if(toPrint.isEmpty()) getAlertNoSeasonsOrNoPlayer();
         else{
-            ObservableList<String> stringList = FXCollections.observableArrayList();
+            /*ObservableList<String> stringList = FXCollections.observableArrayList();
             stringList.add("a");
             stringList.add("b");
 
@@ -178,6 +184,66 @@ public class Timetable implements Initializable {
                 fileWriter.flush();
                 fileWriter.close();
             }
+            toPrint.clear();*/
+
+
+            Document document = new Document(PageSize.A4.rotate());
+            PdfWriter.getInstance(document, new FileOutputStream("Timetable.pdf"));
+
+            Font title = FontFactory.getFont(FontFactory.COURIER_BOLD, 20, BaseColor.BLACK);
+            Font subtitle = FontFactory.getFont(FontFactory.COURIER, 16, BaseColor.BLACK);
+            Font text = FontFactory.getFont(FontFactory.COURIER, 12, BaseColor.BLACK);
+
+            document.open();
+
+            Chunk chunk2 = new Chunk("Timetable in season " + seasonComboBox.getValue() + " for " + teamsComboBox.getValue() + " team", title);
+            document.add(new Paragraph(chunk2));
+            document.add(Chunk.NEWLINE );
+
+            Chunk chunk3 = new Chunk(String.format("%16s %16s %15s %17s %15s %15s", "Home Team", "Away Team", "Date", "Home points", "Away points", "Extra time"), text);
+            document.add(new Paragraph(chunk3));
+            document.add(Chunk.NEWLINE );
+
+            for(int i = 0; i < toPrint.size(); i++){
+                Chunk chunk9 = new Chunk(String.format("%25s %25s %25s %27s %29s %30s", toPrint.get(i).getHostTeam().getName(), toPrint.get(i).getGuestTeam().getName(),
+                        toPrint.get(i).getDate(), toPrint.get(i).getHostPoints(), toPrint.get(i).getGuestPoints(), toPrint.get(i).getExtraTimeCount()));
+
+                document.add(new Paragraph(chunk9));
+                document.add(Chunk.NEWLINE );
+
+/*                Chunk chunk = new Chunk( String.format("%20s %20s", toPrint.get(i).substring(0, toPrint.get(i).lastIndexOf(
+                        "\r\t\t\t\t\t\t Scored")) ,toPrint.get(i).substring(toPrint.get(i).indexOf(":")+1)), text);
+                document.add(new Paragraph(chunk));
+                document.add(Chunk.NEWLINE );*/
+            }
+
+            /*PdfPTable table = new PdfPTable(8);
+            Stream.of("column header 1", "column header 2", "column header 3", "column header 1", "column header 2", "column header 3","column header 1")
+                    .forEach(columnTitle -> {
+                        PdfPCell header = new PdfPCell();
+                        header.setBackgroundColor(BaseColor.LIGHT_GRAY);
+                        header.setBorderWidth(1);
+                        header.setPhrase(new Phrase(columnTitle));
+                        table.addCell(header);
+                    });
+
+            table.addCell("row 1, col 1");
+            table.addCell("row 1, col 2");
+            table.addCell("row 1, col 3");
+
+            document.add(Chunk.NEWLINE );
+
+            PdfPCell horizontalAlignCell = new PdfPCell(new Phrase("row 2, col 2"));
+            horizontalAlignCell.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.addCell(horizontalAlignCell);
+
+            PdfPCell verticalAlignCell = new PdfPCell(new Phrase("row 2, col 3"));
+            verticalAlignCell.setVerticalAlignment(Element.ALIGN_BOTTOM);
+            table.addCell(verticalAlignCell);
+
+            document.add(table);*/
+
+            document.close();
             toPrint.clear();
         }
     }

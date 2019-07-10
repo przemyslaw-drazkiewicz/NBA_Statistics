@@ -206,58 +206,59 @@ public class SelectData implements Initializable {
         }
         else if(playerSeasons.isEmpty()) getAlertClickOkButton();
         else getAlertSelectSeason();
-
-
     }
 
 
     //print
     public void printToFile(ActionEvent event) throws IOException, DocumentException, URISyntaxException {
+        if(toPrint.isEmpty()) getAlertNoSeasonsOrNoPlayer();
+        else {
+            Document document = new Document();
+            PdfWriter.getInstance(document, new FileOutputStream("PlayerAchievement.pdf"));
 
+            document.open();
+            Font title = FontFactory.getFont(FontFactory.COURIER_BOLD, 20, BaseColor.BLACK);
+            Font subtitle = FontFactory.getFont(FontFactory.COURIER, 16, BaseColor.BLACK);
+            Font text = FontFactory.getFont(FontFactory.COURIER, 12, BaseColor.BLACK);
+            Chunk chunk = new Chunk(toPrint.get(1).substring(6) + " " + toPrint.get(2).substring(9), title);
 
-        Document document = new Document();
-        PdfWriter.getInstance(document, new FileOutputStream("PlayerAchievement.pdf"));
+            Chunk chunk2 = new Chunk("The achievements in season: " + toPrint.get(0).substring(8), subtitle);
+            Chunk chunk3 = new Chunk(toPrint.get(3), text);
+            Chunk chunk4 = new Chunk(toPrint.get(4), text);
+            Chunk chunk5 = new Chunk(toPrint.get(5), text);
+            Chunk chunk6 = new Chunk(toPrint.get(6), text);
+            Chunk chunk7 = new Chunk(toPrint.get(7), text);
+            Chunk chunk8 = new Chunk(toPrint.get(8), text);
+            Chunk chunk9 = new Chunk(toPrint.get(9), text);
+            Chunk chunk10 = new Chunk(toPrint.get(10), text);
 
-        document.open();
-        Font title = FontFactory.getFont(FontFactory.COURIER_BOLD, 20, BaseColor.BLACK);
-        Font subtitle = FontFactory.getFont(FontFactory.COURIER, 16, BaseColor.BLACK);
-        Font text = FontFactory.getFont(FontFactory.COURIER, 12, BaseColor.BLACK);
-        Chunk chunk = new Chunk(toPrint.get(1).substring(6) + " " + toPrint.get(2).substring(9), title);
+            com.itextpdf.text.Image img = com.itextpdf.text.Image.getInstance(path);
+            img.setAbsolutePosition(250, 430);
+            document.add(img);
+            document.add(Chunk.NEWLINE);
+            document.add(new Paragraph(chunk));
+            document.add(Chunk.NEWLINE);
+            document.add(new Paragraph(chunk2));
+            document.add(Chunk.NEWLINE);
+            document.add(new Paragraph(chunk3));
+            document.add(Chunk.NEWLINE);
+            document.add(new Paragraph(chunk4));
+            document.add(Chunk.NEWLINE);
+            document.add(new Paragraph(chunk5));
+            document.add(Chunk.NEWLINE);
+            document.add(new Paragraph(chunk6));
+            document.add(Chunk.NEWLINE);
+            document.add(new Paragraph(chunk7));
+            document.add(Chunk.NEWLINE);
+            document.add(new Paragraph(chunk8));
+            document.add(Chunk.NEWLINE);
+            document.add(new Paragraph(chunk9));
+            document.add(Chunk.NEWLINE);
+            document.add(new Paragraph(chunk10));
+            document.close();
 
-        Chunk chunk2 = new Chunk("The achievements in season: " + toPrint.get(0).substring(8), subtitle);
-        Chunk chunk3 = new Chunk(toPrint.get(3), text);
-        Chunk chunk4 = new Chunk(toPrint.get(4), text);
-        Chunk chunk5 = new Chunk(toPrint.get(5), text);
-        Chunk chunk6 = new Chunk(toPrint.get(6), text);
-        Chunk chunk7 = new Chunk(toPrint.get(7), text);
-        Chunk chunk8 = new Chunk(toPrint.get(8), text);
-        Chunk chunk9 = new Chunk(toPrint.get(9), text);
-        Chunk chunk10 = new Chunk(toPrint.get(10), text);
-
-        com.itextpdf.text.Image img  = com.itextpdf.text.Image.getInstance(path);
-        img.setAbsolutePosition(250,450);
-        document.add(img);
-        document.add(Chunk.NEWLINE );
-        document.add(new Paragraph(chunk));
-        document.add(Chunk.NEWLINE );
-        document.add(new Paragraph(chunk2));
-        document.add(Chunk.NEWLINE );
-        document.add(new Paragraph(chunk3));
-        document.add(Chunk.NEWLINE );
-        document.add(new Paragraph(chunk4));
-        document.add(Chunk.NEWLINE );
-        document.add(new Paragraph(chunk5));
-        document.add(Chunk.NEWLINE );
-        document.add(new Paragraph(chunk6));
-        document.add(Chunk.NEWLINE );
-        document.add(new Paragraph(chunk7));
-        document.add(Chunk.NEWLINE );
-        document.add(new Paragraph(chunk8));
-        document.add(Chunk.NEWLINE );
-        document.add(new Paragraph(chunk9));
-        document.add(Chunk.NEWLINE );
-        document.add(new Paragraph(chunk10));
-        document.close();
+            toPrint.clear();
+        }
     }
 
     @SuppressWarnings("Duplicates")

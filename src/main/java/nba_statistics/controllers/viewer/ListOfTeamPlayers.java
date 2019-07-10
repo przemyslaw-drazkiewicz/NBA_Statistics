@@ -1,5 +1,7 @@
 package nba_statistics.controllers.viewer;
 
+import com.itextpdf.text.*;
+import com.itextpdf.text.pdf.PdfWriter;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -25,6 +27,7 @@ import nba_statistics.services.SeasonsService;
 import nba_statistics.services.TeamsService;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
@@ -54,6 +57,7 @@ public class ListOfTeamPlayers implements Initializable {
     private Stage stage;
 
     List<String> toPrint= new ArrayList<>();
+    String path = null;
 
     private void setVisibleListViewPlayers(){
         teamPlayersListView.setVisible(true);
@@ -111,6 +115,7 @@ public class ListOfTeamPlayers implements Initializable {
                 listPlayersNameSurname.add(tmp);
             }
             image.setImage(new Image(teamsService.getTeam(idTeam).getImageURL()));
+            path = teamsService.getTeam(idTeam).getImageURL();
             if(listPlayersNameSurname.isEmpty()) {
                 setInvisibleListViewPlayers();
                 getAlertNoPlayersInTeam();
@@ -147,27 +152,37 @@ public class ListOfTeamPlayers implements Initializable {
     }
 
     //print
-    public void printToFile(ActionEvent event) throws IOException  {
+    public void printToFile(ActionEvent event) throws IOException, DocumentException {
         if(toPrint.isEmpty()) getAlertNoSeasonsOrNoPlayer();
         else{
-            FileChooser fileChooser = new FileChooser();
-            fileChooser.setTitle("Save Copy of Report");
-            fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
-            fileChooser.setInitialFileName("Third report.txt");
+            Document document = new Document();
+            PdfWriter.getInstance(document, new FileOutputStream("ListOfTeamPlayers.pdf"));
 
-            File file = fileChooser.showSaveDialog(stage);
+            document.open();
+            Font title = FontFactory.getFont(FontFactory.COURIER_BOLD, 20, BaseColor.BLACK);
+            Font subtitle = FontFactory.getFont(FontFactory.COURIER, 16, BaseColor.BLACK);
+            Font text = FontFactory.getFont(FontFactory.COURIER, 12, BaseColor.BLACK);
+            Chunk chunk2 = new Chunk("List of " + teamsComboBox.getValue() + " players", title);
+            document.add(new Paragraph(chunk2));
+            document.add(Chunk.NEWLINE );
 
-            if(file!= null){
-                FileWriter fileWriter = new FileWriter(file);
-                for(int i = 0; i< toPrint.size();i++){
-                    fileWriter.write(toPrint.get(i));
-                    fileWriter.write(System.getProperty( "line.separator" ));
-                }
-                fileWriter.flush();
-                fileWriter.close();
+            for(int i = 0; i < toPrint.size(); i++){
+                Chunk chunk = new Chunk(i+1 + ". " + toPrint.get(i), text);
+                document.add(new Paragraph(chunk));
+                document.add(Chunk.NEWLINE );
             }
+
+            com.itextpdf.text.Image img  = com.itextpdf.text.Image.getInstance(path);
+            img.setAbsolutePosition(440,650);
+            img.scaleToFit(100,100);
+            document.add(img);
+
+            document.close();
             toPrint.clear();
         }
+
+
+
 
     }
 
