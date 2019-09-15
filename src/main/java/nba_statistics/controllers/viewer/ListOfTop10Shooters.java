@@ -90,6 +90,11 @@ public class ListOfTop10Shooters implements Initializable {
 
         Seasons season = seasonsService.getSeason(nameSeason);
 
+        if (season == null) {
+            getAlertSelectSeason();
+            return;
+        }
+
         List<PlayerMatchAchievements> playerMatchAchievements = matchesService.getAchievementsPlayersInSeason(season.getId());
         Map<Integer, Integer> map = selectTenPlayersData(playerMatchAchievements);
         List<Players> playersList;

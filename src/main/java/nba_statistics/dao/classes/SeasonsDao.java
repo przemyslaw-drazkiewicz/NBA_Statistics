@@ -24,7 +24,6 @@ public class SeasonsDao extends Dao implements ISeasonsDao {
         Query<Seasons> theQuery = getCurrentSession().createQuery("from Seasons where name = :name", Seasons.class);
         theQuery.setParameter("name", name);
         Seasons s = theQuery.setMaxResults(1).uniqueResult();
-        System.out.println(s.toString());
         return s;
     }
     public int getData(String name, String startDate, String endDate){
